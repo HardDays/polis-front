@@ -1,0 +1,39 @@
+<section class="auth1">
+    <!-- <div class="auth__logo">
+        <img src="assets/img/logo.svg" class="img-responsive" alt="">
+    </div> -->
+    <form class="auth-form auth__form">
+        <!-- <h1 class="auth-form__title1">Log in</h1> -->
+        <ng-container *ngIf="!IsLoggendIn">
+            <div class="input-groupe auth-form__input-groupe">
+                <label class="input-groupe__label" for="email">E-mail</label>
+                <!-- input-groupe__input--error класс ошибки для инпута-->
+                <input [(ngModel)]="LoginModel.username" type="text" class="input-groupe__input" id="email" name="email" autocomplete="off">
+                <p class="input-groupe__error">
+                    <span *ngIf="EmailError">{{EmailError}}</span>
+                </p>
+            </div>
+            <div class="input-groupe auth-form__input-groupe">
+                <label class="input-groupe__label" for="password">Пароль</label>
+                <input [(ngModel)]="LoginModel.password" type="password" class="input-groupe__input" id="password" name="password">
+                <p class="input-groupe__error">
+                    <span *ngIf="PasswordError">{{PasswordError}}</span>
+                </p>
+            </div>
+            <div class="one-col-buttons">
+                <div class="button-wrapper one-col-buttons__item">
+                    <button type="submit" (click)="Login()" class="button-wrapper__button">Авторизоваться</button>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="IsLoggendIn">
+            <div class="one-col-buttons">
+                <div class="button-wrapper one-col-buttons__item">
+                    <button type="submit" (click)="Logout()" class="button-wrapper__button">Убить токен</button>
+                </div>
+            </div>
+        </ng-container>
+        
+    </form>
+</section>
+

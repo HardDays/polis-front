@@ -1,0 +1,39 @@
+@import "layout/var";
+
+.my-investors {
+    position: relative;
+    width: calc(100% + 30px);
+    left: -15px;
+    padding-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+
+    @media (max-width: 675px) {
+        display: block;
+        width: 100%;
+        left: 0;
+    }
+
+    &__item {
+        width: 33.33%;
+        padding: 0 15px;
+        margin-bottom: 30px;
+
+        @media (min-width: 1900px) {
+            width: 25%;
+        }
+
+        @media (max-width: 1250px) {
+            width: 50%;
+        }
+
+        @media (max-width: 675px) {
+            width: 100%;
+            padding: 0;
+        }
+    }
+
+    &__bg {
+        height: 100%;
+    }
+}

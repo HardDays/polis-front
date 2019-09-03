@@ -1,0 +1,80 @@
+@import "layout/var";
+
+.upload-image {
+    position: relative;
+
+    &__input {
+        width: 0;
+        height: 0;
+        display: block;
+        position: absolute;
+        left: -5000px;
+        top: 0;
+        font-size: 0;
+    }
+
+    &__label {
+        display: block;
+        position: relative;
+        height: 160px;
+        width: 100%;
+        border: 1px dashed $grey400;
+        border-radius: 6px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        cursor: pointer;
+
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            border-radius: 6px;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255,255,255,0.7);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        &--error {
+            border-color: $red;
+        }
+
+        &--uploaded {
+            .upload-image__add {
+                opacity: 0;
+            }
+
+            &:hover {
+                &:before {
+                    opacity: 1;
+                }
+
+                .upload-image__add {
+                    opacity: 1;
+                }
+            } 
+        }
+    }
+
+    &__add {
+        display: block;
+        position: absolute;
+        z-index: 2;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        transition: opacity 0.3s;
+    }
+
+    &__plus {
+        margin: 0 auto 14px auto;
+    }
+
+    &__text {
+        font-size: 12px;
+        line-height: 16px;
+        color: $grey400;
+    }
+}

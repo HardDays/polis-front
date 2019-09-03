@@ -1,0 +1,50 @@
+@import "layout/var";
+
+.auth {
+    padding: 25px 15px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image: url(../img/auth-bg.jpg);
+    background-position: center;
+    background-size: cover;
+
+    &__logo {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 25px;
+    }
+
+    &__form {
+        margin: auto;
+        max-width: 474px;
+        width: 100%;
+
+        &--big {
+            max-width: 855px;
+        }
+    }
+
+    &__copyright {
+        margin-top: 45px;
+    }
+
+    &__copyright-text {
+        text-align: center;
+        font-size: 12px;
+        line-height: 14px;
+        color: #C4C4C4;
+    }
+
+    &__copyright-link {
+        text-decoration: none;
+        color: #C4C4C4;
+        border-bottom: 1px solid #C4C4C4;
+        transition: color 0.3s, border-color 0.3s;
+
+        &:hover {
+            color: #fff;
+            border-color: #fff;
+        }
+    }
+}

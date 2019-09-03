@@ -1,0 +1,57 @@
+@import "layout/var";
+
+.header-user{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    
+    &__ava{
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: 1px solid #333333;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 11px;
+        font-size: 14px;
+        line-height: 19px;
+        font-weight: $semiBold;
+        background-size: cover;
+        background-position: center;
+    }
+
+    &__info {
+        position: relative;
+        padding-right: 34px;
+
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 7px;
+            background-image: url(../img/arrow-bottom.svg);
+            background-repeat: no-repeat;
+            background-position: center;
+
+        }
+    }
+
+    &__name {
+        font-size: 14px;
+        line-height: 19px;
+    }
+
+    &__role {
+        font-size: 14px;
+        line-height: 19px;
+        color: $grey400;
+
+    }
+
+}

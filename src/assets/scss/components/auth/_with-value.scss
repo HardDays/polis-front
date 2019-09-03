@@ -1,0 +1,23 @@
+@import "layout/var";
+
+.with-value {
+    position: relative;
+
+    &__value {
+        display: block;
+        position: absolute;
+        top: calc(50% - 1px);
+        left: 11px;
+        z-index: 2;
+        transform: translateY(-50%);
+        $semiBold: 600;
+        font-size: 14px;
+        line-height: 19px;
+
+        &--right {
+            left: auto;
+            right: 16px;
+        }
+    }
+    
+}

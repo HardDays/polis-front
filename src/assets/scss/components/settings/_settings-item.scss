@@ -1,0 +1,32 @@
+@import "layout/var";
+
+.settings-item {
+    background: #fff;
+    padding: 20px 20px 33px;
+    display: flex;
+    flex-direction: column;
+
+    &__top {
+        margin-bottom: 10px;
+    }
+
+    &__bott {
+        margin-top: auto;
+    }
+
+    &__title {
+        font-size: 22px;
+        line-height: 30px;
+        font-weight: $semiBold;
+        margin-bottom: 24px;
+    }
+
+    &__input-groupe {
+        margin-bottom: 6px;
+    }
+    
+
+    &__success-text {
+        text-align: center;
+    }
+}

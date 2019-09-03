@@ -1,0 +1,67 @@
+@import "layout/var";
+
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+    padding-top: 19px;
+
+    &__button {
+        display: block;
+        width: 100%;
+        border: 1px solid $black;
+        background: $black;
+        padding: 14px 10px;
+        color: #fff;
+        text-align: center;
+        max-width: 170px;
+        text-decoration: none;
+        font-size: 15px;
+        line-height: 20px;
+        text-transform: uppercase;
+        transition: border-color 0.3s, color 0.3s, background-color 0.3s;
+        cursor: pointer;
+
+        &:hover {
+            color: $black;
+            background: #fff;
+        }
+
+        &--border_theme {
+            color: $black;
+            background: #fff;
+
+            &:hover {
+                background: $black;
+                color: #fff;
+            }
+        }
+
+        &--full_width {
+            max-width: 100%;
+        }
+
+        &--sm_height {
+            padding: 10px;
+        }
+
+        &[disabled]{
+            background: $grey300;
+            border-color: $grey300;
+            color: #6D6D6D;
+            cursor: default;
+        }
+    }
+
+    &--select_theme {
+        padding-top: 0;
+
+        .button-wrapper__button {
+            padding: 8px 10px;
+            white-space: nowrap;
+        }
+    }
+
+    &--less_dispance {
+        padding-top: 5px;
+    }
+}

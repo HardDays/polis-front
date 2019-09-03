@@ -1,0 +1,148 @@
+@import "layout/var";
+
+.tracking {
+    background: #fff;
+
+    @media (max-width: 767px) {
+        position: relative;
+        overflow: auto;
+    }
+
+    &__item {
+        margin-top: -1px;
+
+        
+    }
+}
+
+.tracking-item {
+    display: flex;
+    border: 1px solid #EAEAEA;
+
+    @media (max-width: 767px) {
+        width: 800px;
+    }
+
+    &__column {
+        border-right: 1px solid #EAEAEA;
+        padding: 12px 15px;
+        width: 12%;
+
+        @media (max-width: 1199px) {
+            padding: 12px 10px;
+        }
+
+        &:first-child {
+            width: 16%;
+
+            .tracking-item__info {
+                text-align: left;
+            }
+        }
+
+        &:last-child {
+            border-right: none;
+        }
+
+       
+
+        &--with_option {
+            background: #F2F2F2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+
+            .tracking-item__info {
+                text-align: left;
+                color: #A4A0A0;
+            }
+
+            .tracking-item__info-button {
+                display: none;
+            }
+        }
+
+        
+        &--checked {
+            background: #fff;
+
+            .tracking-item__info-button {
+                display: block;
+            }
+
+            .tracking-item__info {
+               color: #000;
+            }
+        }
+        &--today {
+            background: rgba(101, 154, 255, 0.1);
+        }
+
+    }
+
+
+    &__info {
+        font-size: 14px;
+        line-height: 19px;
+        text-align: center;
+
+        &--strong {
+            font-weight: $bold;
+        }
+    }
+
+    &--header {
+        background: $black;
+
+        .tracking-item__column {
+            border-color: #434343;
+        }
+        
+        .tracking-item__info {
+            color: #fff;
+        }
+    }
+}
+
+.tracking-checkbox {
+    position: relative;
+
+    &__label {
+        display: none;
+        position: absolute;
+        bottom: calc(100% + 4px);
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+        border: 1px solid #C4C4C4;
+        background: #fff;
+        padding:  4px 10px;
+        font-size: 14px;
+        line-height: 19px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.09);
+
+    }
+
+    &__button {
+        display: block;
+        border-radius: 0;
+        border: 1px solid $black;
+        width: 18px;
+        height: 18px;
+        background-color: transparent;
+        padding: 0;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url(../img/checked-black.svg);
+        cursor: pointer;
+
+        
+    }
+
+    &:hover {
+        .tracking-checkbox__label {
+            display: block;
+        }
+    }
+}

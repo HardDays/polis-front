@@ -1,0 +1,57 @@
+@import "layout/var";
+
+.my-investor {
+   background: #fff;
+   padding: 20px 24px;
+   display: flex;
+   align-items: flex-start;
+
+   &__left {
+    flex-shrink: 0;
+   }
+
+   &__right {
+    width: 100%;
+    padding-left: 14px;
+   }
+
+   &__ava {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid #333333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    line-height: 19px;
+    font-weight: 600;
+    background-size: cover;
+    background-position: center;
+   }
+
+   &__name {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: $bold;
+    margin-bottom: 3px;
+    color: #000;
+   }
+
+   &__mail {
+    font-size: 16px;
+    line-height: 22px;
+    margin-bottom: 5px;
+   }
+
+   &__info {
+    margin-bottom: 5px;
+    font-size: 16px;
+    line-height: 22px;
+    color: #9A9A9A;
+
+    span {
+        color: $blue;
+    }
+   }
+}

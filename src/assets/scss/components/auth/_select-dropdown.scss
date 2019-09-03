@@ -1,0 +1,26 @@
+@import "layout/var";
+
+.select-dropdown {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.09);
+    border: 1px solid $grey400;
+    border-top: none;
+    background: #fff;
+    
+    &__list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    &__item {
+        padding: 9px 20px;
+        font-size: 14px;
+        line-height: 19px;
+        transition: background-color 0.3s;
+        cursor: pointer;
+
+        &--active {
+            background: #F2F2F2;
+        }
+    }
+}

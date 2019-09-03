@@ -1,0 +1,126 @@
+@import "layout/var";
+
+.select {
+    position: relative;
+    
+    &__input-hidden {
+        width: 0;
+        height: 0;
+        display: block;
+        position: absolute;
+        left: -5000px;
+        top: 0;
+        font-size: 0;
+    }
+
+    &__lable {
+        min-height: 39px;
+        padding: 9px 40px 9px 15px;
+        border: 1px solid #C4C4C4;
+        position: relative;
+        background: #fff;
+        cursor: pointer;
+
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 12px;
+            height: 7px;
+            background-image: url(../img/arrow-bottom.svg);
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        &--tag-theme {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            padding: 5px 40px 1px 15px;
+        }
+    }
+
+    &__dropdown {
+        display: none;
+        max-height: 220px;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        overflow: auto;
+        z-index: 10;
+    }
+
+    &__picked {
+        font-size: 14px;
+        line-height: 19px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    &__tag {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+        margin-right: 5px;
+        border-radius: 50px;
+        background: $black;
+        padding: 5px 10px;
+
+    }
+
+    &__tag-text {
+        font-size: 12px;
+        line-height: 16px;
+        color: #fff;
+    }
+
+    &__tag-delete {
+        display: block;
+        position: relative;
+        width: 10px;
+        height: 10px;
+        flex-shrink: 0;
+        background: transparent;
+        border: none;
+        padding: 0;
+        margin-left: 9px;
+        transform-origin: center;
+        transform: rotate(45deg);
+        cursor: pointer;
+
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: #fff;
+        }
+        &:after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 100%;
+            height: 2px;
+            background: #fff;
+        }
+    }
+
+    &--opened {
+        .select__dropdown {
+            display: block;
+        }
+    }
+
+    
+}

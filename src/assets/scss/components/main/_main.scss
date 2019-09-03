@@ -1,0 +1,42 @@
+@import "layout/var";
+
+.main {
+    display: flex;
+
+    @media (max-width: 991px) {
+        display: block;
+    }
+
+    &__side-bar {
+        min-height: 100vh;
+        width: 220px;
+        flex-shrink: 0;
+        z-index: 5;
+
+        @media (max-width: 991px) {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            overflow: auto;
+            transform: translateX(-100%);
+            transition: transform 0.3s;
+        }
+    }
+
+    &__system {
+        width: 100%;
+        min-width: 0;
+
+        @media (max-width: 991px) {
+            min-height: 100vh;
+        }
+    }
+
+    &--visible_sidebar {
+        .main__side-bar {
+            transform: none;
+        }
+    }
+    
+}

@@ -1,0 +1,54 @@
+@import "layout/var";
+
+.auth-form {
+    padding: 43px 60px;
+    background: #fff;
+
+    @media (max-width: 767px) {
+        padding: 30px 20px;
+    }
+
+    &__title {
+        margin-bottom: 30px;
+        font-size: 30px;
+        line-height: 41px;
+        text-align: center;
+    }
+
+    &__input-groupe {
+        margin-bottom: 5px;
+    }
+
+    &__forgot-pass {
+        display: flex;
+    }
+
+    &__forgot-pass-link {
+        margin-bottom: 21px;
+        display: block;
+        font-size: 15px;
+        line-height: 20px;
+        color: #000;
+        text-decoration: none;
+        border-bottom: 1px solid #000;
+        transition: color 0.3s, border-color 0.3s;
+
+        &:hover {
+            color: $blue;
+            border-color: $blue;
+        }
+    }
+
+    &__forgot-success {
+        font-size: 20px;
+        line-height: 27px;
+        text-align: center;
+        margin-bottom: 21px;
+    }
+
+    &__two-col-buttons {
+        max-width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

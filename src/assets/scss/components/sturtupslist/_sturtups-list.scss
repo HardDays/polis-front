@@ -1,0 +1,39 @@
+@import "layout/var";
+
+.sturtups-list {
+    position: relative;
+    width: calc(100% + 7px);
+    left: -3.5px;
+    padding-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+
+    @media (max-width: 580px) {
+        display: block;
+        width: 100%;
+        left: 0;
+    }
+
+    &__item {
+        width: 25%;
+        padding: 0 3.5px;
+        margin-bottom: 10px;
+
+        @media (min-width: 1900px) {
+            width: 20%;
+        }
+
+        @media (max-width: 1250px) {
+            width: 33.33%;
+        }
+
+        @media (max-width: 720px) {
+            width: 50%;
+        }
+
+        @media (max-width: 580px) {
+            width: 100%;
+            padding: 0;
+        }
+    }
+}

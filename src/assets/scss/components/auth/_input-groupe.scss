@@ -1,0 +1,112 @@
+@import "layout/var";
+
+.input-groupe {
+    &__label {
+        margin-bottom: 10px;
+        display: block;
+        font-size: 14px;
+        line-height: 19px;
+        font-weight: $semiBold;
+    }
+
+    &__sub-label {
+        color: #6D6D6D;
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+
+    &__input {
+        padding: 9px 15px;
+        display: block;
+        width: 100%;
+        font-size: 14px;
+        line-height: 19px;
+        background: #fff;
+        border: 1px solid $grey400;
+        transition: border-color 0.3s, background-color 0.3s;
+        color: #000;
+
+        &:focus {
+            border-color: $black;
+        }
+
+        &--error {
+            border-color: $red;   
+        }
+
+        &--textarea {
+            height: 107px;
+            resize: none;
+        }
+
+        &--textarea_lg {
+            height: 295px;
+            resize: none;
+        }
+
+        &--textarea_less_height {
+            height: 80px;
+            resize: none;
+        }
+
+        &--value-left {
+            padding-left: 20px;
+        }
+
+        &--value-right {
+            text-align: right;
+            padding-right: 30px;
+        }
+
+        &--textarea-sm {
+            height: 193px;
+            resize: none;
+        }
+    }
+
+    &__error {
+        padding: 0 16px;
+        min-height: 16px;
+        color: $red;
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+    &__with-sm-butt {
+        display: flex;
+        
+        .input-groupe__input {
+            border-right: none;
+        }
+    }
+
+    &__sm-butt {
+        flex-shrink: 0;
+        width: 40px;
+        display: block;
+        border: 1px solid $black;
+        background: $black;
+        padding: 0;
+        transition: border-color 0.3s, color 0.3s, background-color 0.3s;
+        cursor: pointer;
+
+        &:hover {
+            color: $black;
+            background: #fff;
+
+            path {
+                fill: $black;
+            }
+        }
+
+        path {
+            transition: fill 0.3s;
+        }
+
+        &--sentered_inside {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}

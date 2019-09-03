@@ -1,0 +1,72 @@
+@import "layout/var";
+
+.porfolio-page {
+    &__white-block {
+        background: #fff;
+        padding-top: 21px;
+        margin-bottom: 15px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__title {
+        margin-bottom: 20px;
+        font-weight: $semiBold;
+        font-size: 22px;
+        line-height: 30px;
+        padding: 0 40px;
+
+        @media (max-width: 767px) {
+            padding: 0 16px ;
+        }
+
+        span {
+            color: $grey800;
+        }
+    }
+
+    &__show-more {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 16px 15px;
+        background: transparent;
+        border: none;
+        border-top: 1px solid #EAEAEA;
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: $semiBold;
+        transition: color 0.3s;
+        cursor: pointer;
+
+        svg {
+            display: block;
+            flex-shrink: 0;
+            margin-right: 9px;
+            transform-origin: center;
+
+            path {
+                transition: fill 0.3s;
+            }
+        }
+
+        &:hover {
+            color: $blue;
+
+            svg {
+                path {
+                    fill: $blue;
+                }
+            }
+        }
+
+        &--rotated_arrow {
+            svg {
+                transform: rotate(180deg);
+            }
+        }
+    }
+}

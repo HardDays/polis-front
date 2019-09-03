@@ -1,0 +1,51 @@
+@import "layout/var";
+
+.create-product {
+    background: #fff;
+    padding: 28px 40px;
+    margin-bottom: 10px;
+    position: relative;
+
+    @media (max-width: 767px) {
+        padding: 25px 15px;
+    }
+
+    &__row {
+        display: flex;
+
+        @media (max-width: 1199px) {
+            flex-wrap: wrap;
+        }
+    }
+
+    &__coll {
+        padding-left: 25px;
+        width: 100%;
+        min-width: 0;
+
+        @media (max-width: 1199px) {
+            padding-left: 0;
+        }
+    }
+
+    &__upload-image {
+        width: 328px;
+        flex-shrink: 0;
+
+        @media (max-width: 767px) {
+            width: 100%;
+            max-width: 328px;
+        }
+        
+    }
+
+    &__input-groupe {
+        margin-bottom: 6px;
+    }
+
+    &__line {
+        height: 1px;
+        background: $grey400;
+        margin: 13px 0;
+    }
+}

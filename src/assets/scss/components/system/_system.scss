@@ -1,0 +1,135 @@
+@import "layout/var";
+
+.system {
+    display: flex;
+    flex-direction: column;
+    background: #f2f2f2;
+
+    &__content {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    &__copyright {
+        margin-top: auto;
+        width: 100%;
+    }
+
+    &__wrapper {
+        padding: 0 40px;
+
+        @media (max-width: 991px) {
+            padding: 0 30px;
+        }
+
+        @media (max-width: 767px) {
+            padding: 0 15px;
+        }
+    }
+
+    &__title {
+        font-size: 30px;
+        line-height: 41px;
+        font-weight: $bold;
+        position: relative;
+        margin-bottom: 21px;
+
+        @media (max-width: 767px) {
+            font-size: 23px;
+            line-height: 29px;
+        }
+
+        &--whith-arrow {
+            display: flex;
+            align-items: center;
+        }
+
+        &--with-button {
+            display: flex;
+            align-items: center;
+
+            @media (max-width: 767px) {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        &--with-select {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            @media (max-width: 767px) {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    }
+
+    &__title-arrow {
+        display: block;
+        border: none;
+        background-color: transparent;
+        width: 27px;
+        height: 27px;
+        flex-shrink: 0;
+        padding: 0;
+        margin-right: 20px;
+        cursor: pointer;
+    }
+
+    &__black-link {
+        display: flex;
+        padding: 9px 13px;
+        background: $black;
+        align-items: center;
+        border: 1px solid $black;
+        font-size: 15px;
+        line-height: 20px;
+        text-transform: uppercase;
+        color: #fff;
+        text-decoration: none;
+        margin-left: 30px;
+        font-weight: $regular;
+        transition: border-color 0.3s, color 0.3s, background-color 0.3s;
+
+        @media (max-width: 767px) {
+            margin-left: 0;
+            margin-top: 15px;
+        }
+
+        &:hover {
+            color: $black;
+            background: #fff;
+
+            svg {
+                path {
+                    fill: $black;
+                }
+            }
+        }
+
+        svg {
+            flex-shrink: 0;
+            margin-right: 7px;
+
+            path{
+                transition: fill 0.3s;
+            }
+        }
+    }
+
+    &__sm-wrapper {
+        max-width: 450px;
+        margin: 0 auto;
+    }
+
+    &__title-input-groupe {
+        width: 100%;
+        max-width: 190px;
+
+        @media (max-width: 767px) {
+            margin-top: 10px;
+        }
+    }
+}

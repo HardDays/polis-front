@@ -1,0 +1,34 @@
+@import "layout/var";
+
+.auth-two-cols {
+    display: flex;
+
+    @media (max-width: 767px) {
+        display: block;
+    }
+
+
+    &__side {
+        width: 50%;
+
+        @media (max-width: 767px) {
+            width: 100%;
+        }
+
+        &:first-child {
+            padding-right: 15px;
+
+            @media (max-width: 767px) {
+                padding-right: 0;
+            }
+        }
+
+        &:last-child {
+            padding-left: 15px;
+
+            @media (max-width: 767px) {
+                padding-left: 0;
+            }
+        }
+    }
+}

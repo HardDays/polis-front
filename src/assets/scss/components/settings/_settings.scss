@@ -1,0 +1,29 @@
+@import "layout/var";
+
+.settings {
+    position: relative;
+    width: calc(100% + 16px);
+    left: -8px;
+    padding-top: 5px;
+    display: flex;
+
+    @media (max-width: 760px) {
+        width: 100%;
+        left: 0;
+        display: block;
+    }
+
+    &__collumn {
+        width: 33.33%;
+        padding: 0 8px;
+        @media (max-width: 760px) {
+            width: 100%;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+    }
+
+    &__item {
+        height: 100%;
+    }
+}

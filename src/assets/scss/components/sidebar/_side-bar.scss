@@ -1,0 +1,14 @@
+@import "layout/var";
+
+.side-bar {
+    background: $black;
+    
+    &__logo {
+        height: 60px;
+        border-bottom: 1px solid rgba(241, 241, 241, 0.1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+    }
+}

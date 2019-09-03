@@ -1,0 +1,66 @@
+@import "layout/var";
+
+.add-row-generate {
+   display: flex;
+   margin-bottom: 21px;
+   align-items: center;
+
+   &__butt {
+        display: block;
+        flex-shrink: 0;
+        border: 1px solid $black;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        background: $black;
+        position: relative;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: #fff;
+
+            &:before {
+                background: $black
+            }
+
+            &:after {
+                background: $black
+            }
+        }
+
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 2px;
+            height: 14px;
+            background: #fff;
+            transform-origin: center;
+            transition: background-color 0.3s;
+        }
+
+        &:after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 14px;
+            height: 2px;
+            background: #fff;
+            transform-origin: center;
+            transition: background-color 0.3s;
+        }
+   }
+
+   &__text {
+       margin-left: 15px;
+       font-size: 14px;
+       line-height: 19px;
+   }
+}

@@ -1,0 +1,109 @@
+@import "layout/var";
+
+.sturtup-card {
+    background: #fff;
+    padding: 20px;
+
+    &__logo {
+        position: relative;
+        margin-bottom: 20px;
+
+        &:before {
+            content: "";
+            display: block;
+            position: relative;
+            padding-top: 48%;
+            border: 1px solid #EAEAEA;
+        }
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+        }
+    }
+
+    &__name {
+        font-weight: $semiBold;
+        font-size: 20px;
+        line-height: 27px;
+        margin-bottom: 9px;
+        display: block;
+        text-decoration: none;
+        color: #000;
+
+        &--action {
+            transition: color 0.3s;
+
+            &:hover {
+                color: $blue;
+            }
+        }
+    }
+
+    &__link-wr {
+        margin-bottom: 9px;
+    }
+
+    &__site {
+        color: $blue;
+        font-size: 14px;
+        line-height: 19px;
+        border-bottom: 1px solid $blue;
+        text-decoration: none;
+
+        &:hover {
+            border-color: transparent;
+        }
+    }
+
+    &__mail {
+        font-size: 14px;
+        line-height: 19px;
+        text-decoration: none;
+        color: #000;
+    }
+
+    &__info {
+        margin-bottom: 9px;
+        font-size: 14px;
+        line-height: 19px;
+        span {
+            color: #6D6D6D;
+        }
+
+        &--blue_theme {
+            color: $grey800;
+
+            span {
+                color: $blue;
+            }
+        }
+    }
+
+    &__invest-count {
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: $semiBold;
+        color: $blue;
+    }
+
+    &--sm_theme {
+        .sturtup-card__logo {
+            margin-bottom: 8px;
+        }
+
+        .sturtup-card__name {
+            font-size: 16px;
+            line-height: 22px;
+            margin-bottom: 7px;
+        }
+    }
+
+    &--less-padding {
+        padding: 0 16px;
+    }
+}

@@ -1,0 +1,14 @@
+@import "layout/var";
+
+.create-milestone {
+    background: #fff;
+    padding: 28px 40px 31px;
+
+    @media (max-width: 767px) {
+        padding: 25px 15px;
+    }
+
+    &__input-groupe {
+        margin-bottom: 7px;
+    }
+}

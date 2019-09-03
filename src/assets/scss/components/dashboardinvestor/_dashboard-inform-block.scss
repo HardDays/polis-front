@@ -1,0 +1,33 @@
+@import "layout/var";
+
+.dashboard-inform-block {
+   background: #fff;
+   margin-bottom: 16px;
+   padding: 18px 30px 23px;
+
+   @media (max-width: 1199px) {
+      padding: 23px;
+   }
+
+   @media (max-width: 767px) {
+      padding: 19px 15px;
+   }
+
+   &__key {
+    font-size: 20px;
+    line-height: 27px;
+    font-weight: $semiBold;
+    margin-bottom: 2px;
+   }
+
+   &__value {
+    font-size: 30px;
+    line-height: 41px;
+    font-weight: $bold;
+
+    @media (max-width: 767px) {
+       font-size: 26px;
+       line-height: normal;
+    }
+   }
+}

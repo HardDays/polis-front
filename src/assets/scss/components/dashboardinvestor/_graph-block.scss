@@ -1,0 +1,69 @@
+@import "layout/var";
+
+.graph-block{
+    background: #fff;
+    margin-bottom: 16px;
+    padding: 19px 23px;
+
+    @media (max-width: 767px) {
+        padding: 19px 15px;
+    }
+
+    &__title {
+        font-size: 22px;
+        line-height: 30px;
+        font-weight: $semiBold;
+        margin-bottom: 4px;
+        padding-left: 17px;
+
+        @media (max-width: 1199px) {
+            padding-left: 0;
+        }
+
+        &--once {
+            font-size: 22px;
+            line-height: 30px;
+
+            @media (max-width: 767px) {
+                margin-bottom: 10px;
+            }
+
+            span {
+                font-size: 36px;
+                font-weight: $bold;
+
+                @media (max-width: 767px) {
+                    font-size: 26px;
+                }
+            }
+        }
+    }
+
+    &__flex-block {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+
+        @media (max-width: 767px) {
+            display: block;
+        }
+    }
+
+    &__count {
+        font-size: 30px;
+        line-height: 41px;
+        font-weight: $bold;
+        padding-left: 17px;
+
+        @media (max-width: 1199px) {
+            padding-left: 0;
+        }
+
+        @media (max-width: 767px) {
+            font-size: 26px;
+            line-height: normal;
+            margin-bottom: 10px;
+        }
+    }
+}

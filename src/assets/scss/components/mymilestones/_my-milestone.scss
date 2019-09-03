@@ -1,0 +1,109 @@
+@import "layout/var";
+
+.my-milestone {
+    background: #fff;
+    padding: 20px 24px;
+    
+    &__title-wrapper {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+
+    &__edit-button {
+        margin-left: 15px;
+    }
+
+    &__title {
+        margin-bottom: 8px;
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: $bold;
+    }
+
+    &__description {
+        font-size: 14px;
+        line-height: 19px;
+        margin-bottom: 13px;
+        color: #000000;
+
+        &--show {
+            .my-milestone__hidden-text {
+                display: inline;
+            }
+        }
+    }
+
+    &__hidden-text {
+        display: none;
+    }
+
+    &__show-hide {
+        cursor: pointer;
+        color: $blue;
+        border-bottom: 1px solid $blue;
+    }
+
+    &__date {
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: $bold;
+        padding-left: 27px;
+        background-image: url(../img/date.svg);
+        background-repeat: no-repeat;
+        background-position: top 2px left;
+        margin-bottom: 9px;
+    }
+
+    &__flex-select {
+        display: flex;
+    }
+
+    &__input-groupe {
+        width: 100%;
+        min-width: 0;
+    }
+
+    &__label {
+        font-size: 14px;
+        line-height: 19px;
+        font-weight: $semiBold;
+        margin-bottom: 10px;
+    }
+
+    &__button-wrapper {
+        width: 100%;
+        max-width: 180px;
+        flex-shrink: 0;
+        justify-content: flex-end;
+        
+        @media (max-width: 1365px) {
+            flex-shrink: inherit;
+            padding-left: 15px;
+        }
+    }
+
+    &__complete-mark {
+        display: flex;
+        padding-top: 5px;
+    }
+
+    &__complete {
+        display: flex;
+        align-items: center;
+        background: #D1F2DA;
+        border-radius: 100px;
+        padding: 11px 15px;
+    }
+
+    &__complete-icon {
+        flex-shrink: 0;
+        margin-right: 7px;
+    }
+
+    &__complete-text {
+        color: #45BA1C;
+        font-size: 15px;
+        line-height: 20px;
+    }
+}

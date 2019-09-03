@@ -1,0 +1,76 @@
+@import "layout/var";
+
+.form-filter {
+    margin-bottom: 9px;
+
+    &__flex-groupe {
+        display: flex;
+        margin-bottom: 9px;
+
+        @media (max-width: 767px) {
+            flex-direction: row-reverse;
+        }
+    }
+
+    &__search-from-name {
+        width: 100%;
+        margin-right: 13px;
+
+        @media (max-width: 767px) {
+            margin-right: 0;
+            margin-left: 10px;
+        }
+    }
+
+    &__on-show-checkbox {
+        flex-shrink: 0;
+        width: 40px;
+        height: 39px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid $black;
+        background: $black;
+        padding: 0;
+        transition: border-color 0.3s, color 0.3s, background-color 0.3s;
+        cursor: pointer;
+
+        &:hover {
+            color: $black;
+            background: #fff;
+
+            path {
+                fill: $black;
+            }
+        }
+
+        path {
+            transition: fill 0.3s;
+        }
+    }
+    
+    &__checkboxes {
+        background: #fff;
+    }
+}
+
+.marketplace-checkboxes {
+    padding: 16px 0 6px 15px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+
+    @media (max-width: 500px) {
+        display: block;
+        padding: 16px 15px 6px 15px;
+    }
+
+    &__check-box {
+        margin-right: 30px;
+        margin-bottom: 10px;
+
+        @media (max-width: 500px) {
+            margin-right: 0;
+        }
+    }
+}

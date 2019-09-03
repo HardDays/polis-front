@@ -1,0 +1,57 @@
+@import "layout/var";
+
+body {
+    font-family: $mainFont;
+    font-weight: $regular;
+    padding: 0;
+    margin: 0;
+    position: relative;
+
+    &.modal-open {
+        overflow: hidden;
+    }
+}
+
+html {
+    font-family: sans-serif;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+p {
+    margin: 0;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    margin: 0;
+    font-weight: normal;
+}
+
+a:focus {
+    outline: none;
+}
+
+input,textarea,button{
+    outline: none;
+}
+
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font-family: inherit;
+    border-radius: 0;
+}
+
+button, input {
+    overflow: visible;
+}
