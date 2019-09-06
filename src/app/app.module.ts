@@ -8,6 +8,10 @@ import { AuthService } from './core/services/auth.service';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { AuthModule } from './auth/auth.module';
+import { PeriodModule } from './period/period.module';
+import { DictsService } from './core/services/dicts.service';
+import { TransportModule } from './transport/transport.module';
+import { CarService } from './core/services/car.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,9 @@ import { AuthModule } from './auth/auth.module';
     HttpModule,
     RouterModule,
     AppRoutingModule,
-    AuthModule
+    AuthModule,
+    PeriodModule,
+    TransportModule
     // HttpClientModule,
     // TextMaskModule,
   ],
@@ -28,6 +34,8 @@ import { AuthModule } from './auth/auth.module';
     HttpModule,
     AuthService,
     HttpService,
+    DictsService,
+    CarService
   ],
   bootstrap: [AppComponent]
 })

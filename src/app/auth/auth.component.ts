@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { AuthService } from '../core/services/auth.service';
 import { LoginModel } from '../core/models/login.model';
 import { Validator } from '../core/base/field.validator';
+import { UserModel } from '../core/models/user.model';
 
 
 @Component({
@@ -14,20 +15,24 @@ export class AuthComponent implements OnInit
     LoginModel: LoginModel = new LoginModel();
     PasswordError:string = "";
     EmailError:string = "";
-    
+    User: UserModel = new UserModel();
     IsLoggendIn = false;
     constructor(private auth: AuthService, private cdr: ChangeDetectorRef) 
     {
         this.IsLoggendIn = this.auth.IsLoggedIn;
+        this.User = this.auth.CurrentUser;
         this.auth.onAuthChange$.subscribe(
-            (val) => this.IsLoggendIn = val
+            (val) => {
+                // console.log('loged in', val);
+                this.IsLoggendIn = val;
+            }
         );
-        this.auth.http.http.post("http://192.168.1.97/api/jsonrpc",{
-            "jsonrpc": "2.0", 
-            "method": "Api_Test",
-            "id": "23432423"
-          }, {headers:null}).subscribe((res)=> console.log(res));
-        this.auth.Login({});
+        this.auth.onUserChange$.subscribe(
+            val => {
+                this.User = val;
+            }
+        )
+        // this.auth.Login({});
     }
     ngOnInit() 
     {
@@ -36,7 +41,7 @@ export class AuthComponent implements OnInit
 
     Logout()
     {
-
+        this.auth.Logout();
     }
 
     Login()

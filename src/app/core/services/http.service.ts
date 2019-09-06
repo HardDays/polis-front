@@ -12,19 +12,29 @@ export class HttpService {
     // serverUrl = 'https://venture-box-back-test.herokuapp.com';
 
     public headers: Headers = new Headers([]);
-    public token: TokenModel = new TokenModel('');
+    // public token: TokenModel = new TokenModel('');
     constructor(public http: Http) {
         this.BaseHeadersInit();
     }
 
     BaseInitByToken(data: string)
     {
-        if (data) {
-            if (this.headers.has('Authorization')) {
+        if (data) 
+        {
+            if (this.headers.has('Authorization')) 
+            {
                 this.headers.delete('Authorization');
             }
-            this.headers.append('Authorization', data);
-            this.token = new TokenModel(data);
+            this.headers.append('Authorization', "Token " + data);
+            // this.token = new TokenModel(data);
+        }
+    }
+
+    DeleteAuthToken()
+    {
+        if (this.headers.has('Authorization')) 
+        {
+            this.headers.delete('Authorization');
         }
     }
 
@@ -34,15 +44,15 @@ export class HttpService {
         {
             this.headers.append('Content-Type', 'application/json');
         }
-        this.headers.append('Access-Control-Allow-Credentials', 'true');
-        this.headers.append('Access-Control-Allow-Origin', 'https://widget.agentapp.ru');
+        // this.headers.append('Access-Control-Allow-Credentials', 'true');
+        // this.headers.append('Access-Control-Allow-Origin', 'https://widget.agentapp.ru');
         // this.headers.append('GET', 'POST', 'OPTIONS');
     }
 
-    GetToken(): TokenModel
-    {
-        return this.token;
-    }
+    // GetToken(): TokenModel
+    // {
+    //     return this.token;
+    // }
 
     validResp(resp){
         let body = resp._body;
@@ -58,6 +68,7 @@ export class HttpService {
             .subscribe(
                 (resp: Response) =>
                 {
+                    // console.log(resp);
                     if(success && typeof success == "function")
                     {
                         success(this.validResp(resp)?resp.json():"");
