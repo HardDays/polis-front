@@ -1,116 +1,179 @@
-// import { CompanyModel } from './../models/company.model';
-// import { LoginModel } from './../models/login.model';
 import { Injectable } from "@angular/core";
 import { Subject } from 'rxjs';
-// import { UserModel } from '../models/user.model';
 import { Router } from '@angular/router';
 import { HttpService } from './http.service';
+import { AgreementModel, VehicleModel } from '../models/agreement.model';
+import { SessionService } from './session.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Injectable()
 export class MainService
 {
-    constructor(public http: HttpService, private router: Router) 
+    Agreement: AgreementModel;
+    LastPage: string;
+    SkEnum = {
+        1: {
+            id:1,
+            name: 'Альфастрахование',
+            currency: 'р.',
+            total: 0,
+            img: 'assets/img/alpha.png'
+        },
+        27: {
+            id: 27,
+            name: 'Зетта Страхование',
+            currency: 'р.',
+            total: 0,
+            img: 'assets/img/zetta.png'
+        },
+        5: {
+            id: 5,
+            name: 'Росгоссрах',
+            currency: 'р.',
+            total: 0,
+            img: 'assets/img/rgs.png'
+        },
+        7: {
+            id: 7,
+            name: 'Согласие',
+            currency: 'р.',
+            total: 0,
+            img: 'assets/img/sg.svg'
+        },
+        32: {
+            id: 32,
+            name: 'Ресо',
+            currency: 'р.',
+            total: 0,
+            img: 'assets/img/reso.png'
+        },
+        3: {
+            id: 3,
+            name: "Ингосстрах",
+            currency: 'р.',
+            total: 0,
+            img: 'assets/img/ings.png'
+        },
+        33: {
+            id: 33,
+            name: "ВСК",
+            currency: 'р.',
+            total: 0,
+            img: 'assets/img/vsk.png'
+        },
+        36: {
+            id: 36,
+            name: 'Ренессанс Страхование',
+            currency: 'р.',
+            total: 0,
+            img: 'assets/img/rns.png'
+        },
+        107: {
+            id: 107,
+            name: 'Тинькофф Страхование',
+            currency: 'р.',
+            total: 0,
+            img: 'assets/img/tinkoff.png'
+        }
+    };
+    constructor(public http: HttpService, private router: Router, public _session: SessionService, private _sanitize: DomSanitizer) 
     {
+        this.Agreement = this._session.LoadAgreement();
+        this.LastPage = this._session.LoadPage();
+        console.log(this);
     }
 
-    CreateDrivers(model, success?: (ok) => void, fail?: (err) => void)
+    Navigate(Page)
     {
-        // console.log(this.http.ParseReqBody(model));
+        this.LastPage = Page;
+        this._session.SavePage(Page);
+        this.router.navigate(["/" + Page]);
+    }
+
+    CheckCarByNumber(Obj, success?: (data) => void, fail?: (err) => void)
+    {
         this.http.CommonRequest(
-            () => this.http.PostData("/v1/insured_objects/drivers", JSON.stringify(this.http.ParseReqBody(model))),
-            success,
+            () => this.http.PostData('/cars/by_number_plate', Obj),
+            (res: VehicleModel) => {
+                this.Agreement.vehicle = res;
+                this.Agreement.licensePlate = Obj.number_plate;
+                // console.log(JSON.stringify(this.Agreement));
+                this.SaveAgreement(this.Agreement,success, fail);
+            },
             fail
-        )
+        );
     }
 
-    Calculations(model, success?: (ok) => void, fail?: (err) => void)
+    SaveAgreement(Obj, success?: (data) => void, fail?: (err) => void)
     {
         this.http.CommonRequest(
-            () => this.http.PostData("/v1/agreements/calculations", JSON.stringify(model)),
-            success,
-            fail
-        )
-    }
-
-    CreatePolicyHolder(model, success?: (ok) => void, fail?: (err) => void)
-    {
-        // console.log(this.http.ParseReqBody(model));
-        this.http.CommonRequest(
-            () => this.http.PostData("/v1/insured_objects/insurants/natural_persons", JSON.stringify(this.http.ParseReqBody(model))),
-            success,
-            fail
-        )
-    }
-
-    CreateCar(model, success?: (ok) => void, fail?: (err) => void)
-    {
-        // /insured_objects/cars
-        this.http.CommonRequest(
-            () => this.http.PostData("/v1/insured_objects/cars", JSON.stringify(this.http.ParseReqBody(model))),
-            success,
-            fail
-        )
-    }
-
-    CreateOwner(model, success?: (ok) => void, fail?: (err) => void)
-    {
-        // /insured_objects/cars
-        this.http.CommonRequest(
-            () => this.http.PostData("/v1/insured_objects/owners/natural_persons", JSON.stringify(this.http.ParseReqBody(model))),
-            success,
-            fail
-        )
-    }
-
-    Combine(model, success?: (ok) => void, fail?: (err) => void)
-    {
-        this.http.CommonRequest(
-            () => this.http.PostData("/v1/insured_objects/", JSON.stringify(this.http.ParseReqBody(model))),
-            success,
-            fail
-        )
-    }
-
-    UpdateAgreement(aggr_id, data,success?: (ok) => void, fail?: (err) => void)
-    {
-        this.http.CommonRequest(
-            () => this.http.PatchData("/v1/agreements/" + aggr_id, data),
-            success,
+            () => this.http.PostData('/calculate/save', Obj),
+            (res: AgreementModel) => {
+                this.Agreement = res;
+                this._session.SaveAgreement(this.Agreement);
+                if(success && typeof success == "function")
+                {
+                    success(res);
+                }
+            },
             fail
         );
     }
 
-    GetSCompanies(success?: (ok) => void, fail?: (err) => void)
+    CarDics(Text, success?: (data) => void, fail?: (err) => void)
     {
         this.http.CommonRequest(
-            () => this.http.GetData("/v1/companies/", ''),
-            success,
-            fail
-        );
-    }
-
-    GetLogoFullPath(url)
-    {
-        return this.http.GetQueryStr(url);
-    }
-
-    GetScompanyOffer(aggr_id, company_code, success?: (ok) => void, fail?: (err) => void)
-    {
-        this.http.CommonRequest(
-            () => this.http.PostData("/v1/agreements/"+aggr_id+"/results/" + company_code, ""),
+            () => this.http.PostData('/cars', {
+                "title": Text,
+                "limit": 10
+            }),
             success,
             fail
         )
     }
 
-    GetAggreementInfo(aggr_id, success?: (ok) => void, fail?: (err) => void)
+    Copy(Obj)
+    {
+        return JSON.parse(JSON.stringify(Obj));
+    }
+
+    KladrDics(Text, success?: (data) => void, fail?: (err) => void)
     {
         this.http.CommonRequest(
-            () => this.http.GetData("/v1/agreements/" + aggr_id, ''),
+            () => this.http.GetData('/regions/kladr', "count=10&query=" + Text),
             success,
             fail
-        );
+        )
     }
-    
+
+    GetAddrByKladr(Query, success?: (data) => void, fail?: (err) => void)
+    {
+        this.http.CommonRequest(
+            () => this.http.GetData('/addr/kladr', "query=" + Query),
+            success,
+            fail
+        )
+    }
+
+    LiteCalculation(success?: (data) => void, fail?: (err) => void)
+    {
+        const obj = this.Copy(this.Agreement) as AgreementModel;
+        if(!obj.multidrive && obj.drivers.length > 0)
+        {
+            const now = new Date();
+            for(const i in obj.drivers)
+            {
+                const res = now.getTime() - new Date(obj.drivers[i].birthdate).getTime();
+
+                console.log(res, res / (1000 * 60 * 60 * 24 * 365));
+                obj.drivers[i].age = Math.round(res / (1000 * 60 * 60 * 24 * 365));
+            }
+        }
+        this.http.CommonRequest(
+            () => this.http.PostData('/calculate/lite', obj),
+            success,
+            fail
+        )
+    }
 }

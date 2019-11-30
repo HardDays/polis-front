@@ -1,0 +1,13 @@
+<h1 class="system__title">
+    Ваш предварительный расчет<br>
+    полиса ОСАГО
+</h1>
+<form class="create-product">
+    <div class="create-product__row" *ngFor="let sk of SkData | keyvalue">
+        <div class="create-product__coll">
+            <img width="120px" [src]="sk.value.img"/>
+        </div>
+        <div class="create-product__coll">{{sk.value.name}}</div>
+        <div class="create-product__coll">{{sk.value.total}} {{sk.value.currency}}</div>
+    </div>
+</form>

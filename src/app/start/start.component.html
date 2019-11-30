@@ -1,0 +1,16 @@
+<h1 class="system__title">
+    Давайте начнем
+</h1>
+<br/>
+<br/>
+<p>Для расчета ОСАГО укажите<br/>номер автомобиля и данные из государственной<br>базы данных будут добавлены автоматически</p>
+<br/><br/>
+<!-- <br/> -->
+<form>
+    <input placeholder="ГОС НОМЕР" class="input-polis" name="car_number" [ngModel]="CarNumber" (ngModelChange)="CarNumber = $event">
+    <br/>
+    <br/>
+    <button type="submit" (click)="CheckCarNumber()" class="navigate-button">
+        <span class="navigate-button-text">Расчитать</span>
+    </button>
+</form>

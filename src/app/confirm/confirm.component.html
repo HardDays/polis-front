@@ -1,0 +1,26 @@
+<h1 class="system__title">
+    Для проверки расчета<br>
+    подтвердите номер телефона
+</h1>
+<br/>
+<br/>
+<!-- <br/> -->
+<form [formGroup]="Form" (ngSubmit)="Save()">
+    <p>Телефон</p>
+    <input [textMask]="{mask: phoneMask, guide: true, placeholderChar: '_', showMask: true}" formControlName="phone" class="input-polis" name="phone">
+    <br><br>
+    <p>Код подтверждения</p>
+    <input class="input-polis" formControlName="code" name="code"
+        [ngClass]="{'input-polis-error': code.invalid && (code.dirty || code.touched)}"
+    >
+    <br><br>
+    
+    <button [disabled]="Form.invalid" type="submit" (click)="Save()" class="navigate-button">
+        <span class="navigate-button-text">Подтвердить</span>
+    </button>
+    <br>
+    <br>
+    <button type="submit" (click)="Resend()" class="navigate-button reverse">
+        <span class="navigate-button-text">Отправить снова</span>
+    </button>
+</form>

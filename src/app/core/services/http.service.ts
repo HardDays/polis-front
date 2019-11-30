@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import {Http, RequestOptions} from '@angular/http';
 import {Response, Headers, URLSearchParams} from '@angular/http';
-import { TokenModel } from '../models/token.model';
 import { Observable } from 'rxjs';
 
 declare var Buffer: any;
 @Injectable()
 export class HttpService {
 
-    serverUrl = 'https://widget.agentapp.ru/widgets';
-    // serverUrl = 'https://venture-box-back-test.herokuapp.com';
+    // serverUrl = 'https://widget.agentapp.ru/widgets';
+    serverUrl = 'https://gde-polis.herokuapp.com/api/v1';
+    // serverUrl = 'http://localhost:3000/api/v1';
     // прикрутить 
     public headers: Headers = new Headers([]);
     // public token: TokenModel = new TokenModel('');

@@ -1,0 +1,80 @@
+<h1 class="system__title">
+    Введите данные о себе
+</h1>
+<br/>
+<br/>
+<!-- <br/> -->
+<form [formGroup]="Form" (ngSubmit)="Save()">
+    <!-- <p>Марка, модель</p>
+    <div class="ng-autocomplete input-polis" style="margin: auto;">
+        <ng-autocomplete
+            name="model"
+            [ngModel]="Data.model.full_title"
+            [data]="ModelsDics"
+            [searchKeyword]="'full_title'"
+            placeHolder="Марка, модель"
+            (selected)='selectEvent($event)'
+            (inputChanged)='UpdateDics($event)'
+            [itemTemplate]="itemTemplate"
+            [notFoundTemplate]="notFoundTemplate">
+        </ng-autocomplete>
+        
+        <ng-template #itemTemplate let-item>
+            <a *ngIf="item" [innerHTML]="item && item.full_title ? item.full_title : ''"></a>
+        </ng-template>
+        
+        <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+        </ng-template>
+    </div> -->
+    <p>ФИО</p>
+    
+    <input placeholder="Иванов Иван Иванович" class="input-polis" formControlName="fio" name="fio">
+    <br/>
+    <br/>
+    <p>Дата рождения</p>
+    <div class="input-polis">
+        <my-date-picker name="birthday" [options]="myDatePickerOptions" formControlName="birthday"
+        ></my-date-picker>
+    </div>
+    <!-- <input placeholder="01.01.1990" class="input-polis"  formControlName="birthday" name="birthday"> -->
+    <br/>
+    <br/>
+    <p>Стаж вождения</p>
+    <input type="number" placeholder="" class="input-polis" formControlName="exp" name="exp">
+    <br>
+    <br>
+    <p>Город регистрации</p>
+    <div class="ng-autocomplete input-polis" style="margin: auto;">
+        <ng-autocomplete
+            height="45px"
+            name="city"
+            formControlName="city"
+            [ngModel]="SelectedKladr.unrestricted_value"
+            [data]="CityDics"
+            [searchKeyword]="'unrestricted_value'"
+            (selected)='selectEvent($event)'
+            (inputChanged)='UpdateDics($event)'
+            [itemTemplate]="itemTemplate"
+            [notFoundTemplate]="notFoundTemplate">
+        </ng-autocomplete>
+        
+        <ng-template #itemTemplate let-item>
+            <a *ngIf="item" [innerHTML]="item && item.unrestricted_value ? item.unrestricted_value : ''"></a>
+        </ng-template>
+        
+        <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+        </ng-template>
+    </div> 
+    <br>
+
+    <p>Телефон</p>
+    <input [textMask]="{mask: phoneMask, guide: true, placeholderChar: '_', showMask: true}" formControlName="phone" class="input-polis" name="phone">
+    <br><br>
+
+    <button [disabled]="Form.invalid" type="submit" (click)="Save()" class="navigate-button">
+            <!-- <button type="submit" (click)="Save()" class="navigate-button"> -->
+        <span class="navigate-button-text">Узнать стоимость</span>
+    </button>
+</form>

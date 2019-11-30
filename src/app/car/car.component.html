@@ -1,0 +1,48 @@
+<h1 class="system__title">
+    Это ваш автомобиль?
+</h1>
+<br/>
+<br/>
+<p>Проверьте корректность загруженных данных<br/>и исправьте, если данные неверны</p>
+<br/><br/>
+<!-- <br/> -->
+<form>
+    <p>Марка, модель</p>
+    <div class="ng-autocomplete input-polis" style="margin: auto;">
+        <ng-autocomplete
+            name="model"
+            [ngModel]="Data.model.full_title"
+            [data]="ModelsDics"
+            [searchKeyword]="'full_title'"
+            placeHolder="Марка, модель"
+            (selected)='selectEvent($event)'
+            (inputChanged)='UpdateDics($event)'
+            [itemTemplate]="itemTemplate"
+            [notFoundTemplate]="notFoundTemplate">
+        </ng-autocomplete>
+        
+        <ng-template #itemTemplate let-item>
+            <a *ngIf="item" [innerHTML]="item && item.full_title ? item.full_title : ''"></a>
+        </ng-template>
+        
+        <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+        </ng-template>
+    </div>
+    <br/>
+    <br/>
+    <p>Год выпуска</p>
+    <input type="number" placeholder="Год выпуска" class="input-polis" name="year" [ngModel]="Data.year" (ngModelChange)="Data.year = $event">
+    <br/>
+    <br/>
+    <p>Мощность (Л.С.)</p>
+    <input type="number" placeholder="Мощность" class="input-polis" name="car_power" [ngModel]="Data.power" (ngModelChange)="Data.power = $event">
+    <br>
+    <br>
+    <button type="submit" (click)="SaveCar()" class="navigate-button">
+        <span class="navigate-button-text">Да, все верно</span>
+    </button>
+</form>
+<br>
+<br>
+<p>Мы гарантируем безопасность ваших данных</p>

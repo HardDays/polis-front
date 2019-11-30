@@ -2,15 +2,18 @@
   <div class="system main__system">
     
     <div class="system__wrapper">
-      <auth-cmp></auth-cmp>
+      <!-- <auth-cmp></auth-cmp> -->
       <div>
         <pre>
-            <a routerLink="simple">Пердварительный расчет</a>   <a routerLink="complex">Полный расчет</a>
+            <!-- <a routerLink="simple">Пердварительный расчет</a>   <a routerLink="complex">Полный расчет</a> -->
         </pre>
         
       </div>
       <div class="simple-component">
-          <router-outlet></router-outlet>
+        <div>
+            <button (click)="GoBack()">Назад</button> ЛОГО
+        </div>
+        <router-outlet></router-outlet>
       </div>
       
       
