@@ -13,7 +13,6 @@ import { VehicleModel, AgreementModel, DriverModel } from '../core/models/agreem
     {
     }
     ngOnInit(): void {
-        console.log('ndrivers');
         // throw new Error("Method not implemented.");
     }
 
@@ -40,7 +39,6 @@ import { VehicleModel, AgreementModel, DriverModel } from '../core/models/agreem
                 this._main.Navigate("is_owner");
             },  
             (err) => {
-                console.log(err);
             })
     }
   

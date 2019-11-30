@@ -37,23 +37,19 @@ import { VehicleModel, AgreementModel } from '../core/models/agreement.model';
                     if(index >= 0)
                     {
                         this.Data.model = this.ModelsDics[index];
-                        console.log(this.Data);
                     }
                 });
             }
         }
         
         
-        // console.log(car);
     }
     ngOnInit(): void {
-        console.log('car');
         // throw new Error("Method not implemented.");
     }
 
     UpdateDics($event, callback?:() => void)
     {
-        console.log($event);
         this._main.CarDics($event, (res) => {
             this.ModelsDics = res;
             if(callback && typeof callback == "function")
@@ -62,7 +58,6 @@ import { VehicleModel, AgreementModel } from '../core/models/agreement.model';
             }
         },
         (err) => {
-            console.log(err);
             if(callback && typeof callback == "function")
             {
                 callback();
@@ -73,7 +68,6 @@ import { VehicleModel, AgreementModel } from '../core/models/agreement.model';
     selectEvent($event)
     {
         this.Data.model = $event;
-        // console.log(this.service.AggreementModel);
     }
 
     SaveCar()
@@ -89,7 +83,6 @@ import { VehicleModel, AgreementModel } from '../core/models/agreement.model';
             this._main.Navigate("ndrivers");
         },
         (err) => {
-            console.log(err);
         })
     }
   

@@ -18,7 +18,6 @@ export class AppComponent implements OnInit{
   
   GoBack()
   {
-    console.log("back");
       this._location.back();
   }
 }

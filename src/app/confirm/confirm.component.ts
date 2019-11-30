@@ -34,7 +34,6 @@ import { IMyDpOptions } from 'mydatepicker';
         this.Form.get("phone").setValue(data.phone);
     }
     ngOnInit(): void {
-        console.log('confirm');
         // throw new Error("Method not implemented.");
     }
 
@@ -78,11 +77,9 @@ import { IMyDpOptions } from 'mydatepicker';
 
             this._main.SaveAgreement(agr,(res) => {
                 this._main.Navigate('calc_lite');
-                // console.log(agr);
                 // this._main.Navigate("ndrivers");
             },
             (err) => {
-                console.log(err);
             })
         }
     }

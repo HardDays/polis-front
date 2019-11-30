@@ -14,7 +14,6 @@ import { MainService } from '../core/services/main.service';
 
       }
     ngOnInit(): void {
-        console.log('start');
         // throw new Error("Method not implemented.");
     }
 
@@ -27,7 +26,6 @@ import { MainService } from '../core/services/main.service';
             this._main.Navigate("car");
         },
         (err) => {
-            console.log(err);
         })
     }
     

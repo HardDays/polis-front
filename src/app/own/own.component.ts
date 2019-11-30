@@ -96,21 +96,17 @@ import { IMyDpOptions } from 'mydatepicker';
                 
             },
             (err) => {
-                console.log(err);
             })
         }
         
     }
     ngOnInit(): void {
-        console.log('own');
         // throw new Error("Method not implemented.");
     }
 
     UpdateDics($event, callback?:() => void)
     {
-        console.log($event)
         this._main.KladrDics($event, (res) => {
-            console.log(res);
             this.CityDics = res;
             if(callback && typeof callback == "function")
             {
@@ -118,7 +114,6 @@ import { IMyDpOptions } from 'mydatepicker';
             }
         },
         (err) => {
-            console.log(err);
             if(callback && typeof callback == "function")
             {
                 callback();
@@ -129,14 +124,11 @@ import { IMyDpOptions } from 'mydatepicker';
     selectEvent($event)
     {
         this.SelectedKladr = $event;
-        console.log(this.SelectedKladr);
-        // console.log(this.service.AggreementModel);
     }
 
     Save()
     {
         const data = this.Form.getRawValue();
-        console.log(data);
         const agr = this._main.Copy(this._main.Agreement) as AgreementModel;
 
         const split = data.fio.split(" ");
@@ -169,13 +161,10 @@ import { IMyDpOptions } from 'mydatepicker';
 
 
         this._main.SaveAgreement(agr,(res) => {
-            // console.log(res);
             this._main.Navigate("confirm");
-            // console.log(agr);
             // this._main.Navigate("ndrivers");
         },
         (err) => {
-            console.log(err);
         })
     }
 

@@ -81,7 +81,6 @@ export class MainService
     {
         this.Agreement = this._session.LoadAgreement();
         this.LastPage = this._session.LoadPage();
-        console.log(this);
     }
 
     Navigate(Page)
@@ -98,7 +97,6 @@ export class MainService
             (res: VehicleModel) => {
                 this.Agreement.vehicle = res;
                 this.Agreement.licensePlate = Obj.number_plate;
-                // console.log(JSON.stringify(this.Agreement));
                 this.SaveAgreement(this.Agreement,success, fail);
             },
             fail
@@ -166,7 +164,6 @@ export class MainService
             {
                 const res = now.getTime() - new Date(obj.drivers[i].birthdate).getTime();
 
-                console.log(res, res / (1000 * 60 * 60 * 24 * 365));
                 obj.drivers[i].age = Math.round(res / (1000 * 60 * 60 * 24 * 365));
             }
         }

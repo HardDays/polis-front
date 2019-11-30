@@ -80,7 +80,6 @@ export class HttpService {
             .subscribe(
                 (resp: Response) =>
                 {
-                    // console.log(resp);
                     if(success && typeof success == "function")
                     {
                         success(this.validResp(resp)?resp.json():"");

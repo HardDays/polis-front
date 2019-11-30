@@ -17,10 +17,7 @@ import { DomSanitizer } from '@angular/platform-browser';
     }
     ngOnInit(): void {
         this.SkData = this._main.Copy(this._main.SkEnum) as any;
-        console.log('lite_calc');
-        // throw new Error("Method not implemented.");
         this._main.LiteCalculation(res => {
-            // console.log(res);
             if(res && res.calculations &&  res.calculations.results.length > 0)
             {
                 for(const item of res.calculations.results)
@@ -29,7 +26,6 @@ import { DomSanitizer } from '@angular/platform-browser';
                         this.SkData[item.sk].total = item.total;
                 }
             }
-            // console.log(this.SkData);
         }, err => {console.log(err)})
     }
   
