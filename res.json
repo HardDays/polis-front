@@ -1,0 +1,854 @@
+Create car
+{
+    "car_modification_id":141073,
+    "number_plate":"Н240РН116",
+    "has_trailer":false,
+    "credential":[
+        {
+            "credential_type":"VEHICLE_REGISTRATION",
+            "series":"16УН",
+            "number":"577598"
+        }
+    ],
+    "vin_number":"XW8CA41Z1BK257744"
+}
+Response
+{
+    "id": "aad9b20d-6a35-4197-9cd0-1ed77f3f3429",
+    "credential": [
+        {
+            "issue_date": null,
+            "number": "577598",
+            "series": "16УН",
+            "credential_type": "VEHICLE_REGISTRATION",
+            "expiration_date": null
+        }
+    ],
+    "car_mark": "Skoda",
+    "car_mark_id": "457",
+    "car_type": "B",
+    "car_model": "Octavia",
+    "car_model_id": "864023092",
+    "rsa_code": "366013880",
+    "manufacturing_year": "2010",
+    "car_modification": "102.0 л.с. - 1.6 - Хэтчбек (5 дв.)",
+    "car_modification_id": "141073",
+    "vin_number": "XW8CA41Z1BK257744",
+    "number_plate": "Н240РН116",
+    "car_body_number": null,
+    "chassis_number": null,
+    "has_trailer": false,
+    "is_foreign": true,
+    "engine_displacement": 1.6,
+    "engine_power": 102,
+    "is_rsa_checked": false,
+    "is_deprecated": false
+}
+
+Create driver
+{
+    "first_name":"Константин",
+    "last_name":"Кузовенин",
+    "birth_date":"1987-11-28",
+    "valid_from":"2019-10-04",
+    "driving_experience_started":"2006-12-25",
+    "driver_licenses":[
+        {
+            "number":"045169",
+            "series":"1630",
+            "issue_date":"2006-12-25",
+            "credential_type":"DRIVER_LICENSE"
+        }
+    ],
+    "patronymic":"Александрович"
+}
+Response
+{
+    "id": "84d34c9b-32d5-463d-bf9f-7cddf5021d0b",
+    "fact_address": null,
+    "legal_address": null,
+    "contact": [],
+    "driver_licenses": [
+        {
+            "number": "045169",
+            "series": "1630",
+            "issue_date": "2006-12-25",
+            "credential_type": "DRIVER_LICENSE"
+        }
+    ],
+    "first_name": "Константин",
+    "last_name": "Кузовенин",
+    "patronymic": "Александрович",
+    "birth_date": "1987-11-28",
+    "gender": "M",
+    "driving_experience_started": "2006-12-25",
+    "is_rsa_checked": true,
+    "kbm_value": "0.50",
+    "previous_policy_serial": "МММ",
+    "previous_policy_number": "5011338505"
+}
+
+Calculations
+{
+    "valid_from":"2019-10-04",
+    "valid_to":"2020-10-03",
+    "car_type":"B",
+    "engine_power":102,
+    "target_of_using":11,
+    "insurance_period":8,
+    "owner_registration":{
+        "country":"Россия",
+        "country_iso_code":"RU",
+        "region_fias_id":"0c089b04-099e-4e0e-955a-6bf1ce525f1a",
+        "region_kladr_id":"1600000000000",
+        "region_iso_code":"RU-TA",
+        "region_with_type":"респ Татарстан",
+        "region_type":"респ",
+        "region_type_full":"республика",
+        "region":"Татарстан",
+        "city_fias_id":"93b3df57-4c89-44df-ac42-96f05e9cd3b9",
+        "city_kladr_id":"1600000100000",
+        "city_with_type":"г Казань",
+        "city_type":"г",
+        "city_type_full":"город",
+        "city":"Казань",
+        "fias_id":"93b3df57-4c89-44df-ac42-96f05e9cd3b9",
+        "fias_level":"4",
+        "kladr_id":"1600000100000",
+        "capital_marker":"2",
+        "okato":"92401000000",
+        "oktmo":"92701000",
+        "address_query":"респ Татарстан, г Казань"
+    },
+    "is_car_without_registration":false,
+    "car_id":"aad9b20d-6a35-4197-9cd0-1ed77f3f3429",
+    "drivers_ids":["84d34c9b-32d5-463d-bf9f-7cddf5021d0b"]
+}
+Response
+{
+    "id": "d2194171-8471-4ca6-922e-638da69bc039",
+    "valid_from": "2019-10-04T00:00:00+03:00",
+    "valid_to": "2020-10-03T23:59:59.999999+03:00",
+    "periods": [],
+    "calculation": {
+        "premium": 2846.59,
+        "data": {
+            "valid_from": "2019-10-04",
+            "valid_to": "2020-10-03",
+            "car_type": "B",
+            "engine_power": 102,
+            "target_of_using": "PERSONAL",
+            "insurance_period": 8,
+            "owner_registration": {},
+            "is_car_without_registration": false,
+            "car_id": "aad9b20d-6a35-4197-9cd0-1ed77f3f3429",
+            "drivers_ids": [
+                "84d34c9b-32d5-463d-bf9f-7cddf5021d0b"
+            ],
+            "drivers": [
+                {
+                    "birth_date": "1987-11-28",
+                    "driving_experience_started": "2006-12-25",
+                    "credential": [
+                        {
+                            "number": "045169",
+                            "series": "1630",
+                            "issue_date": "2006-12-25",
+                            "credential_type": "DRIVER_LICENSE"
+                        }
+                    ],
+                    "first_name": "Константин",
+                    "last_name": "Кузовенин",
+                    "patronymic": "Александрович"
+                }
+            ],
+            "car_data": {
+                "car_model_id": "864023092",
+                "car_vin_number": "XW8CA41Z1BK257744",
+                "car_body_number": null,
+                "car_chassis_number": null,
+                "number_plate": "Н240РН116",
+                "manufacturing_year": 2010,
+                "rsa_code": "366013880"
+            },
+            "max_mass": 0,
+            "seats_count": 0,
+            "is_multidrive": false,
+            "insurance_period_kterm": "1.00",
+            "insurance_period_month": 12,
+            "insurant_type": "NATURAL_PERSON",
+            "kbm": "0.5"
+        },
+        "coeffs": {
+            "Tbase_min": 2746,
+            "Tbase_max": 4942,
+            "Ktrailer": 1,
+            "Kregion": 1,
+            "Kengine": 1.2,
+            "Kexpage": 0.96,
+            "Klim": 1,
+            "Kterm": 1,
+            "Kbm": 0.5,
+            "kbm_class": "13",
+            "S_min": 1581.7
+        }
+    },
+    "status": "DRAFT",
+    "insured_object": null
+}
+
+Create object for update
+{
+    "car":"aad9b20d-6a35-4197-9cd0-1ed77f3f3429",
+    "drivers":["84d34c9b-32d5-463d-bf9f-7cddf5021d0b"],
+    "insurant":null,
+    "owner":null
+}
+Response
+{
+    "id": "bf35daff-8cc0-4791-9ffd-3d08de660186",
+    "drivers": [
+        "84d34c9b-32d5-463d-bf9f-7cddf5021d0b"
+    ],
+    "car": "aad9b20d-6a35-4197-9cd0-1ed77f3f3429",
+    "owner": null,
+    "insurant": null
+}
+
+Create owner
+{
+    "address":[
+        {
+            "postal_code":"420057",
+            "country":"Россия",
+            "country_iso_code":"RU",
+            "federal_district":"Приволжский",
+            "region_fias_id":"0c089b04-099e-4e0e-955a-6bf1ce525f1a",
+            "region_kladr_id":"1600000000000",
+            "region_iso_code":"RU-TA",
+            "region_with_type":"Респ Татарстан",
+            "region_type":"Респ",
+            "region_type_full":"республика",
+            "region":"Татарстан",
+            "city_fias_id":"93b3df57-4c89-44df-ac42-96f05e9cd3b9",
+            "city_kladr_id":"1600000100000",
+            "city_with_type":"г Казань",
+            "city_type":"г",
+            "city_type_full":"город",
+            "city":"Казань",
+            "city_district_with_type":"Ново-Савиновский р-н",
+            "city_district_type":"р-н",
+            "city_district_type_full":"район",
+            "city_district":"Ново-Савиновский",
+            "street_fias_id":"6787404c-5636-4abf-bc96-377c0ea6a946",
+            "street_kladr_id":"16000001000050200",
+            "street_with_type":"пр-кт Ибрагимова",
+            "street_type":"пр-кт",
+            "street_type_full":"проспект",
+            "street":"Ибрагимова",
+            "house_fias_id":"4751b863-1121-4ffc-b0fe-f3c8d1ebf53b",
+            "house_kladr_id":"1600000100005020040",
+            "house_type":"д",
+            "house_type_full":"дом",
+            "house":"19",
+            "flat_type":"кв",
+            "flat_type_full":"квартира",
+            "flat":"22",
+            "flat_area":"45.5",
+            "fias_id":"4751b863-1121-4ffc-b0fe-f3c8d1ebf53b",
+            "fias_code":"16000001000000005020040",
+            "fias_level":"8",
+            "fias_actuality_state":"0",
+            "kladr_id":"1600000100005020040",
+            "geoname_id":null,
+            "capital_marker":"2",
+            "okato":"92401379000",
+            "oktmo":"92701000001",
+            "tax_office":"1685",
+            "tax_office_legal":"1685",
+            "timezone":"UTC+3",
+            "geo_lat":"55.8386196",
+            "geo_lon":"49.0885629",
+            "metro":[
+                {"name":"Северный вокзал","line":"Центральная","distance":0.5},
+                {"name":"Яшьлек (Юность)","line":"Центральная","distance":1.2},
+                {"name":"Авиастроительная","line":"Центральная","distance":1.9}
+            ],
+            "qc_geo":"0",
+            "address_query":"респ Татарстан, г Казань, Респ Татарстан, г Казань, Ново-Савиновский р-н, пр-кт Ибрагимова, д 19, кв 22",
+            "address_type":"LEGAL_ADDRESS"
+        }
+    ],
+    "credential":[
+        {
+            "credential_type":"RUSSIAN_INTERNAL_PASSPORT",
+            "issue_date":"2007-12-14",
+            "issue_point":"ОТДЕЛЕНИЕМ В НОВО-САВИНОВСКОМ РАЙОНЕ ОУФМС РОССИИ ПО РЕСП. ТАТАРСТАН В Г. КАЗАНИ",
+            "issue_point_code":"160-007",
+            "number":"946106",
+            "series":"9270"
+        }
+    ],
+    "contact":[],
+    "last_name":"Кузовенин",
+    "first_name":"Константин",
+    "patronymic":"Александрович",
+    "birth_date":"1987-11-28",
+    "valid_from":"2019-10-04"
+}
+Response
+{
+    "id": "c9450f62-dfa4-44a3-9bba-7cdfb622b8b3",
+    "credential": [
+        {
+            "issue_date": "2007-12-14",
+            "issue_point": "ОТДЕЛЕНИЕМ В НОВО-САВИНОВСКОМ РАЙОНЕ ОУФМС РОССИИ ПО РЕСП. ТАТАРСТАН В Г. КАЗАНИ",
+            "issue_point_code": "160-007",
+            "number": "946106",
+            "series": "9270",
+            "credential_type": "RUSSIAN_INTERNAL_PASSPORT"
+        }
+    ],
+    "address": [
+        {
+            "address_type": "LEGAL_ADDRESS",
+            "address_query": "респ Татарстан, г Казань, Респ Татарстан, г Казань, Ново-Савиновский р-н, пр-кт Ибрагимова, д 19, кв 22",
+            "data": {
+                "city": "Казань",
+                "flat": "22",
+                "house": "19",
+                "metro": [
+                    {
+                        "line": "Центральная",
+                        "name": "Северный вокзал",
+                        "distance": 0.5
+                    },
+                    {
+                        "line": "Центральная",
+                        "name": "Яшьлек (Юность)",
+                        "distance": 1.2
+                    },
+                    {
+                        "line": "Центральная",
+                        "name": "Авиастроительная",
+                        "distance": 1.9
+                    }
+                ],
+                "okato": "92401379000",
+                "oktmo": "92701000001",
+                "qc_geo": "0",
+                "region": "Татарстан",
+                "street": "Ибрагимова",
+                "country": "Россия",
+                "fias_id": "4751b863-1121-4ffc-b0fe-f3c8d1ebf53b",
+                "geo_lat": "55.8386196",
+                "geo_lon": "49.0885629",
+                "kladr_id": "1600000100005020040",
+                "timezone": "UTC+3",
+                "city_type": "г",
+                "fias_code": "16000001000000005020040",
+                "flat_area": "45.5",
+                "flat_type": "кв",
+                "fias_level": "8",
+                "house_type": "д",
+                "tax_office": "1685",
+                "postal_code": "420057",
+                "region_type": "Респ",
+                "street_type": "пр-кт",
+                "city_fias_id": "93b3df57-4c89-44df-ac42-96f05e9cd3b9",
+                "city_district": "Ново-Савиновский",
+                "city_kladr_id": "1600000100000",
+                "house_fias_id": "4751b863-1121-4ffc-b0fe-f3c8d1ebf53b",
+                "capital_marker": "2",
+                "city_type_full": "город",
+                "city_with_type": "г Казань",
+                "flat_type_full": "квартира",
+                "house_kladr_id": "1600000100005020040",
+                "region_fias_id": "0c089b04-099e-4e0e-955a-6bf1ce525f1a",
+                "street_fias_id": "6787404c-5636-4abf-bc96-377c0ea6a946",
+                "house_type_full": "дом",
+                "region_iso_code": "RU-TA",
+                "region_kladr_id": "1600000000000",
+                "street_kladr_id": "16000001000050200",
+                "country_iso_code": "RU",
+                "federal_district": "Приволжский",
+                "region_type_full": "республика",
+                "region_with_type": "Респ Татарстан",
+                "street_type_full": "проспект",
+                "street_with_type": "пр-кт Ибрагимова",
+                "tax_office_legal": "1685",
+                "city_district_type": "р-н",
+                "fias_actuality_state": "0",
+                "city_district_type_full": "район",
+                "city_district_with_type": "Ново-Савиновский р-н"
+            },
+            "region_kladr_id": "1600000000000",
+            "city_kladr_id": "1600000100000",
+            "street_kladr_id": "16000001000050200",
+            "house_kladr_id": "1600000100005020040"
+        }
+    ],
+    "person": "5cc3e116-24df-42ed-ad66-9c0325b9c94c",
+    "legal_address": {
+        "address_type": "LEGAL_ADDRESS",
+        "address_query": "респ Татарстан, г Казань, Респ Татарстан, г Казань, Ново-Савиновский р-н, пр-кт Ибрагимова, д 19, кв 22",
+        "data": {
+            "city": "Казань",
+            "flat": "22",
+            "house": "19",
+            "metro": [
+                {
+                    "line": "Центральная",
+                    "name": "Северный вокзал",
+                    "distance": 0.5
+                },
+                {
+                    "line": "Центральная",
+                    "name": "Яшьлек (Юность)",
+                    "distance": 1.2
+                },
+                {
+                    "line": "Центральная",
+                    "name": "Авиастроительная",
+                    "distance": 1.9
+                }
+            ],
+            "okato": "92401379000",
+            "oktmo": "92701000001",
+            "qc_geo": "0",
+            "region": "Татарстан",
+            "street": "Ибрагимова",
+            "country": "Россия",
+            "fias_id": "4751b863-1121-4ffc-b0fe-f3c8d1ebf53b",
+            "geo_lat": "55.8386196",
+            "geo_lon": "49.0885629",
+            "kladr_id": "1600000100005020040",
+            "timezone": "UTC+3",
+            "city_type": "г",
+            "fias_code": "16000001000000005020040",
+            "flat_area": "45.5",
+            "flat_type": "кв",
+            "fias_level": "8",
+            "house_type": "д",
+            "tax_office": "1685",
+            "postal_code": "420057",
+            "region_type": "Респ",
+            "street_type": "пр-кт",
+            "city_fias_id": "93b3df57-4c89-44df-ac42-96f05e9cd3b9",
+            "city_district": "Ново-Савиновский",
+            "city_kladr_id": "1600000100000",
+            "house_fias_id": "4751b863-1121-4ffc-b0fe-f3c8d1ebf53b",
+            "capital_marker": "2",
+            "city_type_full": "город",
+            "city_with_type": "г Казань",
+            "flat_type_full": "квартира",
+            "house_kladr_id": "1600000100005020040",
+            "region_fias_id": "0c089b04-099e-4e0e-955a-6bf1ce525f1a",
+            "street_fias_id": "6787404c-5636-4abf-bc96-377c0ea6a946",
+            "house_type_full": "дом",
+            "region_iso_code": "RU-TA",
+            "region_kladr_id": "1600000000000",
+            "street_kladr_id": "16000001000050200",
+            "country_iso_code": "RU",
+            "federal_district": "Приволжский",
+            "region_type_full": "республика",
+            "region_with_type": "Респ Татарстан",
+            "street_type_full": "проспект",
+            "street_with_type": "пр-кт Ибрагимова",
+            "tax_office_legal": "1685",
+            "city_district_type": "р-н",
+            "fias_actuality_state": "0",
+            "city_district_type_full": "район",
+            "city_district_with_type": "Ново-Савиновский р-н"
+        },
+        "region_kladr_id": "1600000000000",
+        "city_kladr_id": "1600000100000",
+        "street_kladr_id": "16000001000050200",
+        "house_kladr_id": "1600000100005020040"
+    },
+    "contact": [],
+    "first_name": "Константин",
+    "last_name": "Кузовенин",
+    "patronymic": "Александрович",
+    "birth_date": "1987-11-28",
+    "gender": "M"
+}
+
+Create holder
+{
+    "address":[
+        {
+            "postal_code":"420057",
+            "country":"Россия",
+            "country_iso_code":"RU",
+            "federal_district":"Приволжский",
+            "region_fias_id":"0c089b04-099e-4e0e-955a-6bf1ce525f1a",
+            "region_kladr_id":"1600000000000",
+            "region_iso_code":"RU-TA",
+            "region_with_type":"Респ Татарстан",
+            "region_type":"Респ",
+            "region_type_full":"республика",
+            "region":"Татарстан",
+            "city_fias_id":"93b3df57-4c89-44df-ac42-96f05e9cd3b9",
+            "city_kladr_id":"1600000100000",
+            "city_with_type":"г Казань",
+            "city_type":"г",
+            "city_type_full":"город",
+            "city":"Казань",
+            "city_district_with_type":"Ново-Савиновский р-н",
+            "city_district_type":"р-н",
+            "city_district_type_full":"район",
+            "city_district":"Ново-Савиновский",
+            "street_fias_id":"6787404c-5636-4abf-bc96-377c0ea6a946",
+            "street_kladr_id":"16000001000050200",
+            "street_with_type":"пр-кт Ибрагимова",
+            "street_type":"пр-кт",
+            "street_type_full":"проспект",
+            "street":"Ибрагимова",
+            "house_fias_id":"4751b863-1121-4ffc-b0fe-f3c8d1ebf53b",
+            "house_kladr_id":"1600000100005020040",
+            "house_type":"д",
+            "house_type_full":"дом",
+            "house":"19",
+            "flat_type":"кв",
+            "flat_type_full":"квартира",
+            "flat":"22",
+            "flat_area":"45.5",
+            "fias_id":"4751b863-1121-4ffc-b0fe-f3c8d1ebf53b",
+            "fias_code":"16000001000000005020040",
+            "fias_level":"8",
+            "fias_actuality_state":"0",
+            "kladr_id":"1600000100005020040",
+            "geoname_id":null,
+            "capital_marker":"2",
+            "okato":"92401379000",
+            "oktmo":"92701000001",
+            "tax_office":"1685",
+            "tax_office_legal":"1685",
+            "timezone":"UTC+3",
+            "geo_lat":"55.8386196",
+            "geo_lon":"49.0885629",
+            "metro":[
+                {"name":"Северный вокзал","line":"Центральная","distance":0.5},
+                {"name":"Яшьлек (Юность)","line":"Центральная","distance":1.2},
+                {"name":"Авиастроительная","line":"Центральная","distance":1.9}
+            ],
+            "qc_geo":"0",
+            "address_query":"респ Татарстан, г Казань, Респ Татарстан, г Казань, Ново-Савиновский р-н, пр-кт Ибрагимова, д 19, кв 22",
+            "address_type":"LEGAL_ADDRESS"
+        }
+    ],
+    "credential":[
+        {
+            "credential_type":"RUSSIAN_INTERNAL_PASSPORT",
+            "issue_date":"2007-12-14",
+            "issue_point":"ОТДЕЛЕНИЕМ В НОВО-САВИНОВСКОМ РАЙОНЕ ОУФМС РОССИИ ПО РЕСП. ТАТАРСТАН В Г. КАЗАНИ",
+            "issue_point_code":"160-007",
+            "number":"946106",
+            "series":"9270"
+        }
+    ],
+    "contact":[
+        {
+            "contact_type": "PHONE",
+            "data": "+79885413188"
+        },
+        {
+            "contact_type": "EMAIL",
+            "data": "paramonov.kirill.alexandrovich@gmail.com"
+        }
+    ],
+    "last_name":"Кузовенин",
+    "first_name":"Константин",
+    "patronymic":"Александрович",
+    "birth_date":"1987-11-28",
+    "valid_from":"2019-10-04"
+}
+Response
+{
+    "id": "2de55f93-403c-4a3e-aeea-86c609f2569d",
+    "credential": [
+        {
+            "issue_date": "2007-12-14",
+            "issue_point": "ОТДЕЛЕНИЕМ В НОВО-САВИНОВСКОМ РАЙОНЕ ОУФМС РОССИИ ПО РЕСП. ТАТАРСТАН В Г. КАЗАНИ",
+            "issue_point_code": "160-007",
+            "number": "946106",
+            "series": "9270",
+            "credential_type": "RUSSIAN_INTERNAL_PASSPORT"
+        }
+    ],
+    "address": [
+        {
+            "address_type": "LEGAL_ADDRESS",
+            "address_query": "респ Татарстан, г Казань, Респ Татарстан, г Казань, Ново-Савиновский р-н, пр-кт Ибрагимова, д 19, кв 22",
+            "data": {
+                "city": "Казань",
+                "flat": "22",
+                "house": "19",
+                "metro": [
+                    {
+                        "line": "Центральная",
+                        "name": "Северный вокзал",
+                        "distance": 0.5
+                    },
+                    {
+                        "line": "Центральная",
+                        "name": "Яшьлек (Юность)",
+                        "distance": 1.2
+                    },
+                    {
+                        "line": "Центральная",
+                        "name": "Авиастроительная",
+                        "distance": 1.9
+                    }
+                ],
+                "okato": "92401379000",
+                "oktmo": "92701000001",
+                "qc_geo": "0",
+                "region": "Татарстан",
+                "street": "Ибрагимова",
+                "country": "Россия",
+                "fias_id": "4751b863-1121-4ffc-b0fe-f3c8d1ebf53b",
+                "geo_lat": "55.8386196",
+                "geo_lon": "49.0885629",
+                "kladr_id": "1600000100005020040",
+                "timezone": "UTC+3",
+                "city_type": "г",
+                "fias_code": "16000001000000005020040",
+                "flat_area": "45.5",
+                "flat_type": "кв",
+                "fias_level": "8",
+                "house_type": "д",
+                "tax_office": "1685",
+                "postal_code": "420057",
+                "region_type": "Респ",
+                "street_type": "пр-кт",
+                "city_fias_id": "93b3df57-4c89-44df-ac42-96f05e9cd3b9",
+                "city_district": "Ново-Савиновский",
+                "city_kladr_id": "1600000100000",
+                "house_fias_id": "4751b863-1121-4ffc-b0fe-f3c8d1ebf53b",
+                "capital_marker": "2",
+                "city_type_full": "город",
+                "city_with_type": "г Казань",
+                "flat_type_full": "квартира",
+                "house_kladr_id": "1600000100005020040",
+                "region_fias_id": "0c089b04-099e-4e0e-955a-6bf1ce525f1a",
+                "street_fias_id": "6787404c-5636-4abf-bc96-377c0ea6a946",
+                "house_type_full": "дом",
+                "region_iso_code": "RU-TA",
+                "region_kladr_id": "1600000000000",
+                "street_kladr_id": "16000001000050200",
+                "country_iso_code": "RU",
+                "federal_district": "Приволжский",
+                "region_type_full": "республика",
+                "region_with_type": "Респ Татарстан",
+                "street_type_full": "проспект",
+                "street_with_type": "пр-кт Ибрагимова",
+                "tax_office_legal": "1685",
+                "city_district_type": "р-н",
+                "fias_actuality_state": "0",
+                "city_district_type_full": "район",
+                "city_district_with_type": "Ново-Савиновский р-н"
+            },
+            "region_kladr_id": "1600000000000",
+            "city_kladr_id": "1600000100000",
+            "street_kladr_id": "16000001000050200",
+            "house_kladr_id": "1600000100005020040"
+        }
+    ],
+    "person": "f477240f-c0f2-48ce-9eb1-989781c51ab4",
+    "legal_address": {
+        "address_type": "LEGAL_ADDRESS",
+        "address_query": "респ Татарстан, г Казань, Респ Татарстан, г Казань, Ново-Савиновский р-н, пр-кт Ибрагимова, д 19, кв 22",
+        "data": {
+            "city": "Казань",
+            "flat": "22",
+            "house": "19",
+            "metro": [
+                {
+                    "line": "Центральная",
+                    "name": "Северный вокзал",
+                    "distance": 0.5
+                },
+                {
+                    "line": "Центральная",
+                    "name": "Яшьлек (Юность)",
+                    "distance": 1.2
+                },
+                {
+                    "line": "Центральная",
+                    "name": "Авиастроительная",
+                    "distance": 1.9
+                }
+            ],
+            "okato": "92401379000",
+            "oktmo": "92701000001",
+            "qc_geo": "0",
+            "region": "Татарстан",
+            "street": "Ибрагимова",
+            "country": "Россия",
+            "fias_id": "4751b863-1121-4ffc-b0fe-f3c8d1ebf53b",
+            "geo_lat": "55.8386196",
+            "geo_lon": "49.0885629",
+            "kladr_id": "1600000100005020040",
+            "timezone": "UTC+3",
+            "city_type": "г",
+            "fias_code": "16000001000000005020040",
+            "flat_area": "45.5",
+            "flat_type": "кв",
+            "fias_level": "8",
+            "house_type": "д",
+            "tax_office": "1685",
+            "postal_code": "420057",
+            "region_type": "Респ",
+            "street_type": "пр-кт",
+            "city_fias_id": "93b3df57-4c89-44df-ac42-96f05e9cd3b9",
+            "city_district": "Ново-Савиновский",
+            "city_kladr_id": "1600000100000",
+            "house_fias_id": "4751b863-1121-4ffc-b0fe-f3c8d1ebf53b",
+            "capital_marker": "2",
+            "city_type_full": "город",
+            "city_with_type": "г Казань",
+            "flat_type_full": "квартира",
+            "house_kladr_id": "1600000100005020040",
+            "region_fias_id": "0c089b04-099e-4e0e-955a-6bf1ce525f1a",
+            "street_fias_id": "6787404c-5636-4abf-bc96-377c0ea6a946",
+            "house_type_full": "дом",
+            "region_iso_code": "RU-TA",
+            "region_kladr_id": "1600000000000",
+            "street_kladr_id": "16000001000050200",
+            "country_iso_code": "RU",
+            "federal_district": "Приволжский",
+            "region_type_full": "республика",
+            "region_with_type": "Респ Татарстан",
+            "street_type_full": "проспект",
+            "street_with_type": "пр-кт Ибрагимова",
+            "tax_office_legal": "1685",
+            "city_district_type": "р-н",
+            "fias_actuality_state": "0",
+            "city_district_type_full": "район",
+            "city_district_with_type": "Ново-Савиновский р-н"
+        },
+        "region_kladr_id": "1600000000000",
+        "city_kladr_id": "1600000100000",
+        "street_kladr_id": "16000001000050200",
+        "house_kladr_id": "1600000100005020040"
+    },
+    "contact": [
+        {
+            "contact_type": "PHONE",
+            "data": "+79885413188",
+            "comment": null
+        },
+        {
+            "contact_type": "EMAIL",
+            "data": "paramonov.kirill.alexandrovich@gmail.com",
+            "comment": null
+        }
+    ],
+    "first_name": "Константин",
+    "last_name": "Кузовенин",
+    "patronymic": "Александрович",
+    "birth_date": "1987-11-28",
+    "gender": "M",
+    "is_rsa_checked": false,
+}
+
+Create update object
+{
+    "car":"aad9b20d-6a35-4197-9cd0-1ed77f3f3429",
+    "drivers":["84d34c9b-32d5-463d-bf9f-7cddf5021d0b"],
+    "insurant":"f477240f-c0f2-48ce-9eb1-989781c51ab4",
+    "owner":"5cc3e116-24df-42ed-ad66-9c0325b9c94c"
+}
+Response
+{
+    "id": "cf63a100-8d50-46a9-be78-528cb776b2e1",
+    "drivers": [
+        "84d34c9b-32d5-463d-bf9f-7cddf5021d0b"
+    ],
+    "car": "aad9b20d-6a35-4197-9cd0-1ed77f3f3429",
+    "owner": "5cc3e116-24df-42ed-ad66-9c0325b9c94c",
+    "insurant": "f477240f-c0f2-48ce-9eb1-989781c51ab4"
+}
+
+Update agreement by object 
+{"insured_object":"cf63a100-8d50-46a9-be78-528cb776b2e1"}
+Response
+{
+    "id": "d2194171-8471-4ca6-922e-638da69bc039",
+    "valid_from": "2019-10-04T00:00:00+03:00",
+    "valid_to": "2020-10-03T23:59:59.999999+03:00",
+    "periods": [],
+    "calculation": {
+        "data": {
+            "kbm": "0.5",
+            "car_id": "aad9b20d-6a35-4197-9cd0-1ed77f3f3429",
+            "drivers": [
+                {
+                    "last_name": "Кузовенин",
+                    "birth_date": "1987-11-28",
+                    "credential": [
+                        {
+                            "number": "045169",
+                            "series": "1630",
+                            "issue_date": "2006-12-25",
+                            "credential_type": "DRIVER_LICENSE"
+                        }
+                    ],
+                    "first_name": "Константин",
+                    "patronymic": "Александрович",
+                    "driving_experience_started": "2006-12-25"
+                }
+            ],
+            "car_data": {
+                "rsa_code": "366013880",
+                "car_model_id": "864023092",
+                "number_plate": "Н240РН116",
+                "car_vin_number": "XW8CA41Z1BK257744",
+                "car_body_number": null,
+                "car_chassis_number": null,
+                "manufacturing_year": 2010
+            },
+            "car_type": "B",
+            "max_mass": 0,
+            "valid_to": "2020-10-03",
+            "valid_from": "2019-10-04",
+            "drivers_ids": [
+                "84d34c9b-32d5-463d-bf9f-7cddf5021d0b"
+            ],
+            "seats_count": 0,
+            "engine_power": 102,
+            "insurant_type": "NATURAL_PERSON",
+            "is_multidrive": false,
+            "target_of_using": "PERSONAL",
+            "insurance_period": 8,
+            "owner_registration": {},
+            "insurance_period_kterm": "1.00",
+            "insurance_period_month": 12,
+            "is_car_without_registration": false
+        },
+        "coeffs": {
+            "Kbm": 0.5,
+            "Klim": 1,
+            "Kterm": 1,
+            "S_min": 1581.7,
+            "Kengine": 1.2,
+            "Kexpage": 0.96,
+            "Kregion": 1,
+            "Ktrailer": 1,
+            "Tbase_max": 4942,
+            "Tbase_min": 2746,
+            "kbm_class": "13"
+        },
+        "premium": 2846.59
+    },
+    "status": "APPLICATION",
+    "insured_object": "cf63a100-8d50-46a9-be78-528cb776b2e1"
+}
+
+Patch insurant getted from accept contacts
+One more create driver
+Create Update object
+Update agreement by object
+1c687c5f-4db5-4299-9b51-a997c75632ec

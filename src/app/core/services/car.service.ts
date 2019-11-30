@@ -43,4 +43,13 @@ export class CarService
             fail
         )
     }
+
+    GetCarModelFullInfo(modelId: number, success?: (ok) => void, fail?: (err) => void)
+    {
+        this.http.CommonRequest(
+            () => this.http.GetData("/v1/dicts/car_models/"+modelId),
+            success,
+            fail
+        );
+    }
 }

@@ -73,7 +73,10 @@ export class AuthComponent implements OnInit
         console.log(this.LoginModel);
 
         this.auth.Login(
-            this.LoginModel
+            {
+                "username" : this.LoginModel.username,
+                "password" : this.LoginModel.password
+            }
         );
     }
 }

@@ -1,0 +1,105 @@
+<form class="create-product">
+    <div class="create-product__row">
+        <div class="create-product__coll">
+            <h1 class="system__title system__title--whith-arrow">
+                Водители
+            </h1>
+        </div>
+        <div class="create-product__coll"></div>
+        
+        <div class="create-product__coll">
+            <div class="input-groupe create-product__input-groupe">
+                <label class="input-groupe__label" for="credential_type">Количество водителей:</label>
+                    <!-- input-groupe__input--error класс ошибки для инпута -->
+                <div class="with-value">
+                    <select class="input-groupe__input input-groupe__input--value-left" 
+                        name="credential_type" [ngModel]="SelectedVal" 
+                        (ngModelChange)="DriversChange($event)">
+                        <option *ngFor="let item of DriversVals" [value]="item">{{item ? item : 'Без ограничения'}}</option>
+                        
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <ng-container *ngFor="let driver of Drivers; let i = index;">
+            <h3 class="system__title1">
+                Водитель {{i + 1}}
+            </h3>
+            <div class="create-product__row">
+                <div class="create-product__coll">
+                    <div class="input-groupe create-product__input-groupe">
+                        <label class="input-groupe__label" for="last_name">Фамилия:</label>
+                            <!-- input-groupe__input--error класс ошибки для инпута -->
+                        <div class="with-value">
+                            <input class="input-groupe__input input-groupe__input--value-left" 
+                                name="last_name" [ngModel]="driver.last_name"
+                                (ngModelChange)="driver.last_name = $event;"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="create-product__coll">
+                    <div class="input-groupe create-product__input-groupe">
+                        <label class="input-groupe__label" for="first_name">Имя:</label>
+                            <!-- input-groupe__input--error класс ошибки для инпута -->
+                        <div class="with-value">
+                            <input class="input-groupe__input input-groupe__input--value-left" 
+                                name="first_name" [ngModel]="driver.first_name"
+                                (ngModelChange)="driver.first_name = $event;"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="create-product__coll">
+                    <div class="input-groupe create-product__input-groupe">
+                        <label class="input-groupe__label" for="patronymic">Отчество:</label>
+                            <!-- input-groupe__input--error класс ошибки для инпута -->
+                        <div class="with-value">
+                            <input class="input-groupe__input input-groupe__input--value-left" 
+                                name="patronymic" [ngModel]="driver.patronymic"
+                                (ngModelChange)="driver.patronymic = $event;"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="create-product__row">
+                <div class="create-product__coll">
+                    <div class="input-groupe create-product__input-groupe">
+                        <label class="input-groupe__label" for="birth_date">Дата рождения:</label>
+                            <!-- input-groupe__input--error класс ошибки для инпута -->
+                        <div class="with-value">
+                            <input type="date" class="input-groupe__input input-groupe__input--value-left" 
+                                name="birth_date" [ngModel]="driver.birth_date"
+                                (ngModelChange)="driver.birth_date = $event;"/>
+                        </div>
+                    </div>
+                </div>
+                <ng-container *ngFor="let doc of driver.driver_licenses">
+                    <div class="create-product__coll">
+                        <div class="input-groupe create-product__input-groupe">
+                            <label class="input-groupe__label" for="doc">Номер:</label>
+                                <!-- input-groupe__input--error класс ошибки для инпута -->
+                            <div class="with-value">
+                                <input  class="input-groupe__input input-groupe__input--value-left" 
+                                    name="doc" [ngModel]="doc.number"
+                                    (ngModelChange)="doc.number = $event;"/>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <div class="create-product__coll">
+                    <div class="input-groupe create-product__input-groupe">
+                        <label class="input-groupe__label" for="driving_experience_started">Дата начала стажа:</label>
+                            <!-- input-groupe__input--error класс ошибки для инпута -->
+                        <div class="with-value">
+                            <input type="date" class="input-groupe__input input-groupe__input--value-left" 
+                                name="driving_experience_started" [ngModel]="driver.driving_experience_started"
+                                (ngModelChange)="driver.driving_experience_started = $event;"/>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+    </ng-container>
+    
+</form>

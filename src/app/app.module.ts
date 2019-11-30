@@ -12,6 +12,14 @@ import { PeriodModule } from './period/period.module';
 import { DictsService } from './core/services/dicts.service';
 import { TransportModule } from './transport/transport.module';
 import { CarService } from './core/services/car.service';
+import { PolicyholderModule } from './policyholder/policyholder.module';
+import { OwnerModule } from './owner/owner.module';
+import { DriversModule } from './drivers/drivers.module';
+import { MainService } from './core/services/main.service';
+import { FormsModule } from '@angular/forms';
+import { SimpleService } from './simple/simple.service';
+import { CityService } from './core/services/city.service';
+import { DadataService } from './core/services/dadata.service';
 
 @NgModule({
   declarations: [
@@ -20,13 +28,12 @@ import { CarService } from './core/services/car.service';
   imports: [
     BrowserModule,
     // BrowserAnimationsModule,
-    // FormsModule,
+    FormsModule,
     HttpModule,
     RouterModule,
     AppRoutingModule,
     AuthModule,
-    PeriodModule,
-    TransportModule
+    
     // HttpClientModule,
     // TextMaskModule,
   ],
@@ -35,7 +42,11 @@ import { CarService } from './core/services/car.service';
     AuthService,
     HttpService,
     DictsService,
-    CarService
+    CarService,
+    MainService,
+    SimpleService,
+    CityService,
+    DadataService
   ],
   bootstrap: [AppComponent]
 })

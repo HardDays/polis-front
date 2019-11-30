@@ -37,7 +37,6 @@ export class DictsService
 
     GetCarModelDics(markId:number, success?: (ok) => void, fail?: (err) => void)
     {
-        console.log(markId);
         this.http.CommonRequest(
             () => this.http.GetData('/v1/dicts/car_models',"car_mark=" + markId),
             success,

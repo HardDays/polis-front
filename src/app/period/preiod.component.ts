@@ -28,6 +28,20 @@ export class PeriodComponent implements OnInit
 
     }
 
+    SetData(data)
+    {
+        this.FormData = data ? JSON.parse(data) : {
+            "insurance_period": 8,
+            "valid_from": this.ParseDate(this.AddDays(new Date(),3 )),
+            "valid_to": this.ParseDate(this.AddDays(this.AddDays(new Date(),3 ), 365))
+        };;
+    }
+
+    GetData()
+    {
+        return this.FormData;
+    }
+
     UpdatePeriodsDicts()
     {
         this.Periods = [];

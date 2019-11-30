@@ -48,18 +48,31 @@ export class AuthService
         this.onAuthChange$.next(false);
         this.GetCurrentUserFromLocalStorage();
         this.GetTokenFromLocalStorage();
-        // console.log("init?");
+        // this.B2CLogin();
     }
 
-    Login(data: LoginModel)
+    B2CLogin()
     {
-        var params = {};
-        for(var i in data)
-        {
-            params[i.toString()] = data[i];
-        }
+        // var params = {};
+        // for(var i in data)
+        // {
+        //     params[i.toString()] = data[i];
+        // }
         this.http.CommonRequest(
-            () => this.http.PostData('/v1/users/obtain-token', JSON.stringify(params)),
+            () => this.http.PostData('/v1/users/b2c-login', null),
+            (res: TokenModel) => this.InitSession(res)
+        )
+    }
+
+    Login(data: any)
+    {
+        // var params = {};
+        // for(var i in data)
+        // {
+        //     params[i.toString()] = data[i];
+        // }
+        this.http.CommonRequest(
+            () => this.http.PostData('/v1/users/obtain-token', JSON.stringify(data)),
             (res: TokenModel) => this.InitSession(res)
         )
     }
@@ -85,7 +98,6 @@ export class AuthService
     {
         const token = localStorage.getItem(this.token_field);
 
-        // console.log(token);
         if(token)
         {
             this.http.BaseInitByToken(token);

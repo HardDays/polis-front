@@ -34,6 +34,25 @@ export class TransportComponent implements OnInit
         this.UpdateYearDic();
     }
 
+    GetData()
+    {
+        return this.Car;
+    }
+
+    SetData(data)
+    {
+        this.Car = data ? JSON.parse(data) : new CarModel();
+
+        if(this.Car.car_model_id)
+        {
+            this.cars.GetCarModelFullInfo(this.Car.car_model_id,
+                (res) => {
+                    this.CarMarkUpdated(res.car_mark_id);
+                }
+            );
+        }
+    }
+
     UpdateYearDic()
     {
         this.YearDic = [];
@@ -61,7 +80,6 @@ export class TransportComponent implements OnInit
     {
         this.SelectedMark = $event;
         this.UpdateCarModelsDics();
-        // console.log($event);
     }
 
     UpdateCarModelsDics()
@@ -73,7 +91,6 @@ export class TransportComponent implements OnInit
                 this.SelectedMark,
                 (res: any[]) =>
                 {
-                    console.log(res);
                     this.CarModelsDics = res;
                 }
             )
@@ -86,7 +103,6 @@ export class TransportComponent implements OnInit
         {
             this.cars.CheckCarPlateNumber(this.Car.number_plate,
                 (res:any) => {
-                    console.log(res);
                     const mark = this.CarMarksDics.find((obj) => obj.title == res.car_mark);
                     // this.SelectedMark = mark.id;
                     this.CarMarkUpdated(mark.id);
@@ -133,7 +149,6 @@ export class TransportComponent implements OnInit
                     this.Car.credential[1].issue_date = res.next_to;
                     this.Car.credential[1].number = res.number;
                 }
-                // console.log(res);
             });
     }
 }

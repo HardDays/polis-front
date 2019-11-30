@@ -1,0 +1,21 @@
+<form class="create-product">
+    <div class="create-product__row">
+        <button class="navigate-button" routerLink="../transport">
+            <span class="navigate-button-text">Далее</span>
+        </button>
+    </div>
+    <div class="create-product__row">
+        <div class="create-product__coll">
+            <h1 class="system__title system__title--whith-arrow">
+                Вилка от {{CalculateFull.from}}р. до {{CalculateFull.to}}р.
+            </h1>  
+        </div>
+    </div>
+    <div class="create-product__row" *ngFor="let company of Companies">
+        <div class="create-product__coll">
+            <img width="120px" [src]="company.logo"/>
+        </div>
+        <div class="create-product__coll">{{company.title}}</div>
+        <div class="create-product__coll">{{company.data}}</div>
+    </div>
+</form>

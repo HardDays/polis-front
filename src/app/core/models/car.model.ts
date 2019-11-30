@@ -8,7 +8,7 @@ export class CarModel{
         public number_plate?: string,
         public manufacturing_year?: number,
         public max_mass?: string,
-        public has_trailer?: boolean,
+        public has_trailer = false,
         public credential?: CarCredentialModel[]
     ){
 

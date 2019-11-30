@@ -8,14 +8,16 @@ declare var Buffer: any;
 @Injectable()
 export class HttpService {
 
-    serverUrl = 'https://widget.agentapp.ru';
+    serverUrl = 'https://widget.agentapp.ru/widgets';
     // serverUrl = 'https://venture-box-back-test.herokuapp.com';
-
+    // прикрутить 
     public headers: Headers = new Headers([]);
     // public token: TokenModel = new TokenModel('');
     constructor(public http: Http) {
         this.BaseHeadersInit();
     }
+
+    private token : string = "";
 
     BaseInitByToken(data: string)
     {
@@ -26,6 +28,7 @@ export class HttpService {
                 this.headers.delete('Authorization');
             }
             this.headers.append('Authorization', "Token " + data);
+            this.token = data;
             // this.token = new TokenModel(data);
         }
     }
@@ -44,6 +47,14 @@ export class HttpService {
         {
             this.headers.append('Content-Type', 'application/json');
         }
+        if (!this.headers.has('Accept'))
+        {
+            this.headers.append('Accept', 'application/json, text/plain, */*');
+        }
+        this.headers.append('B2C-DOMAIN', 'widget.agentapp.ru');
+        // this.headers.append('Origin', 'https://widget.agentapp.ru/widgets/');
+        // this.headers.append('Sec-Fetch-Mode', 'cors');
+
         // this.headers.append('Access-Control-Allow-Credentials', 'true');
         // this.headers.append('Access-Control-Allow-Origin', 'https://widget.agentapp.ru');
         // this.headers.append('GET', 'POST', 'OPTIONS');
@@ -62,8 +73,9 @@ export class HttpService {
 
     CommonRequest(fun:()=>Observable<Response>, success?: (data) => void, fail?: (err) => void)
     {
-        this.BaseHeadersInit();
+        // this.BaseHeadersInit();
 
+        // this.headers.set('Authorization', "Token " + this.token);
         return fun()
             .subscribe(
                 (resp: Response) =>
@@ -88,7 +100,7 @@ export class HttpService {
 
     GetQueryStr(method: string, params?: string)
     {
-        return this.serverUrl + method + '?' + params;
+        return this.serverUrl + method + (params ? ('?' + params) : '');
     }
 
     GetData(method: string, params?: string)
@@ -132,5 +144,27 @@ export class HttpService {
     GetDataFromOtherUrl(url: string)
     {
         return this.http.get(url);
+    }
+
+    ParseReqBody(data: any)
+    {
+        var params = {};
+        for(const i in data)
+        {
+            if(Array.isArray(data[i]))
+            {
+                params[i.toString()] = [];
+                for(const j in data[i])
+                {
+                    params[i.toString()][j.toString()] = data[i][j];
+                }
+            }
+            else if(typeof data[i] == "object")
+                params[i.toString()] = this.ParseReqBody(data[i]);
+            else
+                params[i.toString()] = data[i];
+        }
+
+        return params;
     }
 }

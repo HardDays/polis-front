@@ -1,0 +1,41 @@
+<form class="create-product">
+        <div class="create-product__row">
+            <div class="create-product__coll">
+                <button class="navigate-button" (click)="Refresh()">
+                    <span class="navigate-button-text">Обновить</span>
+                </button> 
+            </div>
+            <div class="create-product__coll">
+                <input name="token" [ngModel]="Token" (ngModelChange)="Token = $event">
+            </div>
+            <div class="create-product__coll">
+                <button class="navigate-button" (click)="CheckContacts()">
+                    <span class="navigate-button-text">Продолжить</span>
+                </button>  
+            </div>
+            
+            
+        </div>
+        <div class="create-product__row">
+            <div class="create-product__coll">
+                <h1 class="system__title system__title--whith-arrow">
+                    <!-- Вилка от {{CalculateFull.from}}р. до {{CalculateFull.to}}р. -->
+                </h1>  
+            </div>
+        </div>
+        <div class="create-product__row" *ngFor="let company of Companies">
+            <div class="create-product__coll">
+                <img width="120px" [src]="company.logo"/>
+            </div>
+            <div class="create-product__coll">{{company.title}}</div>
+            <div class="create-product__coll">
+                <button *ngIf="company.can_buy" class="navigate-button" (click)="Buy(company.code)">
+                    <span class="navigate-button-text">{{company.data}} р.</span>
+                </button>
+                <ng-container *ngIf="!company.can_buy">
+                    {{company.data}}
+                </ng-container>  
+                
+                </div>
+        </div>
+    </form>

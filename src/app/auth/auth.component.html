@@ -27,7 +27,7 @@
             </div>
         </ng-container>
         <ng-container *ngIf="IsLoggendIn">
-            <h1 class="auth-form__title">{{User.first_name}} {{User.last_name}}</h1>
+            <h1 class="auth-form__title">{{User && User.first_name ? User.first_name : ''}} {{User && User.last_name ? User.last_name: ''}}</h1>
             <div class="one-col-buttons">
                 <div class="button-wrapper one-col-buttons__item">
                     <button type="submit" (click)="Logout()" class="button-wrapper__button">Убить токен</button>

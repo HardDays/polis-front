@@ -1,0 +1,53 @@
+<h1 class="system__title">
+    Продли полис
+</h1>
+<br/>
+<br/>
+<h2>Собственник</h2>
+<br/><br/>
+<p>Введите информацию о страхователе/собственнике</p>
+<br/>
+<br/>
+<!-- <br/> -->
+<form>
+    <input placeholder="ФИО" class="input-polis" name="flname" [ngModel]="Owner.fio" (ngModelChange)="Owner.fio = $event">
+    <br/>
+    <br/>
+    <input placeholder="Дата рождения" class="input-polis" name="bday" [ngModel]="Owner.bday" (ngModelChange)="Owner.bday = $event">
+    <br/>
+    <br/>
+    <input placeholder="Стаж вождения, лет" class="input-polis" name="expirience" [ngModel]="Owner.exp" (ngModelChange)="Owner.exp = $event">
+    <br/>
+    <br/>
+    <div class="ng-autocomplete input-polis" style="margin: auto;">
+        <ng-autocomplete
+            [data]="CityDics"
+            [searchKeyword]="'value'"
+            placeHolder="Город регистрации"
+            (selected)='selectEvent($event)'
+            (inputChanged)='onChangeSearch($event)'
+            [itemTemplate]="itemTemplate"
+            [notFoundTemplate]="notFoundTemplate">
+        </ng-autocomplete>
+        
+        <ng-template #itemTemplate let-item>
+            <a *ngIf="item" [innerHTML]="item && item.value ? item.value : ''"></a>
+        </ng-template>
+        
+        <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+        </ng-template>
+    </div>
+    <br>
+    <input placeholder="Номер телефона" class="input-polis" name="phone_number" [ngModel]="Owner.phone" (ngModelChange)="Owner.phone = $event">
+    <br/>
+    <br/>
+    <br>
+    <br>
+    <button type="submit" (click)="Save()" class="navigate-button">
+        <span class="navigate-button-text">Узнать стоимость</span>
+    </button>
+</form>
+<br>
+<br>
+<p>Мы гарантируем безопасность ваших данных</p>

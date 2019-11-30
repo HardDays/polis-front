@@ -1,0 +1,173 @@
+<form class="create-product">
+    <div class="create-product__row">
+        <div class="create-product__coll">
+            <h1 class="system__title system__title--whith-arrow">
+                Страхователь
+            </h1>  
+        </div>
+        <div class="create-product__coll">
+            <div class="input-groupe create-product__input-groupe">
+                    <label class="input-groupe__label" for="IsOwnerEqualPolicyholder">Является страхователем:</label>
+                    <!-- input-groupe__input--error класс ошибки для инпута -->
+                <div class="with-value">
+                    <input class="input-groupe__input input-groupe__input--value-left" 
+                    name="IsOwnerEqualPolicyholder" type="checkbox" [checked]="IsOwnerEqualPolicyholder" (change)="IsOwnerEqualPolicyholder = !IsOwnerEqualPolicyholder"/>
+                </div>
+            </div>
+        </div>
+        <div class="create-product__coll"></div>
+        <div class="create-product__coll"></div>
+    </div>
+    <ng-container *ngIf="!IsOwnerEqualPolicyholder">
+        <div class="create-product__row">
+            <div class="create-product__coll">
+                <div class="input-groupe create-product__input-groupe">
+                    <label class="input-groupe__label" for="last_name">Фамилия:</label>
+                        <!-- input-groupe__input--error класс ошибки для инпута -->
+                    <div class="with-value">
+                        <input class="input-groupe__input input-groupe__input--value-left" 
+                            name="last_name" [ngModel]="Owner.last_name"
+                            (ngModelChange)="Owner.last_name = $event;"/>
+                    </div>
+                </div>
+            </div>
+            <div class="create-product__coll">
+                <div class="input-groupe create-product__input-groupe">
+                    <label class="input-groupe__label" for="first_name">Имя:</label>
+                        <!-- input-groupe__input--error класс ошибки для инпута -->
+                    <div class="with-value">
+                        <input class="input-groupe__input input-groupe__input--value-left" 
+                            name="first_name" [ngModel]="Owner.first_name"
+                            (ngModelChange)="Owner.first_name = $event;"/>
+                    </div>
+                </div>
+            </div>
+            <div class="create-product__coll">
+                <div class="input-groupe create-product__input-groupe">
+                    <label class="input-groupe__label" for="patronymic">Отчество:</label>
+                        <!-- input-groupe__input--error класс ошибки для инпута -->
+                    <div class="with-value">
+                        <input class="input-groupe__input input-groupe__input--value-left" 
+                            name="patronymic" [ngModel]="Owner.patronymic"
+                            (ngModelChange)="Owner.patronymic = $event;"/>
+                    </div>
+                </div>
+            </div>
+            <div class="create-product__coll">
+                <div class="input-groupe create-product__input-groupe">
+                    <label class="input-groupe__label" for="birth_date">Дата рождения:</label>
+                        <!-- input-groupe__input--error класс ошибки для инпута -->
+                    <div class="with-value">
+                        <input type="date" class="input-groupe__input input-groupe__input--value-left" 
+                            name="birth_date" [ngModel]="Owner.birth_date"
+                            (ngModelChange)="Owner.birth_date = $event;"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="create-product__row" *ngFor="let item of Owner.credential">
+            <div class="create-product__coll">
+                <div class="input-groupe create-product__input-groupe">
+                    <label class="input-groupe__label" for="credential_type">Тип документа:</label>
+                        <!-- input-groupe__input--error класс ошибки для инпута -->
+                    <div class="with-value">
+                        <select class="input-groupe__input input-groupe__input--value-left" 
+                            name="credential_type" [ngModel]="item.credential_type" 
+                            (ngModelChange)="item.credential_type = $event">
+                            <option value="RUSSIAN_INTERNAL_PASSPORT" >Паспорт гражданина РФ</option>
+                            <!-- <option value="DIAGNOSTIC_CHART" >Диагностическая карта</option> -->
+                            <option value="EXTERNAL_PASSPORT">Иностранный паспорт</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="create-product__coll">
+                <div class="input-groupe create-product__input-groupe">
+                    <label class="input-groupe__label" for="series">Серия:</label>
+                        <!-- input-groupe__input--error класс ошибки для инпута -->
+                    <div class="with-value">
+                        <input  class="input-groupe__input input-groupe__input--value-left" 
+                            name="series" [ngModel]="item.series"
+                            (ngModelChange)="item.series = $event;"/>
+                    </div>
+                </div>
+            </div>
+            <div class="create-product__coll">
+                <div class="input-groupe create-product__input-groupe">
+                    <label class="input-groupe__label" for="number">Номер:</label>
+                        <!-- input-groupe__input--error класс ошибки для инпута -->
+                    <div class="with-value">
+                        <input  class="input-groupe__input input-groupe__input--value-left" 
+                            name="number" [ngModel]="item.number"
+                            (ngModelChange)="item.number = $event;"/>
+                    </div>
+                </div>
+            </div>
+            <div class="create-product__coll">
+                <div class="input-groupe create-product__input-groupe">
+                    <label class="input-groupe__label" for="issue_date">Дата выдачи:</label>
+                        <!-- input-groupe__input--error класс ошибки для инпута -->
+                    <div class="with-value">
+                        <input type="issue_date" class="input-groupe__input input-groupe__input--value-left" 
+                            name="issue_date" [ngModel]="item.issue_date"
+                            (ngModelChange)="item.issue_date = $event;"/>
+                    </div>
+                </div>
+            </div>
+            <div class="create-product__coll">
+                <div class="input-groupe create-product__input-groupe">
+                    <label class="input-groupe__label" for="issue_point">Кем выдан:</label>
+                        <!-- input-groupe__input--error класс ошибки для инпута -->
+                    <div class="with-value">
+                        <input  class="input-groupe__input input-groupe__input--value-left" 
+                            name="issue_point" [ngModel]="item.issue_point"
+                            (ngModelChange)="item.issue_point = $event;"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="create-product__row">
+            <div class="create-product__coll">
+                <div class="input-groupe create-product__input-groupe">
+                    <label class="input-groupe__label" for="legal_address">Адрес регистрации:</label>
+                        <!-- input-groupe__input--error класс ошибки для инпута -->
+                    <div class="with-value">
+                        <input  class="input-groupe__input input-groupe__input--value-left" 
+                            name="legal_address" [ngModel]="Owner.address[0].address_query"
+                            (ngModelChange)="AddressChanged($event)"/>
+                    </div>
+                </div>
+            </div>
+            <div class="create-product__coll">
+                <div class="input-groupe create-product__input-groupe">
+                        <label class="input-groupe__label" for="AddressesEquals">Адрес совпадает с фактическим:</label>
+                        <!-- input-groupe__input--error класс ошибки для инпута -->
+                    <div class="with-value">
+                        <input class="input-groupe__input input-groupe__input--value-left" 
+                        name="AddressesEquals" type="checkbox" [checked]="AddressesEquals" (change)="AddressesEquals = !AddressesEquals"/>
+                    </div>
+                </div>
+            </div> 
+            <div class="create-product__coll"></div>
+            <div class="create-product__coll"></div>
+        </div>
+        <div class="create-product__row" *ngIf="!AddressesEquals">
+            <div class="create-product__coll">
+                <div class="input-groupe create-product__input-groupe">
+                    <label class="input-groupe__label" for="actual_address">Адрес проживания:</label>
+                        <!-- input-groupe__input--error класс ошибки для инпута -->
+                    <div class="with-value">
+                        <input  class="input-groupe__input input-groupe__input--value-left" 
+                            name="actual_address" [ngModel]="Owner.address[1].address_query"
+                            (ngModelChange)="Owner.address[1].address_query = $event;"/>
+                    </div>
+                </div>
+            </div>
+            <div class="create-product__coll"></div>
+            <div class="create-product__coll"></div>
+            <div class="create-product__coll"></div>
+        </div>
+    </ng-container>
+    
+    
+</form>
