@@ -58,34 +58,48 @@ import { IMyDpOptions } from 'mydatepicker';
     constructor(private _main: MainService)
     {
         const data = this._main.Copy(this._main.Agreement) as AgreementModel;
-        this.Form.get("fio").setValue(data.name);
-        console.log(data);
-        const date = data.owner.birthdate.split("-");
-        this.Form.get('birthday').setValue({
-            date: {
-                year: Number.parseInt(date[0]),
-                month: Number.parseInt(date[1]),
-                day: Number.parseInt(date[2])
-            }
-        })
-        this.Form.get('phone').setValue(data.phone);
+        if(data.name)
+            this.Form.get("fio").setValue(data.name);
+
+        if(data.owner && data.owner.birthdate)
+        {
+            const date = data.owner.birthdate.split("-");
+            this.Form.get('birthday').setValue({
+                date: {
+                    year: Number.parseInt(date[0]),
+                    month: Number.parseInt(date[1]),
+                    day: Number.parseInt(date[2])
+                }
+            })
+        }
+        
+        if(data.phone)
+        {
+            this.Form.get('phone').setValue(data.phone);
+        }
+        
         if(!data.multidrive && data.drivers.length > 0)
         {
             this.Form.get('exp').setValue(data.drivers[0].exp);
         }
-        this._main.GetAddrByKladr(data.owner.city, (res) => {
-            if(res)
-            {
-                if(res instanceof Array && res.length > 0)
+
+        if(data.owner && data.owner.city)
+        {
+            this._main.GetAddrByKladr(data.owner.city, (res) => {
+                if(res)
                 {
-                    this.SelectedKladr = res[0];
+                    if(res instanceof Array && res.length > 0)
+                    {
+                        this.SelectedKladr = res[0];
+                    }
                 }
-            }
-            
-        },
-        (err) => {
-            console.log(err);
-        })
+                
+            },
+            (err) => {
+                console.log(err);
+            })
+        }
+        
     }
     ngOnInit(): void {
         console.log('own');

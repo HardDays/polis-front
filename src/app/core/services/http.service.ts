@@ -8,8 +8,8 @@ declare var Buffer: any;
 export class HttpService {
 
     // serverUrl = 'https://widget.agentapp.ru/widgets';
-    serverUrl = 'https://gde-polis.herokuapp.com/api/v1';
-    // serverUrl = 'http://localhost:3000/api/v1';
+    // serverUrl = 'https://gde-polis.herokuapp.com/api/v1';
+    serverUrl = 'http://localhost:3000/api/v1';
     // прикрутить 
     public headers: Headers = new Headers([]);
     // public token: TokenModel = new TokenModel('');
