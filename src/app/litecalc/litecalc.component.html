@@ -14,16 +14,19 @@
                     <div class="create-product__coll">{{sk.value.name}}</div>
                     <div class="create-product__coll">{{sk.value.total}} {{sk.value.currency}}</div>
                 </div> -->
-                <div [ngClass]="{'polis__flex--load': IsLoading}" class="polis__flex polis__flex--offer" *ngFor="let sk of SkData | keyvalue">
-                    <div class="polis__image" [ngStyle]="{'background-image': 'url(' + sk.value.img + ')'}"></div>
-                    <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div>
-                    <div class="polis__before">
-                        <ng-container *ngIf="!IsLoading">
-                            <span class="polis__before-price"> от {{sk.value.total}} {{sk.value.currency}}</span>
-                            <span class="polis__middle-price">Средняя {{sk.value.base_rate}} {{sk.value.currency}}</span>
-                        </ng-container>
+                <ng-container *ngFor="let sk of SkData | keyvalue">
+                    <div [ngClass]="{'polis__flex--load': IsLoading}" class="polis__flex polis__flex--offer">
+                        <div class="polis__image" [ngStyle]="{'background-image': 'url(' + sk.value.img + ')'}"></div>
+                        <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div>
+                        <div class="polis__before">
+                            <ng-container *ngIf="!IsLoading">
+                                <span class="polis__before-price"> от {{sk.value.total}} {{sk.value.currency}}</span>
+                                <span class="polis__middle-price">Средняя {{sk.value.base_rate}} {{sk.value.currency}}</span>
+                            </ng-container>
+                        </div>
                     </div>
-                </div>
+                </ng-container>
+                
             </div>
 
             <p class="page__card-text page__card-text--grey">Продолжите заполненение анкеты,<br>это займет 5 минут :)</p>
