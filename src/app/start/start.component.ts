@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MainService } from '../core/services/main.service';
+import { AgreementModel } from '../core/models/agreement.model';
 
 @Component({
     selector: 'app-start-cmp',
@@ -86,6 +87,7 @@ import { MainService } from '../core/services/main.service';
         return;
       }
       let number = this._main.ReplaceAll(this.Number + this.Region, " ", "").toLowerCase();
+      this._main.Agreement = new AgreementModel();
       number = this._main.ReplaceAll(number, '\u2000','');
         this._main.CheckCarByNumber({
             "number_plate": number
@@ -99,6 +101,7 @@ import { MainService } from '../core/services/main.service';
 
     Navigate()
     {
+      this._main.Agreement = new AgreementModel();
       this._main.Navigate(["/prev", "car"]);
     }
     
