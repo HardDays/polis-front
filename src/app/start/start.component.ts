@@ -96,6 +96,11 @@ import { MainService } from '../core/services/main.service';
         (err) => {
         })
     }
+
+    Navigate()
+    {
+      this._main.Navigate(["/prev", "car"]);
+    }
     
   
   }

@@ -137,9 +137,12 @@ import { NgAutoCompleteComponent, CreateNewAutocompleteGroup, SelectedAutocomple
 
         agr.vehicle.model = this.Data.model.model;
         agr.vehicle.brand = this.Data.model.brand;
-        agr.vehicle.power = this.Data.power;
-        agr.vehicle.year = this.Data.year;
 
+        const data = this.Form.getRawValue();
+        agr.vehicle.power = Number.parseInt(this._main.ReplaceAll(data.power,'\u2000', ""));
+        agr.vehicle.year = Number.parseInt(this._main.ReplaceAll(data.year,'\u2000', ""));
+
+        console.log(agr.vehicle);
         this._main.SaveAgreement(agr,(res) => {
             this._main.Navigate(["/prev","ndrivers"]);
         },

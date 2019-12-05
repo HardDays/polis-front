@@ -171,7 +171,7 @@ import { IMyDpOptions } from 'mydatepicker';
         {
             for(const item of agr.drivers)
             {
-                item.exp = data.exp;
+                item.exp = Number.parseInt(this._main.ReplaceAll(data.exp,'\u2000', ""));
             }
 
             agr.drivers[0].birthdate = data.birthday.date.year + "-" + data.birthday.date.month + "-" + data.birthday.date.day;
