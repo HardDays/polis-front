@@ -28,9 +28,9 @@ import { DomSanitizer } from '@angular/platform-browser';
                 {
                     if(this.SkData[item.sk])
                     {
-                        this.SkData[item.sk].total = item.total;
+                        this.SkData[item.sk].total = Math.round(item.total * 0.6);
 
-                        this.SkData[item.sk].base_rate = Math.round(item.base_rate * Math.pow(item.total / item.total_f, 15) * 1.56);
+                        this.SkData[item.sk].base_rate = item.total;
                     }
                         
                 }

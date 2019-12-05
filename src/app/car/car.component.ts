@@ -139,8 +139,25 @@ import { NgAutoCompleteComponent, CreateNewAutocompleteGroup, SelectedAutocomple
         agr.vehicle.brand = this.Data.model.brand;
 
         const data = this.Form.getRawValue();
-        agr.vehicle.power = Number.parseInt(this._main.ReplaceAll(data.power,'\u2000', ""));
-        agr.vehicle.year = Number.parseInt(this._main.ReplaceAll(data.year,'\u2000', ""));
+        // console.log(data);
+        if( typeof data.power == 'string')
+        {
+            agr.vehicle.power = Number.parseInt(this._main.ReplaceAll(data.power,'\u2000', ""));
+        }
+        else if (typeof data.power == 'number')
+        {
+            agr.vehicle.power = Math.round(data.power);
+        }
+        if( typeof data.year == 'string')
+        {
+            agr.vehicle.year = Number.parseInt(this._main.ReplaceAll(data.year,'\u2000', ""));
+        }
+        else if (typeof data.year == 'number')
+        {
+            agr.vehicle.year = Math.round(data.year);
+        }
+
+        // agr.vehicle.year = Number.parseInt(this._main.ReplaceAll(data.year,'\u2000', ""));
 
         console.log(agr.vehicle);
         this._main.SaveAgreement(agr,(res) => {
