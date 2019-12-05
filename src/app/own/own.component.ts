@@ -6,13 +6,20 @@ import { IMyDpOptions } from 'mydatepicker';
 
 @Component({
     selector: 'app-own-cmp',
-    templateUrl: './own.component.html'
+    templateUrl: './own.component.html',
+    styleUrls: ['./own.component.css']
   })
   export class OwnComponent implements OnInit {
 
     CityDics = [];
+    IsError = false;
+    phoneMask = ['(', /\d/,/\d/,/\d/,')', ' ', /\d/, /\d/, /\d/,'-',/\d/,/\d/,'-',/\d/,/\d/];
 
-    phoneMask = ['+', '7',' ', '(', /\d/,/\d/,/\d/,')', ' ', /\d/, /\d/, /\d/,'-',/\d/,/\d/,'-',/\d/,/\d/];
+    expMask = function(rawValue)
+    {
+        return [/[1-8]/,/\d/];
+    }
+
     myDatePickerOptions: IMyDpOptions = {
         // other options...
         dateFormat: 'dd.mm.yyyy',
@@ -23,10 +30,14 @@ import { IMyDpOptions } from 'mydatepicker';
             1: 'Янв', 2: 'Фев', 3: 'Мар', 4: 'Апр', 5: 'Май', 6: 'Июн', 7: 'Июл', 8: 'Авг', 9: 'Сен', 10: 'Окт', 11: 'Ноя', 12: 'Дек'
         },
         showTodayBtn: false,
-        // disableUntil: this.GetDisableUntilData(new Date()),
+        disableSince: this.DisableSince(),
+        maxYear: this.GetMaxYear(),
         showClearDateBtn: false,
-        height: '41px',
-        openSelectorOnInputClick: true
+        height: '38px',
+        inline: false,
+        openSelectorOnInputClick: true,
+        editableDateField: false,
+        indicateInvalidDate: true
     };
 
     Form: FormGroup = new FormGroup({
@@ -48,7 +59,10 @@ import { IMyDpOptions } from 'mydatepicker';
         ]),
         "phone": new FormControl('',[
           Validators.required,
-          Validators.pattern(/^\+(7)\s\(\d\d\d\)\s\d\d\d\-\d\d\-\d\d$/)
+          Validators.pattern(/^\(\d\d\d\)\s\d\d\d\-\d\d\-\d\d$/)
+        ]),
+        "check": new FormControl('', [
+            Validators.required
         ])
     });
 
@@ -58,6 +72,7 @@ import { IMyDpOptions } from 'mydatepicker';
     constructor(private _main: MainService)
     {
         const data = this._main.Copy(this._main.Agreement) as AgreementModel;
+        // console.log(data);
         if(data.name)
             this.Form.get("fio").setValue(data.name);
 
@@ -75,7 +90,8 @@ import { IMyDpOptions } from 'mydatepicker';
         
         if(data.phone)
         {
-            this.Form.get('phone').setValue(data.phone);
+            this.Form.get("phone").setValue(data.phone.replace(data.phone.slice(0,3), ""));
+            // this.Form.get('phone').setValue(data.phone);
         }
         
         if(!data.multidrive && data.drivers.length > 0)
@@ -128,6 +144,20 @@ import { IMyDpOptions } from 'mydatepicker';
 
     Save()
     {
+        for(const i in this.Form.controls)
+        {
+            this.Form.get(i).markAsDirty();
+            this.Form.get(i).markAsTouched();
+            this.Form.get(i).updateValueAndValidity();
+        }
+        this.Form.updateValueAndValidity();
+        console.log(this.Form);
+        if(!this.Form.valid || !this.Form.get('check').value)
+        {
+            this.IsError = true;
+            return;
+        }
+            
         const data = this.Form.getRawValue();
         const agr = this._main.Copy(this._main.Agreement) as AgreementModel;
 
@@ -157,11 +187,11 @@ import { IMyDpOptions } from 'mydatepicker';
         agr.owner.city = this.SelectedKladr.data.kladr_id;
 
         agr.name = data.fio;
-        agr.phone = data.phone;
+        agr.phone = "+7 " + data.phone;
 
 
         this._main.SaveAgreement(agr,(res) => {
-            this._main.Navigate("confirm");
+            this._main.Navigate(["/prev", "confirm"]);
             // this._main.Navigate("ndrivers");
         },
         (err) => {
@@ -180,6 +210,35 @@ import { IMyDpOptions } from 'mydatepicker';
             month: Number.parseInt(arr[1]),
             day: Number.parseInt(arr[2])
         };
+    }
+
+    DisableSince()
+    {
+        let date = new Date();
+
+        return {
+            year: date.getFullYear() - 18,
+            month: date.getMonth() + 1,
+            day: date.getDate()
+        }
+    }
+
+    GetMaxYear()
+    {
+        const data = this.DisableSince();
+
+        return data.year;
+    }
+
+    onCalendarToggle(event: number): void {
+        if(!this.Form.controls.birthday.value && event == 1)
+        {
+            let obj = this.DisableSince();
+            obj.day -= 1;
+            this.Form.get('birthday').setValue({
+                date: obj
+            })
+        }
     }
   
   }

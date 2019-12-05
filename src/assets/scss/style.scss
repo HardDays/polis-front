@@ -1,76 +1,27 @@
 @import "layout/var";
 @import "layout/app";
-//auth
-@import "components/auth/auth";
-@import "components/auth/auth-form";
-@import "components/auth/input-groupe";
-@import "components/auth/button-wrapper";
-@import "components/auth/two-col-buttons";
-@import "components/auth/auth-two-cols";
-@import "components/auth/check-boxes-row";
-@import "components/auth/one-checkbox";
-@import "components/auth/upload-file";
-@import "components/auth/with-value";
-@import "components/auth/select";
-@import "components/auth/select-dropdown";
-@import "components/auth/row-generate";
-@import "components/auth/add-row-generate";
-//main
-@import "components/main/main";
-//sidebar
-@import "components/sidebar/side-bar";
-@import "components/sidebar/side-bar-menu";
-//system
-@import "components/system/system";
-@import "components/system/system-copyright";
-//system header
-@import "components/headersystem/system-header";
-@import "components/headersystem/header-user";
-//create product
-@import "components/createproduct/create-product";
-@import "components/createproduct/upload-image";
-//my products
-@import "components/myproducts/my-products";
-@import "components/myproducts/product";
-@import "components/myproducts/product-tags";
-@import "components/myproducts/edit-button";
-//my news
-@import "components/mynews/my-news";
-@import "components/mynews/my-new";
-//create milestone
-@import "components/createmilestone/create-milestone";
-//my-milestones
-@import "components/mymilestones/my-milestones";
-@import "components/mymilestones/my-milestone";
-//sturtup profile  
-@import "components/sturtupprofile/sturtup-profile";
-@import "components/sturtupprofile/sturtup-card";
-@import "components/sturtupprofile/sturtup-info";
-//sturtups list
-@import "components/sturtupslist/sturtups-list";
-//dashboard investor
-@import "components/dashboardinvestor/dashboard-investor-row";
-@import "components/dashboardinvestor/graph-block";
-@import "components/dashboardinvestor/graph-actions";
-@import "components/dashboardinvestor/dashboard-inform-block";
-@import "components/dashboardinvestor/news-block";
-//modal
+
+@import "components/header/header";
+
+@import "components/index/index";
+//button
+@import "components/button/button";
+
+@import "components/page/page";
+
+@import "components/avto-num/avto-num";
+
+@import "components/polis/polis";
+
+//form
+@import "components/form/form";
+@import "components/form/checkbox";
+@import "components/form/radio";
+@import "components/form/hint";
+@import "components/form/calendar";
+
 @import "components/modal/modal";
-@import "components/modal/invest-modal";
-@import "components/modal/invest-modal-form";
-//settings
-@import "components/settings/settings";
-@import "components/settings/settings-item";
-//my investers
-@import "components/myinvestors/my-investors";
-@import "components/myinvestors/my-investor";
-//porfolio page
-@import "components/porfoliopage/porfolio-page";
-@import "components/porfoliopage/porfolio-list";
-//dashboard startup
-@import "components/dashboardstartup/dashboard-startup";
-//marketplace
-@import "components/marketplace/marketplace-filter";
-@import "components/marketplace/marketplace-products";
-//tracking
-@import "components/tracking/tracking";
+
+
+
+

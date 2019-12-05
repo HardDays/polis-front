@@ -6,7 +6,9 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { CarRoutingModule } from './car.routing';
 import { CarComponent } from './car.component';
+
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
     RouterModule,
     ReactiveFormsModule,
     CarRoutingModule,
+    TextMaskModule,
     AutocompleteLibModule
   ],
   providers: [ ]

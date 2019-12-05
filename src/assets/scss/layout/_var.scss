@@ -1,14 +1,44 @@
-//font-family
-$mainFont: 'Open Sans', sans-serif;;
-//font-weight
-$regular: 400;
-$semiBold: 600;
-$bold: 700;
-//colors
-$grey300: #EEEEEE;
-$grey400: #C4C4C4;
-$grey800: #9A9A9A;
-$red: #CE4E4E;
-$blue: #659AFF;
-$black: #303030;
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,900&display=swap&subset=cyrillic-ext');
 
+@font-face {
+  font-family: 'Helvetica Neue Cyr Roman';
+  src: url('../fonts/HelveticaNeueCyr-Roman.eot');
+  src: url('../fonts/HelveticaNeueCyr-Roman.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/HelveticaNeueCyr-Roman.woff') format('woff'),
+  url('../fonts/HelveticaNeueCyr-Roman.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+$mainFont: 'Roboto', sans-serif;
+$formFont: 'Helvetica Neue Cyr Roman', sans-serif;
+
+//colors
+
+$blue: #007CFF;
+$formTextColor: rgba(0, 0, 0, 0.8);
+$labelColor: #818181;
+$topBackground: rgba(33, 77, 160, 0.6);
+
+$headerHeight: 58px;
+$footerHeight: 55px;
+
+// mixins
+
+@mixin placeholderColor($color) {
+  &::-moz-placeholder {
+    color: $color;
+  }
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+  }
+  &::-ms-input-placeholder {
+    color: $color;
+  }
+  &::placeholder {
+    color: $color;
+  }
+}

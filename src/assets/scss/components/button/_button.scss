@@ -1,0 +1,35 @@
+@import "layout/var";
+
+.button {
+  background: $blue;
+  color: white;
+  width: 100%;
+  font-size: 16px;
+  display: block;
+  height: 45px;
+  border-radius: 4px;
+  position: relative;
+
+  &--white {
+    border: 1px solid $blue;
+    background: transparent;
+    color: $blue;
+  }
+
+  &--disabled {
+    pointer-events: none;
+    background: #B5B5B5;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-35px);
+
+    &--right {
+      transform: translateX(100px);
+      top: 13px;
+    }
+  }
+}

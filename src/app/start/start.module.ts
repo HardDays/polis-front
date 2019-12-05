@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { StartComponent } from './start.component';
 import { StartRoutingModule } from './start.routing';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
@@ -18,8 +19,8 @@ import { StartRoutingModule } from './start.routing';
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
+    TextMaskModule,
     StartRoutingModule
-
   ],
   providers: [ ]
 })

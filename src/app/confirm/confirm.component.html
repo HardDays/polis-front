@@ -1,11 +1,35 @@
-<h1 class="system__title">
-    Для проверки расчета<br>
-    подтвердите номер телефона
-</h1>
-<br/>
-<br/>
-<!-- <br/> -->
-<form [formGroup]="Form" (ngSubmit)="Save()">
+<div class="page__top page__top--big page__top--phone">
+    <p class="page__title">Для проверки расчета<br>подтвердите номер телефона</p>
+</div>
+
+<div class="page__block page__block--bottom_margin">
+    <form [formGroup]="Form" (ngSubmit)="Save()">
+        <div class="form form--bottom_40">
+            <div class="form__item">
+                <label class="form__label">Телефон</label>
+                <div class="form__phone-block">
+                    <div class="form__phone-code">
+                        <span class="form__phone-code-flag" style="background-image: url('assets/img/avto-country.svg')"></span>
+                        <span class="form__phone-code-text">+7</span>
+                    </div>
+                    <!-- <input type="text" class="form__input form__input--phone" placeholder="(999) 789 00 00"> -->
+                    <input [textMask]="{mask: phoneMask, guide: true, placeholderChar: '_', showMask: true}" formControlName="phone" class="form__input form__input--phone" name="phone">
+                </div>
+            </div>
+            <div class="form__item">
+                <label class="form__label">Код подтверждения</label>
+                <!-- <input type="text" class="form__input"> -->
+                <input class="form__input" formControlName="code" name="code"
+                    [ngClass]="{'form__input--error': code.invalid && (code.dirty || code.touched)}"
+                >
+            </div>
+        </div>
+
+        <button class="button" [disabled]="Form.invalid" type="submit">Отправить</button>
+        <button class="button button--white">Отправить снова</button>
+    </form>
+</div>
+<!-- <form [formGroup]="Form" (ngSubmit)="Save()">
     <p>Телефон</p>
     <input [textMask]="{mask: phoneMask, guide: true, placeholderChar: '_', showMask: true}" formControlName="phone" class="input-polis" name="phone">
     <br><br>
@@ -23,4 +47,4 @@
     <button type="submit" (click)="Resend()" class="navigate-button reverse">
         <span class="navigate-button-text">Отправить снова</span>
     </button>
-</form>
+</form> -->

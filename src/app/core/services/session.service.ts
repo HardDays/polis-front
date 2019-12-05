@@ -27,15 +27,24 @@ export class SessionService
         return aggr ? JSON.parse(aggr) : new AgreementModel();
     }
 
-    public SavePage(Page: string)
+    public SavePage(Page: string[])
     {
-        localStorage.setItem(this.last_page, Page);
+        localStorage.setItem(this.last_page, JSON.stringify(Page));
     }
 
     public LoadPage()
     {
         const page = localStorage.getItem(this.last_page);
 
-        return page ? page : "start";
+        let result = ["/prev", "start"];
+
+        try{
+            result = page ? JSON.parse(page) : ["/prev", "start"];
+        }
+        catch(err)
+        {
+            result = ["/prev", "start"]
+        }
+        return result;
     }
 }

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { MainService } from './core/services/main.service';
 import { FormsModule } from '@angular/forms';
 import { SessionService } from './core/services/session.service';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -20,10 +22,9 @@ import { SessionService } from './core/services/session.service';
     FormsModule,
     HttpModule,
     RouterModule,
-    AppRoutingModule
-    
-    // HttpClientModule,
-    // TextMaskModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatAutocompleteModule
   ],
   providers: [
     HttpModule,
@@ -31,6 +32,7 @@ import { SessionService } from './core/services/session.service';
     MainService,
     SessionService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

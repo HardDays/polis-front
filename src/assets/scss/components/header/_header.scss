@@ -1,0 +1,39 @@
+@import "layout/var";
+
+.header {
+  background: white;
+  height: 58px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.06);
+  position: relative;
+
+  &__back {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 52px;
+    height: 58px;
+    background: url('../img/back.svg') no-repeat center;
+  }
+
+  &__logo {
+    font-weight: 900;
+    font-size: 30px;
+    color: $blue;
+    opacity: 0.6;
+  }
+
+  &__profile {
+    display: block;
+    width: 52px;
+    height: 58px;
+    background: url('../img/profile.svg') no-repeat center;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}

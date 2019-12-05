@@ -23,7 +23,7 @@ import { VehicleModel, AgreementModel, DriverModel } from '../core/models/agreem
 
         this._main.SaveAgreement(agr,
             (res) => {
-                this._main.Navigate("own");
+                this._main.Navigate(["/prev", "own"]);
             },  
             (err) => {
             })

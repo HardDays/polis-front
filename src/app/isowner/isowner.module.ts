@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+// import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { IsownerComponent } from './isowner.component';
 import { IsOwnerRoutingModule } from './isowner.routing';
 
@@ -20,7 +20,7 @@ import { IsOwnerRoutingModule } from './isowner.routing';
     RouterModule,
     ReactiveFormsModule,
     IsOwnerRoutingModule,
-    AutocompleteLibModule
+    // AutocompleteLibModule
   ],
   providers: [ ]
 })

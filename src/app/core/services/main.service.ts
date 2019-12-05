@@ -11,70 +11,79 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class MainService
 {
     Agreement: AgreementModel;
-    LastPage: string;
+    LastPage: string[];
     SkEnum = {
         1: {
             id:1,
             name: 'Альфастрахование',
             currency: 'р.',
             total: 0,
-            img: 'assets/img/alpha.png'
+            img: 'assets/img/alpha.png',
+            base_rate: 0
         },
         27: {
             id: 27,
             name: 'Зетта Страхование',
             currency: 'р.',
             total: 0,
-            img: 'assets/img/zetta.png'
+            img: 'assets/img/zetta.png',
+            base_rate: 0
         },
         5: {
             id: 5,
             name: 'Росгоссрах',
             currency: 'р.',
             total: 0,
-            img: 'assets/img/rgs.png'
+            img: 'assets/img/rgs.png',
+            base_rate: 0
         },
         7: {
             id: 7,
             name: 'Согласие',
             currency: 'р.',
             total: 0,
-            img: 'assets/img/sg.svg'
+            img: 'assets/img/sg.svg',
+            base_rate: 0
         },
         32: {
             id: 32,
             name: 'Ресо',
             currency: 'р.',
             total: 0,
-            img: 'assets/img/reso.png'
+            img: 'assets/img/reso.png',
+            base_rate: 0
         },
         3: {
             id: 3,
             name: "Ингосстрах",
             currency: 'р.',
             total: 0,
-            img: 'assets/img/ings.png'
+            img: 'assets/img/ings.png',
+            base_rate: 0
         },
         33: {
             id: 33,
             name: "ВСК",
             currency: 'р.',
             total: 0,
-            img: 'assets/img/vsk.png'
+            img: 'assets/img/vsk.png',
+            base_rate: 0
         },
         36: {
             id: 36,
             name: 'Ренессанс Страхование',
             currency: 'р.',
             total: 0,
-            img: 'assets/img/rns.png'
+            img: 'assets/img/rns.png',
+            base_rate: 0
         },
         107: {
             id: 107,
             name: 'Тинькофф Страхование',
             currency: 'р.',
             total: 0,
-            img: 'assets/img/tinkoff.png'
+            img: 'assets/img/tinkoff.png',
+            base_rate: 0
         }
     };
     constructor(public http: HttpService, private router: Router, public _session: SessionService, private _sanitize: DomSanitizer) 
@@ -87,7 +96,7 @@ export class MainService
     {
         this.LastPage = Page;
         this._session.SavePage(Page);
-        this.router.navigate(["/" + Page]);
+        this.router.navigate(Page);
     }
 
     CheckCarByNumber(Obj, success?: (data) => void, fail?: (err) => void)
@@ -172,5 +181,10 @@ export class MainService
             success,
             fail
         )
+    }
+
+    ReplaceAll(text: string, find: string, replace: string): string
+    {
+        return text.split(find).join(replace);
     }
 }

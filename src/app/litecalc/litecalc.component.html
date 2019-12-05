@@ -1,8 +1,38 @@
-<h1 class="system__title">
-    Ваш предварительный расчет<br>
-    полиса ОСАГО
-</h1>
-<form class="create-product">
+<div class="content content--blue">
+    <div class="index index--with_footer">
+        <p class="index__title">Ваш предварительный расчёт полиса ОСАГО</p>
+
+        <div class="index__block">
+            <span class="index__hint"></span>
+
+            <div class="polis polis--no_answer polis--loading">
+
+                <!-- <div class="create-product__row" *ngFor="let sk of SkData | keyvalue">
+                    <div class="create-product__coll">
+                        <img width="120px" [src]="sk.value.img"/>
+                    </div>
+                    <div class="create-product__coll">{{sk.value.name}}</div>
+                    <div class="create-product__coll">{{sk.value.total}} {{sk.value.currency}}</div>
+                </div> -->
+                <div [ngClass]="{'polis__flex--load': IsLoading}" class="polis__flex polis__flex--offer" *ngFor="let sk of SkData | keyvalue">
+                    <div class="polis__image" [ngStyle]="{'background-image': 'url(' + sk.value.img + ')'}"></div>
+                    <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div>
+                    <div class="polis__before">
+                        <ng-container *ngIf="!IsLoading">
+                            <span class="polis__before-price"> от {{sk.value.total}} {{sk.value.currency}}</span>
+                            <span class="polis__middle-price">Средняя {{sk.value.base_rate}} {{sk.value.currency}}</span>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+            <p class="page__card-text page__card-text--grey">Продолжите заполненение анкеты,<br>это займет 5 минут :)</p>
+
+            <button class="button">Сделать точный расчет</button>
+        </div>
+    </div>
+</div>
+<!-- <form class="create-product">
     <div class="create-product__row" *ngFor="let sk of SkData | keyvalue">
         <div class="create-product__coll">
             <img width="120px" [src]="sk.value.img"/>
@@ -10,4 +40,4 @@
         <div class="create-product__coll">{{sk.value.name}}</div>
         <div class="create-product__coll">{{sk.value.total}} {{sk.value.currency}}</div>
     </div>
-</form>
+</form> -->

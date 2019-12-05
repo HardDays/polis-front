@@ -1,29 +1,97 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MainService } from '../core/services/main.service';
 
 @Component({
     selector: 'app-start-cmp',
-    templateUrl: './start.component.html'
+    templateUrl: './start.component.html',
+    styleUrls: ['./start.component.css']
   })
   export class StartComponent implements OnInit {
-    CarNumber: string = "";
+    Number: string = '';
+    Region: string = '';
 
-      constructor(private _main: MainService)
-      {
+    @ViewChild("main", {static: true}) main : ElementRef;
+    @ViewChild("region", {static: true}) region: ElementRef;
 
-      }
+    // MainMask = [/u0430-u044f/, ' ', /\d/, /\d/, /\d/, ' ', /а-я/, /а-я/];
+    MainMask = [/[а-яА-Я]/, ' ', /\d/, /\d/, /\d/, ' ',/[а-яА-Я]/,/[а-яА-Я]/];
+    MainReg = /^[а-яА-Я]\s\d\d\d\s[а-яА-Я][а-яА-Я]$/;
+
+    RegionMask = [/\d/, /\d/, /\d|\s/];
+    RegionReg = /^(\d){2}(\d|\u2000)$/
+
+    IsError = false;
+
+    constructor(private _main: MainService)
+    {
+
+    }
     ngOnInit(): void {
-        // throw new Error("Method not implemented.");
+    }
+
+    NumberChange($event)
+    {
+      this.Number = $event;
+
+      if(this.MainReg.test(this.Number))
+      {
+        this.FocusRegion();
+      }
+    }
+
+    RegionChange($event: string)
+    {
+      this.Region = $event;
+    }
+
+    RegionKeyPress($event)
+    {
+      if($event.key == "Backspace")
+      {
+        if(this.Region.length == 0)
+        {
+          this.FocusMain();
+        }
+      }
+    }
+
+    FocusMain()
+    {
+      this.main.nativeElement.focus();
+    }
+
+    FocusRegion()
+    {
+      this.region.nativeElement.focus();
     }
 
     CheckCarNumber()
     {
+      this.IsError = false;
+      if(!this.RegionReg.test(this.Region))
+      {
+        this.IsError = true;
+        this.FocusRegion();
+      }
+
+      if(!this.MainReg.test(this.Number))
+      {
+        this.IsError = true;
+        this.FocusMain();
+      }
+
+      if(this.IsError)
+      {
+        return;
+      }
+      let number = this._main.ReplaceAll(this.Number + this.Region, " ", "").toLowerCase();
+      number = this._main.ReplaceAll(number, '\u2000','');
         this._main.CheckCarByNumber({
-            "number_plate": this.CarNumber
+            "number_plate": number
         },
         (res) => {
-            this._main.Navigate("car");
+            this._main.Navigate(["/prev", "car"]);
         },
         (err) => {
         })

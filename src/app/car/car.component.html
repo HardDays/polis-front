@@ -1,12 +1,52 @@
-<h1 class="system__title">
-    Это ваш автомобиль?
-</h1>
-<br/>
-<br/>
-<p>Проверьте корректность загруженных данных<br/>и исправьте, если данные неверны</p>
-<br/><br/>
-<!-- <br/> -->
-<form>
+<div class="page__top page__top--woman">
+    <p class="page__title">Это ваш автомобиль?<span class="small-margin">Проверьте корректность загруженных данных<br>и исправьте, если данные неверны</span></p>
+</div>
+
+<div class="page__block page__block--bottom_margin">
+    <form    [formGroup]="Form" (ngSubmit)="SaveCar()">
+        <div class="form">
+            
+            <div class="form__item">
+                <label class="form__label">Марка, модель</label>
+                <ng-autocomplete
+                    name="model"
+                    formControlName="model"
+                    [ngModel]="Data.model.full_title"
+                    [data]="ModelsDics"
+                    [searchKeyword]="'full_title'"
+                    placeHolder="Марка, модель"
+                    (selected)='selectEvent($event)'
+                    (inputChanged)='UpdateDics($event)'
+                    [itemTemplate]="itemTemplate"
+                    [notFoundTemplate]="notFoundTemplate">
+                </ng-autocomplete>
+                
+                <ng-template #itemTemplate let-item>
+                    <a *ngIf="item" [innerHTML]="item && item.full_title ? item.full_title : ''"></a>
+                </ng-template>
+                
+                <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="'Ничего не найдено'"></div>
+                </ng-template>
+            </div>
+
+            <div class="form__item form__item--calendar">
+                <label class="form__label">Год выпуска</label>
+                <input type="text" [textMask]="{mask: YearMask, placeholderChar: '\u2000'}"  placeholder="Год выпуска" class="form__input" name="year" formControlName="year">
+                <!-- <input type="text" name="year" class="form__input" value="2014 Г.В."> -->
+            </div>
+
+            <div class="form__item form__item--select">
+                <label class="form__label">Мощность (Л.С.)</label>
+                <input formControlName="power" type="text" placeholder="Мощность" [textMask]="{mask: PowerMask, placeholderChar: '\u2000'}" class="form__input" name="car_power">
+                <!-- <input type="text" name="power" class="form__input" value="2300"> -->
+            </div>
+        </div>
+
+        <button type="submit" class="button">Да, всё верно</button>
+    </form>
+</div>
+<!-- <form>
     <p>Марка, модель</p>
     <div class="ng-autocomplete input-polis" style="margin: auto;">
         <ng-autocomplete
@@ -42,7 +82,4 @@
     <button type="submit" (click)="SaveCar()" class="navigate-button">
         <span class="navigate-button-text">Да, все верно</span>
     </button>
-</form>
-<br>
-<br>
-<p>Мы гарантируем безопасность ваших данных</p>
+</form> -->

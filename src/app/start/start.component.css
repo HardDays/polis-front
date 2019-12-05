@@ -1,0 +1,9 @@
+.avto-num__input {
+    width: 100%;
+    font-size: 36px;
+    text-transform: uppercase;
+}
+
+.avto-num__block--error{
+    border: 1px solid red;
+}

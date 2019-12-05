@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+// import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { TextMaskModule } from 'angular2-text-mask';
 import { MyDatePickerModule } from 'mydatepicker';
 import { ConfirmComponent } from './confirm.component';
@@ -22,7 +22,7 @@ import { ConfirmRoutingModule } from './confirm.routing';
     RouterModule,
     ReactiveFormsModule,
     ConfirmRoutingModule,
-    AutocompleteLibModule,
+    // AutocompleteLibModule,
     TextMaskModule,
     MyDatePickerModule
   ],

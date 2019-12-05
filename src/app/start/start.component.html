@@ -1,16 +1,37 @@
-<h1 class="system__title">
-    Давайте начнем
-</h1>
-<br/>
-<br/>
-<p>Для расчета ОСАГО укажите<br/>номер автомобиля и данные из государственной<br>базы данных будут добавлены автоматически</p>
-<br/><br/>
-<!-- <br/> -->
-<form>
-    <input placeholder="ГОС НОМЕР" class="input-polis" name="car_number" [ngModel]="CarNumber" (ngModelChange)="CarNumber = $event">
-    <br/>
-    <br/>
-    <button type="submit" (click)="CheckCarNumber()" class="navigate-button">
-        <span class="navigate-button-text">Расчитать</span>
-    </button>
-</form>
+<div class="page__top page__top--big page__top--man">
+    <p class="page__title">Давайте начнем!<span>Для расчета ОСАГО укажите<br>номер автомобиля и данные из государственной базы данных будут добавлены автоматически</span></p>
+</div>
+
+<div class="page__block page__block--bottom_margin">
+    <div class="avto-num">
+        <div class="avto-num__block" [ngClass]="{'avto-num__block--error': IsError}">
+            <div class="avto-num__left">
+                <!-- <input type="text" placeholder="A" class="avto-num__input avto-num__input--character avto-num__input--alone"> -->
+                <input #main type="text" 
+                    [textMask]="{mask: MainMask, placeholderChar: '\u2000', keepCharPosition: true}" 
+                    placeholder="А 000 АА" 
+                    class="avto-num__input"
+                    [ngModel]="Number"
+                    (ngModelChange)="NumberChange($event)"
+                    >
+                <!-- <input type="text" placeholder="AA" class="avto-num__input avto-num__input--character avto-num__input--double"> -->
+            </div>
+            <div class="avto-num__right">
+                <input #region type="text" 
+                    placeholder="111" 
+                    class="avto-num__input avto-num__input--region"
+                    [textMask]="{mask: RegionMask, placeholderChar: '\u2000'}" 
+                    [ngModel]="Region"
+                    (ngModelChange)="RegionChange($event)"
+                    (keydown)="RegionKeyPress($event)"
+                    >
+                <span class="avto-num__country">RUS</span>
+            </div>
+        </div>
+    </div>
+    
+    <!--  -->
+
+    <button class="button" type="submit" (click)="CheckCarNumber()">Рассчитать</button>
+    <button class="button button--white" [routerLink]="['/car']">Ввести данные вручную<span class="button__icon button__icon--right"><img src="assets/img/arrow-right.svg" alt=""></span></button>
+</div>

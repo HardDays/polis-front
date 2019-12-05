@@ -2,21 +2,14 @@
 
 body {
     font-family: $mainFont;
-    font-weight: $regular;
-    padding: 0;
     margin: 0;
+    padding: 0;
     position: relative;
+    background: #FCFCFC;
 
-    &.modal-open {
+    &.modal-opened {
         overflow: hidden;
     }
-}
-
-html {
-    font-family: sans-serif;
-    line-height: 1.15;
-    -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: transparent;
 }
 
 p {
@@ -27,31 +20,47 @@ h1,h2,h3,h4,h5,h6 {
     margin: 0;
     font-weight: normal;
 }
+header, footer, section, div, span, p, button, a, input, textarea {
+    box-sizing: border-box;
+}
+
+button,input,textarea{
+    outline: none;
+}
+button {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+}
+a {
+    text-decoration: none;
+}
 
 a:focus {
     outline: none;
 }
 
-input,textarea,button{
-    outline: none;
-}
-
-.img-responsive {
-    display: block;
-    max-width: 100%;
-    height: auto;
-}
-
-*, ::after, ::before {
-    box-sizing: border-box;
-}
-
-button, input, optgroup, select, textarea {
+footer {
     margin: 0;
-    font-family: inherit;
-    border-radius: 0;
+    padding: 0;
 }
 
-button, input {
-    overflow: visible;
+
+.hidden {
+    display: none!important;
+}
+
+.flex-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    height: 100%;
+    flex-grow: 1;
+
+    &--blue {
+        background: $blue;
+    }
 }

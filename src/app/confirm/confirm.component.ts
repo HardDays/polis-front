@@ -10,15 +10,13 @@ import { IMyDpOptions } from 'mydatepicker';
   })
   export class ConfirmComponent implements OnInit {
 
-    CityDics = [];
-
-    phoneMask = ['+', '7',' ', '(', /\d/,/\d/,/\d/,')', ' ', /\d/, /\d/, /\d/,'-',/\d/,/\d/,'-',/\d/,/\d/];
+    phoneMask = ['(', /\d/,/\d/,/\d/,')', ' ', /\d/, /\d/, /\d/,'-',/\d/,/\d/,'-',/\d/,/\d/];
     
 
     Form: FormGroup = new FormGroup({
         "phone": new FormControl('',[
           Validators.required,
-          Validators.pattern(/^\+(7)\s\(\d\d\d\)\s\d\d\d\-\d\d\-\d\d$/)
+          Validators.pattern(/^\(\d\d\d\)\s\d\d\d\-\d\d\-\d\d$/)
         ]),
         "code": new FormControl('',[
             Validators.required,
@@ -31,7 +29,8 @@ import { IMyDpOptions } from 'mydatepicker';
     {
         const data = this._main.Copy(this._main.Agreement) as AgreementModel;
 
-        this.Form.get("phone").setValue(data.phone);
+        // console.log();
+        this.Form.get("phone").setValue(data.phone.replace(data.phone.slice(0,3), ""));
     }
     ngOnInit(): void {
         // throw new Error("Method not implemented.");
@@ -72,11 +71,11 @@ import { IMyDpOptions } from 'mydatepicker';
 
             if(agr.phone != this.Form.controls.phone.value)
             {
-                agr.phone = this.Form.controls.phone.value;
+                agr.phone = "+7 " + this.Form.controls.phone.value;
             }
 
             this._main.SaveAgreement(agr,(res) => {
-                this._main.Navigate('calc_lite');
+                this._main.Navigate(['calc_lite']);
                 // this._main.Navigate("ndrivers");
             },
             (err) => {

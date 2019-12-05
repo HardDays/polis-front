@@ -1,9 +1,15 @@
-<h1 class="system__title">
-    Укажите количество<br>водителей
-</h1>
-<br/>
-<br/>
-<form class="create-product">
+<div class="page__top page__top--car">
+    <p class="page__title">Укажите количество<br>водителей</p>
+</div>
+
+<div class="page__block">
+    <button class="button" (click)="SelectDriversNumber(1)">1</button>
+    <button class="button" (click)="SelectDriversNumber(2)">2</button>
+    <button class="button" (click)="SelectDriversNumber(3)">3</button>
+    <button class="button" (click)="SelectDriversNumber(4)">4</button>
+    <button class="button" (click)="SelectDriversNumber(0)">Без ограничения</button>
+</div>
+<!-- <form class="create-product">
     <div class="select-drivers">
         <button (click)="SelectDriversNumber(1)">1</button>
     </div>
@@ -20,4 +26,4 @@
     <div class="select-drivers">
         <button (click)="SelectDriversNumber(0)">Без ограничений</button>
     </div>
-</form>
+</form> -->

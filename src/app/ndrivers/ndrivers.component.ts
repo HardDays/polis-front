@@ -36,7 +36,7 @@ import { VehicleModel, AgreementModel, DriverModel } from '../core/models/agreem
 
         this._main.SaveAgreement(agr,
             (res) => {
-                this._main.Navigate("is_owner");
+                this._main.Navigate(["/prev", "is_owner"]);
             },  
             (err) => {
             })

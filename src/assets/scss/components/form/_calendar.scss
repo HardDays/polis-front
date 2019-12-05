@@ -1,0 +1,130 @@
+@import "layout/var";
+
+.calendar {
+  background: #e9f4ff;
+  box-shadow: 0px 3.64342px 7.28684px rgba(0, 0, 0, 0.06);
+  border-radius: 3px;
+  margin-top: 6px;
+  margin-bottom: 19px;
+  display: block;
+
+  &--white {
+    margin-bottom: 0;
+    background: transparent;
+    box-shadow: none;
+
+    .calendar__table {
+      padding: 0;
+    }
+
+    .calendar__row {
+      &:last-child {
+        .calendar__day {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .calendar__day {
+      color: black!important;
+
+      &--selected {
+        color: white!important;
+      }
+
+      &--inactive {
+        color: #a9a9a9!important;
+      }
+    }
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 0 15px;
+  }
+
+  &__back {
+    display: block;
+    width: 8px;
+    height: 12px;
+    background: url('../img/calendar-next.svg');
+    transform: scale(-1,1);
+  }
+
+  &__month {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    width: 181px;
+    text-align: center;
+  }
+
+  &__next {
+    display: block;
+    width: 8px;
+    height: 12px;
+    background: url('../img/calendar-next.svg');
+  }
+
+  &__table {
+    padding: 0 8px;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__week {
+    font-weight: normal;
+    font-size: 14px;
+    color: #a9a9a9;
+    text-align: center;
+    margin-bottom: 14px;
+    width: 30px;
+  }
+
+  &__day {
+    text-align: center;
+    font-size: 14px;
+    line-height: 28px;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 16px;
+
+    &:nth-child(6),
+    &:nth-child(7) {
+      color: #a9a9a9;
+    }
+
+    &--today {
+      border: 1px solid $blue;
+      border-radius: 50%;
+    }
+
+    &--selected {
+      background: $blue;
+      border-radius: 50%;
+      color: white!important;
+    }
+
+    &--strike {
+      position: relative;
+
+      &:after {
+        content: '';
+        display: block;
+        width: 19px;
+        height: 1px;
+        background: black;
+        top: 14px;
+        left: 5px;
+        position: absolute;
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}

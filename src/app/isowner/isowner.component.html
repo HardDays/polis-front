@@ -1,14 +1,8 @@
-<h1 class="system__title">
-    Вы являетесь собственником<br>автомобиля?
-</h1>
-<br/>
-<br/>
-<form class="create-product">
-    <div class="select-drivers">
-        <button (click)="IsOwner(1)">Да</button>
-    </div>
-    
-    <div class="select-drivers">
-        <button (click)="IsOwner(0)">Нет</button>
-    </div>
-</form>
+<div class="page__top page__top--big page__top--man_with_car">
+    <p class="page__title">Вы являетесь собственником автомобиля?</p>
+</div>
+
+<div class="page__block">
+    <button (click)="IsOwner(1)" class="button"><span class="button__icon"><img src="/assets/img/yes.svg" alt=""></span>Да</button>
+    <button (click)="IsOwner(0)" class="button"><span class="button__icon"><img src="/assets/img/no.svg" alt=""></span>Нет</button>
+</div>

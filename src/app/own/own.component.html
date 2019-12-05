@@ -1,10 +1,110 @@
-<h1 class="system__title">
-    Введите данные о себе
-</h1>
-<br/>
-<br/>
-<!-- <br/> -->
-<form [formGroup]="Form" (ngSubmit)="Save()">
+<div class="page__top page__top--man_with_car">
+    <p class="page__title">Введите данные о себе</p>
+</div>
+
+<div class="page__block page__block--bottom_margin">
+    <form [formGroup]="Form" (ngSubmit)="Save()">
+        <div class="form form--medium">
+            <div class="form__item">
+                <label class="form__label">ФИО</label>
+                <textarea class="form__textarea form__textarea--smooth" formControlName="fio" name="fio" style="height: 60px"></textarea>
+                <!-- <input placeholder="Иванов Иван Иванович" class="input-polis" > -->
+            </div>
+            <div class="form__item form__item--calendar">
+                <label class="form__label">Дата рождения</label>
+                <!-- <input type="text" class="form__input" value="12.12.1987"> -->
+                <div class="form__input datepicker-test">
+                    <my-date-picker name="birthday" [options]="myDatePickerOptions" formControlName="birthday" (calendarToggle)="onCalendarToggle($event)"
+                    ></my-date-picker>
+                </div>
+            </div>
+            <div class="form__item form__item--select">
+                <div class="hint">
+                    <div class="hint__icon"></div>
+
+                    <div class="hint__block">
+                        <p>Для более точного расчёта нужна информация о стаже, это влияет на стоимость</p>
+                    </div>
+                </div>
+
+                <label class="form__label">Стаж вождения (лет)</label>
+                <input 
+                    type="text" 
+                    placeholder="" 
+                    class="form__input" 
+                    formControlName="exp"
+                    name="exp"
+                    [textMask]="{mask: expMask, placeholderChar: '\u2000'}"    
+                >
+                <!-- <input type="text" class="form__input"> -->
+            </div>
+            <div class="form__item form__item--select">
+                <div class="hint">
+                    <div class="hint__icon"></div>
+
+                    <div class="hint__block">
+                        <p>В каком городе прописан собственник автомобиля? Регион влияет на стоимость страховки</p>
+                    </div>
+                </div>
+
+                <label class="form__label">Город регистрации</label>
+                <ng-autocomplete
+                    height="40px"
+                    name="city"
+                    formControlName="city"
+                    [ngModel]="SelectedKladr.unrestricted_value"
+                    [data]="CityDics"
+                    [searchKeyword]="'unrestricted_value'"
+                    (selected)='selectEvent($event)'
+                    (inputChanged)='UpdateDics($event)'
+                    [itemTemplate]="itemTemplate"
+                    [notFoundTemplate]="notFoundTemplate">
+                </ng-autocomplete>
+                
+                <ng-template #itemTemplate let-item>
+                    <a *ngIf="item" [innerHTML]="item && item.unrestricted_value ? item.unrestricted_value : ''"></a>
+                </ng-template>
+                
+                <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                </ng-template>
+            </div>
+            <div class="form__item">
+                <label class="form__label">Телефон</label>
+                <div class="form__phone-block">
+                    <div class="form__phone-code">
+                        <span class="form__phone-code-flag" style="background-image: url('assets/img/avto-country.svg')"></span>
+                        <span class="form__phone-code-text">+7</span>
+                    </div>
+                    <input 
+                        [textMask]="{mask: phoneMask, guide: true, placeholderChar: '_', showMask: true}" 
+                        formControlName="phone" 
+                        class="form__input form__input--phone" 
+                        name="phone">
+                    <!-- <input type="text" class="form__input form__input--phone" placeholder="(999) 789 00 00"> -->
+                </div>
+            </div>
+
+            <label class="checkbox">
+                <input type="checkbox" class="checkbox__input"  formControlName="check">
+                <div class="checkbox__text">Я принимаю условия передачи информации<br>и страхования</div>
+            </label>
+        </div>
+
+        <button  type="submit" (click)="Save()" class="button">Узнать стоимость</button>
+    </form>
+</div>
+
+<div class="modal"[ngClass]="{'modal--opened': IsError}">
+    <div class="modal__content">
+        <div class="modal__head">Данные неверны</div>
+        <div class="modal__data">
+            <p class="modal__text">Введите корректные данные!</p>
+            <button class="button button--white" (click)="IsError = false">Закрыть</button>
+        </div>
+    </div>
+</div>
+<!-- <form [formGroup]="Form" (ngSubmit)="Save()"> -->
     <!-- <p>Марка, модель</p>
     <div class="ng-autocomplete input-polis" style="margin: auto;">
         <ng-autocomplete
@@ -27,26 +127,25 @@
             <div [innerHTML]="notFound"></div>
         </ng-template>
     </div> -->
-    <p>ФИО</p>
+    <!-- <p>ФИО</p>
     
-    <input placeholder="Иванов Иван Иванович" class="input-polis" formControlName="fio" name="fio">
+    
     <br/>
     <br/>
     <p>Дата рождения</p>
     <div class="input-polis">
-        <my-date-picker name="birthday" [options]="myDatePickerOptions" formControlName="birthday"
-        ></my-date-picker>
-    </div>
+        
+    </div> -->
     <!-- <input placeholder="01.01.1990" class="input-polis"  formControlName="birthday" name="birthday"> -->
-    <br/>
+    <!-- <br/>
     <br/>
     <p>Стаж вождения</p>
-    <input type="number" placeholder="" class="input-polis" formControlName="exp" name="exp">
+    
     <br>
     <br>
     <p>Город регистрации</p>
-    <div class="ng-autocomplete input-polis" style="margin: auto;">
-        <ng-autocomplete
+    <div class="ng-autocomplete input-polis" style="margin: auto;"> -->
+        <!-- <ng-autocomplete
             height="45px"
             name="city"
             formControlName="city"
@@ -65,16 +164,16 @@
         
         <ng-template #notFoundTemplate let-notFound>
             <div [innerHTML]="notFound"></div>
-        </ng-template>
-    </div> 
+        </ng-template> -->
+    <!-- </div> 
     <br>
 
     <p>Телефон</p>
     <input [textMask]="{mask: phoneMask, guide: true, placeholderChar: '_', showMask: true}" formControlName="phone" class="input-polis" name="phone">
     <br><br>
 
-    <button [disabled]="Form.invalid" type="submit" (click)="Save()" class="navigate-button">
+    <button [disabled]="Form.invalid" type="submit" (click)="Save()" class="navigate-button"> -->
             <!-- <button type="submit" (click)="Save()" class="navigate-button"> -->
-        <span class="navigate-button-text">Узнать стоимость</span>
+        <!-- <span class="navigate-button-text">Узнать стоимость</span>
     </button>
-</form>
+</form> -->
