@@ -20,16 +20,18 @@ import { DomSanitizer } from '@angular/platform-browser';
     ngOnInit(): void {
         this.IsLoading = true;
         this.SkData = this._main.Copy(this._main.SkEnum) as any;
+        let skdata = this._main.Copy(this._main.SkEnum) as any;
         this._main.LiteCalculation(res => {
             console.log(res);
+            
             let result = {} as any;
             if(res && res.calculations &&  res.calculations.results.length > 0)
             {
                 for(const item of res.calculations.results)
                 {
-                    if(this.SkData[item.sk])
+                    if(skdata[item.sk])
                     {
-                        result[item.sk] = this._main.Copy(this.SkData[item.sk]);
+                        result[item.sk] = this._main.Copy(skdata[item.sk]);
                         result[item.sk].total = Math.round(item.total * 0.6);
 
                         result[item.sk].base_rate = item.total;

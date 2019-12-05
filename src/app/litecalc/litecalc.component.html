@@ -14,8 +14,7 @@
                     <div class="create-product__coll">{{sk.value.name}}</div>
                     <div class="create-product__coll">{{sk.value.total}} {{sk.value.currency}}</div>
                 </div> -->
-                <ng-container *ngFor="let sk of SkData | keyvalue">
-                    <div [ngClass]="{'polis__flex--load': IsLoading}" class="polis__flex polis__flex--offer">
+                    <div [ngClass]="{'polis__flex--load': IsLoading}" *ngFor="let sk of SkData | keyvalue" class="polis__flex polis__flex--offer">
                         <div class="polis__image" [ngStyle]="{'background-image': 'url(' + sk.value.img + ')'}"></div>
                         <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div>
                         <div class="polis__before">
@@ -25,7 +24,6 @@
                             </ng-container>
                         </div>
                     </div>
-                </ng-container>
                 
             </div>
 
