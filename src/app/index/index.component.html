@@ -1,0 +1,47 @@
+<div class="content content--blue">
+    <div class="index">
+        <p class="index__title">4 простых шага для расчета и оформления полиса ОСАГО</p>
+
+        <div class="index__block">
+            <span class="index__close"></span>
+
+            <swiper [config]="config" [(index)]="Index">
+                <div>
+                    <div class="index__image"><img src="assets/img/step1.png" alt=""></div>
+
+                    <p class="index__name">Шаг 1</p>
+                    <p class="index__text">Заполните данные об автомобиле и водителях</p>
+                </div>
+                <div>
+                    <div class="index__image"><img src="assets/img/step2.png" alt=""></div>
+
+                    <p class="index__name">Шаг 2</p>
+                    <p class="index__text">Получите расчет от 8-ми страховых компаний</p>
+                </div>
+                <div>
+                    <div class="index__image"><img src="assets/img/step3.png" alt=""></div>
+
+                    <p class="index__name">Шаг 3</p>
+                    <p class="index__text">Выберите выгодное для вас предложение</p>
+                </div>
+                <div>
+                    <div class="index__image"><img src="assets/img/step4.png" alt=""></div>
+
+                    <p class="index__name">Шаг 4</p>
+                    <p class="index__text">Оформите онлайн и получите полис на E-mail</p>
+                </div>
+            </swiper>
+
+            <ul class="index__dots">
+                <li (click)="Index=0" class="index__dot" [ngClass]="{'index__dot--active': Index == 0}"></li>
+                <li (click)="Index=1" class="index__dot" [ngClass]="{'index__dot--active': Index == 1}"></li>
+                <li (click)="Index=2" class="index__dot" [ngClass]="{'index__dot--active': Index == 2}"></li>
+                <li (click)="Index=3" class="index__dot" [ngClass]="{'index__dot--active': Index == 3}"></li>
+            </ul>
+            
+
+            
+            <button class="button" [routerLink]="['/prev']">Далее</button>
+        </div>
+    </div>
+</div>

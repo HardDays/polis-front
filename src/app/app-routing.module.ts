@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'prev', pathMatch: 'full'},
+  { path: '', redirectTo: 'index', pathMatch: 'full'},
   { path: 'prev', loadChildren: 'src/app/prev/prev.module#PrevModule'},
   // { path: 'start', loadChildren: 'src/app/start/start.module#StartModule'},
   // { path: 'car', loadChildren: 'src/app/car/car.module#CarModule'},
@@ -13,7 +13,8 @@ const routes: Routes = [
   // { path: 'is_owner', loadChildren: 'src/app/isowner/isowner.module#IsOwnerModule'},
   // { path: 'own', loadChildren: 'src/app/own/own.module#OwnModule'},
   // { path: 'confirm', loadChildren: 'src/app/confirm/confirm.module#ConfirmModule'},
-  { path: 'calc_lite', loadChildren: 'src/app/litecalc/litecalc.module#LiteCalcModule'}
+  { path: 'calc_lite', loadChildren: 'src/app/litecalc/litecalc.module#LiteCalcModule'},
+  { path: 'index', loadChildren: 'src/app/index/index.module#IndexModule' }
 ];
 
 @NgModule({
