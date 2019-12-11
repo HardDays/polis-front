@@ -1,0 +1,12 @@
+
+<form [formGroup]="Form">
+    <div class="form__item form__item--small_top">
+        <label class="form__label">E-mail</label>
+        <input type="text" 
+            class="form__input" 
+            formControlName="email"
+            name="email"
+            [ngClass]="{'form__input--error': Form.controls.email.invalid && (Form.controls.email.dirty || Form.controls.email.touched) }" 
+            >
+    </div>
+</form>

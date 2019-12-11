@@ -15,7 +15,7 @@ export class IndexComponent implements OnInit{
 
     setInterval(() => {
         this.Index = this.Index < 3 ? this.Index + 1 : 0;
-    }, 2000);
+    }, 4000);
   }
   
 }

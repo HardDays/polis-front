@@ -1,0 +1,51 @@
+<div class="page__top page__top--man_with_car">
+    <p class="page__title">Введите данные водителей</p>
+</div>
+
+<div class="page__block page__block--bottom_margin page__block--top_70">
+    <ng-container *ngFor="let item of Drivers; let i = index">
+        <app-driver-form-cmp [driver]="item" [index]="i" (onDelete)="DeleteDriver($event)" #drivers></app-driver-form-cmp>
+    </ng-container>
+    
+        
+        <!-- <div class="page__driver page__driver--opened">
+            <div class="page__driver-top">
+                <span class="page__driver-name">Водитель 1</span>
+                <span class="page__driver-delete"></span>
+            </div>
+
+            <div class="form form--small">
+                <div class="form__item">
+                    <label class="form__label">ФИО</label>
+                    <input type="text" class="form__input" value="Иван Иванович Иванов">
+                </div>
+
+                <div class="form__item form__item--calendar">
+                    <label class="form__label">Дата рождения</label>
+                    <input type="text" class="form__input" value="12.12.1993">
+                </div>
+
+                <div class="form__item">
+                    <label class="form__label">Серия номер водительского удостоверения</label>
+                    <input type="text" class="form__input" value="1234 5678 9000">
+                </div>
+
+                <div class="form__item form__item--calendar">
+                    <div class="hint">
+                        <div class="hint__icon"></div>
+
+                        <div class="hint__block">
+                            <p>Для более точного расчёта нужна информация о стаже, это влияет на стоимость</p>
+                        </div>
+                    </div>
+
+                    <label class="form__label">Начало стажа</label>
+                    <input type="text" class="form__input" value="01.01.2018">
+                </div>
+            </div>
+        </div> -->
+
+        <div *ngIf="Drivers.length < 4" class="page__driver-add" (click)="AddDriver()">Добавить водителя</div>
+
+        <button class="button" type="submit" (click)="Save()">Далее</button>
+</div>

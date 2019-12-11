@@ -1,0 +1,85 @@
+<div class="page__top page__top--calendar">
+    <p class="page__title">Укажите дату начала действия<br>полиса ОСАГО</p>
+</div>
+
+<div class="page__block page__block--bottom_margin page__block--top_70">
+    <form [formGroup]="Form" (ngSubmit)="Save()">
+        <div class="form form--small">
+                <div class="form__item form__item--calendar">
+                     <label class="form__label">Дата</label>
+                    <!-- <input type="text" class="form__input" value="12.12.1993"> -->
+                    <div class="form__input datepicker-test" [ngClass]="{'form__input--error': date.invalid && (date.dirty || date.touched)}">
+                        <my-date-picker name="date" [options]="myDatePickerOptions" formControlName="date"
+                        ></my-date-picker>
+                    </div>
+
+                    <!-- <div class="calendar calendar--white">
+                        <div class="calendar__top">
+                            <span class="calendar__back"></span>
+                            <span class="calendar__month">Январь 2019</span>
+                            <span class="calendar__next"></span>
+                        </div>
+
+                        <div class="calendar__table">
+                            <div class="calendar__row">
+                                <span class="calendar__week">Пн</span>
+                                <span class="calendar__week">Вт</span>
+                                <span class="calendar__week">Ср</span>
+                                <span class="calendar__week">Чт</span>
+                                <span class="calendar__week">Пт</span>
+                                <span class="calendar__week">Сб</span>
+                                <span class="calendar__week">Вс</span>
+                            </div>
+                            <div class="calendar__row">
+                                <span class="calendar__day"></span>
+                                <span class="calendar__day"></span>
+                                <span class="calendar__day"></span>
+                                <span class="calendar__day"></span>
+                                <span class="calendar__day calendar__day--inactive">1</span>
+                                <span class="calendar__day calendar__day--inactive">2</span>
+                                <span class="calendar__day calendar__day--inactive">3</span>
+                            </div>
+                            <div class="calendar__row">
+                                <span class="calendar__day calendar__day--inactive">4</span>
+                                <span class="calendar__day calendar__day--today">5</span>
+                                <span class="calendar__day calendar__day--selected">6</span>
+                                <span class="calendar__day calendar__day--strike">7</span>
+                                <span class="calendar__day calendar__day--strike">8</span>
+                                <span class="calendar__day calendar__day--strike">9</span>
+                                <span class="calendar__day">10</span>
+                            </div>
+                            <div class="calendar__row">
+                                <span class="calendar__day">11</span>
+                                <span class="calendar__day">12</span>
+                                <span class="calendar__day">13</span>
+                                <span class="calendar__day">14</span>
+                                <span class="calendar__day">15</span>
+                                <span class="calendar__day">16</span>
+                                <span class="calendar__day">17</span>
+                            </div>
+                            <div class="calendar__row">
+                                <span class="calendar__day">18</span>
+                                <span class="calendar__day">19</span>
+                                <span class="calendar__day">20</span>
+                                <span class="calendar__day">21</span>
+                                <span class="calendar__day">22</span>
+                                <span class="calendar__day">23</span>
+                                <span class="calendar__day">24</span>
+                            </div>
+                            <div class="calendar__row">
+                                <span class="calendar__day">25</span>
+                                <span class="calendar__day">26</span>
+                                <span class="calendar__day">27</span>
+                                <span class="calendar__day">28</span>
+                                <span class="calendar__day">29</span>
+                                <span class="calendar__day">30</span>
+                                <span class="calendar__day">31</span>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+
+        <button class="button" type="submit">Далее</button>
+    </form>
+</div>

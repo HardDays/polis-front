@@ -36,7 +36,7 @@ import { IMyDpOptions } from 'mydatepicker';
         height: '38px',
         inline: false,
         openSelectorOnInputClick: true,
-        editableDateField: false,
+        editableDateField: true,
         indicateInvalidDate: true
     };
 

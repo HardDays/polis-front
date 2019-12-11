@@ -14,7 +14,12 @@ const routes: Routes = [
   // { path: 'own', loadChildren: 'src/app/own/own.module#OwnModule'},
   // { path: 'confirm', loadChildren: 'src/app/confirm/confirm.module#ConfirmModule'},
   { path: 'calc_lite', loadChildren: 'src/app/litecalc/litecalc.module#LiteCalcModule'},
-  { path: 'index', loadChildren: 'src/app/index/index.module#IndexModule' }
+  { path: 'index', loadChildren: 'src/app/index/index.module#IndexModule' },
+  { path: 'full', loadChildren: 'src/app/full/full.module#FullModule'},
+  { path: 'docs', loadChildren: 'src/app/docs/docs.module#DocsModule'},
+  { path: 'sum', loadChildren: 'src/app/sum/sum.module#SumModule'},
+  { path: 'passport', loadChildren: 'src/app/passport/passport.module#PassportModule'},
+  { path: 'offers', loadChildren: 'src/app/offers/offers.module#OffersModule'}
 ];
 
 @NgModule({

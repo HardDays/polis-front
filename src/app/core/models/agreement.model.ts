@@ -41,13 +41,13 @@ export class VehicleModel{
         public brand?: string,
         public model?: string,
         public dc?: string,
-        public dcDate?: Date,
+        public dcDate?: string,
         public bodyNum?: string,
         public chassisNum?: string,
-        public docDate?: Date,
-        public dcIssueDate?: Date,
-        public created_at?: Date,
-        public updated_at?: Date
+        public docDate?: string,
+        public dcIssueDate?: string,
+        public created_at?: string,
+        public updated_at?: string
     ){}
 }
 
@@ -60,6 +60,7 @@ export class OwnerModel{
         public birthdate?: string,
         public passportSerial?: string,
         public passportNumber?: string,
+        public passportDate?: string,
         public city?: string,
         public street?: string,
         public house?: string,
@@ -80,7 +81,7 @@ export class DriverModel{
         public birthdate?: string,
         public age?: number,
         public exp?: number,
-        public expdate?: Date,
+        public expdate?: string,
         public licenseSerial?: string,
         public licenseNumber?: string,
         public licenseDate?: string

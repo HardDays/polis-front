@@ -1,0 +1,93 @@
+<div class="page__top page__top--check">
+    <p class="page__title polis__title">Проверка данных<span>Данные будут переданы страховым компаниям<br>для расчёта стоимости. Винмательно проверьте<br>введённые данные</span></p>
+</div>
+
+<div class="page__block page__block--bottom_margin page__block--top_70">
+    <div class="page__driver">
+        <div class="page__driver-top">
+            <span class="page__driver-zag">Ваш автомобиль:</span>
+            <span class="page__driver-edit"></span>
+        </div>
+
+        <div class="page__driver-info">
+            <p>Audi RS 6, 300 Л.С. 2015 г.в.</p>
+            <p><span>Гос. номер:</span> А111АА 116</p>
+            <p><span>VIN:</span> 12334235</p>
+            <p><span>СТС:</span> 345345 от 12.12.2015</p>
+        </div>
+
+    </div>
+    <div class="page__driver">
+        <div class="page__driver-top">
+            <span class="page__driver-zag">Водители:</span>
+            <span class="page__driver-edit"></span>
+        </div>
+
+        <div class="page__driver-info">
+            <p><span>Водитель 1:</span></p>
+            <p><span>ФИО:</span> Иван Иванович Иванов</p>
+            <p><span>Дата рождения:</span> 31.12.1994</p>
+            <p><span>ВУ:</span> 123 456</p>
+            <p><span>Дата начала стажа:</span> 12.12.2012</p>
+            <p><span>Водитель 2:</span></p>
+            <p><span>ФИО:</span> Иванова Анна</p>
+            <p><span>Дата рождения:</span> 31.12.1994</p>
+            <p><span>ВУ:</span> 123 456</p>
+            <p><span>Дата начала стажа:</span> 12.12.2012</p>
+        </div>
+
+    </div>
+    <div class="page__driver">
+        <div class="page__driver-top">
+            <span class="page__driver-zag">Собственник:</span>
+            <span class="page__driver-edit"></span>
+        </div>
+
+        <div class="page__driver-info">
+            <p><span>ФИО:</span> Иван Иванович Иванов</p>
+            <p><span>Дата рождения:</span> 20.07.1996</p>
+            <p><span>Паспорт:</span> 96 12 123456</p>
+            <p><span>Выдан:</span> 15.12.2016</p>
+            <p><span>Код подразделения:</span> 123-456</p>
+            <p><span>Выдан:</span> ТП УФМС ПО РЕСПУБЛИКЕ ТАТАРСТАН</p>
+            <p><span>Адрес регистрации:</span> г. Казань улица Пушкина, дом 12</p>
+        </div>
+
+    </div>
+    <div class="page__driver">
+        <div class="page__driver-top">
+            <span class="page__driver-zag">Страхователь:</span>
+            <span class="page__driver-edit"></span>
+        </div>
+
+        <div class="page__driver-info">
+            <p><span>ФИО:</span> Иванова Анна Сергеевна</p>
+            <p><span>Дата рождения:</span> 30.12.1996</p>
+            <p><span>Паспорт:</span> 96 12 143356</p>
+            <p><span>Выдан:</span> 10.12.2017</p>
+            <p><span>Выдан:</span> ТП УФМС ПО РЕСПУБЛИКЕ ТАТАРСТАН</p>
+            <p><span>Код подразделения:</span> 123-456</p>
+        </div>
+
+    </div>
+    <div class="page__driver page__driver--no_border page__driver--no_bottom">
+        <div class="page__driver-top">
+            <span class="page__driver-zag">Контактные данные:</span>
+            <span class="page__driver-edit"></span>
+        </div>
+
+        <div class="page__driver-info">
+            <p><span>Телефон:</span> +79999999999</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="page__block page__block--second">
+    <p class="page__email-text">Не забудьте указать E-mail, на который хотите получить полис:</p>
+    <div class="form">
+        <app-email-form-cmp #email></app-email-form-cmp>
+    </div>
+    <!-- Add class "button--disabled" to disable the button -->
+    <button class="button" (click)="Navigate()">Все верно!</button>
+</div>

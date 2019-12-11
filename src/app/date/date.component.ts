@@ -1,0 +1,88 @@
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { IMyDpOptions } from 'mydatepicker';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MainService } from '../core/services/main.service';
+import { AgreementModel } from '../core/models/agreement.model';
+
+@Component({
+  selector: 'app-date-cmp',
+  templateUrl: './date.component.html',
+  styleUrls: ['./date.component.css']
+})
+export class DateComponent implements OnInit{
+
+    myDatePickerOptions: IMyDpOptions = {
+        // other options...
+        dateFormat: 'dd.mm.yyyy',
+        dayLabels: {
+            su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб'
+        },
+        monthLabels:{
+            1: 'Янв', 2: 'Фев', 3: 'Мар', 4: 'Апр', 5: 'Май', 6: 'Июн', 7: 'Июл', 8: 'Авг', 9: 'Сен', 10: 'Окт', 11: 'Ноя', 12: 'Дек'
+        },
+        showTodayBtn: false,
+        disableUntil: this.DisableFrom(),
+        // maxYear: this.GetMaxYear(),
+        showClearDateBtn: false,
+        height: '37px',
+        inline: false,
+        openSelectorOnInputClick: true,
+        editableDateField: true,
+        indicateInvalidDate: true
+    };
+
+    Form: FormGroup = new FormGroup({
+        "date": new FormControl('',[
+          Validators.required
+        ])
+    });
+
+    constructor(private _main: MainService)
+    {
+        
+    }
+    ngOnInit(): void {
+    }
+
+    DisableFrom()
+    {
+        const date = new Date();
+
+        const newDate = new Date(date.getTime() + 1000*60*60*24*3);
+
+        return {
+            year: newDate.getFullYear(),
+            month: newDate.getMonth() + 1,
+            day: newDate.getDate()
+        }
+    }
+
+    Save()
+    {
+        this.date.markAsDirty();
+        this.date.markAsTouched();
+        this.date.updateValueAndValidity();
+        this.Form.updateValueAndValidity();
+
+        if(this.Form.valid)
+        {
+            const vals = this.Form.getRawValue();
+            let agr = this._main.Copy(this._main.Agreement) as AgreementModel;
+            agr.date = vals.date.date.year + "-" + vals.date.date.month + "-" + vals.date.date.day;  
+
+            this._main.SaveAgreement(agr,(res) => {
+                this._main.Navigate(['/full', 'vehicle']);
+                // this._main.Navigate("ndrivers");
+            },
+            (err) => {
+            })
+        }
+
+    }
+
+    get date()
+    {
+        return this.Form.get('date');
+    }
+  
+}

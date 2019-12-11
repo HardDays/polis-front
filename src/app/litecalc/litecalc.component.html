@@ -29,7 +29,7 @@
 
             <p class="page__card-text page__card-text--grey">Продолжите заполненение анкеты,<br>это займет 5 минут :)</p>
 
-            <button class="button">Сделать точный расчет</button>
+            <button [disabled]="IsLoading" class="button" type="submit" (click)="Navigate()">Сделать точный расчет</button>
         </div>
     </div>
 </div>

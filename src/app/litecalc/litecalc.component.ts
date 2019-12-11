@@ -45,6 +45,11 @@ import { DomSanitizer } from '@angular/platform-browser';
             
         }, err => {console.log(err)})
     }
+
+    Navigate()
+    {
+        this._main.Navigate(['/docs'])
+    }
   
   }
   

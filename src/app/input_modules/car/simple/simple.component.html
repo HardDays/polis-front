@@ -1,0 +1,54 @@
+<form [formGroup]="Form">
+    <div class="form__item">
+        <label class="form__label">Марка, модель</label>
+        <ng-autocomplete
+            name="model"
+            formControlName="model"
+            [ngModel]="Data.model.full_title"
+            [data]="ModelsDics"
+            [searchKeyword]="'full_title'"
+            placeHolder="Марка, модель"
+            (selected)='selectEvent($event)'
+            (inputChanged)='UpdateDics($event)'
+            [itemTemplate]="itemTemplate"
+            [notFoundTemplate]="notFoundTemplate"
+            [ngClass]="{'form__input--error': Form.controls.model.invalid && (Form.controls.model.dirty || Form.controls.model.touched) }"    
+        >
+        </ng-autocomplete>
+        
+        <ng-template #itemTemplate let-item>
+            <a *ngIf="item" [innerHTML]="item && item.full_title ? item.full_title : ''"></a>
+        </ng-template>
+        
+        <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="'Ничего не найдено'"></div>
+        </ng-template>
+    </div>
+    
+    <div class="form__item form__item--calendar">
+        <label class="form__label">Год выпуска</label>
+        <input type="text" 
+            [textMask]="{mask: YearMask, placeholderChar: '\u2000'}"  
+            placeholder="Год выпуска" 
+            class="form__input" 
+            name="year" 
+            formControlName="year"
+            [ngClass]="{'form__input--error': Form.controls.year.invalid && (Form.controls.year.dirty || Form.controls.year.touched) }"
+        >
+        <!-- <input type="text" name="year" class="form__input" value="2014 Г.В."> -->
+    </div>
+    
+    <div class="form__item form__item--select">
+        <label class="form__label">Мощность (Л.С.)</label>
+        <input 
+            formControlName="power" 
+            type="text" 
+            placeholder="Мощность" 
+            [textMask]="{mask: PowerMask, placeholderChar: '\u2000'}" 
+            class="form__input" 
+            name="car_power"
+            [ngClass]="{'form__input--error': Form.controls.power.invalid && (Form.controls.power.dirty || Form.controls.power.touched) }"
+        >
+        <!-- <input type="text" name="power" class="form__input" value="2300"> -->
+    </div>
+</form>

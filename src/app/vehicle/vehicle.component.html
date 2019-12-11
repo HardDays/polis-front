@@ -1,0 +1,27 @@
+<div class="page__top page__top--car">
+    <p class="page__title">Введите данные об<br>автомобиле</p>
+</div>
+
+<div class="page__block page__block--bottom_margin page__block--top_70">
+    <div class="page__driver" [ngClass]="{'page__driver--opened': TopOpened}">
+        <div class="page__driver-top" (click)="TopOpened = !TopOpened">
+            <span class="page__driver-name">Ваш автомобиль</span>
+        </div>
+
+        <div class="form form--small">
+            <app-simple-car-cmp #simple></app-simple-car-cmp>
+        </div>
+    </div>
+
+    <div class="page__driver page__driver--no_border" [ngClass]="{'page__driver--opened': BottomOpened}">
+        <div class="page__driver-top" (click)="BottomOpened = !BottomOpened">
+            <span class="page__driver-name">Данные автомобиля</span>
+        </div>
+
+        <div class="form">
+            <app-full-car-cmp #full></app-full-car-cmp>
+        </div>
+    </div>
+
+    <button class="button" type="submit" (click)="Save()">Далее</button>
+</div>

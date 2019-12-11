@@ -49,4 +49,7 @@
   background-size: cover;
 }
 
+.autocomplete-container .input-container .x {
+  right: 24px;
+}
 

@@ -1,0 +1,11 @@
+
+.form__item--calendar:before
+{
+    display: none;
+}
+
+.datepicker-test
+{
+    padding: 0px;
+    height: 41px;
+}

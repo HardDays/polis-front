@@ -1,0 +1,78 @@
+<form [formGroup]="Form">
+    <div class="form form--small">
+        <div class="form__item">
+            <label class="form__label">ФИО</label>
+            <input type="text" 
+                class="form__input" 
+                formControlName="name" 
+                name="name"
+                [ngClass]="{'form__input--error': Form.controls.name.invalid && (Form.controls.name.dirty || Form.controls.name.touched)}"    
+            >
+        </div>
+
+        <div class="form__item">
+            <label class="form__label">Дата рождения</label>
+            <div class="form__input datepicker-test"
+            [ngClass]="{'form__input--error': Form.controls.birthdate.invalid && (Form.controls.birthdate.dirty || Form.controls.birthdate.touched)}"    
+            >
+                <my-date-picker name="birthdate" [options]="BdayOptions" formControlName="birthdate"
+                ></my-date-picker>
+            </div>
+        </div>
+
+        <div class="form__item form__item--select">
+            <label class="form__label">Тип документа</label>
+            <input type="text" disabled class="form__input" value="Паспорт гражданина РФ">
+        </div>
+
+        <div class="form__item">
+            <label class="form__label">Серия номер</label>
+            <input type="text" 
+                class="form__input" 
+                formControlName="number" 
+                name="number"
+                [ngClass]="{'form__input--error': Form.controls.number.invalid && (Form.controls.number.dirty || Form.controls.number.touched)}" 
+            >
+        </div>
+
+        <div class="form__item form__item--calendar">
+            <label class="form__label">Дата выдачи</label>
+            <div class="form__input datepicker-test"
+            [ngClass]="{'form__input--error': Form.controls.passportDate.invalid && (Form.controls.passportDate.dirty || Form.controls.passportDate.touched)}" 
+            >
+                <my-date-picker name="passportDate" [options]="GiveOptions" formControlName="passportDate"
+                ></my-date-picker>
+            </div>
+        </div>
+
+        <!-- <div class="form__item">
+            <label class="form__label">Кем выдан</label>
+            <input type="text" class="form__input" value="Название подразделения">
+        </div> -->
+
+        <div class="form__item">
+            <label class="form__label">Адрес регистрации</label>
+            <ng-autocomplete
+                name="address"
+                formControlName="address"
+                [data]="AddOptions"
+                [searchKeyword]="'value'"
+                (selected)='selectEvent($event)'
+                (inputChanged)='UpdateDics($event)'
+                [itemTemplate]="itemTemplate"
+                [notFoundTemplate]="notFoundTemplate"
+                [ngClass]="{'form__input--error': Form.controls.address.invalid && (Form.controls.address.dirty || Form.controls.address.touched) }"    
+            >
+            </ng-autocomplete>
+            
+            <ng-template #itemTemplate let-item>
+                <a *ngIf="item" [innerHTML]="item && item.value ? item.value : ''"></a>
+            </ng-template>
+            
+            <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="'Ничего не найдено'"></div>
+            </ng-template>
+            <!-- <textarea class="form__textarea">г. Казань Большая Мухаметшина улица д. 35 корп.3 кв. 85</textarea> -->
+        </div>
+    </div>
+</form>

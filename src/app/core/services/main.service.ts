@@ -19,7 +19,8 @@ export class MainService
             currency: 'р.',
             total: 0,
             img: 'assets/img/alpha.png',
-            base_rate: 0
+            base_rate: 0,
+            status: 'loading'
         },
         27: {
             id: 27,
@@ -27,7 +28,8 @@ export class MainService
             currency: 'р.',
             total: 0,
             img: 'assets/img/zetta.png',
-            base_rate: 0
+            base_rate: 0,
+            status: 'loading'
         },
         5: {
             id: 5,
@@ -35,7 +37,8 @@ export class MainService
             currency: 'р.',
             total: 0,
             img: 'assets/img/rgs.png',
-            base_rate: 0
+            base_rate: 0,
+            status: 'loading'
         },
         7: {
             id: 7,
@@ -43,7 +46,8 @@ export class MainService
             currency: 'р.',
             total: 0,
             img: 'assets/img/sg.svg',
-            base_rate: 0
+            base_rate: 0,
+            status: 'loading'
         },
         32: {
             id: 32,
@@ -51,7 +55,8 @@ export class MainService
             currency: 'р.',
             total: 0,
             img: 'assets/img/reso.png',
-            base_rate: 0
+            base_rate: 0,
+            status: 'loading'
         },
         3: {
             id: 3,
@@ -59,7 +64,8 @@ export class MainService
             currency: 'р.',
             total: 0,
             img: 'assets/img/ings.png',
-            base_rate: 0
+            base_rate: 0,
+            status: 'loading'
         },
         33: {
             id: 33,
@@ -67,7 +73,8 @@ export class MainService
             currency: 'р.',
             total: 0,
             img: 'assets/img/vsk.png',
-            base_rate: 0
+            base_rate: 0,
+            status: 'loading'
         },
         36: {
             id: 36,
@@ -75,7 +82,8 @@ export class MainService
             currency: 'р.',
             total: 0,
             img: 'assets/img/rns.png',
-            base_rate: 0
+            base_rate: 0,
+            status: 'loading'
         },
         107: {
             id: 107,
@@ -83,7 +91,8 @@ export class MainService
             currency: 'р.',
             total: 0,
             img: 'assets/img/tinkoff.png',
-            base_rate: 0
+            base_rate: 0,
+            status: 'loading'
         }
     };
     constructor(public http: HttpService, private router: Router, public _session: SessionService, private _sanitize: DomSanitizer) 
@@ -163,6 +172,19 @@ export class MainService
         )
     }
 
+    GetAddr(Query, KladrId?, success?: (data) => void, fail?: (err) => void)
+    {
+        this.http.CommonRequest(
+            () => this.http.GetData('/regions/addr',this.ParseObjectToSearchString({
+                query: Query,
+                kladr_id: KladrId ? KladrId : null,
+                count: 10
+            })),
+            success,
+            fail
+        )
+    }
+
     LiteCalculation(success?: (data) => void, fail?: (err) => void)
     {
         const obj = this.Copy(this.Agreement) as AgreementModel;
@@ -186,5 +208,31 @@ export class MainService
     ReplaceAll(text: string, find: string, replace: string): string
     {
         return text.split(find).join(replace);
+    }
+
+    ParseObjectToSearchString(obj)
+    {
+        let arr = [];
+
+        for(const i in obj)
+        {
+            arr.push(i + "=" + obj[i]);
+        }
+
+        return arr.join("&");
+    }
+
+    GetOffer(Sk, success?: (data) => void, fail?: (err) => void )
+    {
+        let agr = this.Copy(this.Agreement) as AgreementModel;
+        agr.vehicle.docDate = agr.vehicle.docDate.split("T")[0];
+        agr.vehicle.dcDate = agr.vehicle.dcDate.split("T")[0];
+        this.http.CommonRequest(
+            () => this.http.PostData('/calculate/offer/' + Sk, {
+                agreement: agr
+            }),
+            success,
+            fail
+        )
     }
 }

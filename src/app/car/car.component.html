@@ -3,83 +3,9 @@
 </div>
 
 <div class="page__block page__block--bottom_margin">
-    <form    [formGroup]="Form" (ngSubmit)="SaveCar()">
         <div class="form">
-            
-            <div class="form__item">
-                <label class="form__label">Марка, модель</label>
-                <ng-autocomplete
-                    name="model"
-                    formControlName="model"
-                    [ngModel]="Data.model.full_title"
-                    [data]="ModelsDics"
-                    [searchKeyword]="'full_title'"
-                    placeHolder="Марка, модель"
-                    (selected)='selectEvent($event)'
-                    (inputChanged)='UpdateDics($event)'
-                    [itemTemplate]="itemTemplate"
-                    [notFoundTemplate]="notFoundTemplate">
-                </ng-autocomplete>
-                
-                <ng-template #itemTemplate let-item>
-                    <a *ngIf="item" [innerHTML]="item && item.full_title ? item.full_title : ''"></a>
-                </ng-template>
-                
-                <ng-template #notFoundTemplate let-notFound>
-                    <div [innerHTML]="'Ничего не найдено'"></div>
-                </ng-template>
-            </div>
-
-            <div class="form__item form__item--calendar">
-                <label class="form__label">Год выпуска</label>
-                <input type="text" [textMask]="{mask: YearMask, placeholderChar: '\u2000'}"  placeholder="Год выпуска" class="form__input" name="year" formControlName="year">
-                <!-- <input type="text" name="year" class="form__input" value="2014 Г.В."> -->
-            </div>
-
-            <div class="form__item form__item--select">
-                <label class="form__label">Мощность (Л.С.)</label>
-                <input formControlName="power" type="text" placeholder="Мощность" [textMask]="{mask: PowerMask, placeholderChar: '\u2000'}" class="form__input" name="car_power">
-                <!-- <input type="text" name="power" class="form__input" value="2300"> -->
-            </div>
+            <app-simple-car-cmp #simple></app-simple-car-cmp>
         </div>
 
-        <button type="submit" class="button">Да, всё верно</button>
-    </form>
+        <button type="submit" class="button" (click)="SaveCar()">Да, всё верно</button>
 </div>
-<!-- <form>
-    <p>Марка, модель</p>
-    <div class="ng-autocomplete input-polis" style="margin: auto;">
-        <ng-autocomplete
-            name="model"
-            [ngModel]="Data.model.full_title"
-            [data]="ModelsDics"
-            [searchKeyword]="'full_title'"
-            placeHolder="Марка, модель"
-            (selected)='selectEvent($event)'
-            (inputChanged)='UpdateDics($event)'
-            [itemTemplate]="itemTemplate"
-            [notFoundTemplate]="notFoundTemplate">
-        </ng-autocomplete>
-        
-        <ng-template #itemTemplate let-item>
-            <a *ngIf="item" [innerHTML]="item && item.full_title ? item.full_title : ''"></a>
-        </ng-template>
-        
-        <ng-template #notFoundTemplate let-notFound>
-            <div [innerHTML]="notFound"></div>
-        </ng-template>
-    </div>
-    <br/>
-    <br/>
-    <p>Год выпуска</p>
-    <input type="number" placeholder="Год выпуска" class="input-polis" name="year" [ngModel]="Data.year" (ngModelChange)="Data.year = $event">
-    <br/>
-    <br/>
-    <p>Мощность (Л.С.)</p>
-    <input type="number" placeholder="Мощность" class="input-polis" name="car_power" [ngModel]="Data.power" (ngModelChange)="Data.power = $event">
-    <br>
-    <br>
-    <button type="submit" (click)="SaveCar()" class="navigate-button">
-        <span class="navigate-button-text">Да, все верно</span>
-    </button>
-</form> -->

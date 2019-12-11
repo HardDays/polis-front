@@ -1,0 +1,31 @@
+.autocomplete-container > .x {
+    position: absolute;
+    right: 24px;
+    margin: auto;
+    cursor: pointer;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.form__item.autocomplete-container.input-container div.x
+{
+    position: absolute;
+    right: 24px;
+    margin: auto;
+    cursor: pointer;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.form__item--calendar:before
+{
+    display: none;
+}
+
+.datepicker-test
+{
+    padding: 0px;
+    height: 41px;
+}

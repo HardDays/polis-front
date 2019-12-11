@@ -1,0 +1,63 @@
+<div class="content content--blue">
+    <div class="index index--with_footer">
+        <p class="index__title polis__title">Загружаем предложения<strong>1:50</strong><span>Выберите лучшее предложение и перейдите<br>к оформлению и оплате полиса</span></p>
+
+        <div class="index__block">
+
+            <div class="polis polis--no_answer polis--loading">
+                <ng-container *ngFor="let sk of SkData | keyvalue">
+
+                    <ng-container *ngIf="sk.value.status != 'error'">
+                        <div class="polis__flex polis__flex--offer"  [ngClass]="{'polis__flex--load': sk.value.status == 'loading'}">
+                            <div class="polis__image" [ngStyle]="{'background-image': 'url(' + sk.value.img + ')'}"></div>
+                            <div class="polis__price">{{sk.value.total}} ₽</div>
+                            <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div>
+                            <button class="button polis__button" (click)="Navigate()">Оформить</button>
+                        </div>
+                    </ng-container>
+                    
+<!--                         
+
+                    <div *ngIf="sk.value.status != 'error'" class="polis__flex polis__flex--offer" [ngClass]="{'polis__flex--load': sk.value.status == 'loading'}" >
+                        <div class="polis__image" [ngStyle]="{'background-image': 'url(' + sk.value.img + ')'}"></div>
+                        <div class="polis__price" *ngIf="sk.value.status == 'ok'">{{sk.value.total}} {{sk.value.currency}</div>
+                        <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div>
+                        <button class="button polis__button" (click)="Navigate()">Оформить</button>
+                    </div> -->
+                </ng-container>
+                
+                <!-- <div class="polis__flex polis__flex--offer">
+                    <div class="polis__image"><img src="assets/img/tinkoff.svg" alt=""></div>
+                    <div class="polis__price">3 850 ₽</div>
+                    <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div>
+                    <button class="button polis__button" (click)="Navigate()">Оформить</button>
+                </div>
+                <div class="polis__flex polis__flex--offer">
+                    <div class="polis__image"><img src="assets/img/vtb.svg" alt=""></div>
+                    <div class="polis__price">3 850 ₽</div>
+                    <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div>
+                    <button class="button polis__button" (click)="Navigate()">Оформить</button>
+                </div>
+                <Add class "polis__flex--load" to hide price, to show loader and to disable the button like below -->
+                <!-- <div class="polis__flex polis__flex--offer polis__flex--load">
+                    <div class="polis__image"><img src="assets/img/ingosstrah.svg" alt=""></div>
+                    <div class="polis__price">3 850 ₽</div>
+                    <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div>
+                    <button class="button polis__button" (click)="Navigate()">Оформить</button>
+                </div>
+                <div class="polis__flex polis__flex--offer polis__flex--load">
+                    <div class="polis__image"><img src="assets/img/alfa.svg" alt=""></div>
+                    <div class="polis__price">3 850 ₽</div>
+                    <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div>
+                    <button class="button polis__button" (click)="Navigate()">Оформить</button>
+                </div>
+                <div class="polis__flex polis__flex--offer polis__flex--load">
+                    <div class="polis__image"><img src="assets/img/rosgosstrah.svg" alt=""></div>
+                    <div class="polis__price">3 850 ₽</div>
+                    <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div>
+                    <button class="button polis__button" (click)="Navigate()">Оформить</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>

@@ -7,41 +7,17 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { MatAutocomplete } from '@angular/material/autocomplete';
 import { NgAutoCompleteComponent, CreateNewAutocompleteGroup, SelectedAutocompleteItem } from 'ng-auto-complete';
+import { SimpleCarComponent } from '../input_modules/car/simple/simple.component';
 
 @Component({
     selector: 'app-car-cmp',
-    templateUrl: './car.component.html'
+    templateUrl: './car.component.html',
+    styleUrls: ['./car.component.css']
   })
   export class CarComponent implements OnInit 
   {
-    ModelsDics = [];
-    Form: FormGroup = new FormGroup({
-        "model": new FormControl('', [
-            Validators.required
-        ]),
-        "year": new FormControl('',[
-            Validators.required,
-            Validators.min(1990),
-            Validators.max(new Date().getFullYear())
-        ]),
-        "power": new FormControl('',[
-            Validators.required,
-            Validators.min(1),
-            Validators.max(9999)
-        ])
-    });
 
-
-    Data = {
-        model: {
-            model: "",
-            brand: "",
-            full_title: ""
-        },
-        year: null,
-        power: null
-    };
-    Car = new VehicleModel();
+    @ViewChild('simple', {static: false}) simple: SimpleCarComponent;
 
     YearMask = function(rawValue)
     {
@@ -80,87 +56,30 @@ import { NgAutoCompleteComponent, CreateNewAutocompleteGroup, SelectedAutocomple
     }
     constructor(private _main: MainService)
     {
-        this.Car = this._main.Copy(this._main.Agreement.vehicle);
-        if(this.Car)
-        {
-            this.Data.power = this.Car.power ? this.Car.power : null;
-            this.Data.year = this.Car.year ? this.Car.year : null;
-
-            if(this.Car.brand && this.Car.model)
-            {
-                const full_title = this.Car.brand + " " + this.Car.model
-                this.UpdateDics(full_title,
-                () => {
-                    const index = this.ModelsDics.findIndex(obj => obj.full_title == full_title);
-                    if(index >= 0)
-                    {
-                        this.Data.model = this.ModelsDics[index];
-                    }
-                });
-            }
-        }
-
-        this.Form.patchValue(this.Data);
-        // this.Form.controls.model.setValue(this.Data.model.full_title);
         
     }
     ngOnInit(): void {
 
     }
 
-
-    UpdateDics($event, callback?:() => void)
-    {
-        this._main.CarDics($event, (res) => {
-            this.ModelsDics = res;
-            if(callback && typeof callback == "function")
-            {
-                callback();
-            }
-        },
-        (err) => {
-            if(callback && typeof callback == "function")
-            {
-                callback();
-            }
-        })
-    }
-
-    selectEvent($event)
-    {
-        this.Data.model = $event;
-    }
-
     SaveCar()
     {
-        const agr = this._main.Copy(this._main.Agreement) as AgreementModel;
 
-        agr.vehicle.model = this.Data.model.model;
-        agr.vehicle.brand = this.Data.model.brand;
-
-        const data = this.Form.getRawValue();
-        // console.log(data);
-        if( typeof data.power == 'string')
+        const data = this.simple.GetData();
+        if(!data)
         {
-            agr.vehicle.power = Number.parseInt(this._main.ReplaceAll(data.power,'\u2000', ""));
-        }
-        else if (typeof data.power == 'number')
-        {
-            agr.vehicle.power = Math.round(data.power);
-        }
-        if( typeof data.year == 'string')
-        {
-            agr.vehicle.year = Number.parseInt(this._main.ReplaceAll(data.year,'\u2000', ""));
-        }
-        else if (typeof data.year == 'number')
-        {
-            agr.vehicle.year = Math.round(data.year);
+            return;
         }
 
-        // agr.vehicle.year = Number.parseInt(this._main.ReplaceAll(data.year,'\u2000', ""));
+        let agr = this._main.Copy(this._main.Agreement) as AgreementModel;
 
-        console.log(agr.vehicle);
+        for(const i in data)
+        {
+            agr.vehicle[i] = data[i];
+        }
+       
         this._main.SaveAgreement(agr,(res) => {
+            console.log(agr, res);
             this._main.Navigate(["/prev","ndrivers"]);
         },
         (err) => {

@@ -1,0 +1,52 @@
+<form [formGroup]="Form">
+    <div class="form__item">
+        <div class="form__radios">
+            <label class="radio">
+                <input type="radio" class="radio__input" value='vin' name="num_type" formControlName="num_type">
+                <div class="radio__text">VIN</div>
+            </label>
+            <label class="radio">
+                <input type="radio" class="radio__input" value='bodyNum' name="num_type" formControlName="num_type">
+                <div class="radio__text">№ КУЗОВА</div>
+            </label>
+            <label class="radio">
+                <input type="radio" class="radio__input" value='chassisNum' name="num_type" formControlName="num_type">
+                <div class="radio__text">№ ШАССИ</div>
+            </label>
+        </div>
+        <input type="text" 
+            class="form__input" 
+            formControlName="number" 
+            name="number"
+            [ngClass]="{'form__input--error': Form.controls.number.invalid && (Form.controls.number.dirty || Form.controls.number.touched)}"
+        >
+    </div>
+
+    <div class="form__item">
+        <div class="form__radios">
+            <label class="radio">
+                <input type="radio" class="radio__input" [value]='1' name="docType" formControlName="docType">
+                <div class="radio__text">CTC</div>
+            </label>
+            <label class="radio">
+                <input type="radio" class="radio__input" [value]='0' name="docType" formControlName="docType">
+                <div class="radio__text">ПТС</div>
+            </label>
+        </div>
+        <input type="text" 
+            class="form__input" 
+            formControlName="doc_number" 
+            name="doc_number"
+            [ngClass]="{'form__input--error': Form.controls.doc_number.invalid && (Form.controls.doc_number.dirty || Form.controls.doc_number.touched)}"
+        >
+    </div>
+
+    <div class="form__item form__item--calendar">
+        <label class="form__label">Дата выдачи</label>
+        <div class="form__input datepicker-test" [ngClass]="{'form__input--error': Form.controls.docDate.invalid && (Form.controls.docDate.dirty || Form.controls.docDate.touched)}">
+            <my-date-picker name="docDate" [options]="myDatePickerOptions" formControlName="docDate"
+            ></my-date-picker>
+        </div>
+        <!-- <input type="text" class="form__input" value="01.01.2018"> -->
+    </div>
+</form>

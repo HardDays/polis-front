@@ -9,6 +9,7 @@ import { CarComponent } from './car.component';
 
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { TextMaskModule } from 'angular2-text-mask';
+import { CarFormModule } from '../input_modules/car/car.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { TextMaskModule } from 'angular2-text-mask';
     ReactiveFormsModule,
     CarRoutingModule,
     TextMaskModule,
-    AutocompleteLibModule
+    AutocompleteLibModule,
+    CarFormModule
   ],
   providers: [ ]
 })

@@ -1,0 +1,44 @@
+<div class="page__driver" [ngClass]="{'page__driver--opened': IsOpened}">
+    <div class="page__driver-top">
+        <span class="page__driver-name" (click)="IsOpened = !IsOpened">Водитель {{index + 1}}</span>
+        <span class="page__driver-delete" (click)="Delete()"></span>
+    </div>
+
+    <div class="form form--small">
+        <form [formGroup]="Form">
+            <div class="form__item">
+                <label class="form__label">ФИО</label>
+                <input type="text" class="form__input" formControlName="name" name="name">
+            </div>
+
+            <div class="form__item form__item--calendar">
+                <label class="form__label">Дата рождения</label>
+                <div class="form__input datepicker-test">
+                    <my-date-picker name="birthdate" [options]="BdayOptions" formControlName="birthdate"
+                    ></my-date-picker>
+                </div>
+            </div>
+
+            <div class="form__item">
+                <label class="form__label">Серия номер водительского удостоверения</label>
+                <input type="text" class="form__input" formControlName="license" name="license">
+            </div>
+
+            <div class="form__item form__item--calendar">
+                <div class="hint">
+                    <div class="hint__icon"></div>
+
+                    <div class="hint__block">
+                        <p>Для более точного расчёта нужна информация о стаже, это влияет на стоимость</p>
+                    </div>
+                </div>
+
+                <label class="form__label">Начало стажа</label>
+                <div class="form__input datepicker-test">
+                    <my-date-picker name="expdate" [options]="ExpOptions" formControlName="expdate"
+                    ></my-date-picker>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
