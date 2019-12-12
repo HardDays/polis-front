@@ -11,7 +11,8 @@ const routes: Routes = [
             { path: 'drivers', loadChildren: 'src/app/drivers/drivers.module#DriversModule'},
             { path: 'owner', loadChildren: 'src/app/owner/owner.module#OwnerModule'},
             { path: 'check', loadChildren: 'src/app/check/check.module#CheckModule'},
-            { path: 'offer', loadChildren: 'src/app/offer/offer.module#OfferModule'}
+            { path: 'offer', loadChildren: 'src/app/offer/offer.module#OfferModule'},
+            { path: 'dc', loadChildren: 'src/app/dc/dc.module#DcModule'}
         ]
     }
 ];

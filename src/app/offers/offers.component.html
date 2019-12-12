@@ -1,7 +1,14 @@
 <div class="content content--blue">
     <div class="index index--with_footer">
-        <p class="index__title polis__title">Загружаем предложения<strong>1:50</strong><span>Выберите лучшее предложение и перейдите<br>к оформлению и оплате полиса</span></p>
-
+        <p class="index__title polis__title" *ngIf="IsLoading">Загружаем предложения<strong>{{TimerLabel}}</strong><span>Выберите лучшее предложение и перейдите<br>к оформлению и оплате полиса</span></p>
+        <p class="index__title polis__title" *ngIf="!IsLoading">
+            <ng-container *ngIf="SuccessNum == 0">
+                Нет ответа от страховых<span>В данный момент страховые компании не отвечают. Мы отправим вам актуальные предложения на E-mail, как только получим ответ</span>
+            </ng-container>
+            <ng-container  *ngIf="SuccessNum > 0">
+                {{InsurerData.firstname}}, {{SuccessNum}} страховых компаний<br>готовы оформить вам полис ОСАГО<span>Выберите лучшее предложение и перейдите<br>к оформлению и оплате полиса</span>
+            </ng-container>
+        </p>
         <div class="index__block">
 
             <div class="polis polis--no_answer polis--loading">
@@ -12,51 +19,18 @@
                             <div class="polis__image" [ngStyle]="{'background-image': 'url(' + sk.value.img + ')'}"></div>
                             <div class="polis__price">{{sk.value.total}} ₽</div>
                             <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div>
-                            <button class="button polis__button" (click)="Navigate()">Оформить</button>
+                            <button class="button polis__button" (click)="Navigate(sk.value)">Оформить</button>
                         </div>
                     </ng-container>
-                    
-<!--                         
-
-                    <div *ngIf="sk.value.status != 'error'" class="polis__flex polis__flex--offer" [ngClass]="{'polis__flex--load': sk.value.status == 'loading'}" >
-                        <div class="polis__image" [ngStyle]="{'background-image': 'url(' + sk.value.img + ')'}"></div>
-                        <div class="polis__price" *ngIf="sk.value.status == 'ok'">{{sk.value.total}} {{sk.value.currency}</div>
-                        <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div>
-                        <button class="button polis__button" (click)="Navigate()">Оформить</button>
-                    </div> -->
                 </ng-container>
+                <p class="polis__partner">Вы можете оформить ОСАГО в офисе нашего партнера:</p>
+                <div class="polis__flex polis__flex--active polis__flex--partner">
+                    <div class="polis__image"><img src="assets/img/brokers.png" alt=""></div>
+                    <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div>
+                    <button class="button polis__button" (click)="Navigate(null)">Оформить</button>
+                    <!-- <div class="polis__no-right">3 700 ₽/год</div> -->
+                </div>
                 
-                <!-- <div class="polis__flex polis__flex--offer">
-                    <div class="polis__image"><img src="assets/img/tinkoff.svg" alt=""></div>
-                    <div class="polis__price">3 850 ₽</div>
-                    <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div>
-                    <button class="button polis__button" (click)="Navigate()">Оформить</button>
-                </div>
-                <div class="polis__flex polis__flex--offer">
-                    <div class="polis__image"><img src="assets/img/vtb.svg" alt=""></div>
-                    <div class="polis__price">3 850 ₽</div>
-                    <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div>
-                    <button class="button polis__button" (click)="Navigate()">Оформить</button>
-                </div>
-                <Add class "polis__flex--load" to hide price, to show loader and to disable the button like below -->
-                <!-- <div class="polis__flex polis__flex--offer polis__flex--load">
-                    <div class="polis__image"><img src="assets/img/ingosstrah.svg" alt=""></div>
-                    <div class="polis__price">3 850 ₽</div>
-                    <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div>
-                    <button class="button polis__button" (click)="Navigate()">Оформить</button>
-                </div>
-                <div class="polis__flex polis__flex--offer polis__flex--load">
-                    <div class="polis__image"><img src="assets/img/alfa.svg" alt=""></div>
-                    <div class="polis__price">3 850 ₽</div>
-                    <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div>
-                    <button class="button polis__button" (click)="Navigate()">Оформить</button>
-                </div>
-                <div class="polis__flex polis__flex--offer polis__flex--load">
-                    <div class="polis__image"><img src="assets/img/rosgosstrah.svg" alt=""></div>
-                    <div class="polis__price">3 850 ₽</div>
-                    <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div>
-                    <button class="button polis__button" (click)="Navigate()">Оформить</button>
-                </div> -->
             </div>
         </div>
     </div>

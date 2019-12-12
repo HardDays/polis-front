@@ -19,7 +19,9 @@ const routes: Routes = [
   { path: 'docs', loadChildren: 'src/app/docs/docs.module#DocsModule'},
   { path: 'sum', loadChildren: 'src/app/sum/sum.module#SumModule'},
   { path: 'passport', loadChildren: 'src/app/passport/passport.module#PassportModule'},
-  { path: 'offers', loadChildren: 'src/app/offers/offers.module#OffersModule'}
+  { path: 'offers', loadChildren: 'src/app/offers/offers.module#OffersModule'},
+  { path: '**', loadChildren: 'src/app/error/error.module#ErrorModule' }
+
 ];
 
 @NgModule({

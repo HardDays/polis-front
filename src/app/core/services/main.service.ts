@@ -12,6 +12,8 @@ export class MainService
 {
     Agreement: AgreementModel;
     LastPage: string[];
+
+    Offer = {};
     SkEnum = {
         1: {
             id:1,
@@ -99,6 +101,8 @@ export class MainService
     {
         this.Agreement = this._session.LoadAgreement();
         this.LastPage = this._session.LoadPage();
+
+        this.Offer = this._session.LoadOffer();
     }
 
     Navigate(Page)
@@ -106,6 +110,12 @@ export class MainService
         this.LastPage = Page;
         this._session.SavePage(Page);
         this.router.navigate(Page);
+    }
+
+    ChoseOffer(data)
+    {
+        this.Offer = data;
+        this._session.SaveOffer(data);
     }
 
     CheckCarByNumber(Obj, success?: (data) => void, fail?: (err) => void)
@@ -231,6 +241,15 @@ export class MainService
             () => this.http.PostData('/calculate/offer/' + Sk, {
                 agreement: agr
             }),
+            success,
+            fail
+        )
+    }
+
+    GetPaymentUrl(eId,data?, success?: (data) => void, fail?: (err) => void )
+    {
+        this.http.CommonRequest(
+            () => this.http.GetData('/pay/link/' + eId, this.ParseObjectToSearchString(data)), 
             success,
             fail
         )

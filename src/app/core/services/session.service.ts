@@ -10,10 +10,22 @@ export class SessionService
 {
     private aggr_field = "agreement";
     private last_page = "page";
+    private chosen_offer = "offer";
     constructor(public http: HttpService, private router: Router) 
     {
     }
 
+    public SaveOffer(data: any)
+    {
+        localStorage.setItem(this.chosen_offer, JSON.stringify(data));
+    }
+
+    public LoadOffer()
+    {
+        const offer = localStorage.getItem(this.chosen_offer);
+
+        return offer ? JSON.parse(offer) : {};
+    }
 
     public SaveAgreement(aggr: AgreementModel)
     {
