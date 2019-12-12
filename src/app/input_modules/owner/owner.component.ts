@@ -118,7 +118,6 @@ import { IMyDpOptions } from 'mydatepicker';
     }
     ngOnInit(): void {
 
-        console.log(this._main.Agreement);
         this.InitData();
     }
 
@@ -176,7 +175,6 @@ import { IMyDpOptions } from 'mydatepicker';
         }
         this.Form.updateValueAndValidity();
 
-        console.log(this.Form);
         if(this.Form.invalid)
         {
             return false;
@@ -240,18 +238,14 @@ import { IMyDpOptions } from 'mydatepicker';
         this._main.GetAddr($event, null, 
             (res) => {
                 this.AddOptions = res;
-                console.log(res);
             },
             (err) => {
-                console.log(err);
             })
-        // console.log($event);
     }
 
     selectEvent($event)
     {
         this.Addr = $event;
-        console.log($event);
     }
 
 

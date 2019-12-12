@@ -85,7 +85,6 @@ import { IMyDpOptions } from 'mydatepicker';
             this.Form.get(i).updateValueAndValidity();
         }
         this.Form.updateValueAndValidity();
-        console.log(this.Form);
     }
     ngOnInit(): void {
         // throw new Error("Method not implemented.");
@@ -147,7 +146,6 @@ import { IMyDpOptions } from 'mydatepicker';
               this._main.Navigate(['/offers']);
             },
             (err) => {
-              console.log(err);
             })
       
     }

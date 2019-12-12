@@ -42,7 +42,6 @@ export class InsurerComponent implements OnInit{
         this._main.Navigate(navigate);
       },
       (err) => {
-        console.log(err);
       })
 
     

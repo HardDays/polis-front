@@ -48,7 +48,6 @@ export class DriversComponent implements OnInit{
         agr.drivers = result;
         this._main.SaveAgreement(agr,
             (res) => {
-                console.log(agr, res);
                 this._main.Navigate(['/sum']);
             },
             (err) => {}

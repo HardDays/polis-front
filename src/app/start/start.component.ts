@@ -93,7 +93,6 @@ import { AgreementModel } from '../core/models/agreement.model';
             "number_plate": number
         },
         (res) => {
-          console.log(res);
             this._main.Navigate(["/prev", "car"]);
         },
         (err) => {

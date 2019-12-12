@@ -79,7 +79,6 @@ import { SimpleCarComponent } from '../input_modules/car/simple/simple.component
         }
        
         this._main.SaveAgreement(agr,(res) => {
-            console.log(agr, res);
             this._main.Navigate(["/prev","ndrivers"]);
         },
         (err) => {

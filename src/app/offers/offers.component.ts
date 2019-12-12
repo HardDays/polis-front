@@ -41,7 +41,6 @@ export class OffersComponent implements OnInit{
         (res) => {
           if(res)
           {
-            console.log(res);
             if(res.errors.length > 0)
             {
               this.SkData[i].status = 'error';
@@ -64,7 +63,6 @@ export class OffersComponent implements OnInit{
   
   Navigate(Sk)
   {
-    console.log(Sk);
     if(Sk && Sk.status == 'ok')
     {
       this._main.ChoseOffer(Sk);

@@ -61,7 +61,6 @@ export class OfferComponent implements OnInit{
         else{
           this._main.Navigate(['/offers']);
         }
-        // console.log(res);
         this.IsLoading = false;
       },
       (err) => {

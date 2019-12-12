@@ -74,7 +74,6 @@ import { IMyDpOptions } from 'mydatepicker';
     constructor(private _main: MainService)
     {
         const data = this._main.Copy(this._main.Agreement) as AgreementModel;
-        // console.log(data);
 
         this.IsOwner = data.insurerIsOwner;
 
@@ -156,7 +155,6 @@ import { IMyDpOptions } from 'mydatepicker';
             this.Form.get(i).updateValueAndValidity();
         }
         this.Form.updateValueAndValidity();
-        console.log(this.Form);
         if(!this.Form.valid || !this.Form.get('check').value)
         {
             this.IsError = true;

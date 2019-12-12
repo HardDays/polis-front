@@ -26,7 +26,6 @@ import { DomSanitizer } from '@angular/platform-browser';
         let skdata = this._main.Copy(this._main.SkEnum) as any;
         this.GenerateModalText();
         this._main.LiteCalculation(res => {
-            console.log(res);
             
             let result = {} as any;
             if(res && res.calculations &&  res.calculations.results.length > 0)
@@ -83,18 +82,12 @@ import { DomSanitizer } from '@angular/platform-browser';
         {
             this._main.GetAddrByKladr(agr.owner.city, 
                 (res) => {
-                    // console.log(res);
 
                     text += "<p class=\"modal__text\">Город регистрации собственника: <strong>" + res[0].value +"</stron></p>";
                     this.ModalText = text;
                 })
         }
 
-        // <p class="modal__text">Автомобиль: <strong>Audi RS 6, 300 Л.С.</strong></p>
-        // <p class="modal__text">Водитель: <strong>Иванов Иван 31 год, 5 лет стажа</strong></p>
-        // <p class="modal__text">Город регистрации собственника: <strong>Казань, Татарстан</strong></p>
-        // <p class="modal__text">Персональный коэф. безаварийности (КБМ): <span>Неизвестно (необходим точный расчет)</span></p>
-        console.log(this._main.Agreement);
     }
 
 

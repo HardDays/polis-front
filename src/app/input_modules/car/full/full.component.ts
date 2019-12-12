@@ -69,7 +69,6 @@ import { IMyDpOptions } from 'mydatepicker';
 
         const agr = this._main.Copy(this._main.Agreement) as AgreementModel;
 
-        console.log(agr);
         if(agr.vehicle.vin)
         {
             data.num_type = "vin";
@@ -100,7 +99,6 @@ import { IMyDpOptions } from 'mydatepicker';
         {
             data.docDate = this.ParseDate(agr.vehicle.docDate);
         }
-        console.log(data);
 
         this.Form.patchValue(data);
 
