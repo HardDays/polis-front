@@ -11,8 +11,11 @@ import { DomSanitizer } from '@angular/platform-browser';
     styleUrls: ['./litecalc.component.css']
   })
   export class LiteCalcComponent implements OnInit {
-      SkData = {} as any;
-      IsLoading = true;
+    SkData = {} as any;
+    IsLoading = true;
+    ShowModal = false;
+
+    ModalText = "";
     constructor(private _main: MainService, private _sanitize: DomSanitizer)
     {
         
@@ -21,6 +24,7 @@ import { DomSanitizer } from '@angular/platform-browser';
         this.IsLoading = true;
         this.SkData = this._main.Copy(this._main.SkEnum) as any;
         let skdata = this._main.Copy(this._main.SkEnum) as any;
+        this.GenerateModalText();
         this._main.LiteCalculation(res => {
             console.log(res);
             
@@ -48,7 +52,59 @@ import { DomSanitizer } from '@angular/platform-browser';
 
     Navigate()
     {
+        this.ShowModal = false;
         this._main.Navigate(['/docs'])
+    }
+
+    GenerateModalText()
+    {
+        const agr = this._main.Copy(this._main.Agreement) as AgreementModel;
+        let text = "";
+
+        if(agr.vehicle)
+        {
+            text += "<p class=\"modal__text\">Автомобиль: <strong>" + agr.vehicle.brand + " " + agr.vehicle.model + ", " + agr.vehicle.power + "</strong></p>";
+        }
+
+        if(agr.drivers && agr.drivers.length > 0)
+        {
+            const age = (agr.drivers[0].age ? agr.drivers[0].age : this.GetAge(agr.drivers[0].birthdate));
+            const age_str = age + " " + ((age % 10 == 0 || age % 10 > 4) ? "лет": "года") + ", ";
+            const exp_str = agr.drivers[0].exp + " " + ((age % 10 == 0 || age % 10 > 4)? "лет": "года") + " стажа"
+            text += "<p class=\"modal__text\">Водитель: <strong>" 
+                + agr.drivers[0].lastname + " "  
+                + agr.drivers[0].firstname + " " 
+                + age_str
+                + exp_str
+                + "</strong></p>"
+        }
+
+        if(agr.owner.city)
+        {
+            this._main.GetAddrByKladr(agr.owner.city, 
+                (res) => {
+                    // console.log(res);
+
+                    text += "<p class=\"modal__text\">Город регистрации собственника: <strong>" + res[0].value +"</stron></p>";
+                    this.ModalText = text;
+                })
+        }
+
+        // <p class="modal__text">Автомобиль: <strong>Audi RS 6, 300 Л.С.</strong></p>
+        // <p class="modal__text">Водитель: <strong>Иванов Иван 31 год, 5 лет стажа</strong></p>
+        // <p class="modal__text">Город регистрации собственника: <strong>Казань, Татарстан</strong></p>
+        // <p class="modal__text">Персональный коэф. безаварийности (КБМ): <span>Неизвестно (необходим точный расчет)</span></p>
+        console.log(this._main.Agreement);
+    }
+
+
+    GetAge(str:string)
+    {
+        let diff  = Date.now() - new Date(str).getTime()
+
+        const age = new Date(diff);
+
+        return Math.abs(age.getUTCFullYear() - 1970);
     }
   
   }

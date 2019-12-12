@@ -44,7 +44,6 @@ export class VehicleComponent implements OnInit{
         {
             agr.vehicle[i] = data[i];
         }
-        console.log(agr);
         // this._main.Navigate(['/full', 'drivers']);
         // if(this.Form.valid)
         // {
@@ -53,13 +52,11 @@ export class VehicleComponent implements OnInit{
         //     agr.date = vals.date.date.year + "-" + vals.date.date.month + "-" + vals.date.date.day;  
 
             this._main.SaveAgreement(agr,(res) => {
-                console.log(res);
                 this._main.Navigate(['/full', 'drivers']);
                 // this._main.Navigate("ndrivers");
             },
             (err) => {
             })
-        //     console.log(vals, agr);
         // }
     }
   

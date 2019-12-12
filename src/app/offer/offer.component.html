@@ -16,3 +16,24 @@
     <div class="polis__loading" [ngStyle]="{'display': IsLoading? 'flex' : 'none'}"><img style="margin: auto;" src="assets/img/loader.svg" alt=""></div>
     <button class="button" [ngClass]="{'button--disabled': IsLoading && ButtonDisabled}" (click)="GetUrl()">Оплатить</button>
 </div>
+<div class="modal" [ngClass]="{'modal--opened': ShowModal}">
+    <div class="modal__content">
+        <div class="modal__head">Необходимо подтвердить телефон</div>
+        <div class="modal__data">
+            <form [formGroup]="Form" (ngSubmit)="ConfirmPhone()">
+                <div class="form form--bottom_40">
+                    <div class="form__item">
+                        <label class="form__label">Код подтверждения</label>
+                        <!-- <input type="text" class="form__input"> -->
+                        <input class="form__input" formControlName="code" name="code"
+                            [ngClass]="{'form__input--error': code.invalid && (code.dirty || code.touched)}"
+                        >
+                    </div>
+                </div>
+        
+                <button class="button" [disabled]="Form.invalid" type="submit">Подтвердить</button>
+                <button class="button button--white" (click)="Navigate()">Отменить</button>
+            </form>
+        </div>
+    </div>
+</div>

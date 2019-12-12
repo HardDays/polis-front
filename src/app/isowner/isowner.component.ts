@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MainService } from '../core/services/main.service';
-import { VehicleModel, AgreementModel, DriverModel } from '../core/models/agreement.model';
+import { VehicleModel, AgreementModel, DriverModel, OwnerModel } from '../core/models/agreement.model';
 
 @Component({
     selector: 'app-isowner-cmp',
@@ -20,6 +20,7 @@ import { VehicleModel, AgreementModel, DriverModel } from '../core/models/agreem
         let agr = this._main.Copy(this._main.Agreement) as AgreementModel;
 
         agr.insurerIsOwner = $event;
+        agr.insurer = new OwnerModel();
 
         this._main.SaveAgreement(agr,
             (res) => {

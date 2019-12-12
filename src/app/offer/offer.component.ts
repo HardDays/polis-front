@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MainService } from '../core/services/main.service';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-offer-cmp',
@@ -13,6 +13,19 @@ export class OfferComponent implements OnInit{
   IsLoading = false;
   Url = '';
   ButtonDisabled = true;
+  ShowModal = false;
+
+  Form: FormGroup = new FormGroup({
+    "code": new FormControl('',[
+        Validators.required
+    ])
+  });
+
+  get code()
+  {
+    return this.Form.get("code");
+  }
+
   constructor(private _main: MainService)
   {
     this.Offer = this._main.Copy(this._main.Offer) as any;
@@ -23,19 +36,26 @@ export class OfferComponent implements OnInit{
     
   }
 
+  ConfirmPhone()
+  {
+    const data = this.Form.getRawValue()
+    this.GetPaymentHandler(this.Offer.eId, {smsCode: data.code});
+  }
+
   GetPaymentHandler(eId, data?)
   {
-    this._main.GetPaymentUrl(eId, 
+    this._main.GetPaymentUrl(eId, data,
       (res) => {
         if(res.results)
         {
           if(res.results.needSmsCode)
           {
-            //TODO: Show Modal window
+            this.ShowModal = true;
           }
           else{
             this.Url = res.results;
             this.ButtonDisabled = false;
+            this.ShowModal = false;
           }
         }
         else{
@@ -52,7 +72,7 @@ export class OfferComponent implements OnInit{
   
   Navigate()
   {
-    this._main.Navigate(['/full', 'check']);
+    this._main.Navigate(['/offers']);
   }
 
   Save()

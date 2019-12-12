@@ -3,7 +3,7 @@
         <p class="index__title">Ваш предварительный расчёт полиса ОСАГО</p>
 
         <div class="index__block">
-            <span class="index__hint"></span>
+            <span class="index__hint" (click)="ShowModal=true"></span>
 
             <div class="polis polis--no_answer polis--loading">
 
@@ -33,12 +33,14 @@
         </div>
     </div>
 </div>
-<!-- <form class="create-product">
-    <div class="create-product__row" *ngFor="let sk of SkData | keyvalue">
-        <div class="create-product__coll">
-            <img width="120px" [src]="sk.value.img"/>
+<div class="modal" [ngClass]="{'modal--opened': ShowModal}">
+    <div class="modal__content">
+        <div class="modal__head">Данные, влияющие на стоимость ОСАГО</div>
+        <div class="modal__data">
+            <div [innerHTML]="ModalText"></div>
+            
+            <button class="button"  (click)="Navigate()">Сделать точный расчет</button>
+            <button class="button button--white" (click)="ShowModal=false">Закрыть</button>
         </div>
-        <div class="create-product__coll">{{sk.value.name}}</div>
-        <div class="create-product__coll">{{sk.value.total}} {{sk.value.currency}}</div>
     </div>
-</form> -->
+</div>
