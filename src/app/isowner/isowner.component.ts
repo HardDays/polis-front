@@ -20,8 +20,11 @@ import { VehicleModel, AgreementModel, DriverModel, OwnerModel } from '../core/m
         let agr = this._main.Copy(this._main.Agreement) as AgreementModel;
 
         agr.insurerIsOwner = $event;
-        agr.insurer = new OwnerModel();
-
+        if(!agr.insurerIsOwner)
+        {
+          agr.insurer = new OwnerModel();
+        }
+        
         this._main.SaveAgreement(agr,
             (res) => {
                 this._main.Navigate(["/prev", "own"]);

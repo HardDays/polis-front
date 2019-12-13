@@ -6,7 +6,13 @@
                 Нет ответа от страховых<span>В данный момент страховые компании не отвечают. Мы отправим вам актуальные предложения на E-mail, как только получим ответ</span>
             </ng-container>
             <ng-container  *ngIf="SuccessNum > 0">
-                {{InsurerData.firstname}}, {{SuccessNum}} страховых компаний<br>готовы оформить вам полис ОСАГО<span>Выберите лучшее предложение и перейдите<br>к оформлению и оплате полиса</span>
+                {{InsurerData.firstname}}, 
+                {{SuccessNum}} 
+                    <ng-container *ngIf="SuccessNum == 1">страховая компания<br>готова</ng-container>
+                    <ng-container  *ngIf="SuccessNum > 1">страховых компаний<br>готовы</ng-container>
+                    
+                    
+                оформить вам полис ОСАГО<span>Выберите лучшее предложение и перейдите<br>к оформлению и оплате полиса</span>
             </ng-container>
         </p>
         <div class="index__block">
