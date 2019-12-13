@@ -1,7 +1,38 @@
+.avto-num__block {
+    width: 257px;
+    height: 55px;
+}
+
+.avto-num__left {
+    width: 190px;
+}
+
 .avto-num__input {
     width: 100%;
-    font-size: 32px;
+    font-size: 42px;
     text-transform: uppercase;
+}
+
+.avto-num__right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.avto-num__input--region {
+    font-size: 24px;
+    margin-bottom: 0;
+}
+
+.avto-num__country {
+    font-size: 10px;
+    display: inline-block;
+    padding-right: 23px;
+}
+
+.avto-num__country:after {
+    width: 14px;
+    height: 8px;
 }
 
 .avto-num__block--error{
