@@ -6,7 +6,8 @@
     margin-bottom: 21px;
 
     .polis__flex {
-      padding: 28px 0;
+      //padding: 28px 0;
+      padding: 15px 0;
 
       &--load {
         .polis__loading {
@@ -62,7 +63,8 @@
     margin-bottom: 0;
 
     .polis__flex {
-      padding: 21px 0;
+      //padding: 21px 0;
+      padding: 15px 0;
 
       &:last-child {
         padding-bottom: 0;
@@ -129,7 +131,8 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgba(226, 226, 228, 0.5);
-    padding: 22px 40px 22px 20px;
+    //padding: 22px 40px 22px 20px;
+    padding: 15px 40px 15px 20px;
 
     &:first-child {
       padding-top: 0;
