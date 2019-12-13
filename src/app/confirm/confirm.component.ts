@@ -29,7 +29,6 @@ import { IMyDpOptions } from 'mydatepicker';
     {
         const data = this._main.Copy(this._main.Agreement) as AgreementModel;
 
-        // console.log();
         this.Form.get("phone").setValue(data.phone.replace(data.phone.slice(0,3), ""));
     }
     ngOnInit(): void {

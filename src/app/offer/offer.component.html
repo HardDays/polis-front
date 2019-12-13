@@ -1,10 +1,11 @@
 <div class="page__top page__top--man_check">
-    <p class="page__title">Вы выбрали:</p>
+    <p class="page__title">Вы выбрали: {{Offer.name}}</p>
 </div>
 
 <div class="page__block page__block--bottom_margin">
     <div class="page__company">
-        <img src="assets/img/tinkoff.svg" alt="">
+        <div class="polis__image" [ngStyle]="{'background-image': 'url(' + Offer.img + ')'}"></div>
+        <!-- <img src="assets/img/tinkoff.svg" alt=""> -->
         <span class="page__company-price">3 850 ₽</span>
     </div>
     <p class="page__card-text">Для оплаты вы будете перенаправлены на сайт страховой компании</p>
@@ -12,6 +13,27 @@
         <img src="assets/img/chosen-company.jpg" alt="">
     </div>
     <p class="page__card-text">Вы получите полис после оплаты на сайте страхователя и сможете проверить его по <a href="#">базе РСА</a></p>
-
-    <button class="button">Оплатить</button>
+    <div class="polis__loading" [ngStyle]="{'display': IsLoading? 'flex' : 'none'}"><img style="margin: auto;" src="assets/img/loader.svg" alt=""></div>
+    <button class="button" [ngClass]="{'button--disabled': IsLoading && ButtonDisabled}" (click)="GetUrl()">Оплатить</button>
+</div>
+<div class="modal" [ngClass]="{'modal--opened': ShowModal}">
+    <div class="modal__content">
+        <div class="modal__head">Необходимо подтвердить телефон</div>
+        <div class="modal__data">
+            <form [formGroup]="Form" (ngSubmit)="ConfirmPhone()">
+                <div class="form form--bottom_40">
+                    <div class="form__item">
+                        <label class="form__label">Код подтверждения</label>
+                        <!-- <input type="text" class="form__input"> -->
+                        <input class="form__input" formControlName="code" name="code"
+                            [ngClass]="{'form__input--error': code.invalid && (code.dirty || code.touched)}"
+                        >
+                    </div>
+                </div>
+        
+                <button class="button" [disabled]="Form.invalid" type="submit">Подтвердить</button>
+                <button class="button button--white" (click)="Navigate()">Отменить</button>
+            </form>
+        </div>
+    </div>
 </div>

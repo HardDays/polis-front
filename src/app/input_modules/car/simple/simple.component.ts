@@ -153,7 +153,6 @@ import { MainService } from 'src/app/core/services/main.service';
         result.brand = this.Data.model.brand;
 
         const data = this.Form.getRawValue();
-        // console.log(data);
         if( typeof data.power == 'string')
         {
             result.power = Number.parseInt(this._main.ReplaceAll(data.power,'\u2000', ""));

@@ -99,7 +99,6 @@ import { IMyDpOptions } from 'mydatepicker';
         {
             data.docDate = this.ParseDate(agr.vehicle.docDate);
         }
-        console.log(data);
 
         this.Form.patchValue(data);
 

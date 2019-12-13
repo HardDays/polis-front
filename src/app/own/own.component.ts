@@ -15,6 +15,8 @@ import { IMyDpOptions } from 'mydatepicker';
     IsError = false;
     phoneMask = ['(', /\d/,/\d/,/\d/,')', ' ', /\d/, /\d/, /\d/,'-',/\d/,/\d/,'-',/\d/,/\d/];
 
+    IsOwner = 1;
+
     expMask = function(rawValue)
     {
         return [/[1-8]/,/\d/];
@@ -72,7 +74,9 @@ import { IMyDpOptions } from 'mydatepicker';
     constructor(private _main: MainService)
     {
         const data = this._main.Copy(this._main.Agreement) as AgreementModel;
-        // console.log(data);
+
+        this.IsOwner = data.insurerIsOwner;
+
         if(data.name)
             this.Form.get("fio").setValue(data.name);
 
@@ -151,7 +155,6 @@ import { IMyDpOptions } from 'mydatepicker';
             this.Form.get(i).updateValueAndValidity();
         }
         this.Form.updateValueAndValidity();
-        console.log(this.Form);
         if(!this.Form.valid || !this.Form.get('check').value)
         {
             this.IsError = true;
@@ -180,10 +183,21 @@ import { IMyDpOptions } from 'mydatepicker';
             agr.drivers[0].middlename = mname;
         }
 
-        agr.owner.firstname = fname;
-        agr.owner.lastname = lname;
-        agr.owner.middlename = mname;
-        agr.owner.birthdate = data.birthday.date.year + "-" + data.birthday.date.month + "-" + data.birthday.date.day;
+        if(this.IsOwner)
+        {
+            agr.owner.firstname = fname;
+            agr.owner.lastname = lname;
+            agr.owner.middlename = mname;
+            agr.owner.birthdate = data.birthday.date.year + "-" + data.birthday.date.month + "-" + data.birthday.date.day;
+        }
+        else{
+            agr.insurer.firstname = fname;
+            agr.insurer.lastname = lname;
+            agr.insurer.middlename = mname;
+            agr.insurer.birthdate = data.birthday.date.year + "-" + data.birthday.date.month + "-" + data.birthday.date.day;
+        }
+
+        
         agr.owner.city = this.SelectedKladr.data.kladr_id;
 
         agr.name = data.fio;

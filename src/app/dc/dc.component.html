@@ -1,0 +1,60 @@
+<div class="page__top page__top--card">
+    <p class="page__title">Нет диагностической карты<span class="small-margin">К сожалению у вас нет диагностической карты,<br>либо она просрочена.</span></p>
+</div>
+
+<div class="page__block page__block--bottom_margin">
+    <p class="page__card-text">Мы сохранили ваши данные, обновите диагностическую карту и продолжайте оформление.</p>
+    <p class="page__card-name">Что нужно сделать сейчас?</p>
+    <swiper [(index)]="Index">
+        <div>
+            <div class="page__card-image">
+                <img src="assets/img/card1.jpg" alt="">
+            </div>
+            <p class="page__card-text">Сделайте ТО</p>
+        </div>
+        <div>
+            <div class="page__card-image">
+                <img src="assets/img/card2.jpg" alt="">
+            </div>
+            <p class="page__card-text">Введите номер диагностической карты ТО</p>
+        </div>
+        <div>
+            <div class="page__card-image">
+                <img src="assets/img/card3.jpg" alt="">
+            </div>
+            <p class="page__card-text">Продолжите оформление</p>
+        </div>
+        <div>
+            <div class="page__card-image">
+                <img src="assets/img/card4.jpg" alt="">
+            </div>
+            <p class="page__card-text">Получите полис на E-mail</p>
+        </div>
+    </swiper>
+
+    <ul class="index__dots page__dots">
+        <li (click)="Index=0" class="index__dot" [ngClass]="{'index__dot--active': Index == 0}"></li>
+        <li (click)="Index=1" class="index__dot" [ngClass]="{'index__dot--active': Index == 1}"></li>
+        <li (click)="Index=2" class="index__dot" [ngClass]="{'index__dot--active': Index == 2}"></li>
+        <li (click)="Index=3" class="index__dot" [ngClass]="{'index__dot--active': Index == 3}"></li>
+    </ul>
+
+    <div class="form">
+        <form [formGroup]="Form">
+            <div class="form__item form__item--calendar form__item--small_top">
+                <label class="form__label">Введите дату окончания ДК</label>
+                <div class="form__input datepicker-test" [ngClass]="{'form__input--error': dcDate.invalid && (dcDate.dirty || dcDate.touched)}">
+                    <my-date-picker name="dcDate" [options]="myDatePickerOptions" formControlName="dcDate"
+                    ></my-date-picker>
+                </div>
+            </div>
+    
+            <div class="form__item form__item--small_top">
+                <label class="form__label">Введите номер диагностической карты</label>
+                <input type="text" class="form__input" name="dc" formControlName="dc">
+            </div>
+        </form>
+    </div>
+
+    <button class="button" type="submit" (click)="Navigate()"  [ngClass]="{'button--disabled': Form.invalid}">Далее</button>
+</div>

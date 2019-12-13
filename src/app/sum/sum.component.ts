@@ -20,20 +20,6 @@ export class SumComponent implements OnInit{
     Save()
     {
         this._main.Navigate(['/passport']);
-        // if(this.Form.valid)
-        // {
-        //     const vals = this.Form.getRawValue();
-        //     let agr = this._main.Copy(this._main.Agreement) as AgreementModel;
-        //     agr.date = vals.date.date.year + "-" + vals.date.date.month + "-" + vals.date.date.day;  
-
-        //     this._main.SaveAgreement(agr,(res) => {
-        //         this._main.Navigate(['calc_lite']);
-        //         // this._main.Navigate("ndrivers");
-        //     },
-        //     (err) => {
-        //     })
-        //     console.log(vals, agr);
-        // }
     }
   
 }

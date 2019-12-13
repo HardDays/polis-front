@@ -17,6 +17,8 @@ import { IMyDpOptions } from 'mydatepicker';
   })
   export class OwnerFormComponent implements OnInit 
   {
+
+    @Input() Data: OwnerModel;
     Addr = null as any;
 
     AddOptions: any[] = [];
@@ -116,7 +118,6 @@ import { IMyDpOptions } from 'mydatepicker';
     }
     ngOnInit(): void {
 
-        console.log(this._main.Agreement);
         this.InitData();
     }
 
@@ -124,42 +125,40 @@ import { IMyDpOptions } from 'mydatepicker';
     {
         let data = {} as any;
 
-        const agr = this._main.Copy(this._main.Agreement) as AgreementModel;
-
-        if(agr.owner.firstname || agr.owner.lastname)
+        if(this.Data.firstname || this.Data.lastname)
         {
             let arr = [];
-            if(agr.owner.lastname)
-                arr.push(agr.owner.lastname);
+            if(this.Data.lastname)
+                arr.push(this.Data.lastname);
 
-            if(agr.owner.firstname)
-                arr.push(agr.owner.firstname);
+            if(this.Data.firstname)
+                arr.push(this.Data.firstname);
 
-            if(agr.owner.middlename)
-                arr.push(agr.owner.middlename);
+            if(this.Data.middlename)
+                arr.push(this.Data.middlename);
 
 
             data.name = arr.join(" ");
         }
 
-        if(agr.owner.passportSerial  || agr.owner.passportNumber )
+        if(this.Data.passportSerial  || this.Data.passportNumber )
         {
-            data.number = agr.owner.passportSerial + agr.owner.passportNumber;
+            data.number = this.Data.passportSerial + this.Data.passportNumber;
         }
 
-        if(agr.owner.passportDate)
+        if(this.Data.passportDate)
         {
-            data.passportDate = this.ParseStrToObj(agr.owner.passportDate);
+            data.passportDate = this.ParseStrToObj(this.Data.passportDate);
         }
 
-        if(agr.owner.birthdate)
+        if(this.Data.birthdate)
         {
-            data.birthdate = this.ParseStrToObj(agr.owner.birthdate);
+            data.birthdate = this.ParseStrToObj(this.Data.birthdate);
         }
 
-        if(agr.owner.fullAddress)
+        if(this.Data.fullAddress)
         {
-            data.address = agr.owner.fullAddress;
+            data.address = this.Data.fullAddress;
         }
 
         this.Form.patchValue(data);
@@ -176,12 +175,11 @@ import { IMyDpOptions } from 'mydatepicker';
         }
         this.Form.updateValueAndValidity();
 
-        console.log(this.Form);
         if(this.Form.invalid)
         {
             return false;
         }
-        let result = this._main.Copy(this._main.Agreement.owner) as OwnerModel
+        let result = this._main.Copy(this.Data) as OwnerModel
 
         result.city = this.Addr.data.city_kladr_id;
         result.street = this.Addr.data.street_with_type ? this.Addr.data.street_with_type : this.Addr.data.street;
@@ -223,35 +221,31 @@ import { IMyDpOptions } from 'mydatepicker';
 
     ParseStrToObj(str: string)
     {
-        const split = str.split("-");
+        let split = str.split("-");
 
         return {
             date: {
-                year: split[0],
-                month: split[1],
-                day: split[2]
+                year: Number.parseInt(split[0]),
+                month: Number.parseInt(split[1]),
+                day: Number.parseInt(split[2])
             }
         }
     }
 
     UpdateDics($event)
     {
-        const kladr = this._main.Agreement.owner.city;
-        this._main.GetAddr($event, kladr, 
+        // const kladr = this._main.Agreement.owner.city;
+        this._main.GetAddr($event, null, 
             (res) => {
                 this.AddOptions = res;
-                console.log(res);
             },
             (err) => {
-                console.log(err);
             })
-        // console.log($event);
     }
 
     selectEvent($event)
     {
         this.Addr = $event;
-        console.log($event);
     }
 
 

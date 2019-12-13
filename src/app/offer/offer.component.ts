@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MainService } from '../core/services/main.service';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-offer-cmp',
@@ -9,19 +9,82 @@ import { FormGroup } from '@angular/forms';
 })
 export class OfferComponent implements OnInit{
 
+  Offer = {} as any;
+  IsLoading = false;
+  Url = '';
+  ButtonDisabled = true;
+  ShowModal = false;
+
+  Form: FormGroup = new FormGroup({
+    "code": new FormControl('',[
+        Validators.required
+    ])
+  });
+
+  get code()
+  {
+    return this.Form.get("code");
+  }
+
   constructor(private _main: MainService)
   {
+    this.Offer = this._main.Copy(this._main.Offer) as any;
   }
   ngOnInit(): void {
+    this.IsLoading = true;
+    this.GetPaymentHandler(this.Offer.eId)
+    
+  }
+
+  ConfirmPhone()
+  {
+    const data = this.Form.getRawValue()
+    this.GetPaymentHandler(this.Offer.eId, {smsCode: data.code});
+  }
+
+  GetPaymentHandler(eId, data?)
+  {
+    this._main.GetPaymentUrl(eId, data,
+      (res) => {
+        if(res.results)
+        {
+          if(res.results.needSmsCode)
+          {
+            this.ShowModal = true;
+          }
+          else{
+            this.Url = res.results;
+            this.ButtonDisabled = false;
+            this.ShowModal = false;
+          }
+        }
+        else{
+          this._main.Navigate(['/offers']);
+        }
+        this.IsLoading = false;
+      },
+      (err) => {
+        this._main.Navigate(['/offers']);
+        this.IsLoading = false;
+      })  
   }
   
   Navigate()
   {
-    this._main.Navigate(['/full', 'check']);
+    this._main.Navigate(['/offers']);
   }
 
   Save()
   {
       this._main.Navigate(['/full', 'check']);
+  }
+
+  GetUrl()
+  {
+    if(!this.IsLoading && !this.ButtonDisabled && this.Url)
+    {
+      this.IsLoading = true;
+      location.href = this.Url;
+    }
   }
 }

@@ -14,6 +14,7 @@ export class CheckComponent implements OnInit{
   {
   }
   ngOnInit(): void {
+    
   }
 
   Navigate()
@@ -32,15 +33,39 @@ export class CheckComponent implements OnInit{
     }
 
     this._main.SaveAgreement(agr,
-      (res) => {
-        console.log(res);
-        this._main.Navigate(["/offers"]);
+      (res: AgreementModel) => {
+        let navigate = ["/offers"];
+        if(!this.ValidateDc(res))
+        {
+          navigate = ["/full", "dc"];
+        }
+        this._main.Navigate(navigate);
       },
       (err) => {
-        console.log(err);
       })
       
 
+  }
+
+  ValidateDc(data: AgreementModel)
+  {
+    if(!data.vehicle.dcDate || !data.vehicle.dc)
+    {
+      return false;
+    }
+
+    if(data.vehicle.dcDate)
+    {
+      const now = new Date();
+      const date = new Date(data.vehicle.dcDate);
+
+      if(now.getTime() > date.getTime())
+      {
+        return false;
+      }
+    }
+
+    return true;
   }
   
 }

@@ -5,20 +5,18 @@ import { OwnerFormComponent } from '../input_modules/owner/owner.component';
 import { AgreementModel, OwnerModel } from '../core/models/agreement.model';
 
 @Component({
-  selector: 'app-owner-cmp',
-  templateUrl: './owner.component.html',
-  styleUrls: ['./owner.component.css']
+  selector: 'app-insurer-cmp',
+  templateUrl: './insurer.component.html',
+  styleUrls: ['./insurer.component.css']
 })
-export class OwnerComponent implements OnInit{
+export class InsurerComponent implements OnInit{
 
   IsOwnerInsurer = 1;
-  @ViewChild('owner', {static: false}) owner: OwnerFormComponent;
-  Owner = new OwnerModel();
+  @ViewChild('insurer', {static: false}) insurer: OwnerFormComponent;
+  Insurer = new OwnerModel();
   constructor(private _main: MainService)
   {
-    this.IsOwnerInsurer = this._main.Agreement.insurerIsOwner;
-
-    this.Owner = this._main.Copy(this._main.Agreement.owner) as OwnerModel;
+    this.Insurer = this._main.Copy(this._main.Agreement.insurer) as OwnerModel;
   }
   ngOnInit(): void {
   }
@@ -30,21 +28,17 @@ export class OwnerComponent implements OnInit{
 
   Save()
   {
-    const data = this.owner.GetData();
+    const data = this.insurer.GetData();
     if(!data)
     {
       return;
     }
 
     let agr = this._main.Copy(this._main.Agreement) as AgreementModel;
-    agr.owner = data;
+    agr.insurer = data;
     this._main.SaveAgreement(agr,
       (res) => {
         let navigate = ['/full', 'check'];
-        if(!this.IsOwnerInsurer)
-        {
-          navigate = ['/full', 'insurer'];
-        }
         this._main.Navigate(navigate);
       },
       (err) => {

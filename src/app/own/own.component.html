@@ -47,14 +47,14 @@
                     </div>
                 </div>
 
-                <label class="form__label">Город регистрации</label>
+                <label class="form__label">Город регистрации {{IsOwner ? "" : "собственника"}}</label>
                 <ng-autocomplete
                     height="40px"
                     name="city"
                     formControlName="city"
-                    [ngModel]="SelectedKladr.unrestricted_value"
+                    [ngModel]="SelectedKladr.value"
                     [data]="CityDics"
-                    [searchKeyword]="'unrestricted_value'"
+                    [searchKeyword]="'value'"
                     (selected)='selectEvent($event)'
                     (inputChanged)='UpdateDics($event)'
                     [itemTemplate]="itemTemplate"
@@ -62,7 +62,7 @@
                 </ng-autocomplete>
                 
                 <ng-template #itemTemplate let-item>
-                    <a *ngIf="item" [innerHTML]="item && item.unrestricted_value ? item.unrestricted_value : ''"></a>
+                    <a *ngIf="item" [innerHTML]="item && item.value ? item.value : ''"></a>
                 </ng-template>
                 
                 <ng-template #notFoundTemplate let-notFound>
