@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {Observable} from 'rxjs';
@@ -15,6 +15,7 @@ import { MainService } from 'src/app/core/services/main.service';
   })
   export class SimpleCarComponent implements OnInit 
   {
+      @Input() Car: VehicleModel
     ModelsDics = [];
     Form: FormGroup = new FormGroup({
         "model": new FormControl('', [
@@ -42,7 +43,6 @@ import { MainService } from 'src/app/core/services/main.service';
         year: null,
         power: null
     };
-    Car = new VehicleModel();
 
     YearMask = function(rawValue)
     {
@@ -82,6 +82,10 @@ import { MainService } from 'src/app/core/services/main.service';
     constructor(private _main: MainService)
     {
         this.Car = this._main.Copy(this._main.Agreement.vehicle);
+        
+        
+    }
+    ngOnInit(): void {
         if(this.Car)
         {
             this.Data.power = this.Car.power ? this.Car.power : null;
@@ -102,10 +106,6 @@ import { MainService } from 'src/app/core/services/main.service';
         }
 
         this.Form.patchValue(this.Data);
-        
-    }
-    ngOnInit(): void {
-
     }
 
 

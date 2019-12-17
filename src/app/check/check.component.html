@@ -6,25 +6,35 @@
     <div class="page__driver">
         <div class="page__driver-top">
             <span class="page__driver-zag">Ваш автомобиль:</span>
-            <span class="page__driver-edit"></span>
+            <span class="page__driver-edit" (click)="ShowVehicleModal = true"></span>
         </div>
 
         <div class="page__driver-info">
-            <p>Audi RS 6, 300 Л.С. 2015 г.в.</p>
-            <p><span>Гос. номер:</span> А111АА 116</p>
-            <p><span>VIN:</span> 12334235</p>
-            <p><span>СТС:</span> 345345 от 12.12.2015</p>
+            <p>{{Agr.vehicle.brand}} {{Agr.vehicle.model}}, {{Agr.vehicle.power}} Л.С. {{Agr.vehicle.year}} г.в.</p>
+            <p><span>Гос. номер:</span> {{Agr.licensePlate.toUpperCase()}}</p>
+            <p *ngIf="Agr.vehicle.vin"><span>VIN:</span> {{Agr.vehicle.vin}}</p>
+            <p *ngIf="Agr.vehicle.chassisNum"><span>№ ШАССИ:</span> {{Agr.vehicle.chassisNum}}</p>
+            <p *ngIf="Agr.vehicle.bodyNum"><span>№ КУЗОВА:</span> {{Agr.vehicle.bodyNum}}</p>
+            <p><span>{{Agr.vehicle.docType ? 'СТС' : 'ПТС'}}:</span> {{Agr.vehicle.docSerial}}{{Agr.vehicle.docNumber}} от {{Agr.vehicle.docDate | date: 'dd.MM.yyyy' }}</p>
         </div>
 
     </div>
     <div class="page__driver">
         <div class="page__driver-top">
             <span class="page__driver-zag">Водители:</span>
-            <span class="page__driver-edit"></span>
+            <span class="page__driver-edit" (click)="ShowDriversModal = true"></span>
         </div>
 
         <div class="page__driver-info">
-            <p><span>Водитель 1:</span></p>
+            <ng-container *ngFor="let driver of Agr.drivers; let i=index">
+                <p><span>Водитель {{i+1}}:</span></p>
+                <p><span>ФИО:</span> {{driver.lastname}} {{driver.firstname}} {{driver.middlename}}</p>
+                <p><span>Дата рождения:</span> {{driver.birthdate | date: 'dd.MM.yyyy' }}</p>
+                <p><span>ВУ:</span> {{driver.licenseSerial}} {{driver.licenseNumber}}</p>
+                <p><span>Дата начала стажа:</span> {{driver.expdate | date: 'dd.MM.yyyy' }}</p>
+            </ng-container>
+            
+            <!-- <p><span>Водитель 1:</span></p>
             <p><span>ФИО:</span> Иван Иванович Иванов</p>
             <p><span>Дата рождения:</span> 31.12.1994</p>
             <p><span>ВУ:</span> 123 456</p>
@@ -33,40 +43,37 @@
             <p><span>ФИО:</span> Иванова Анна</p>
             <p><span>Дата рождения:</span> 31.12.1994</p>
             <p><span>ВУ:</span> 123 456</p>
-            <p><span>Дата начала стажа:</span> 12.12.2012</p>
+            <p><span>Дата начала стажа:</span> 12.12.2012</p> -->
         </div>
 
     </div>
     <div class="page__driver">
         <div class="page__driver-top">
             <span class="page__driver-zag">Собственник:</span>
-            <span class="page__driver-edit"></span>
+            <span class="page__driver-edit" (click)="ShowOwnerModal = true"></span>
         </div>
 
         <div class="page__driver-info">
-            <p><span>ФИО:</span> Иван Иванович Иванов</p>
-            <p><span>Дата рождения:</span> 20.07.1996</p>
-            <p><span>Паспорт:</span> 96 12 123456</p>
-            <p><span>Выдан:</span> 15.12.2016</p>
-            <p><span>Код подразделения:</span> 123-456</p>
-            <p><span>Выдан:</span> ТП УФМС ПО РЕСПУБЛИКЕ ТАТАРСТАН</p>
-            <p><span>Адрес регистрации:</span> г. Казань улица Пушкина, дом 12</p>
+            <p><span>ФИО:</span> {{Agr.owner.lastname}} {{Agr.owner.firstname}} {{Agr.owner.middlename}}</p>
+            <p><span>Дата рождения:</span> {{Agr.owner.birthdate | date: 'dd.MM.yyyy' }}</p>
+            <p><span>Паспорт:</span> {{Agr.owner.passportSerial}} {{Agr.owner.passportNumber}}</p>
+            <p><span>Выдан:</span> {{Agr.owner.passportDate | date: 'dd.MM.yyyy' }}</p>
+            <p><span>Адрес регистрации:</span> {{Agr.owner.fullAddress}}</p>
         </div>
 
     </div>
-    <div class="page__driver">
+    <div class="page__driver" *ngIf="Agr.insurer && !Agr.insurerIsOwner">
         <div class="page__driver-top">
             <span class="page__driver-zag">Страхователь:</span>
-            <span class="page__driver-edit"></span>
+            <span class="page__driver-edit" (click)="ShowInsurerModal = true"></span>
         </div>
 
         <div class="page__driver-info">
-            <p><span>ФИО:</span> Иванова Анна Сергеевна</p>
-            <p><span>Дата рождения:</span> 30.12.1996</p>
-            <p><span>Паспорт:</span> 96 12 143356</p>
-            <p><span>Выдан:</span> 10.12.2017</p>
-            <p><span>Выдан:</span> ТП УФМС ПО РЕСПУБЛИКЕ ТАТАРСТАН</p>
-            <p><span>Код подразделения:</span> 123-456</p>
+            <p><span>ФИО:</span> {{Agr.insurer.lastname}} {{Agr.insurer.firstname}} {{Agr.insurer.middlename}}</p>
+            <p><span>Дата рождения:</span> {{Agr.insurer.birthdate | date: 'dd.MM.yyyy' }}</p>
+            <p><span>Паспорт:</span> {{Agr.insurer.passportSerial}} {{Agr.insurer.passportNumber}}</p>
+            <p><span>Выдан:</span> {{Agr.insurer.passportDate | date: 'dd.MM.yyyy' }}</p>
+            <p><span>Адрес регистрации:</span> {{Agr.insurer.fullAddress}}</p>
         </div>
 
     </div>
@@ -77,7 +84,7 @@
         </div>
 
         <div class="page__driver-info">
-            <p><span>Телефон:</span> +79999999999</p>
+            <p><span>Телефон:</span> {{Agr.phone}}</p>
         </div>
 
     </div>
@@ -89,5 +96,84 @@
         <app-email-form-cmp #email></app-email-form-cmp>
     </div>
     <!-- Add class "button--disabled" to disable the button -->
-    <button class="button" (click)="Navigate()">Все верно!</button>
+    <button class="button" [ngClass]="{'button--disabled': email.Form.invalid}" (click)="Navigate()">Все верно!</button>
+</div>
+
+<div class="modal" [ngClass]="{'modal--opened': ShowVehicleModal}">
+    <div class="modal__content modal__content--edit">
+        <div class="page__driver page__driver--bordered">
+            <div class="page__driver" [ngClass]="{'page__driver--opened': TopOpened}">
+                <div class="page__driver-top" (click)="TopOpened = !TopOpened">
+                    <span class="page__driver-name">Ваш автомобиль</span>
+                </div>
+        
+                <div class="form form--small">
+                    <app-simple-car-cmp #simple [Car]="Agr.vehicle"></app-simple-car-cmp>
+                </div>
+            </div>
+        
+            <div class="page__driver page__driver--no_border" [ngClass]="{'page__driver--opened': BottomOpened}">
+                <div class="page__driver-top" (click)="BottomOpened = !BottomOpened">
+                    <span class="page__driver-name">Данные автомобиля</span>
+                </div>
+        
+                <div class="form">
+                    <app-full-car-cmp #full [Car]="Agr.vehicle"></app-full-car-cmp>
+                </div>
+            </div>
+            
+        </div>
+        <button class="button"
+            (click)="ConfirmVehicleData()"
+        >Сохранить</button>
+        <button class="button button--white" (click)="ShowVehicleModal = false">Закрыть</button>
+    </div>
+</div>
+
+<div class="modal" [ngClass]="{'modal--opened': ShowDriversModal}">
+    <div class="modal__content modal__content--edit">
+        <div class="page__driver page__driver--bordered">
+            <div class="page__driver-top">
+                <!-- <span class="page__driver-name">Водители</span> -->
+            </div>
+            <ng-container *ngFor="let item of Agr.drivers; let i = index">
+                <app-driver-form-cmp [driver]="item" [index]="i" (onDelete)="DeleteDriver($event)" #drivers></app-driver-form-cmp>
+            </ng-container>
+            <div *ngIf="Agr.drivers.length < 4" class="page__driver-add" (click)="AddDriver()">Добавить водителя</div>
+        </div>
+        <button class="button"
+            (click)="ConfirmDriversData()"
+        >Сохранить</button>
+        <button class="button button--white" (click)="ShowDriversModal = false">Закрыть</button>
+    </div>
+</div>
+
+<div class="modal" [ngClass]="{'modal--opened': ShowOwnerModal}">
+    <div class="modal__content modal__content--edit">
+        <div class="page__driver page__driver--owner page__driver--bordered">
+            <div class="page__driver-top">
+                <span class="page__driver-name">Собственник</span>
+            </div>
+            <app-owner-form-cmp #owner [Data]="Agr.owner"></app-owner-form-cmp>
+        </div>
+        <button class="button"
+            (click)="ConfirmOwnerData()"
+        >Сохранить</button>
+        <button class="button button--white" (click)="ShowOwnerModal = false">Закрыть</button>
+    </div>
+</div>
+
+<div *ngIf="Agr.insurer && !Agr.insurerIsOwner" class="modal" [ngClass]="{'modal--opened': ShowInsurerModal}">
+    <div class="modal__content modal__content--edit">
+        <div class="page__driver page__driver--owner page__driver--bordered">
+            <div class="page__driver-top">
+                <span class="page__driver-name">Страхователь</span>
+            </div>
+            <app-owner-form-cmp #owner [Data]="Agr.insurer"></app-owner-form-cmp>
+        </div>
+        <button class="button"
+            (click)="ConfirmInsurerData()"
+        >Сохранить</button>
+        <button class="button button--white" (click)="ShowInsurerModal = false">Закрыть</button>
+    </div>
 </div>

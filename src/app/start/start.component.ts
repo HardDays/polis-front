@@ -9,6 +9,7 @@ import { AgreementModel } from '../core/models/agreement.model';
     styleUrls: ['./start.component.css']
   })
   export class StartComponent implements OnInit {
+    IsLoading = false;
     Number: string = '';
     Region: string = '';
 
@@ -16,7 +17,7 @@ import { AgreementModel } from '../core/models/agreement.model';
     @ViewChild("region", {static: true}) region: ElementRef;
 
     // MainMask = [/u0430-u044f/, ' ', /\d/, /\d/, /\d/, ' ', /а-я/, /а-я/];
-    MainMask = [/[а-яА-Я]/, ' ', /\d/, /\d/, /\d/, ' ',/[а-яА-Я]/,/[а-яА-Я]/];
+    MainMask = [/[УКЕНХВАРОСМТукенхваросмт]/, ' ', /\d/, /\d/, /\d/, ' ',/[УКЕНХВАРОСМТукенхваросмт]/,/[УКЕНХВАРОСМТукенхваросмт]/];
     MainReg = /^[а-яА-Я]\s\d\d\d\s[а-яА-Я][а-яА-Я]$/;
 
     RegionMask = [/\d/, /\d/, /\d|\s/];
@@ -89,13 +90,16 @@ import { AgreementModel } from '../core/models/agreement.model';
       let number = this._main.ReplaceAll(this.Number + this.Region, " ", "").toLowerCase();
       this._main.Agreement = new AgreementModel();
       number = this._main.ReplaceAll(number, '\u2000','');
+      this.IsLoading = true;
         this._main.CheckCarByNumber({
             "number_plate": number
         },
         (res) => {
-            this._main.Navigate(["/prev", "car"]);
+          this.IsLoading = false;
+          this._main.Navigate(["/prev", "car"]);
         },
         (err) => {
+          this.IsLoading = false;
         })
     }
 

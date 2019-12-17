@@ -8,12 +8,14 @@
         <form [formGroup]="Form">
             <div class="form__item">
                 <label class="form__label">ФИО</label>
-                <input type="text" class="form__input" formControlName="name" name="name">
+                <input type="text" class="form__input" formControlName="name" name="name"
+                    [ngClass]="{'form__input--error': name.invalid && (name.dirty || name.touched)}"
+                >
             </div>
 
             <div class="form__item form__item--calendar">
                 <label class="form__label">Дата рождения</label>
-                <div class="form__input datepicker-test">
+                <div class="form__input datepicker-test" [ngClass]="{'form__input--error': birthdate.invalid && (birthdate.dirty || birthdate.touched)}">
                     <my-date-picker name="birthdate" [options]="BdayOptions" formControlName="birthdate"
                     ></my-date-picker>
                 </div>
@@ -21,7 +23,9 @@
 
             <div class="form__item">
                 <label class="form__label">Серия номер водительского удостоверения</label>
-                <input type="text" class="form__input" formControlName="license" name="license">
+                <input type="text" class="form__input" formControlName="license" name="license" [textMask]="{mask: DocMask}"
+                [ngClass]="{'form__input--error': license.invalid && (license.dirty || license.touched)}"
+                >
             </div>
 
             <div class="form__item form__item--calendar">
@@ -34,7 +38,7 @@
                 </div>
 
                 <label class="form__label">Начало стажа</label>
-                <div class="form__input datepicker-test">
+                <div class="form__input datepicker-test"  [ngClass]="{'form__input--error': expdate.invalid && (expdate.dirty || expdate.touched)}">
                     <my-date-picker name="expdate" [options]="ExpOptions" formControlName="expdate"
                     ></my-date-picker>
                 </div>

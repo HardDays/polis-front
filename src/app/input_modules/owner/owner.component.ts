@@ -9,6 +9,7 @@ import { VehicleModel, AgreementModel } from 'src/app/core/models/agreement.mode
 import { MainService } from 'src/app/core/services/main.service';
 import { DriverModel, OwnerModel } from '../../core/models/agreement.model';
 import { IMyDpOptions } from 'mydatepicker';
+import { conformToMask } from 'text-mask-core';
 
 @Component({
     selector: 'app-owner-form-cmp',
@@ -22,6 +23,18 @@ import { IMyDpOptions } from 'mydatepicker';
     Addr = null as any;
 
     AddOptions: any[] = [];
+
+    DocMask = [
+        /\d/,
+        /\d/,
+        ' ',
+        /\d/,
+        /\d/,
+        ' ',
+        /\d/, /\d/, /\d/, /\d/, /\d/, /\d/
+    ];
+    DocReg = /^\d{2}\s\d{2}\s\d{6}$/;
+
     BdayOptions: IMyDpOptions = {
         // other options...
         dateFormat: 'dd.mm.yyyy',
@@ -40,7 +53,7 @@ import { IMyDpOptions } from 'mydatepicker';
         inline: false,
         openSelectorOnInputClick: true,
         editableDateField: true,
-        indicateInvalidDate: true
+        indicateInvalidDate: false
     };
 
     GiveOptions: IMyDpOptions = {
@@ -61,7 +74,7 @@ import { IMyDpOptions } from 'mydatepicker';
         inline: false,
         openSelectorOnInputClick: true,
         editableDateField: true,
-        indicateInvalidDate: true
+        indicateInvalidDate: false
     };
 
     Form: FormGroup = new FormGroup({
@@ -72,7 +85,8 @@ import { IMyDpOptions } from 'mydatepicker';
             Validators.required
         ]),
         "number": new FormControl('', [
-            Validators.required
+            Validators.required,
+            Validators.pattern(this.DocReg)
         ]),
         "passportDate": new FormControl('',[
             Validators.required
@@ -143,7 +157,8 @@ import { IMyDpOptions } from 'mydatepicker';
 
         if(this.Data.passportSerial  || this.Data.passportNumber )
         {
-            data.number = this.Data.passportSerial + this.Data.passportNumber;
+            data.number = conformToMask(this.Data.passportSerial + this.Data.passportNumber, this.DocMask, {fuide: false}).conformedValue;
+            // data.number = this.Data.passportSerial + this.Data.passportNumber;
         }
 
         if(this.Data.passportDate)
@@ -167,6 +182,8 @@ import { IMyDpOptions } from 'mydatepicker';
 
     GetData()
     {
+        // console.log(this.Form.getRawValue());
+        // return false;
         for(const i in this.Form.controls)
         {
             this.Form.get(i).markAsDirty();
@@ -181,17 +198,21 @@ import { IMyDpOptions } from 'mydatepicker';
         }
         let result = this._main.Copy(this.Data) as OwnerModel
 
-        result.city = this.Addr.data.city_kladr_id;
-        result.street = this.Addr.data.street_with_type ? this.Addr.data.street_with_type : this.Addr.data.street;
-        result.house = this.Addr.data.house;
-        result.apartment = this.Addr.data.flat ? this.Addr.data.flat : null;
-        result.fullkladr = this.Addr.data.kladr_id ? this.Addr.data.kladr_id : 
-            (this.Addr.data.house_kladr_id ? this.Addr.data.house_kladr_id : 
-                (this.Addr.data.fias_code ? this.Addr.data.fias_code : this.Addr.data.city_kladr_id)
-            );
-
-        result.zip = this.Addr.data.postal_code;
-        result.fullAddress = this.Addr.unrestricted_value;
+        if(this.Addr)
+        {
+            result.city = this.Addr.data.city_kladr_id;
+            result.street = this.Addr.data.street_with_type ? this.Addr.data.street_with_type : this.Addr.data.street;
+            result.house = this.Addr.data.house;
+            result.apartment = this.Addr.data.flat ? this.Addr.data.flat : null;
+            result.fullkladr = this.Addr.data.kladr_id ? this.Addr.data.kladr_id : 
+                (this.Addr.data.house_kladr_id ? this.Addr.data.house_kladr_id : 
+                    (this.Addr.data.fias_code ? this.Addr.data.fias_code : this.Addr.data.city_kladr_id)
+                );
+    
+            result.zip = this.Addr.data.postal_code;
+            result.fullAddress = this.Addr.unrestricted_value;
+        }
+        
 
         const data = this.Form.getRawValue();
 
@@ -207,8 +228,9 @@ import { IMyDpOptions } from 'mydatepicker';
         result.lastname = lname;
         result.middlename = mname;
 
-        result.passportSerial  = data.number.substr(0,4);
-        result.passportNumber = data.number.replace(result.passportSerial, "");
+        const spl = data.number.split(" ");
+        result.passportSerial  = spl[0] + spl[1];
+        result.passportNumber = spl[2];
 
         return result;
 

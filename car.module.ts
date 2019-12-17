@@ -5,9 +5,9 @@ import { HttpModule } from '@angular/http';
 // import { RouterModule } from '@angular/router';
 import { TextMaskModule } from 'angular2-text-mask';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { SimpleCarComponent } from './src/app/input_modules/car/simple/simple.component';
+import { FullCarComponent } from './src/app/input_modules/car/full/full.component';
 import { MyDatePickerModule } from 'mydatepicker';
-import { SimpleCarComponent } from './simple/simple.component';
-import { FullCarComponent } from './full/full.component';
 
 
 @NgModule({

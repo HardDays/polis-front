@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { MyDatePickerModule } from 'mydatepicker';
 import { VehicleComponent } from './vehicle.component';
 import { VehicleRoutingModule } from './vehicle.routing';
-import { CarFormModule } from '../input_modules/car/car.module';
+import { CarFormModule } from '../../../car.module';
 import { SimpleCarComponent } from '../input_modules/car/simple/simple.component';
 
 @NgModule({

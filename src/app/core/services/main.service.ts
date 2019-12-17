@@ -254,4 +254,13 @@ export class MainService
             fail
         )
     }
+
+    GetAge(str:string)
+    {
+        let diff  = Date.now() - new Date(str).getTime()
+
+        const age = new Date(diff);
+
+        return Math.abs(age.getUTCFullYear() - 1970);
+    }
 }

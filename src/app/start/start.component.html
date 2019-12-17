@@ -30,8 +30,7 @@
         </div>
     </div>
     
-    <!--  -->
-
-    <button class="button" type="submit" (click)="CheckCarNumber()">Рассчитать</button>
+    <div class="polis__loading" [ngStyle]="{'display': IsLoading? 'flex' : 'none'}"><img style="margin: auto;" src="assets/img/loader.svg" alt=""></div>
+    <button class="button" [ngClass]="{'button--disabled': IsLoading}" type="submit" (click)="CheckCarNumber()">Рассчитать</button>
     <button class="button button--white" (click)="Navigate()">Ввести данные вручную<span class="button__icon button__icon--right"><img src="assets/img/arrow-right.svg" alt=""></span></button>
 </div>

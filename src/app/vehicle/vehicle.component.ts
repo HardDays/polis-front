@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { IMyDpOptions } from 'mydatepicker';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MainService } from '../core/services/main.service';
-import { AgreementModel } from '../core/models/agreement.model';
+import { AgreementModel, VehicleModel } from '../core/models/agreement.model';
 import { SimpleCarComponent } from '../input_modules/car/simple/simple.component';
 import { FullCarComponent } from '../input_modules/car/full/full.component';
 
@@ -16,11 +16,13 @@ export class VehicleComponent implements OnInit{
     
     BottomOpened = true;
     TopOpened = false;
+    Vehicle: VehicleModel;
 
     @ViewChild('simple', {static: false}) simple: SimpleCarComponent;
     @ViewChild('full', {static: false}) full: FullCarComponent;
     constructor(private _main: MainService)
     {
+        this.Vehicle = this._main.Copy(this._main.Agreement.vehicle) as VehicleModel;
     }
     ngOnInit(): void 
     {

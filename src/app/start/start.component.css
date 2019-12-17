@@ -33,6 +33,7 @@
 .avto-num__country:after {
     width: 14px;
     height: 8px;
+    top: 2px;
 }
 
 .avto-num__block--error{

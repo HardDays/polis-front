@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { IMyDpOptions } from 'mydatepicker';
+import { IMyDpOptions, MyDatePicker, IMySelector } from 'mydatepicker';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MainService } from '../core/services/main.service';
 import { AgreementModel } from '../core/models/agreement.model';
@@ -11,6 +11,10 @@ import { AgreementModel } from '../core/models/agreement.model';
 })
 export class DateComponent implements OnInit{
 
+    @ViewChild('mydatepicker', {static: false}) mydp: MyDatePicker;
+    private selector: IMySelector = {
+        open: false
+    };
     myDatePickerOptions: IMyDpOptions = {
         // other options...
         dateFormat: 'dd.mm.yyyy',
@@ -25,10 +29,11 @@ export class DateComponent implements OnInit{
         // maxYear: this.GetMaxYear(),
         showClearDateBtn: false,
         height: '37px',
-        inline: false,
+        // inline: true,
+        // showInputField: false,
         openSelectorOnInputClick: true,
         editableDateField: true,
-        indicateInvalidDate: true
+        indicateInvalidDate: false
     };
 
     Form: FormGroup = new FormGroup({
@@ -39,9 +44,13 @@ export class DateComponent implements OnInit{
 
     constructor(private _main: MainService)
     {
-        
+        // this.datepicker.openSelector(1);
     }
     ngOnInit(): void {
+        
+        this.selector = {
+            open: true
+        };
     }
 
     DisableFrom()

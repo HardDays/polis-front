@@ -23,6 +23,21 @@
             <form [formGroup]="Form" (ngSubmit)="ConfirmPhone()">
                 <div class="form form--bottom_40">
                     <div class="form__item">
+                        <label class="form__label">Телефон</label>
+                        <div class="form__phone-block">
+                            <div class="form__phone-code">
+                                <span class="form__phone-code-flag" style="background-image: url('assets/img/avto-country.svg')"></span>
+                                <span class="form__phone-code-text">+7</span>
+                            </div>
+                            <input
+                                disabled
+                                formControlName="phone"
+                                class="form__input form__input--phone" 
+                                name="phone">
+                            <!-- <input type="text" class="form__input form__input--phone" placeholder="(999) 789 00 00"> -->
+                        </div>
+                    </div>
+                    <div class="form__item">
                         <label class="form__label">Код подтверждения</label>
                         <!-- <input type="text" class="form__input"> -->
                         <input class="form__input" formControlName="code" name="code"

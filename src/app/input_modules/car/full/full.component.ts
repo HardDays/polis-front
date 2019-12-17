@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {Observable} from 'rxjs';
@@ -8,6 +8,7 @@ import { NgAutoCompleteComponent, CreateNewAutocompleteGroup, SelectedAutocomple
 import { VehicleModel, AgreementModel } from 'src/app/core/models/agreement.model';
 import { MainService } from 'src/app/core/services/main.service';
 import { IMyDpOptions } from 'mydatepicker';
+import { conformToMask } from 'text-mask-core';
 
 @Component({
     selector: 'app-full-car-cmp',
@@ -16,6 +17,7 @@ import { IMyDpOptions } from 'mydatepicker';
   })
   export class FullCarComponent implements OnInit 
   {
+    @Input() Car: VehicleModel
     ModelsDics = [];
 
     myDatePickerOptions: IMyDpOptions = {
@@ -36,8 +38,19 @@ import { IMyDpOptions } from 'mydatepicker';
         inline: false,
         openSelectorOnInputClick: true,
         editableDateField: true,
-        indicateInvalidDate: true
+        indicateInvalidDate: false
     };
+
+    DocMask = [
+        /[УКЕНХВАРОСМТукенхваросмт0-9]/,
+        /[УКЕНХВАРОСМТукенхваросмт0-9]/,
+        ' ',
+        /[УКЕНХВАРОСМТукенхваросмт0-9]/,
+        /[УКЕНХВАРОСМТукенхваросмт0-9]/,
+        ' ',
+        /\d/, /\d/, /\d/, /\d/, /\d/, /\d/
+    ];
+    DocReg = /^[а-яА-Я0-9]{2}\s[а-яА-Я0-9]{2}\s\d{6}$/;
 
     Form: FormGroup = new FormGroup({
         "num_type": new FormControl('', [
@@ -50,7 +63,8 @@ import { IMyDpOptions } from 'mydatepicker';
             Validators.required
         ]),
         "doc_number": new FormControl('', [
-            Validators.required
+            Validators.required,
+            Validators.pattern(this.DocReg)
         ]),
         "docDate": new FormControl('', [
             Validators.required
@@ -59,54 +73,55 @@ import { IMyDpOptions } from 'mydatepicker';
 
     constructor(private _main: MainService)
     {
-        let data = {
-            num_type: "vin",
-            number: "",
-            docType: 0,
-            doc_number: "",
-            docDate: {}
-        };
-
-        const agr = this._main.Copy(this._main.Agreement) as AgreementModel;
-
-        if(agr.vehicle.vin)
-        {
-            data.num_type = "vin";
-            data.number = agr.vehicle.vin;
-        }
-        else if(agr.vehicle.bodyNum)
-        {
-            data.num_type = "bodyNum";
-            data.number = agr.vehicle.bodyNum;
-        }
-        else if(agr.vehicle.chassisNum)
-        {
-            data.num_type = "chassisNum";
-            data.number = agr.vehicle.chassisNum;
-        }
-
-        if(agr.vehicle.docType !== null)
-        {
-            data.docType = agr.vehicle.docType;
-        }
-
-        if(agr.vehicle.docNumber || agr.vehicle.docSerial)
-        {
-            data.doc_number = agr.vehicle.docSerial + agr.vehicle.docNumber;
-        }
-
-        if(agr.vehicle.docDate)
-        {
-            data.docDate = this.ParseDate(agr.vehicle.docDate);
-        }
-
-        this.Form.patchValue(data);
-
-
         
     }
     ngOnInit(): void {
-
+        console.log(this.Car);
+        if(this.Car)
+        {
+            let data = {
+                num_type: "vin",
+                number: "",
+                docType: 0,
+                doc_number: "",
+                docDate: {}
+            };
+    
+            // const agr = this._main.Copy(this._main.Agreement) as AgreementModel;
+    
+            if(this.Car.vin)
+            {
+                data.num_type = "vin";
+                data.number = this.Car.vin;
+            }
+            else if(this.Car.bodyNum)
+            {
+                data.num_type = "bodyNum";
+                data.number = this.Car.bodyNum;
+            }
+            else if(this.Car.chassisNum)
+            {
+                data.num_type = "chassisNum";
+                data.number = this.Car.chassisNum;
+            }
+    
+            if(this.Car.docType !== null)
+            {
+                data.docType = this.Car.docType;
+            }
+    
+            if(this.Car.docNumber || this.Car.docSerial)
+            {
+                data.doc_number = conformToMask(this.Car.docSerial + this.Car.docNumber, this.DocMask, {fuide: false}).conformedValue;
+            }
+    
+            if(this.Car.docDate)
+            {
+                data.docDate = this.ParseDate(this.Car.docDate);
+            }
+    
+            this.Form.patchValue(data);
+        }
     }
     DisableUntil()
     {
@@ -136,6 +151,8 @@ import { IMyDpOptions } from 'mydatepicker';
     GetData()
     {
 
+        // console.log(this.Form.getRawValue());
+        // return false;
         for(const i in this.Form.controls)
         {
             this.Form.get(i).markAsDirty();
@@ -153,11 +170,14 @@ import { IMyDpOptions } from 'mydatepicker';
         const data = this.Form.getRawValue();
         result[data.num_type] = data.number;
         result.docType = data.docType;
-        result.docSerial = data.doc_number.substr(0,4);
-        result.docNumber = data.doc_number.replace(result.docSerial, "");
+        const splitData = data.doc_number.split(" ");
+        result.docSerial = splitData[0] + splitData[1];
+        result.docNumber = splitData[2];
 
         result.docDate = this.ParseDateObjToStr(data.docDate);
 
+        // console.log(result);
+        // return false;
         return result;
 
     }

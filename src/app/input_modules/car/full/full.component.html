@@ -37,6 +37,8 @@
             class="form__input" 
             formControlName="doc_number" 
             name="doc_number"
+            
+            [textMask]="{mask: DocMask}" 
             [ngClass]="{'form__input--error': Form.controls.doc_number.invalid && (Form.controls.doc_number.dirty || Form.controls.doc_number.touched)}"
         >
     </div>

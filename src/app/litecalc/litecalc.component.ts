@@ -84,8 +84,13 @@ import { DomSanitizer } from '@angular/platform-browser';
                 (res) => {
 
                     text += "<p class=\"modal__text\">Город регистрации собственника: <strong>" + res[0].value +"</stron></p>";
+                    text += "<p class=\"modal__text\">Персональный коэф. безаварийности (КБМ): <span>Неизвестно (необходим точный расчет)</span></p>";
                     this.ModalText = text;
                 })
+        }
+        else{
+            text += "<p class=\"modal__text\">Персональный коэф. безаварийности (КБМ): <span>Неизвестно (необходим точный расчет)</span></p>";
+            this.ModalText = text;
         }
 
     }

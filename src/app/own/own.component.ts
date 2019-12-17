@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { MainService } from '../core/services/main.service';
 import { VehicleModel, AgreementModel } from '../core/models/agreement.model';
 import { IMyDpOptions } from 'mydatepicker';
@@ -17,8 +17,32 @@ import { IMyDpOptions } from 'mydatepicker';
 
     IsOwner = 1;
 
-    expMask = function(rawValue)
+    expMask = (rawValue) => 
     {
+        let data = this.Form.get('birthday').value;
+
+        if(!data)
+            return [/[1-8]/,/\d/];
+
+        const age = this._main.GetAge(data.date.year + "-" + data.date.month + "-" + data.date.day);
+
+        const diff = age - 18;
+        if(diff == 0)
+        {
+            return [/[0]/];
+        }
+        else if (diff < 10)
+        {
+            return [new RegExp("[0-" + diff + "]" )];
+        }
+        else {
+            let mask = [/[0-9]/];
+
+            if(rawValue[0] && rawValue[0] != "0")
+            {
+                mask.push(/\d/);
+            }
+        }
         return [/[1-8]/,/\d/];
     }
 
@@ -39,7 +63,7 @@ import { IMyDpOptions } from 'mydatepicker';
         inline: false,
         openSelectorOnInputClick: true,
         editableDateField: true,
-        indicateInvalidDate: true
+        indicateInvalidDate: false
     };
 
     Form: FormGroup = new FormGroup({
@@ -57,7 +81,7 @@ import { IMyDpOptions } from 'mydatepicker';
         "exp": new FormControl('',[
           Validators.required,
           Validators.min(0),
-          Validators.max(90)
+          this.ValidateExp()
         ]),
         "phone": new FormControl('',[
           Validators.required,
@@ -68,6 +92,11 @@ import { IMyDpOptions } from 'mydatepicker';
         ])
     });
 
+
+    get exp()
+    {
+        return this.Form.get('exp');
+    }
     SelectedKladr = {} as any;
 
     
@@ -110,6 +139,7 @@ import { IMyDpOptions } from 'mydatepicker';
                 {
                     if(res instanceof Array && res.length > 0)
                     {
+                        this.Form.get('city').setValue(res[0].value)
                         this.SelectedKladr = res[0];
                     }
                 }
@@ -253,6 +283,35 @@ import { IMyDpOptions } from 'mydatepicker';
                 date: obj
             })
         }
+    }
+
+    ValidateExp()
+    {
+        return (control: AbstractControl): {[key: string]: any} | null => {
+            if(this.Form && this.Form.controls)
+            {
+                let data = this.Form.get('birthday').value;
+
+                if(!data)
+                    return null;
+
+
+                const age = this._main.GetAge(data.date.year + "-" + data.date.month + "-" + data.date.day);
+
+                const diff = age - 18;
+
+                const val = Number.parseInt(control.value);
+
+                if(val > diff)
+                {
+                    return {'wrong': true};
+                }
+
+                console.log(diff, val);
+                
+            }
+            return null;
+          };
     }
   
   }

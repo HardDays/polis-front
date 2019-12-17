@@ -9,6 +9,7 @@ import { VehicleModel, AgreementModel } from 'src/app/core/models/agreement.mode
 import { MainService } from 'src/app/core/services/main.service';
 import { DriverModel } from '../../core/models/agreement.model';
 import { IMyDpOptions } from 'mydatepicker';
+import { conformToMask } from 'text-mask-core';
 
 @Component({
     selector: 'app-driver-form-cmp',
@@ -24,6 +25,17 @@ import { IMyDpOptions } from 'mydatepicker';
     @Output() onDelete = new EventEmitter<number>();
 
     IsOpened = false;
+
+    DocMask = [
+        /\d/,
+        /\d/,
+        ' ',
+        /\d/,
+        /\d/,
+        ' ',
+        /\d/, /\d/, /\d/, /\d/, /\d/, /\d/
+    ];
+    DocReg = /^\d{2}\s\d{2}\s\d{6}$/;
 
     BdayOptions: IMyDpOptions = {
         // other options...
@@ -43,7 +55,7 @@ import { IMyDpOptions } from 'mydatepicker';
         inline: false,
         openSelectorOnInputClick: true,
         editableDateField: true,
-        indicateInvalidDate: true
+        indicateInvalidDate: false
     };
 
     ExpOptions: IMyDpOptions = {
@@ -64,7 +76,7 @@ import { IMyDpOptions } from 'mydatepicker';
         inline: false,
         openSelectorOnInputClick: true,
         editableDateField: true,
-        indicateInvalidDate: true
+        indicateInvalidDate: false
     };
 
     Form: FormGroup = new FormGroup({
@@ -75,12 +87,33 @@ import { IMyDpOptions } from 'mydatepicker';
             Validators.required
         ]),
         "license": new FormControl('',[
-            Validators.required
+            Validators.required,
+            Validators.pattern(this.DocReg)
         ]),
         "expdate": new FormControl('',[
             Validators.required
         ])
     });
+
+    get name()
+    {
+        return this.Form.get('name');
+    }
+
+    get license()
+    {
+        return this.Form.get('license');
+    }
+
+    get birthdate()
+    {
+        return this.Form.get('birthdate');
+    }
+
+    get expdate()
+    {
+        return this.Form.get('expdate');
+    }
 
     BdayDisable()
     {
@@ -141,7 +174,7 @@ import { IMyDpOptions } from 'mydatepicker';
 
         if(this.driver.licenseSerial || this.driver.licenseNumber)
         {
-            data.license = this.driver.licenseSerial + this.driver.licenseNumber;
+            data.license = conformToMask(this.driver.licenseSerial + this.driver.licenseNumber, this.DocMask, {fuide: false}).conformedValue;
         }
 
         if(this.driver.expdate)
@@ -189,8 +222,9 @@ import { IMyDpOptions } from 'mydatepicker';
         result.lastname = lname;
         result.middlename = mname;
 
-        result.licenseSerial = data.license.substr(0,4);
-        result.licenseNumber = data.license.replace(result.licenseSerial, "");
+        const spl = data.license.split(" ");
+        result.licenseSerial = spl[0] + spl[1];
+        result.licenseNumber = spl[2];
 
         return result;
 
@@ -217,6 +251,11 @@ import { IMyDpOptions } from 'mydatepicker';
                 day: split[2]
             }
         }
+    }
+
+    Open()
+    {
+        this.IsOpened = true;
     }
 
 

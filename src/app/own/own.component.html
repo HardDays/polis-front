@@ -7,13 +7,17 @@
         <div class="form form--medium">
             <div class="form__item">
                 <label class="form__label">ФИО</label>
-                <textarea class="form__textarea form__textarea--smooth" formControlName="fio" name="fio" style="height: 60px"></textarea>
-                <!-- <input placeholder="Иванов Иван Иванович" class="input-polis" > -->
+                <!-- <textarea class="form__textarea form__textarea--smooth" formControlName="fio" name="fio" style="height: 60px"></textarea> -->
+                <input formControlName="fio" name="fio" class="form__input"
+                    [ngClass]="{'form__input--error': Form.controls.fio.invalid && (Form.controls.fio.dirty || Form.controls.fio.touched)}"
+                >
             </div>
             <div class="form__item form__item--calendar">
                 <label class="form__label">Дата рождения</label>
                 <!-- <input type="text" class="form__input" value="12.12.1987"> -->
-                <div class="form__input datepicker-test">
+                <div class="form__input datepicker-test" 
+                    [ngClass]="{'form__input--error': Form.controls.birthday.invalid && (Form.controls.birthday.dirty || Form.controls.birthday.touched)}"
+                >
                     <my-date-picker name="birthday" [options]="myDatePickerOptions" formControlName="birthday" (calendarToggle)="onCalendarToggle($event)"
                     ></my-date-picker>
                 </div>
@@ -35,6 +39,7 @@
                     formControlName="exp"
                     name="exp"
                     [textMask]="{mask: expMask, placeholderChar: '\u2000'}"    
+                    [ngClass]="{'form__input--error': exp.invalid && (exp.dirty || exp.touched)}"
                 >
                 <!-- <input type="text" class="form__input"> -->
             </div>
@@ -48,26 +53,28 @@
                 </div>
 
                 <label class="form__label">Город регистрации {{IsOwner ? "" : "собственника"}}</label>
-                <ng-autocomplete
-                    height="40px"
-                    name="city"
-                    formControlName="city"
-                    [ngModel]="SelectedKladr.value"
-                    [data]="CityDics"
-                    [searchKeyword]="'value'"
-                    (selected)='selectEvent($event)'
-                    (inputChanged)='UpdateDics($event)'
-                    [itemTemplate]="itemTemplate"
-                    [notFoundTemplate]="notFoundTemplate">
-                </ng-autocomplete>
+                <div [ngClass]="{'form__input--error': Form.controls.city.invalid && (Form.controls.city.dirty || Form.controls.city.touched)}">
+                    <ng-autocomplete
+                        height="40px"
+                        name="city"
+                        formControlName="city"
+                        [data]="CityDics"
+                        [searchKeyword]="'value'"
+                        (selected)='selectEvent($event)'
+                        (inputChanged)='UpdateDics($event)'
+                        [itemTemplate]="itemTemplate"
+                        [notFoundTemplate]="notFoundTemplate">
+                    </ng-autocomplete>
+                    
+                    <ng-template #itemTemplate let-item>
+                        <a *ngIf="item" [innerHTML]="item && item.value ? item.value : ''"></a>
+                    </ng-template>
+                    
+                    <ng-template #notFoundTemplate let-notFound>
+                        <div [innerHTML]="notFound"></div>
+                    </ng-template>
+                </div>
                 
-                <ng-template #itemTemplate let-item>
-                    <a *ngIf="item" [innerHTML]="item && item.value ? item.value : ''"></a>
-                </ng-template>
-                
-                <ng-template #notFoundTemplate let-notFound>
-                    <div [innerHTML]="notFound"></div>
-                </ng-template>
             </div>
             <div class="form__item">
                 <label class="form__label">Телефон</label>
@@ -80,7 +87,9 @@
                         [textMask]="{mask: phoneMask, guide: true, placeholderChar: '_', showMask: true}" 
                         formControlName="phone" 
                         class="form__input form__input--phone" 
-                        name="phone">
+                        name="phone"
+                        [ngClass]="{'form__input--error': Form.controls.phone.invalid && (Form.controls.phone.dirty || Form.controls.phone.touched)}"
+                    >
                     <!-- <input type="text" class="form__input form__input--phone" placeholder="(999) 789 00 00"> -->
                 </div>
             </div>

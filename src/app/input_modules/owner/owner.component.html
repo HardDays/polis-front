@@ -32,6 +32,7 @@
                 formControlName="number" 
                 name="number"
                 [ngClass]="{'form__input--error': Form.controls.number.invalid && (Form.controls.number.dirty || Form.controls.number.touched)}" 
+                [textMask]="{mask: DocMask}"
             >
         </div>
 
@@ -52,26 +53,30 @@
 
         <div class="form__item">
             <label class="form__label">Адрес регистрации</label>
-            <ng-autocomplete
-                name="address"
-                formControlName="address"
-                [data]="AddOptions"
-                [searchKeyword]="'value'"
-                (selected)='selectEvent($event)'
-                (inputChanged)='UpdateDics($event)'
-                [itemTemplate]="itemTemplate"
-                [notFoundTemplate]="notFoundTemplate"
-                [ngClass]="{'form__input--error': Form.controls.address.invalid && (Form.controls.address.dirty || Form.controls.address.touched) }"    
+            <div class="autocomplete"
+                [ngClass]="{'form__input--error': Form.controls.address.invalid && (Form.controls.address.dirty || Form.controls.address.touched) }"  
             >
-            </ng-autocomplete>
+                <ng-autocomplete
+                    name="address"
+                    formControlName="address"
+                    [data]="AddOptions"
+                    [searchKeyword]="'value'"
+                    (selected)='selectEvent($event)'
+                    (inputChanged)='UpdateDics($event)'
+                    [itemTemplate]="itemTemplate"
+                    [notFoundTemplate]="notFoundTemplate"  
+                >
+                </ng-autocomplete>
+                
+                <ng-template #itemTemplate let-item>
+                    <a *ngIf="item" [innerHTML]="item && item.value ? item.value : ''"></a>
+                </ng-template>
+                
+                <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="'Ничего не найдено'"></div>
+                </ng-template>
+            </div>
             
-            <ng-template #itemTemplate let-item>
-                <a *ngIf="item" [innerHTML]="item && item.value ? item.value : ''"></a>
-            </ng-template>
-            
-            <ng-template #notFoundTemplate let-notFound>
-                <div [innerHTML]="'Ничего не найдено'"></div>
-            </ng-template>
             <!-- <textarea class="form__textarea">г. Казань Большая Мухаметшина улица д. 35 корп.3 кв. 85</textarea> -->
         </div>
     </div>

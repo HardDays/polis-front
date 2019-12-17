@@ -66,7 +66,7 @@ import { IMyDpOptions } from 'mydatepicker';
         inline: false,
         openSelectorOnInputClick: true,
         editableDateField: true,
-        indicateInvalidDate: true
+        indicateInvalidDate: false
     };
     constructor(private _main: MainService)
     {

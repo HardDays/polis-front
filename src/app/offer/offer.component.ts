@@ -1,6 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MainService } from '../core/services/main.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AgreementModel } from '../core/models/agreement.model';
 
 @Component({
   selector: 'app-offer-cmp',
@@ -15,10 +16,13 @@ export class OfferComponent implements OnInit{
   ButtonDisabled = true;
   ShowModal = false;
 
+  Phone = "";
+
   Form: FormGroup = new FormGroup({
     "code": new FormControl('',[
         Validators.required
-    ])
+    ]),
+    "phone": new FormControl('',[])
   });
 
   get code()
@@ -29,6 +33,9 @@ export class OfferComponent implements OnInit{
   constructor(private _main: MainService)
   {
     this.Offer = this._main.Copy(this._main.Offer) as any;
+    const agr = this._main.Copy(this._main.Agreement) as AgreementModel;
+
+    this.Form.get('phone').patchValue(agr.phone.replace("+7", ""));
   }
   ngOnInit(): void {
     this.IsLoading = true;

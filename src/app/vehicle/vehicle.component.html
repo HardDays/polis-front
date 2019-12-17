@@ -9,7 +9,7 @@
         </div>
 
         <div class="form form--small">
-            <app-simple-car-cmp #simple></app-simple-car-cmp>
+            <app-simple-car-cmp #simple [Car]="Vehicle"></app-simple-car-cmp>
         </div>
     </div>
 
@@ -19,7 +19,7 @@
         </div>
 
         <div class="form">
-            <app-full-car-cmp #full></app-full-car-cmp>
+            <app-full-car-cmp #full [Car]="Vehicle"></app-full-car-cmp>
         </div>
     </div>
 

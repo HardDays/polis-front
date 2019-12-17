@@ -17,6 +17,7 @@ import { SimpleCarComponent } from '../input_modules/car/simple/simple.component
   export class CarComponent implements OnInit 
   {
 
+    IsLoading = false;
     @ViewChild('simple', {static: false}) simple: SimpleCarComponent;
 
     YearMask = function(rawValue)
@@ -70,7 +71,7 @@ import { SimpleCarComponent } from '../input_modules/car/simple/simple.component
         {
             return;
         }
-
+        this.IsLoading = true;
         let agr = this._main.Copy(this._main.Agreement) as AgreementModel;
 
         for(const i in data)
@@ -79,9 +80,11 @@ import { SimpleCarComponent } from '../input_modules/car/simple/simple.component
         }
        
         this._main.SaveAgreement(agr,(res) => {
+            this.IsLoading = false;
             this._main.Navigate(["/prev","ndrivers"]);
         },
         (err) => {
+            this.IsLoading = false;
         })
     }
 

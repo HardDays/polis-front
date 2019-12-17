@@ -3,7 +3,7 @@ import { IMyDpOptions } from 'mydatepicker';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MainService } from '../core/services/main.service';
 import { AgreementModel, DriverModel } from '../core/models/agreement.model';
-import { SimpleCarComponent } from '../input_modules/car/simple/simple.component';
+import { DriverFormComponent } from '../input_modules/driver/driver.component';
 
 @Component({
   selector: 'app-drivers-cmp',
@@ -13,7 +13,7 @@ import { SimpleCarComponent } from '../input_modules/car/simple/simple.component
 export class DriversComponent implements OnInit{
 
     Drivers: DriverModel[] = [];
-    @ViewChildren('drivers') drivers: QueryList<SimpleCarComponent>
+    @ViewChildren('drivers') drivers: QueryList<DriverFormComponent>
 
     constructor(private _main: MainService)
     {
@@ -41,9 +41,24 @@ export class DriversComponent implements OnInit{
         let agr = this._main.Copy(this._main.Agreement) as AgreementModel;
         let result = [];
 
+        let isError = false;
         this.drivers.forEach(item => {
-            result.push(item.GetData());
+            const data = item.GetData();
+            if(!data)
+            {
+                isError = true;
+                item.Open();
+            }
+            else{
+                result.push(data);
+            }
+            
         });
+
+        if(isError)
+        {
+            return;
+        }
         
         agr.drivers = result;
         this._main.SaveAgreement(agr,
@@ -57,6 +72,10 @@ export class DriversComponent implements OnInit{
     AddDriver()
     {
         this.Drivers.push(new DriverModel());
+
+        setTimeout(() => {
+            this.drivers.last.Open();
+        }, 10);
     }
 
     DeleteDriver(index)

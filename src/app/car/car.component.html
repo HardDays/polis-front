@@ -6,6 +6,6 @@
         <div class="form">
             <app-simple-car-cmp #simple></app-simple-car-cmp>
         </div>
-
-        <button type="submit" class="button" (click)="SaveCar()">Да, всё верно</button>
+        <div class="polis__loading" [ngStyle]="{'display': IsLoading? 'flex' : 'none'}"><img style="margin: auto;" src="assets/img/loader.svg" alt=""></div>
+        <button class="button" [ngClass]="{'button--disabled': IsLoading}" type="submit" (click)="SaveCar()">Да, всё верно</button>
 </div>
