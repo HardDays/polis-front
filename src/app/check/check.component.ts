@@ -6,6 +6,7 @@ import { SimpleCarComponent } from '../input_modules/car/simple/simple.component
 import { FullCarComponent } from '../input_modules/car/full/full.component';
 import { DriverFormComponent } from '../input_modules/driver/driver.component';
 import { OwnerFormComponent } from '../input_modules/owner/owner.component';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-check-cmp',
@@ -30,12 +31,28 @@ export class CheckComponent implements OnInit{
   ShowInsurerModal = false;
   @ViewChild('insurer', {static: false}) insurer: OwnerFormComponent;
 
+  phoneMask = ['(', /\d/,/\d/,/\d/,')', ' ', /\d/, /\d/, /\d/,'-',/\d/,/\d/,'-',/\d/,/\d/];
+  Form: FormGroup = new FormGroup({
+    "phone": new FormControl('',[
+      Validators.required,
+      Validators.pattern(/^\(\d\d\d\)\s\d\d\d\-\d\d\-\d\d$/)
+    ])
+  });
+  ShowPhoneModal =  false;
+
   Agr: AgreementModel = new AgreementModel();
+
 
   constructor(private _main: MainService)
   {
     this.Agr = this._main.Copy(this._main.Agreement) as AgreementModel;
+
+    if(this.Agr.phone)
+    {
+        this.Form.get("phone").setValue(this.Agr.phone.replace(this.Agr.phone.slice(0,3), ""));
+    }
   }
+
   ngOnInit(): void {
     console.log(this.Agr);
   }
@@ -66,8 +83,6 @@ export class CheckComponent implements OnInit{
       },
       (err) => {
       })
-      
-
   }
 
   ValidateDc(data: AgreementModel)
@@ -171,6 +186,18 @@ export class CheckComponent implements OnInit{
 
       this.Agr.insurer = data;
       this.ShowInsurerModal = false;
+    }
+
+    ConfirmPhoneData()
+    {
+      if(this.Form.invalid)
+        return;
+
+      const data = this.Form.getRawValue();
+
+      this.Agr.phone = "+7 " + data.phone;
+
+      this.ShowPhoneModal = false;
     }
   
 }

@@ -71,6 +71,11 @@ import { conformToMask } from 'text-mask-core';
         ])
     });
 
+    get docType()
+    {
+        return this.Form.get('docType');
+    }
+
     constructor(private _main: MainService)
     {
         

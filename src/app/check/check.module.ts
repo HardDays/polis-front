@@ -10,6 +10,7 @@ import { EmailFormModule } from '../input_modules/email/email.module';
 import { DriverFormModule } from '../input_modules/driver/driver.module';
 import { OwnerFormModule } from '../input_modules/owner/owner.module';
 import { CarFormModule } from '../input_modules/car/car.module';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CarFormModule } from '../input_modules/car/car.module';
     EmailFormModule,
     CarFormModule,
     DriverFormModule,
-    OwnerFormModule
+    OwnerFormModule,
+    TextMaskModule
   ],
   providers: [ 
   ]

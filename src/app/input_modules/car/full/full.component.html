@@ -44,7 +44,7 @@
     </div>
 
     <div class="form__item form__item--calendar">
-        <label class="form__label">Дата выдачи</label>
+        <label class="form__label">Дата выдачи  {{docType.value ? 'СТС' : 'ПТС'}}</label>
         <div class="form__input datepicker-test" [ngClass]="{'form__input--error': Form.controls.docDate.invalid && (Form.controls.docDate.dirty || Form.controls.docDate.touched)}">
             <my-date-picker name="docDate" [options]="myDatePickerOptions" formControlName="docDate"
             ></my-date-picker>

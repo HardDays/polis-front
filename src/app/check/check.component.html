@@ -80,7 +80,7 @@
     <div class="page__driver page__driver--no_border page__driver--no_bottom">
         <div class="page__driver-top">
             <span class="page__driver-zag">Контактные данные:</span>
-            <span class="page__driver-edit"></span>
+            <span class="page__driver-edit" (click)="ShowPhoneModal = true"></span>
         </div>
 
         <div class="page__driver-info">
@@ -175,5 +175,39 @@
             (click)="ConfirmInsurerData()"
         >Сохранить</button>
         <button class="button button--white" (click)="ShowInsurerModal = false">Закрыть</button>
+    </div>
+</div>
+
+<div class="modal" [ngClass]="{'modal--opened': ShowPhoneModal}">
+    <div class="modal__content modal__content--edit">
+        <div class="page__driver page__driver--owner page__driver--bordered">
+            <div class="page__driver-top">
+                <span class="page__driver-name">Номер телефона</span>
+            </div>
+            <form [formGroup]="Form" (ngSubmit)="ConfirmPhoneData()">
+                <div class="form form--bottom_40">
+                    <div class="form__item">
+                        <label class="form__label">Телефон</label>
+                        <div class="form__phone-block">
+                            <div class="form__phone-code">
+                                <span class="form__phone-code-flag" style="background-image: url('assets/img/avto-country.svg')"></span>
+                                <span class="form__phone-code-text">+7</span>
+                            </div>
+                            <input
+                                [textMask]="{mask: phoneMask}" 
+                                formControlName="phone" 
+                                class="form__input form__input--phone" 
+                                name="phone"
+                                [ngClass]="{'form__input--error': Form.controls.phone.invalid && (Form.controls.phone.dirty || Form.controls.phone.touched)}"
+                            >
+                            <!-- <input type="text" class="form__input form__input--phone" placeholder="(999) 789 00 00"> -->
+                        </div>
+                    </div>
+                </div>
+        
+                <button class="button" [disabled]="Form.invalid" type="submit">Сохранить</button>
+                <button class="button button--white" (click)="ShowPhoneModal = false">Закрыть</button>
+            </form>
+        </div>
     </div>
 </div>

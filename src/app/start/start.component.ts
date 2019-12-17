@@ -27,7 +27,7 @@ import { AgreementModel } from '../core/models/agreement.model';
 
     constructor(private _main: MainService)
     {
-
+      // this.IsLoading = true;
     }
     ngOnInit(): void {
     }

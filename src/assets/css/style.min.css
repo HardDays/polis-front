@@ -1917,6 +1917,11 @@ footer {
   padding: 0 25px 0px 15px !important;
 }
 
+.loading--image, .custom--loading
+{
+  height: 40px;
+}
+
 .autocomplete-container .input-container .x i
 {
   /* display: none !important; */

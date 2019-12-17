@@ -246,9 +246,9 @@ import { conformToMask } from 'text-mask-core';
 
         return {
             date: {
-                year: split[0],
-                month: split[1],
-                day: split[2]
+                year: Number.parseInt(split[0]),
+                month: Number.parseInt(split[1]),
+                day: Number.parseInt(split[2])
             }
         }
     }

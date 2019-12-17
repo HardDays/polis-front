@@ -203,9 +203,8 @@ export class MainService
             const now = new Date();
             for(const i in obj.drivers)
             {
-                const res = now.getTime() - new Date(obj.drivers[i].birthdate).getTime();
-
-                obj.drivers[i].age = Math.round(res / (1000 * 60 * 60 * 24 * 365));
+                obj.drivers[i].age = this.GetAge(obj.drivers[i].birthdate);
+                obj.drivers[i].exp = this.GetAge(obj.drivers[i].expdate);
             }
         }
         this.http.CommonRequest(
@@ -262,5 +261,14 @@ export class MainService
         const age = new Date(diff);
 
         return Math.abs(age.getUTCFullYear() - 1970);
+    }
+
+    CheckKBM(data, success?: (data) => void, fail?: (err) => void )
+    {
+        this.http.CommonRequest(
+            () => this.http.PostData('/calculate/kbm', data),
+            success,
+            fail
+        );
     }
 }

@@ -5,7 +5,7 @@
         <div class="index__block">
             <span class="index__hint" (click)="ShowModal=true"></span>
 
-            <div class="polis polis--no_answer polis--loading">
+            <div class="polis">
 
                 <!-- <div class="create-product__row" *ngFor="let sk of SkData | keyvalue">
                     <div class="create-product__coll">
@@ -14,9 +14,9 @@
                     <div class="create-product__coll">{{sk.value.name}}</div>
                     <div class="create-product__coll">{{sk.value.total}} {{sk.value.currency}}</div>
                 </div> -->
-                    <div [ngClass]="{'polis__flex--load': IsLoading}" *ngFor="let sk of SkData | keyvalue" class="polis__flex polis__flex--offer">
+                    <div *ngFor="let sk of SkData | keyvalue" class="polis__flex">
                         <div class="polis__image" [ngStyle]="{'background-image': 'url(' + sk.value.img + ')'}"></div>
-                        <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div>
+                        <!-- <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div> -->
                         <div class="polis__before">
                             <ng-container *ngIf="!IsLoading">
                                 <span class="polis__before-price"> от {{sk.value.total}} {{sk.value.currency}}</span>
