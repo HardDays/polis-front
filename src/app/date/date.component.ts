@@ -12,7 +12,7 @@ import { AgreementModel } from '../core/models/agreement.model';
 export class DateComponent implements OnInit{
 
     @ViewChild('mydatepicker', {static: false}) mydp: MyDatePicker;
-    private selector: IMySelector = {
+    public selector: IMySelector = {
         open: false
     };
     myDatePickerOptions: IMyDpOptions = {

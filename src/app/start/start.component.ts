@@ -92,7 +92,7 @@ import { AgreementModel } from '../core/models/agreement.model';
       number = this._main.ReplaceAll(number, '\u2000','');
       this.IsLoading = true;
         this._main.CheckCarByNumber({
-            "number_plate": number
+            "number_plate": number.toLowerCase()
         },
         (res) => {
           this.IsLoading = false;

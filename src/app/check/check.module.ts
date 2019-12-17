@@ -7,9 +7,9 @@ import { RouterModule } from '@angular/router';
 import { CheckComponent } from './check.component';
 import { CheckRoutingModule } from './check.routing';
 import { EmailFormModule } from '../input_modules/email/email.module';
-import { CarFormModule } from '../../../car.module';
 import { DriverFormModule } from '../input_modules/driver/driver.module';
 import { OwnerFormModule } from '../input_modules/owner/owner.module';
+import { CarFormModule } from '../input_modules/car/car.module';
 
 @NgModule({
   declarations: [
