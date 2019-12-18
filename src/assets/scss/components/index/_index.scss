@@ -66,6 +66,7 @@
   &__image {
     flex-grow: 1;
     display: flex;
+    min-height: 270px;
 
     img {
       margin: auto;

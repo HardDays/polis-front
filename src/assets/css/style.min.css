@@ -57,6 +57,10 @@ button, input, textarea {
   outline: none;
 }
 
+input {
+  box-shadow: none!important;
+}
+
 button {
   padding: 0;
   border: 0;
@@ -250,6 +254,7 @@ footer {
       flex-grow: 1;
   display: -ms-flexbox;
   display: flex;
+  min-height: 270px;
 }
 
 .index__image img {
@@ -1309,9 +1314,10 @@ footer {
 
 .form__input {
   width: 100%;
-  background: #FCFCFC;
-  border: 1px solid #E3E3E3;
-  border-radius: 4px;
+  background: #FCFCFC!important;
+  border: 1px solid #E3E3E3!important;
+  border-radius: 4px!important;
+  box-shadow: none!important;
   height: 40px;
   font-size: 14px;
   font-family: "Helvetica Neue Cyr Roman", sans-serif;
