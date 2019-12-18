@@ -203,8 +203,10 @@ export class MainService
             const now = new Date();
             for(const i in obj.drivers)
             {
-                obj.drivers[i].age = this.GetAge(obj.drivers[i].birthdate);
-                obj.drivers[i].exp = this.GetAge(obj.drivers[i].expdate);
+                if(!obj.drivers[i].age)
+                    obj.drivers[i].age = this.GetAge(obj.drivers[i].birthdate);
+                if(!obj.drivers[i].exp && obj.drivers[i].expdate)
+                    obj.drivers[i].exp = this.GetAge(obj.drivers[i].expdate);
             }
         }
         this.http.CommonRequest(

@@ -17,6 +17,8 @@ export class AppComponent implements OnInit{
       (val) => {
         if(val instanceof NavigationEnd)
         {
+
+          // TODO опускается экран при переключении
           const url = val.url;
 
           if(url.indexOf("/prev") == 0 || url.indexOf("/full") == 0)
