@@ -62,14 +62,14 @@ import { DomSanitizer } from '@angular/platform-browser';
 
         if(agr.vehicle)
         {
-            text += "<p class=\"modal__text\">Автомобиль: <strong>" + agr.vehicle.brand + " " + agr.vehicle.model + ", " + agr.vehicle.power + "</strong></p>";
+            text += "<p class=\"modal__text\">Автомобиль: <strong>" + agr.vehicle.brand + " " + agr.vehicle.model + ", " + agr.vehicle.power + " Л. С.</strong></p>";
         }
 
         if(agr.drivers && agr.drivers.length > 0)
         {
             const age = (agr.drivers[0].age ? agr.drivers[0].age : this.GetAge(agr.drivers[0].birthdate));
-            const age_str = age + " " + ((age % 10 == 0 || age % 10 > 4) ? "лет": "года") + ", ";
-            const exp_str = agr.drivers[0].exp + " " + ((age % 10 == 0 || age % 10 > 4)? "лет": "года") + " стажа"
+            const age_str = this._main.GetAgeStr(age) + ", ";
+            const exp_str = this._main.GetAgeStr(agr.drivers[0].exp) + " стажа"
             text += "<p class=\"modal__text\">Водитель: <strong>" 
                 + agr.drivers[0].lastname + " "  
                 + agr.drivers[0].firstname + " " 

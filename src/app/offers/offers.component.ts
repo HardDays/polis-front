@@ -28,7 +28,7 @@ export class OffersComponent implements OnInit{
     
   }
   ngOnInit(): void {
-    this._main.Agreement.usePeriod = 12;
+    // this._main.Agreement.usePeriod = 12;
     if(this._main.Agreement.insurerIsOwner)
     {
       this._main.Agreement.insurer = null;

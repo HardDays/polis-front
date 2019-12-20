@@ -89,7 +89,7 @@ import { IMyDpOptions } from 'mydatepicker';
     ngOnInit(): void {
         // throw new Error("Method not implemented.");
         setInterval(() => {
-            this.Index = this.Index < 3 ? this.Index + 1 : 0;
+            this.Index = this.Index < 4 ? this.Index + 1 : 0;
         }, 4000);
     }
 

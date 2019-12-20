@@ -200,7 +200,8 @@ import { conformToMask } from 'text-mask-core';
 
         if(this.Addr)
         {
-            result.city = this.Addr.data.city_kladr_id;
+            result.city = this.Addr.data.city_kladr_id ? this.Addr.data.city_kladr_id : 
+                (this.Addr.data.settlement_kladr_id ? this.Addr.data.settlement_kladr_id : this.Addr.data.kladr_id);
             result.street = this.Addr.data.street_with_type ? this.Addr.data.street_with_type : this.Addr.data.street;
             result.house = this.Addr.data.house;
             result.apartment = this.Addr.data.flat ? this.Addr.data.flat : null;
@@ -267,6 +268,7 @@ import { conformToMask } from 'text-mask-core';
 
     selectEvent($event)
     {
+        console.log($event);
         this.Addr = $event;
     }
 

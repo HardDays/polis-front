@@ -13,7 +13,6 @@ export class OfferComponent implements OnInit{
   Offer = {} as any;
   IsLoading = false;
   Url = '';
-  ButtonDisabled = true;
   ShowModal = false;
 
   Phone = "";
@@ -38,6 +37,11 @@ export class OfferComponent implements OnInit{
     this.Form.get('phone').patchValue(agr.phone.replace("+7", ""));
   }
   ngOnInit(): void {
+    // if(localStorage.getItem('payurl'))
+    // {
+    //   this.Url = localStorage.getItem('payurl');
+    // }
+
     this.IsLoading = true;
 
     const data = {
@@ -61,9 +65,15 @@ export class OfferComponent implements OnInit{
 
   GetPaymentHandler(eId, data?)
   {
+    
+    this.IsLoading = true;
     this._main.GetPaymentUrl(eId, data,
       (res) => {
-        if(res.results)
+        if(res.errors && res.errors[0] && res.errors[0] == "Создать дубль расчета.")
+        {
+          this.Url = localStorage.getItem('payurl');
+        }
+        else if(res.results)
         {
           if(res.results.needSmsCode)
           {
@@ -71,7 +81,7 @@ export class OfferComponent implements OnInit{
           }
           else{
             this.Url = res.results;
-            this.ButtonDisabled = false;
+            // this.ButtonDisabled = false;
             this.ShowModal = false;
           }
         }
@@ -98,13 +108,17 @@ export class OfferComponent implements OnInit{
 
   GetUrl()
   {
-    if(!this.IsLoading && !this.ButtonDisabled && this.Url)
+    if(!this.IsLoading && this.Url)
     {
       this.IsLoading = true;
       
       localStorage.setItem('payurl', this.Url);
       location.href = this.Url;
 
+    }
+    else if (!this.Url)
+    {
+      this._main.Navigate(['/offers']);
     }
   }
 }

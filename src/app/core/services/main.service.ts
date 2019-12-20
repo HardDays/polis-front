@@ -47,7 +47,7 @@ export class MainService
             name: 'Согласие',
             currency: 'р.',
             total: 0,
-            img: 'assets/img/sg.svg',
+            img: 'assets/img/sg.png',
             base_rate: 0,
             status: 'loading'
         },
@@ -286,5 +286,26 @@ export class MainService
             success,
             fail
         );
+    }
+
+
+    GetAgeStr(age)
+    {
+        let result = age + " ";
+
+        if(age % 10 == 0 || age % 10 >= 5 || (age > 10 && age < 15))
+        {
+            result += "лет";
+        }
+        else
+        {
+            result += "год";
+            if ( age % 10 != 1)
+            {
+                result += "а";
+            }
+        }
+
+        return result;
     }
 }

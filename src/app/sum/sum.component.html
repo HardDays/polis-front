@@ -1,6 +1,15 @@
 <div class="content content--blue">
     <div class="index index--with_footer">
-        <p class="index__title polis__title">Стоимость полиса с учетом<br>водителей<span>Готово! Мы сделали расчет для {{Drivers.length}}-х водителей</span></p>
+        <p class="index__title polis__title">Стоимость полиса 
+            <ng-container *ngIf="Drivers.length > 0">с учетом<br>{{Drivers.length == 1 ? 'водителя' : 'водителей'}}</ng-container>
+            <span>Готово! Мы сделали расчет 
+                <ng-container *ngIf="Drivers.length == 0">
+                    без ограничений по количеству водителей
+                </ng-container>
+                <ng-container *ngIf="Drivers.length > 0">
+                    для {{Drivers.length}}-{{Drivers.length == 1 ? 'го водителя' : 'х водителей'}}
+                </ng-container>
+            </span></p>
 
         <div class="index__block">
 

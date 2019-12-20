@@ -13,12 +13,12 @@
         <img src="assets/img/chosen-company.jpg" alt="">
     </div>
     <p class="page__card-text">Вы получите полис после оплаты на сайте страхователя и сможете проверить его по <a href="#">базе РСА</a></p>
-    <div class="polis__loading" [ngStyle]="{'display': IsLoading? 'flex' : 'none'}"><img style="margin: auto;" src="assets/img/loader.svg" alt=""></div>
+    <div class="polis__loading custom--loading" style="display: flex;"><img class="loading--image" *ngIf="IsLoading" style="margin: auto;" src="assets/img/loading1.svg" alt=""></div>
     <button class="button" [ngClass]="{'button--disabled': IsLoading && ButtonDisabled}" (click)="GetUrl()">Оплатить</button>
 </div>
 <div class="modal" [ngClass]="{'modal--opened': ShowModal}">
     <div class="modal__content">
-        <div class="modal__head">Необходимо подтвердить телефон</div>
+        <div class="modal__head">Перед оплатой полиса в {{Offer.name}} необходимо ввести код из смс.</div>
         <div class="modal__data">
             <form [formGroup]="Form" (ngSubmit)="ConfirmPhone()">
                 <div class="form form--bottom_40">
@@ -45,8 +45,8 @@
                         >
                     </div>
                 </div>
-        
-                <button class="button" [disabled]="Form.invalid" type="submit">Подтвердить</button>
+                <div class="polis__loading custom--loading" style="display: flex;"><img *ngIf="IsLoading" class="loading--image" style="margin: auto;" src="assets/img/loading1.svg" alt=""></div>
+                <button class="button" [ngClass]="{'button--disabled': IsLoading}" type="submit">Подтвердить</button>
                 <button class="button button--white" (click)="Navigate()">Отменить</button>
             </form>
         </div>

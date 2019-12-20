@@ -6,6 +6,7 @@
     <p class="page__card-text">Мы сохранили ваши данные, обновите диагностическую карту и продолжайте оформление.</p>
     <p class="page__card-name">Что нужно сделать сейчас?</p>
     <swiper [(index)]="Index">
+        
         <div>
             <div class="page__card-image">
                 <img src="assets/img/card1.jpg" alt="">
@@ -17,6 +18,12 @@
                 <img src="assets/img/card2.jpg" alt="">
             </div>
             <p class="page__card-text">Введите номер диагностической карты ТО</p>
+        </div>
+        <div>
+            <div class="page__card-image">
+                <img src="assets/img/card4.jpg" alt="">
+            </div>
+            <p class="page__card-text">В случае ввода заведомо ложных данных страховая компания, в случае дтп, имеет право отказать в страховой выплате.</p>
         </div>
         <div>
             <div class="page__card-image">
@@ -37,6 +44,7 @@
         <li (click)="Index=1" class="index__dot" [ngClass]="{'index__dot--active': Index == 1}"></li>
         <li (click)="Index=2" class="index__dot" [ngClass]="{'index__dot--active': Index == 2}"></li>
         <li (click)="Index=3" class="index__dot" [ngClass]="{'index__dot--active': Index == 3}"></li>
+        <li (click)="Index=4" class="index__dot" [ngClass]="{'index__dot--active': Index == 4}"></li>
     </ul>
 
     <div class="form">

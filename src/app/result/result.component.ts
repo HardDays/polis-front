@@ -28,7 +28,7 @@ export class ResultComponent implements OnInit{
     this.Offer = this._main.Copy(this._main.Offer) as any;
     this.Email = this._main.Agreement.email;
     this.Timer = setInterval(()=> this.ProcessTimer(), 1000);
-    console.log(JSON.stringify(this.Offer));
+    // console.log(JSON.stringify(this.Offer));
     this.CheckPaymentStatus();
     // console.log(window.location, document.URL);
     this.QueryTimer = setInterval(() => this.CheckPaymentStatus(), 15000);
