@@ -14,7 +14,7 @@
     </div>
     <p class="page__card-text">Вы получите полис после оплаты на сайте страхователя и сможете проверить его по <a href="#">базе РСА</a></p>
     <div class="polis__loading custom--loading" style="display: flex;"><img class="loading--image" *ngIf="IsLoading" style="margin: auto;" src="assets/img/loading1.svg" alt=""></div>
-    <button class="button" [ngClass]="{'button--disabled': IsLoading && ButtonDisabled}" (click)="GetUrl()">Оплатить</button>
+    <button class="button" [ngClass]="{'button--disabled': IsLoading}" (click)="GetUrl()">Оплатить</button>
 </div>
 <div class="modal" [ngClass]="{'modal--opened': ShowModal}">
     <div class="modal__content">
