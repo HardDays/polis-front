@@ -25,8 +25,15 @@ export class OffersComponent implements OnInit{
 
   constructor(private _main: MainService)
   {
+    
   }
   ngOnInit(): void {
+    this._main.Agreement.usePeriod = 12;
+    if(this._main.Agreement.insurerIsOwner)
+    {
+      this._main.Agreement.insurer = null;
+    }
+    console.log(this._main.Agreement);
     this.InsurerData = this._main.Copy(this._main.Agreement.insurerIsOwner ? this._main.Agreement.owner : this._main.Agreement.insurer) as OwnerModel;
     this.SkData = this._main.Copy(this._main.SkEnum) as any;
     this.Total = Object.keys(this.SkData).length;

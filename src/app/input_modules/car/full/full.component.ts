@@ -175,9 +175,18 @@ import { conformToMask } from 'text-mask-core';
         const data = this.Form.getRawValue();
         result[data.num_type] = data.number;
         result.docType = data.docType;
-        const splitData = data.doc_number.split(" ");
-        result.docSerial = splitData[0] + splitData[1];
-        result.docNumber = splitData[2];
+        
+        if(result.docType == 2)
+        {
+            result.docNumber = this._main.ReplaceAll(data.doc_number, " ", "");
+            result.docSerial = null;
+        }
+        else{
+            const splitData = data.doc_number.split(" ");
+            result.docSerial = splitData[0] + splitData[1];
+            result.docNumber = splitData[2];
+        }
+        
 
         result.docDate = this.ParseDateObjToStr(data.docDate);
 

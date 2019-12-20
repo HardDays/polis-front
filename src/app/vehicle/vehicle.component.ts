@@ -22,6 +22,7 @@ export class VehicleComponent implements OnInit{
     @ViewChild('full', {static: false}) full: FullCarComponent;
     constructor(private _main: MainService)
     {
+        console.log(this._main.Agreement);
         this.Vehicle = this._main.Copy(this._main.Agreement.vehicle) as VehicleModel;
     }
     ngOnInit(): void 

@@ -39,11 +39,19 @@ export class DateComponent implements OnInit{
     Form: FormGroup = new FormGroup({
         "date": new FormControl('',[
           Validators.required
+        ]),
+        "usePeriod": new FormControl(12, [
+            Validators.required
         ])
     });
 
     constructor(private _main: MainService)
     {
+        const data = this._main.Copy(this._main.Agreement) as AgreementModel;
+
+        if(data.usePeriod)
+            this.Form.get('usePeriod').patchValue(data.usePeriod)
+        console.log(this._main.Agreement);
         // this.datepicker.openSelector(1);
     }
     ngOnInit(): void {
@@ -77,7 +85,8 @@ export class DateComponent implements OnInit{
         {
             const vals = this.Form.getRawValue();
             let agr = this._main.Copy(this._main.Agreement) as AgreementModel;
-            agr.date = vals.date.date.year + "-" + vals.date.date.month + "-" + vals.date.date.day;  
+            agr.date = this._main.ParseDateObjToStr(vals.date);  
+            agr.usePeriod = typeof vals.usePeriod == 'number' ? vals.usePeriod : Number.parseInt(vals.usePeriod);
 
             this._main.SaveAgreement(agr,(res) => {
                 this._main.Navigate(['/full', 'vehicle']);

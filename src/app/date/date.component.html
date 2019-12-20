@@ -81,7 +81,13 @@
                 </div>
                 <div class="form__item">
                     <label class="form__label">Период страхования</label>
-                    <input class="form__input" type="text">
+                    <select class="form__input" formControlName="usePeriod">
+                        <option value="12">1 год</option>
+                        <option value="9">9 месяцев</option>
+                        <option value="6">6 месяцев</option>
+                        <option value="3">3 месяца</option>
+                    </select>
+                    <!-- <input  type="text"> -->
                 </div>
             </div>
 

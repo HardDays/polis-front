@@ -35,7 +35,7 @@ export class MainService
         },
         5: {
             id: 5,
-            name: 'Росгоссрах',
+            name: 'Росгосстрах',
             currency: 'р.',
             total: 0,
             img: 'assets/img/rgs.png',
@@ -269,6 +269,20 @@ export class MainService
     {
         this.http.CommonRequest(
             () => this.http.PostData('/calculate/kbm', data),
+            success,
+            fail
+        );
+    }
+
+    ParseDateObjToStr(obj)
+    {
+        return obj.date.year + "-" + (obj.date.month < 10 ? "0": "") + obj.date.month + "-" + (obj.date.day < 10 ? "0" : "") + obj.date.day;
+    }
+
+    CheckPayment(Id, success?: (data) => void, fail?: (err) => void)
+    {
+        this.http.CommonRequest(
+            () => this.http.GetData('/pay/status/' + Id, ''),
             success,
             fail
         );

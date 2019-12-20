@@ -1,0 +1,33 @@
+<div class="page__top" [ngClass]="{'page__top--payment_success': IsSuccess, 'page__top--payment_error': IsError}">
+    <ng-container *ngIf="IsLoading">
+        <p class="page__title">Проверяем статус оплаты<br><br>{{TimerLabel}}</p>
+    </ng-container>
+    <ng-container *ngIf="IsSuccess">
+        <p class="page__title">Отлично, оплата прошла<br>успешно, ваш полис готов!</p>
+    </ng-container>
+    <ng-container *ngIf="IsError">
+        <p class="page__title">К сожалению, страховая компания не смогла провести платёж</p>
+    </ng-container>
+</div>
+
+<div class="page__block page__block--bottom_margin">
+    <div class="polis__loading custom--loading" *ngIf="IsLoading" style="display: flex;"><img class="loading--image" style="margin: auto;" src="assets/img/loading1.svg" alt=""></div>
+    <ng-container *ngIf="IsSuccess">
+        <p class="page__card-text">Полис отправлен на вашу почту:<br>{{Email}}. Вы можете проверить полис по базе <a href="https://dkbm-web.autoins.ru/dkbm-web-1.0/bsostate.htm">Российского Союза Автостраховщиков</a></p>
+        <div class="page__card-image">
+            <img src="assets/img/polis.jpg" alt="">
+        </div>
+        <button class="button" type="submit">Скачать полис</button>
+    </ng-container>
+    <ng-container *ngIf="IsError">
+        <div class="page__text-block">
+            <p class="page__card-text">Возможно, это произошло по техническим причинам. Попробуйте оплатить позже или выберите другую страховую компанию.</p>
+            <p class="page__card-text">Ссылка на повторную оплату сформирована и отправлена на вашу почту:<br><strong>{{Email}}</strong></p>
+        </div>
+
+        <button class="button" [routerLink]="['/offers']">Повторить попытку</button>
+        <button class="button button--white" [routerLink]="['/offers']">Выбрать другое предложение</button>
+    </ng-container>
+    
+    
+</div>

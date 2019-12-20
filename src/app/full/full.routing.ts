@@ -13,7 +13,9 @@ const routes: Routes = [
             { path: 'insurer', loadChildren: 'src/app/insurer/insurer.module#InsurerModule'},
             { path: 'check', loadChildren: 'src/app/check/check.module#CheckModule'},
             { path: 'offer', loadChildren: 'src/app/offer/offer.module#OfferModule'},
-            { path: 'dc', loadChildren: 'src/app/dc/dc.module#DcModule'}
+            { path: 'dc', loadChildren: 'src/app/dc/dc.module#DcModule'},
+            { path: 'fail', loadChildren: 'src/app/fail/fail.module#FailModule'},
+            { path: 'result', loadChildren: 'src/app/result/result.module#ResultModule'}
         ]
     }
 ];

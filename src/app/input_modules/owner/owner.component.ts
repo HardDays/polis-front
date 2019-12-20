@@ -238,7 +238,7 @@ import { conformToMask } from 'text-mask-core';
 
     ParseDateObjToStr(obj)
     {
-        return obj.date.year + "-" + obj.date.month + "-" + obj.date.day;
+        return this._main.ParseDateObjToStr(obj);
     }
 
     ParseStrToObj(str: string)

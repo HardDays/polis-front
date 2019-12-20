@@ -15,7 +15,7 @@
             <p *ngIf="Agr.vehicle.vin"><span>VIN:</span> {{Agr.vehicle.vin}}</p>
             <p *ngIf="Agr.vehicle.chassisNum"><span>№ ШАССИ:</span> {{Agr.vehicle.chassisNum}}</p>
             <p *ngIf="Agr.vehicle.bodyNum"><span>№ КУЗОВА:</span> {{Agr.vehicle.bodyNum}}</p>
-            <p><span>{{Agr.vehicle.docType ? 'СТС' : 'ПТС'}}:</span> {{Agr.vehicle.docSerial}}{{Agr.vehicle.docNumber}} от {{Agr.vehicle.docDate | date: 'dd.MM.yyyy' }}</p>
+            <p><span>{{Agr.vehicle.docType == 1 ? 'СТС' : (Agr.vehicle.docType == 2 ? 'ЭПТС' : 'ПТС')}}:</span> {{Agr.vehicle.docSerial}}{{Agr.vehicle.docNumber}} от {{Agr.vehicle.docDate | date: 'dd.MM.yyyy' }}</p>
         </div>
 
     </div>

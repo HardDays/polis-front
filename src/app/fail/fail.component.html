@@ -1,0 +1,12 @@
+<div class="page__top page__top--payment_error page__top--payment_cancel">
+    <p class="page__title">Платеж отменен</p>
+</div>
+
+<div class="page__block page__block--bottom_margin">
+    <div class="page__text-block">
+        <p class="page__card-text">Вы ввели неправильные данные карты или недостаточно денег. Внимательно проверьте все заполняемые поля и баланс карты.<br>Попробуйте снова.</p>
+    </div>
+
+    <button class="button" (click)="Navigate()">Повторить попытку</button>
+    <button class="button button--white" [routerLink]="['/offers']">Выбрать другое предложение</button>
+</div>

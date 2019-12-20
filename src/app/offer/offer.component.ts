@@ -39,14 +39,24 @@ export class OfferComponent implements OnInit{
   }
   ngOnInit(): void {
     this.IsLoading = true;
-    this.GetPaymentHandler(this.Offer.eId)
+
+    const data = {
+      successUrl: window.location.origin + "/full/result",
+      failUrl: window.location.origin + "/full/fail"
+    };
+    this.GetPaymentHandler(this.Offer.eId, data);
     
   }
 
   ConfirmPhone()
   {
     const data = this.Form.getRawValue()
-    this.GetPaymentHandler(this.Offer.eId, {smsCode: data.code});
+    const params = {
+      successUrl: window.location.origin + "/full/result",
+      failUrl: window.location.origin + "/full/fail",
+      smsCode: data.code
+    };
+    this.GetPaymentHandler(this.Offer.eId, params);
   }
 
   GetPaymentHandler(eId, data?)
@@ -91,7 +101,10 @@ export class OfferComponent implements OnInit{
     if(!this.IsLoading && !this.ButtonDisabled && this.Url)
     {
       this.IsLoading = true;
+      
+      localStorage.setItem('payurl', this.Url);
       location.href = this.Url;
+
     }
   }
 }
