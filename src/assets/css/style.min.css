@@ -61,6 +61,13 @@ input {
   box-shadow: none!important;
 }
 
+input[type=text], textarea, input[type="range"], input, input:matches([type="password"], [type="search"]), select {   
+  /* Remove First */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 button {
   padding: 0;
   border: 0;
