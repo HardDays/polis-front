@@ -4,7 +4,7 @@
 
 <div class="page__block page__block--bottom_margin">
         <div class="form">
-            <app-simple-car-cmp #simple></app-simple-car-cmp>
+            <app-simple-car-cmp #simple [Car]="Vehicle"></app-simple-car-cmp>
         </div>
         <div class="polis__loading" [ngStyle]="{'display': IsLoading? 'flex' : 'none'}"><img style="margin: auto;" src="assets/img/loader.svg" alt=""></div>
         <button class="button" [ngClass]="{'button--disabled': IsLoading}" type="submit" (click)="SaveCar()">Да, всё верно</button>

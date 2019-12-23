@@ -34,6 +34,12 @@ import { MainService } from 'src/app/core/services/main.service';
     });
 
 
+    CarModel = {
+        model: "",
+        brand: "",
+        full_title: ""
+    };
+
     Data = {
         model: {
             model: "",
@@ -81,15 +87,18 @@ import { MainService } from 'src/app/core/services/main.service';
     }
     constructor(private _main: MainService)
     {
-        this.Car = this._main.Copy(this._main.Agreement.vehicle);
+        // this.Car = this._main.Copy(this._main.Agreement.vehicle);
         
         
     }
     ngOnInit(): void {
         if(this.Car)
         {
-            this.Data.power = this.Car.power ? this.Car.power : null;
-            this.Data.year = this.Car.year ? this.Car.year : null;
+            const data = {
+                power: this.Car.power ? this.Car.power : null,
+                year: this.Car.year ? this.Car.year : null
+            };
+            this.Form.patchValue(data);
 
             if(this.Car.brand && this.Car.model)
             {
@@ -99,13 +108,15 @@ import { MainService } from 'src/app/core/services/main.service';
                     const index = this.ModelsDics.findIndex(obj => obj.full_title == full_title);
                     if(index >= 0)
                     {
-                        this.Data.model = this.ModelsDics[index];
+                        this.CarModel = this.ModelsDics[index];
+                        this.Form.get('model').patchValue(this.CarModel.full_title);
+                        // this.Data.model = this.ModelsDics[index];
                     }
                 });
             }
         }
 
-        this.Form.patchValue(this.Data);
+        
     }
 
 
@@ -128,7 +139,16 @@ import { MainService } from 'src/app/core/services/main.service';
 
     selectEvent($event)
     {
-        this.Data.model = $event;
+        this.CarModel = $event;
+    }
+
+    unselectEvent()
+    {
+        this.CarModel = {
+            model: "",
+            brand: "",
+            full_title: ""
+        };
     }
 
     GetData()
@@ -149,8 +169,8 @@ import { MainService } from 'src/app/core/services/main.service';
         const result = {} as any;
         const agr = this._main.Copy(this._main.Agreement) as AgreementModel;
 
-        result.model = this.Data.model.model;
-        result.brand = this.Data.model.brand;
+        result.model = this.CarModel.model;
+        result.brand = this.CarModel.brand;
 
         const data = this.Form.getRawValue();
         if( typeof data.power == 'string')

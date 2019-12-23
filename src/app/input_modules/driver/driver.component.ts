@@ -115,6 +115,21 @@ import { conformToMask } from 'text-mask-core';
         return this.Form.get('expdate');
     }
 
+    FioOptions: any[] = [];
+
+    Fio = {
+        value: "",
+        unrestricted_value: "",
+        data: {
+            surname: "",
+            name: "",
+            patronymic: "",
+            gender: "",
+            source: null,
+            qc: 0
+        }
+    } as any;
+
     BdayDisable()
     {
         const date = new Date();
@@ -170,6 +185,15 @@ import { conformToMask } from 'text-mask-core';
 
 
             data.name = arr.join(" ");
+
+            this._main.GetFio(data.name, (res)=>{
+                if(res && res.length > 0)
+                {
+                    this.Fio = res[0];
+                    // console.log(this.Fio);
+                    //Галавиев Ильфат Ринатович
+                }
+            })
         }
 
         if(this.driver.licenseSerial || this.driver.licenseNumber)
@@ -194,11 +218,16 @@ import { conformToMask } from 'text-mask-core';
 
     GetData()
     {
+        
         for(const i in this.Form.controls)
         {
             this.Form.get(i).markAsDirty();
             this.Form.get(i).markAsTouched();
             this.Form.get(i).updateValueAndValidity();
+        }
+        if(!this.Fio || !this.Fio.data.name || !this.Fio.data.surname)
+        {
+            this.name.setErrors({'wrong': true});
         }
         this.Form.updateValueAndValidity();
 
@@ -213,14 +242,10 @@ import { conformToMask } from 'text-mask-core';
         result.expdate = this.ParseDateObjToStr(data.expdate);
         result.licenseDate = result.expdate;
 
-        const split = data.name.split(" ");
-
-        const lname = split[0];
-        const fname = split[1];
-        const mname = split.length > 2 ? split[2] : "";
-        result.firstname = fname;
-        result.lastname = lname;
-        result.middlename = mname;
+        
+        result.firstname = this.Fio.data.name;
+        result.lastname = this.Fio.data.surname;
+        result.middlename = this.Fio.data.patronymic;
 
         const spl = data.license.split(" ");
         result.licenseSerial = spl[0] + spl[1];
@@ -256,6 +281,28 @@ import { conformToMask } from 'text-mask-core';
     Open()
     {
         this.IsOpened = true;
+    }
+    UpdateDics($event)
+    {
+        // const kladr = this._main.Agreement.owner.city;
+        this._main.GetFio($event,
+            (res) => {
+                this.FioOptions = res;
+            },
+            (err) => {
+
+            })
+    }
+
+    selectEvent($event)
+    {
+        this.Fio = $event;
+        console.log(this.Fio);
+    }
+
+    unselectEvent()
+    {
+        this.Fio = null as any;
     }
 
 

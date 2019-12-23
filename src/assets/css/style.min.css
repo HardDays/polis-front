@@ -108,7 +108,7 @@ footer {
 }
 
 .content--scrolling_polis .index__block {
-  max-height: calc(100vh - 58px - 45px - 86px)!important;
+  max-height: calc(100vh - 58px - 45px - 160px)!important;
 }
 
 .content--scrolling_polis .polis {

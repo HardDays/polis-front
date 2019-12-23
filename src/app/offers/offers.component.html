@@ -24,37 +24,49 @@
                         <div class="polis__flex polis__flex--offer">
                             <div class="polis__image" [ngStyle]="{'background-image': 'url(' + sk.value.img + ')'}"></div>
                             <div class="polis__price">{{sk.value.total}} ₽</div>
-                            <div class="polis__loading">
-                                <img src="assets/img/loader.svg" alt="">
+                            <!-- <div class="polis__loading"> -->
+                                <!-- <img src="assets/img/loader.svg" alt=""> -->
                                 <!-- <img src="assets/img/loading1.svg" alt=""> -->
-                            </div>
+                            <!-- </div> -->
                             <button class="button polis__button" (click)="Navigate(sk.value)">Оформить</button>
                         </div>
                     </ng-container>
                 </ng-container>
                 <ng-container *ngFor="let sk of SkData | keyvalue">
                     <ng-container *ngIf="sk.value.status == 'loading'">
-                        <div class="polis__flex polis__flex--offer"  [ngClass]="{'polis__flex--load': sk.value.status == 'loading'}">
-                            <div class="polis__image" [ngStyle]="{'background-image': 'url(' + sk.value.img + ')'}"></div>
-                            <div class="polis__price">{{sk.value.total}} ₽</div>
+                        <div class="polis__flex polis__flex--load">
+                            <div class="polis__image polis__image--inactive" [ngStyle]="{'background-image': 'url(' + sk.value.img + ')'}"></div>
+                            <!-- <div class="polis__price">{{sk.value.total}} ₽</div> -->
                             <div class="polis__loading custom--loading" style="display: flex;">
                                 <img class="loading--image" style="margin: auto;" src="assets/img/loading1.svg" alt="">
                             </div>
-                            <!-- <div class="polis__loading  custom--loading">
-                                <img src="assets/img/loader.svg" alt="">
-                                <img src="assets/img/loading1.svg" alt="">
-                            </div> -->
-                            <button class="button polis__button" (click)="Navigate(sk.value)">Оформить</button>
+                            <div class="polis__no-right"></div>
+                            <!-- <button class="button polis__button" (click)="Navigate(sk.value)">Оформить</button> -->
                         </div>
                     </ng-container>
                 </ng-container>
                 <p class="polis__partner">Вы можете оформить ОСАГО в офисе нашего партнера:</p>
                 <div class="polis__flex polis__flex--active polis__flex--partner">
-                    <div class="polis__image"><img src="assets/img/brokers.png" alt=""></div>
+                    <div class="polis__image"><img src="assets/img/brokers.svg" alt=""></div>
                     <!-- <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div> -->
                     <button class="button polis__button" (click)="Navigate(null)">Оформить</button>
                     <!-- <div class="polis__no-right">3 700 ₽/год</div> -->
                 </div>
+                <ng-container *ngFor="let sk of SkData | keyvalue">
+                    <ng-container *ngIf="sk.value.status == 'error'">
+                        <div class="polis__flex">
+                            <div class="polis__image polis__image--inactive" [ngStyle]="{'background-image': 'url(' + sk.value.img + ')'}"></div>
+                            <!-- <div class="polis__price">{{sk.value.total}} ₽</div> -->
+                            <!-- <div class="polis__loading custom--loading" style="display: flex;">
+                                <img class="loading--image" style="margin: auto;" src="assets/img/loading1.svg" alt="">
+                            </div> -->
+                            <div class="polis__no-right">Нет ответа</div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+
+                
+                
                 
             </div>
         </div>

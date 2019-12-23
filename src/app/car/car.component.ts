@@ -17,6 +17,7 @@ import { SimpleCarComponent } from '../input_modules/car/simple/simple.component
   export class CarComponent implements OnInit 
   {
 
+    Vehicle: VehicleModel = new VehicleModel();
     IsLoading = false;
     @ViewChild('simple', {static: false}) simple: SimpleCarComponent;
 
@@ -57,7 +58,7 @@ import { SimpleCarComponent } from '../input_modules/car/simple/simple.component
     }
     constructor(private _main: MainService)
     {
-        
+        this.Vehicle = this._main.Copy(this._main.Agreement.vehicle) as VehicleModel;
     }
     ngOnInit(): void {
 

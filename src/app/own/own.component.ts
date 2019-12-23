@@ -99,6 +99,20 @@ import { IMyDpOptions } from 'mydatepicker';
     }
     SelectedKladr = {} as any;
 
+    FioOptions: any[] = [];
+
+    Fio = {
+        value: "",
+        unrestricted_value: "",
+        data: {
+            surname: "",
+            name: "",
+            patronymic: "",
+            gender: "",
+            source: null,
+            qc: 0
+        }
+    } as any;
     
     constructor(private _main: MainService)
     {
@@ -107,7 +121,18 @@ import { IMyDpOptions } from 'mydatepicker';
         this.IsOwner = data.insurerIsOwner;
 
         if(data.name)
+        {
             this.Form.get("fio").setValue(data.name);
+            this._main.GetFio(data.name, (res)=>{
+                if(res && res.length > 0)
+                {
+                    this.Fio = res[0];
+                    // console.log(this.Fio);
+                    //Галавиев Ильфат Ринатович
+                }
+            })
+        }
+            
 
         if(data.owner && data.owner.birthdate)
         {
@@ -148,13 +173,16 @@ import { IMyDpOptions } from 'mydatepicker';
             (err) => {
             })
         }
+
+
+            
         
     }
     ngOnInit(): void {
         // throw new Error("Method not implemented.");
     }
 
-    UpdateDics($event, callback?:() => void)
+    UpdateKladrDics($event, callback?:() => void)
     {
         this._main.KladrDics($event, (res) => {
             this.CityDics = res;
@@ -171,9 +199,14 @@ import { IMyDpOptions } from 'mydatepicker';
         })
     }
 
-    selectEvent($event)
+    selectKladrEvent($event)
     {
         this.SelectedKladr = $event;
+    }
+
+    unselectKladrEvent()
+    {
+        this.SelectedKladr = {} as any;
     }
 
     Save()
@@ -184,7 +217,12 @@ import { IMyDpOptions } from 'mydatepicker';
             this.Form.get(i).markAsTouched();
             this.Form.get(i).updateValueAndValidity();
         }
+        if(!this.Fio || !this.Fio.data.name || !this.Fio.data.surname)
+        {
+            this.Form.get('fio').setErrors({'wrong': true});
+        }
         this.Form.updateValueAndValidity();
+
         if(!this.Form.valid || !this.Form.get('check').value)
         {
             this.IsError = true;
@@ -194,11 +232,14 @@ import { IMyDpOptions } from 'mydatepicker';
         const data = this.Form.getRawValue();
         const agr = this._main.Copy(this._main.Agreement) as AgreementModel;
 
-        const split = data.fio.split(" ");
+        // result.firstname = this.Fio.data.name;
+        // result.lastname = this.Fio.data.surname;
+        // result.middlename = this.Fio.data.patronymic;
+        // const split = data.fio.split(" ");
 
-        const lname = split[0];
-        const fname = split[1];
-        const mname = split.length > 2 ? split[2] : "";
+        const lname = this.Fio.data.surname;
+        const fname = this.Fio.data.name;
+        const mname = this.Fio.data.patronymic;
 
         if(!agr.multidrive)
         {
@@ -230,11 +271,12 @@ import { IMyDpOptions } from 'mydatepicker';
         
         agr.owner.city = this.SelectedKladr.data.kladr_id;
 
-        agr.name = data.fio;
+        agr.name = this.Fio.value;
         agr.phone = "+7 " + data.phone;
 
 
         this._main.SaveAgreement(agr,(res) => {
+            console.log(res);
             this._main.Navigate(["/prev", "confirm"]);
             // this._main.Navigate("ndrivers");
         },
@@ -306,13 +348,38 @@ import { IMyDpOptions } from 'mydatepicker';
                 {
                     return {'wrong': true};
                 }
-
-                console.log(diff, val);
                 
             }
             return null;
           };
     }
+
+    RegionInputCleared()
+    {
+        this.SelectedKladr = {} as any;
+    }
   
+    UpdateFioDics($event)
+    {
+        // const kladr = this._main.Agreement.owner.city;
+        this._main.GetFio($event,
+            (res) => {
+                this.FioOptions = res;
+            },
+            (err) => {
+
+            })
+    }
+
+    selectFioEvent($event)
+    {
+        this.Fio = $event;
+        console.log(this.Fio);
+    }
+
+    unselectFioEvent()
+    {
+        this.Fio = null as any;
+    }
   }
   

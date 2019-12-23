@@ -195,6 +195,16 @@ export class MainService
         )
     }
 
+    GetFio(Query, success?: (data) => void, fail?: (err) => void)
+    {
+        this.http.CommonRequest(
+            () => this.http.GetData('/dadata/fio',"query=" + Query),
+            success,
+            fail
+        )
+    }
+
+
     LiteCalculation(success?: (data) => void, fail?: (err) => void)
     {
         const obj = this.Copy(this.Agreement) as AgreementModel;

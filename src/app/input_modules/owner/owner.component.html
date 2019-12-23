@@ -2,12 +2,37 @@
     <div class="form form--small">
         <div class="form__item">
             <label class="form__label">ФИО</label>
-            <input type="text" 
+            <!-- <input type="text" 
                 class="form__input" 
                 formControlName="name" 
                 name="name"
                 [ngClass]="{'form__input--error': Form.controls.name.invalid && (Form.controls.name.dirty || Form.controls.name.touched)}"    
+            > -->
+
+            <div class="autocomplete"
+                [ngClass]="{'form__input--error': Form.controls.name.invalid && (Form.controls.name.dirty || Form.controls.name.touched)}"
             >
+                <ng-autocomplete
+                    name="address"
+                    formControlName="name"
+                    [data]="FioOptions"
+                    [searchKeyword]="'value'"
+                    (selected)='selectFioEvent($event)'
+                    (inputChanged)='UpdateFioDics($event)'
+                    (inputCleared)='unselectFioEvent()'
+                    [itemTemplate]="itemTemplate"
+                    [notFoundTemplate]="notFoundTemplate"  
+                >
+                </ng-autocomplete>
+                
+                <ng-template #itemTemplate let-item>
+                    <a *ngIf="item" [innerHTML]="item && item.value ? item.value : ''"></a>
+                </ng-template>
+                
+                <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="'Ничего не найдено'"></div>
+                </ng-template>
+            </div>
         </div>
 
         <div class="form__item">
@@ -63,6 +88,7 @@
                     [searchKeyword]="'value'"
                     (selected)='selectEvent($event)'
                     (inputChanged)='UpdateDics($event)'
+                    (inputCleared)='unselectEvent()'
                     [itemTemplate]="itemTemplate"
                     [notFoundTemplate]="notFoundTemplate"  
                 >

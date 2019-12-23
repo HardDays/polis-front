@@ -15,23 +15,18 @@ export class ResultComponent implements OnInit{
   IsSuccess = false;
   IsError = false;
   
-  Timer = null;
 
-  TimeForProcess = 300;
-  TimerLabel = "5:00";
-
-    QueryTimer = null;
+  QueryTimer = null;
 
   constructor(private _main: MainService)
   {
     this.IsLoading = true;
     this.Offer = this._main.Copy(this._main.Offer) as any;
     this.Email = this._main.Agreement.email;
-    this.Timer = setInterval(()=> this.ProcessTimer(), 1000);
     // console.log(JSON.stringify(this.Offer));
-    this.CheckPaymentStatus();
+    // this.CheckPaymentStatus();
     // console.log(window.location, document.URL);
-    this.QueryTimer = setInterval(() => this.CheckPaymentStatus(), 15000);
+    // this.QueryTimer = setInterval(() => this.CheckPaymentStatus(), 15000);
   }
   ngOnInit(): void {
 
@@ -60,22 +55,6 @@ export class ResultComponent implements OnInit{
         })
   }
 
-  ProcessTimer()
-  {
-    this.TimeForProcess -= 1;
-    let time = this.TimeForProcess;
-    let minute = 0;
-
-    while(time >= 60)
-    {
-      minute += 1;
-      time -= 60;
-    }
-
-    let seconds = time;
-    this.TimerLabel = minute + ":" + (seconds < 10 ? "0" : "") + seconds;
-  }
-
   SetError()
   {
     this.DeteleLoadingAndTimers();
@@ -91,7 +70,6 @@ export class ResultComponent implements OnInit{
   DeteleLoadingAndTimers()
   {
       this.IsLoading = false;
-      clearInterval(this.Timer);
       clearInterval(this.QueryTimer);
   }
 }

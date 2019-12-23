@@ -1,6 +1,6 @@
 <div class="page__top" [ngClass]="{'page__top--payment_success': IsSuccess, 'page__top--payment_error': IsError}">
     <ng-container *ngIf="IsLoading">
-        <p class="page__title">Проверяем статус оплаты<br><br>{{TimerLabel}}</p>
+        <p class="page__title">Получение полиса</p>
     </ng-container>
     <ng-container *ngIf="IsSuccess">
         <p class="page__title">Отлично, оплата прошла<br>успешно, ваш полис готов!</p>
@@ -11,7 +11,19 @@
 </div>
 
 <div class="page__block page__block--bottom_margin">
-    <div class="polis__loading custom--loading" *ngIf="IsLoading" style="display: flex;"><img class="loading--image" style="margin: auto;" src="assets/img/loading1.svg" alt=""></div>
+    <ng-container *ngIf="IsLoading">
+        <div class="page__text-block">
+            <p class="page__card-text">
+                Оплата и получение полиса проходит от 1 до 15 минут в зависимости от страховой компании. В редких случаях, оплата может проходить долбше из-за технических работ.
+                <br>Если у вас списались деньги, то вы обязательно получите полис на указанную почту.
+            </p>
+            <!-- <p class="page__card-text">
+                
+            </p> -->
+        </div>
+        <div class="polis__loading custom--loading" style="display: flex;"><img class="loading--image" style="margin: auto;" src="assets/img/loading1.svg" alt=""></div>
+    </ng-container>
+    
     <ng-container *ngIf="IsSuccess">
         <p class="page__card-text">Полис отправлен на вашу почту:<br>{{Email}}. Вы можете проверить полис по базе <a href="https://dkbm-web.autoins.ru/dkbm-web-1.0/bsostate.htm">Российского Союза Автостраховщиков</a></p>
         <div class="page__card-image">

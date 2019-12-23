@@ -5,11 +5,11 @@
             <ng-autocomplete
                 name="model"
                 formControlName="model"
-                [ngModel]="Data.model.full_title"
                 [data]="ModelsDics"
                 [searchKeyword]="'full_title'"
                 placeHolder="Марка, модель"
                 (selected)='selectEvent($event)'
+                (inputCleared)='unselectEvent()'
                 (inputChanged)='UpdateDics($event)'
                 [itemTemplate]="itemTemplate"
                 [notFoundTemplate]="notFoundTemplate"   
