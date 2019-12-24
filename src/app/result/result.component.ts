@@ -24,9 +24,9 @@ export class ResultComponent implements OnInit{
     this.Offer = this._main.Copy(this._main.Offer) as any;
     this.Email = this._main.Agreement.email;
     // console.log(JSON.stringify(this.Offer));
-    // this.CheckPaymentStatus();
+    this.CheckPaymentStatus();
     // console.log(window.location, document.URL);
-    // this.QueryTimer = setInterval(() => this.CheckPaymentStatus(), 15000);
+    this.QueryTimer = setInterval(() => this.CheckPaymentStatus(), 15000);
   }
   ngOnInit(): void {
 
