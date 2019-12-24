@@ -18,7 +18,7 @@ export class MainService
         1: {
             id:1,
             name: 'Альфастрахование',
-            currency: 'р.',
+            currency: '₽',
             total: 0,
             img: 'assets/img/alpha.png',
             base_rate: 0,
@@ -27,7 +27,7 @@ export class MainService
         27: {
             id: 27,
             name: 'Зетта Страхование',
-            currency: 'р.',
+            currency: '₽',
             total: 0,
             img: 'assets/img/zetta.png',
             base_rate: 0,
@@ -36,7 +36,7 @@ export class MainService
         5: {
             id: 5,
             name: 'Росгосстрах',
-            currency: 'р.',
+            currency: '₽',
             total: 0,
             img: 'assets/img/rgs.png',
             base_rate: 0,
@@ -45,7 +45,7 @@ export class MainService
         7: {
             id: 7,
             name: 'Согласие',
-            currency: 'р.',
+            currency: '₽',
             total: 0,
             img: 'assets/img/sg.png',
             base_rate: 0,
@@ -54,7 +54,7 @@ export class MainService
         32: {
             id: 32,
             name: 'Ресо',
-            currency: 'р.',
+            currency: '₽',
             total: 0,
             img: 'assets/img/reso.png',
             base_rate: 0,
@@ -63,7 +63,7 @@ export class MainService
         3: {
             id: 3,
             name: "Ингосстрах",
-            currency: 'р.',
+            currency: '₽',
             total: 0,
             img: 'assets/img/ings.png',
             base_rate: 0,
@@ -72,7 +72,7 @@ export class MainService
         33: {
             id: 33,
             name: "ВСК",
-            currency: 'р.',
+            currency: '₽',
             total: 0,
             img: 'assets/img/vsk.png',
             base_rate: 0,
@@ -81,7 +81,7 @@ export class MainService
         36: {
             id: 36,
             name: 'Ренессанс Страхование',
-            currency: 'р.',
+            currency: '₽',
             total: 0,
             img: 'assets/img/rns.png',
             base_rate: 0,
@@ -90,7 +90,7 @@ export class MainService
         107: {
             id: 107,
             name: 'Тинькофф Страхование',
-            currency: 'р.',
+            currency: '₽',
             total: 0,
             img: 'assets/img/tinkoff.png',
             base_rate: 0,
@@ -228,6 +228,12 @@ export class MainService
 
     ReplaceAll(text: string, find: string, replace: string): string
     {
+
+        if(typeof text == "number")
+        {
+            return text;
+        }
+
         return text.split(find).join(replace);
     }
 

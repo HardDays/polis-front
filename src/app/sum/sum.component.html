@@ -28,7 +28,7 @@
                                 <strong>Персональный КБМ {{Kbms[i].factor}}</strong>
                                 <ng-container *ngIf="Kbms[i].factor <= 0.8">- Отличный пилот, так держать!</ng-container>
                                 <br>
-                                Стоимость полиса со скидкой: <strong>{{Round(AvgPrice * Kbms[i].factor)}} ₽/год</strong>
+                                Стоимость полиса со скидкой: <strong>{{Round(AvgPrice * Kbms[i].factor) | moneypipe}}/год</strong>
                             </ng-container>
                             
                         </div>
@@ -52,12 +52,12 @@
                         </label>
 
                         <div class="polis__sum-text">
-                            Стоимость полиса со скидкой: <strong>{{Round(AvgPrice * 1.8)}} ₽/год</strong><br><br>
+                            Стоимость полиса со скидкой: <strong>{{Round(AvgPrice * 1.8)  | moneypipe}}/год</strong><br><br>
                         </div>
                     </div>
                 </div>
 
-                <p class="polis__sum">ИТОГО: <span>{{TotalPrice}} ₽/год</span></p>
+                <p class="polis__sum">ИТОГО: <span>{{TotalPrice | moneypipe}}/год</span></p>
 
                 <button class="button" type="submit" (click)="Save()">Далее</button>
             </div>

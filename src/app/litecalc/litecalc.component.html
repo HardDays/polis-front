@@ -19,8 +19,8 @@
                         <!-- <div class="polis__loading"><img src="assets/img/loader.svg" alt=""></div> -->
                         <div class="polis__before">
                             <ng-container *ngIf="!IsLoading">
-                                <span class="polis__before-price"> от {{sk.value.total}} {{sk.value.currency}}</span>
-                                <span class="polis__middle-price">Средняя {{sk.value.base_rate}} {{sk.value.currency}}</span>
+                                <span class="polis__before-price"> от {{sk.value.total | moneypipe}}</span>
+                                <span class="polis__middle-price">Средняя {{sk.value.base_rate | moneypipe}}</span>
                             </ng-container>
                         </div>
                     </div>

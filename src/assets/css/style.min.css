@@ -325,6 +325,7 @@ footer {
   border-radius: 4px;
   position: relative;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 .button--white {
@@ -1834,6 +1835,7 @@ footer {
 }
 
 .modal--opened {
+  z-index: 9999;
   display: block;
 }
 

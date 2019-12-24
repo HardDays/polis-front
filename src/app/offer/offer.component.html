@@ -6,19 +6,19 @@
     <div class="page__company">
         <div class="polis__image" [ngStyle]="{'background-image': 'url(' + Offer.img + ')'}"></div>
         <!-- <img src="assets/img/tinkoff.svg" alt=""> -->
-        <span class="page__company-price">{{Offer.total}} Р.</span>
+        <span class="page__company-price">{{Offer.total | moneypipe}}</span>
     </div>
     <p class="page__card-text">Для оплаты вы будете перенаправлены на сайт страховой компании</p>
     <div class="page__card-image">
         <img src="assets/img/chosen-company.jpg" alt="">
     </div>
-    <p class="page__card-text">Вы получите полис после оплаты на сайте страхователя и сможете проверить его по <a href="#">базе РСА</a></p>
+    <p class="page__card-text">Вы получите полис после оплаты на сайте страхователя и сможете проверить его по базе <a href="https://dkbm-web.autoins.ru/dkbm-web-1.0/bsostate.htm">Российского Союза Автостраховщиков</a></p>
     <div class="polis__loading custom--loading" style="display: flex;"><img class="loading--image" *ngIf="IsLoading" style="margin: auto;" src="assets/img/loading1.svg" alt=""></div>
     <button class="button" [ngClass]="{'button--disabled': IsLoading}" (click)="GetUrl()">Оплатить</button>
 </div>
 <div class="modal" [ngClass]="{'modal--opened': ShowModal}">
     <div class="modal__content">
-        <div class="modal__head">Перед оплатой полиса в {{Offer.name}} необходимо ввести код из смс.</div>
+        <div class="modal__head">Перед оплатой полиса в {{Offer.name}} необходимо ввести код из смс</div>
         <div class="modal__data">
             <form [formGroup]="Form" (ngSubmit)="ConfirmPhone()">
                 <div class="form form--bottom_40">

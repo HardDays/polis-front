@@ -50,7 +50,7 @@ export class OffersComponent implements OnInit{
           {
             if(res.errors.length > 0)
             {
-              this.SkData[i].status = 'error';
+              setTimeout(() => {this.SkData[i].status = 'error';}, 5000)
             }
             else if (res.results.length > 0)
             {
@@ -62,7 +62,7 @@ export class OffersComponent implements OnInit{
           this.CheckProcessed();
         },
         (err) => {
-          this.SkData[i].status = 'error';
+          setTimeout(() => {this.SkData[i].status = 'error';}, 5000)
           this.CheckProcessed();
         })
     }

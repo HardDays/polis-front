@@ -9,6 +9,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { MyDatePickerModule } from 'mydatepicker';
 import { LiteCalcComponent } from './litecalc.component';
 import { LiteCalcRoutingModule } from './litecalc.routing';
+import { PipesModule } from '../core/pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { LiteCalcRoutingModule } from './litecalc.routing';
     LiteCalcRoutingModule,
     // AutocompleteLibModule,
     TextMaskModule,
-    MyDatePickerModule
+    MyDatePickerModule,
+    PipesModule
   ],
   providers: [ ]
 })

@@ -132,7 +132,12 @@
     <div class="modal__content">
         <div class="modal__head">Данные неверны</div>
         <div class="modal__data">
-            <p class="modal__text">Введите корректные данные!</p>
+            <p class="modal__text">Правильно заполните следующие поля:<br>
+                <ng-container *ngFor="let item of ErrorStr">
+                    <span>- {{item}}</span><br>
+                </ng-container>
+                
+            </p>
             <button class="button button--white" (click)="IsError = false">Закрыть</button>
         </div>
     </div>

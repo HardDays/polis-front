@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { MyDatePickerModule } from 'mydatepicker';
 import { SumComponent } from './sum.component';
 import { SumRoutingModule } from './sum.routing';
+import { PipesModule } from '../core/pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SumRoutingModule } from './sum.routing';
     RouterModule,
     ReactiveFormsModule,
     SumRoutingModule,
-    MyDatePickerModule
+    MyDatePickerModule,
+    PipesModule
   ],
   providers: []
 })

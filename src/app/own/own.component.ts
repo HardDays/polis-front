@@ -17,6 +17,8 @@ import { IMyDpOptions } from 'mydatepicker';
 
     IsOwner = 1;
 
+    ErrorStr = [];
+
     expMask = (rawValue) => 
     {
         let data = this.Form.get('birthday').value;
@@ -64,6 +66,15 @@ import { IMyDpOptions } from 'mydatepicker';
         openSelectorOnInputClick: true,
         editableDateField: true,
         indicateInvalidDate: false
+    };
+
+    ErrorNames = {
+        fio: "ФИО",
+        birthday: "Дата рождения",
+        city: "Город регистрации" + (this._main.Agreement.insurerIsOwner ? "" : " собственника"),
+        exp: "Стаж вождения",
+        phone: "Телефон",
+        check: "Условия передачи информации и страхования"
     };
 
     Form: FormGroup = new FormGroup({
@@ -211,6 +222,7 @@ import { IMyDpOptions } from 'mydatepicker';
 
     Save()
     {
+        this.ErrorStr = [];
         for(const i in this.Form.controls)
         {
             this.Form.get(i).markAsDirty();
@@ -225,6 +237,11 @@ import { IMyDpOptions } from 'mydatepicker';
 
         if(!this.Form.valid || !this.Form.get('check').value)
         {
+            for(const i in this.Form.controls)
+            {
+                if(this.Form.get(i).invalid)
+                    this.ErrorStr.push(this.ErrorNames[i]);
+            }
             this.IsError = true;
             return;
         }

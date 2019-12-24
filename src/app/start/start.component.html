@@ -3,34 +3,39 @@
 </div>
 
 <div class="page__block page__block--bottom_margin">
-    <div class="avto-num">
-        <div class="avto-num__block" [ngClass]="{'avto-num__block--error': IsError}">
-            <div class="avto-num__left">
-                <!-- <input type="text" placeholder="A" class="avto-num__input avto-num__input--character avto-num__input--alone"> -->
-                <input #main type="text" 
-                    [textMask]="{mask: MainMask, placeholderChar: '\u2000', keepCharPosition: true}" 
-                    placeholder="А 000 АА" 
-                    class="avto-num__input"
-                    [ngModel]="Number"
-                    (ngModelChange)="NumberChange($event)"
-                    >
-                <!-- <input type="text" placeholder="AA" class="avto-num__input avto-num__input--character avto-num__input--double"> -->
-            </div>
-            <div class="avto-num__right">
-                <input #region type="text" 
-                    placeholder="111" 
-                    class="avto-num__input avto-num__input--region"
-                    [textMask]="{mask: RegionMask, placeholderChar: '\u2000'}" 
-                    [ngModel]="Region"
-                    (ngModelChange)="RegionChange($event)"
-                    (keydown)="RegionKeyPress($event)"
-                    >
-                <span class="avto-num__country">RUS</span>
+    <form (ngSubmit)="CheckCarNumber()">
+        <div class="avto-num">
+            <div class="avto-num__block" [ngClass]="{'avto-num__block--error': IsError}">
+                <div class="avto-num__left">
+                    <!-- <input type="text" placeholder="A" class="avto-num__input avto-num__input--character avto-num__input--alone"> -->
+                    <input #main type="text" 
+                        [textMask]="{mask: MainMask, placeholderChar: '\u2000', keepCharPosition: true}" 
+                        placeholder="А 000 АА" 
+                        class="avto-num__input"
+                        [ngModel]="Number"
+                        name="number"
+                        (ngModelChange)="NumberChange($event)"
+                        >
+                    <!-- <input type="text" placeholder="AA" class="avto-num__input avto-num__input--character avto-num__input--double"> -->
+                </div>
+                <div class="avto-num__right">
+                    <input #region type="text" 
+                        placeholder="111" 
+                        class="avto-num__input avto-num__input--region"
+                        [textMask]="{mask: RegionMask, placeholderChar: '\u2000'}" 
+                        [ngModel]="Region"
+                        name="region"
+                        (ngModelChange)="RegionChange($event)"
+                        (keydown)="RegionKeyPress($event)"
+                        >
+                    <span class="avto-num__country">RUS</span>
+                </div>
             </div>
         </div>
-    </div>
+        
+        <div class="polis__loading custom--loading" style="display: flex;"><img *ngIf="IsLoading" class="loading--image" style="margin: auto;" src="assets/img/loading1.svg" alt=""></div>
+        <button class="button" [ngClass]="{'button--disabled': IsLoading}" type="submit" (click)="CheckCarNumber()">Рассчитать</button>
+    </form>
     
-    <div class="polis__loading custom--loading" style="display: flex;"><img *ngIf="IsLoading" class="loading--image" style="margin: auto;" src="assets/img/loading1.svg" alt=""></div>
-    <button class="button" [ngClass]="{'button--disabled': IsLoading}" type="submit" (click)="CheckCarNumber()">Рассчитать</button>
     <button class="button button--white" (click)="Navigate()">Ввести данные вручную<span class="button__icon button__icon--right"><img src="assets/img/arrow-right.svg" alt=""></span></button>
 </div>

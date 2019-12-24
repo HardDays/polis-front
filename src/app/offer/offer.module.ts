@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { OfferComponent } from './offer.component';
 import { OfferRoutingModule } from './offer.routing';
+import { PipesModule } from '../core/pipes/pipes.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { OfferRoutingModule } from './offer.routing';
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    OfferRoutingModule
+    OfferRoutingModule,
+    PipesModule
   ],
   providers: [ 
   ]
