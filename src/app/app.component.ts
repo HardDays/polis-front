@@ -20,14 +20,17 @@ export class AppComponent implements OnInit{
 
           // TODO опускается экран при переключении
           const url = val.url;
-          window.scrollTo({top:0});
-          if(url.indexOf("/prev") == 0 || url.indexOf("/full") == 0 || url.indexOf("/full/result") != 0)
+          console.log(url);
+          if(url.indexOf("/prev") == 0 || url.indexOf("/full") == 0)
           {
             this.IsBlue = false;
           }
-          else{
+          else
+          {
             this.IsBlue = true;
           }
+          
+          window.scrollTo({top:0});
         }
       }
     )

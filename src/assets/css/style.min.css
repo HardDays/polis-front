@@ -192,7 +192,7 @@ footer {
 }
 
 .index--with_footer {
-  min-height: calc(100vh - 58px - 55px);
+  min-height: calc(100vh - 58px - 45px);
   padding-bottom: 0;
 }
 
