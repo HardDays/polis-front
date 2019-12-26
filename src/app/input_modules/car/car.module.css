@@ -18,12 +18,6 @@
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
 }
-
-.form__item--calendar:before
-{
-    display: none;
-}
-
 .datepicker-test
 {
     padding: 0px;

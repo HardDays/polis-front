@@ -9,10 +9,16 @@
                 <div class="form__item form__item--calendar">
                      <label class="form__label">Дата</label>
                     <!-- <input type="text" class="form__input" value="12.12.1993"> -->
-                    <div class="form__input datepicker-test" [ngClass]="{'form__input--error': date.invalid && (date.dirty || date.touched)}">
+                    <app-calendar-cmp 
+                        [Show]="true"
+                        [DisableBefore]="DisableBefore"
+                        formControlName="date"
+                        [ParentForm]="Form"
+                    ></app-calendar-cmp>
+                    <!-- <div class="form__input datepicker-test" [ngClass]="{'form__input--error': date.invalid && (date.dirty || date.touched)}">
                         <my-date-picker [selector]="selector" name="date" [options]="myDatePickerOptions" formControlName="date"
                         ></my-date-picker>
-                    </div>
+                    </div> -->
 
                     <!-- <div class="calendar calendar--white">
                         <div class="calendar__top">

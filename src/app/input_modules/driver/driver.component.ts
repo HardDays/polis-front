@@ -36,48 +36,11 @@ import { conformToMask } from 'text-mask-core';
         /\d/, /\d/, /\d/, /\d/, /\d/, /\d/
     ];
     DocReg = /^\d{2}\s\d{2}\s\d{6}$/;
+    BeforeBday = "";
+    AfterBday = "";
 
-    BdayOptions: IMyDpOptions = {
-        // other options...
-        dateFormat: 'dd.mm.yyyy',
-        dayLabels: {
-            su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб'
-        },
-        monthLabels:{
-            1: 'Янв', 2: 'Фев', 3: 'Мар', 4: 'Апр', 5: 'Май', 6: 'Июн', 7: 'Июл', 8: 'Авг', 9: 'Сен', 10: 'Окт', 11: 'Ноя', 12: 'Дек'
-        },
-        showTodayBtn: false,
-        // disableUntil: this.DisableUntil(),
-        disableSince: this.BdayDisable(),
-        // maxYear: this.GetMaxYear(),
-        showClearDateBtn: false,
-        height: '37px',
-        inline: false,
-        openSelectorOnInputClick: true,
-        editableDateField: true,
-        indicateInvalidDate: false
-    };
-
-    ExpOptions: IMyDpOptions = {
-        // other options...
-        dateFormat: 'dd.mm.yyyy',
-        dayLabels: {
-            su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб'
-        },
-        monthLabels:{
-            1: 'Янв', 2: 'Фев', 3: 'Мар', 4: 'Апр', 5: 'Май', 6: 'Июн', 7: 'Июл', 8: 'Авг', 9: 'Сен', 10: 'Окт', 11: 'Ноя', 12: 'Дек'
-        },
-        showTodayBtn: false,
-        // disableUntil: this.DisableUntil(),
-        disableSince: this.ExpDisable(),
-        // maxYear: this.GetMaxYear(),
-        showClearDateBtn: false,
-        height: '37px',
-        inline: false,
-        openSelectorOnInputClick: true,
-        editableDateField: true,
-        indicateInvalidDate: false
-    };
+    BeforeExp = "";
+    AfterExp = "";
 
     Form: FormGroup = new FormGroup({
         "name": new FormControl('', [
@@ -130,27 +93,7 @@ import { conformToMask } from 'text-mask-core';
         }
     } as any;
 
-    BdayDisable()
-    {
-        const date = new Date();
-
-        return {
-            year: date.getFullYear()-18,
-            month: date.getMonth()+1,
-            day: date.getDate()
-        }
-    }
-
-    ExpDisable()
-    {
-        const date = new Date();
-
-        return {
-            year: date.getFullYear(),
-            month: date.getMonth()+1,
-            day: date.getDate()
-        }
-    }
+    
 
 
 
@@ -160,11 +103,48 @@ import { conformToMask } from 'text-mask-core';
     }
     constructor(private _main: MainService)
     {
+        this.AfterBday = this.BdayDisable();
+        this.BeforeBday = this.BdayBeforeDisable();
+
+        this.AfterExp = this.ExpDisable();
     }
     ngOnInit(): void {
         this.IsOpened = this.index == 0;
 
         this.InitData();
+    }
+
+    BdayBeforeDisable()
+    {
+        const date = new Date();
+
+        const year =  date.getFullYear() - 90;
+        const month = ((date.getMonth() + 1) < 10 ?  "0" : "") +  (date.getMonth() + 1);
+        const day = ((date.getDate()) < 10 ?  "0" : "") +  (date.getDate());
+
+        return [year,month,day].join("-");
+    }
+
+    BdayDisable()
+    {
+        const date = new Date();
+
+        const year =  date.getFullYear() - 18;
+        const month = ((date.getMonth() + 1) < 10 ?  "0" : "") +  (date.getMonth() + 1);
+        const day = ((date.getDate()) < 10 ?  "0" : "") +  (date.getDate());
+
+        return [year,month,day].join("-");
+    }
+
+    ExpDisable()
+    {
+        const date = new Date();
+
+        const year =  date.getFullYear();
+        const month = ((date.getMonth() + 1) < 10 ?  "0" : "") +  (date.getMonth() + 1);
+        const day = ((date.getDate()) < 10 ?  "0" : "") +  (date.getDate());
+
+        return [year,month,day].join("-");
     }
 
     InitData()
@@ -201,18 +181,21 @@ import { conformToMask } from 'text-mask-core';
             data.license = conformToMask(this.driver.licenseSerial + this.driver.licenseNumber, this.DocMask, {fuide: false}).conformedValue;
         }
 
-        if(this.driver.expdate)
-        {
-            data.expdate = this.ParseStrToObj(this.driver.expdate);
-        }
-
         if(this.driver.birthdate)
         {
-            data.birthdate = this.ParseStrToObj(this.driver.birthdate);
+            data.birthdate = this.driver.birthdate;
         }
+
+        if(this.driver.expdate)
+        {
+            data.expdate = this.driver.expdate;
+        }
+
+        
         
 
         this.Form.patchValue(data);
+        this.Form.updateValueAndValidity();
     }
 
 
@@ -238,8 +221,8 @@ import { conformToMask } from 'text-mask-core';
         
         let result = this._main.Copy(this.driver) as DriverModel;
         const data = this.Form.getRawValue();
-        result.birthdate = this.ParseDateObjToStr(data.birthdate);
-        result.expdate = this.ParseDateObjToStr(data.expdate);
+        result.birthdate = data.birthdate;
+        result.expdate = data.expdate;
         result.licenseDate = result.expdate;
 
         

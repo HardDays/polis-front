@@ -9,6 +9,7 @@ import { OwnComponent } from './own.component';
 import { OwnRoutingModule } from './own.routing';
 import { TextMaskModule } from 'angular2-text-mask';
 import { MyDatePickerModule } from 'mydatepicker';
+import { CalendarModule } from '../input_modules/calendar/calendar.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MyDatePickerModule } from 'mydatepicker';
     OwnRoutingModule,
     AutocompleteLibModule,
     TextMaskModule,
-    MyDatePickerModule
+    MyDatePickerModule,
+    CalendarModule
   ],
   providers: [ ]
 })

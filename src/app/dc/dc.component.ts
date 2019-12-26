@@ -21,13 +21,16 @@ import { IMyDpOptions } from 'mydatepicker';
         ])
     });
 
+    Before = "";
+    After = "";
+
     CheckDcDate()
     {
         return (control: AbstractControl): {[key: string]: any} | null => {
             if(control.value)
             {
                 const now = new Date(new Date().getTime() +  + 1000*60*60*24*3);
-                const date = new Date(control.value.date.year, control.value.date.month-1, control.value.date.day);
+                const date = new Date(control.value);
 
                 if(now.getTime() > date.getTime())
                 {
@@ -49,25 +52,6 @@ import { IMyDpOptions } from 'mydatepicker';
     }
 
 
-    myDatePickerOptions: IMyDpOptions = {
-        // other options...
-        dateFormat: 'dd.mm.yyyy',
-        dayLabels: {
-            su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб'
-        },
-        monthLabels:{
-            1: 'Янв', 2: 'Фев', 3: 'Мар', 4: 'Апр', 5: 'Май', 6: 'Июн', 7: 'Июл', 8: 'Авг', 9: 'Сен', 10: 'Окт', 11: 'Ноя', 12: 'Дек'
-        },
-        showTodayBtn: false,
-        disableUntil: this.DisableFrom(),
-        // maxYear: this.GetMaxYear(),
-        showClearDateBtn: false,
-        height: '37px',
-        inline: false,
-        openSelectorOnInputClick: true,
-        editableDateField: true,
-        indicateInvalidDate: false
-    };
     constructor(private _main: MainService)
     {
         const vehicle = this._main.Copy(this._main.Agreement.vehicle) as VehicleModel;
@@ -75,7 +59,7 @@ import { IMyDpOptions } from 'mydatepicker';
         this.dc.patchValue(vehicle.dc);
         if(vehicle.dcDate)
         {
-            this.dcDate.patchValue(this.ParseStrToObj(vehicle.dcDate));
+            this.dcDate.setValue(vehicle.dcDate);
         }
 
         for(const i in this.Form.controls)
@@ -85,6 +69,9 @@ import { IMyDpOptions } from 'mydatepicker';
             this.Form.get(i).updateValueAndValidity();
         }
         this.Form.updateValueAndValidity();
+
+        this.Before = this.DisableBefore();
+        // this.After = this.DisableFrom();
     }
     ngOnInit(): void {
         // throw new Error("Method not implemented.");
@@ -93,31 +80,19 @@ import { IMyDpOptions } from 'mydatepicker';
         }, 4000);
     }
 
-    DisableFrom()
+    DisableBefore()
     {
         const date = new Date();
 
         const newDate = new Date(date.getTime() + 1000*60*60*24*3);
 
-        return {
-            year: newDate.getFullYear(),
-            month: newDate.getMonth() + 1,
-            day: newDate.getDate()
-        }
+        const year =  newDate.getFullYear();
+        const month = ((newDate.getMonth() + 1) < 10 ?  "0" : "") +  (newDate.getMonth() + 1);
+        const day = ((newDate.getDate()) < 10 ?  "0" : "") +  (newDate.getDate());
+
+        return [year,month,day].join("-");
     }
 
-    ParseStrToObj(str: string)
-    {
-        const date = new Date(str);
-
-        return {
-            date: {
-                year: date.getFullYear(),
-                month: date.getMonth() + 1,
-                day: date.getDate()
-            }
-        }
-    }
 
     Navigate()
     {
@@ -138,7 +113,7 @@ import { IMyDpOptions } from 'mydatepicker';
         const data = this.Form.getRawValue();
 
         agr.vehicle.dc = data.dc;
-        agr.vehicle.dcDate = this.ParseDateObjToStr(data.dcDate);
+        agr.vehicle.dcDate = data.dcDate;
 
 
         this._main.SaveAgreement(agr,
@@ -149,10 +124,5 @@ import { IMyDpOptions } from 'mydatepicker';
             })
       
     }
-    ParseDateObjToStr(obj)
-    {
-        return obj.date.year + "-" + obj.date.month + "-" + obj.date.day;
-    }
-
   }
   

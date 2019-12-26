@@ -11,6 +11,7 @@ import { DcComponent } from './dc.component';
 import { DcRoutingModule } from './dc.routing';
 import { TextMaskModule } from 'angular2-text-mask';
 import { MyDatePickerModule } from 'mydatepicker';
+import { CalendarModule } from '../input_modules/calendar/calendar.module';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     direction: 'horizontal',
@@ -31,7 +32,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     DcRoutingModule,
     SwiperModule,
     TextMaskModule,
-    MyDatePickerModule
+    MyDatePickerModule,
+    CalendarModule
   ],
   providers: [ 
     {

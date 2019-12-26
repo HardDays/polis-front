@@ -35,14 +35,21 @@
             </div>
         </div>
 
-        <div class="form__item">
+        <div class="form__item form__item--calendar">
             <label class="form__label">Дата рождения</label>
-            <div class="form__input datepicker-test"
-            [ngClass]="{'form__input--error': Form.controls.birthdate.invalid && (Form.controls.birthdate.dirty || Form.controls.birthdate.touched)}"    
+            <app-calendar-cmp
+                    [DisableBefore]="BeforeBday"
+                    [DisableFrom]="AfterBday"
+                    formControlName="birthdate"
+                    [ParentForm]="Form"
+            ></app-calendar-cmp>
+            <!-- <div class="form__input datepicker-test"
+                [ngClass]="{'form__input--error': Form.controls.birthdate.invalid && (Form.controls.birthdate.dirty || Form.controls.birthdate.touched)}"    
             >
+                
                 <my-date-picker name="birthdate" [options]="BdayOptions" formControlName="birthdate"
                 ></my-date-picker>
-            </div>
+            </div> -->
         </div>
 
         <div class="form__item form__item--select">
@@ -63,12 +70,17 @@
 
         <div class="form__item form__item--calendar">
             <label class="form__label">Дата выдачи</label>
-            <div class="form__input datepicker-test"
+            <app-calendar-cmp
+                    [DisableFrom]="AfterGive"
+                    formControlName="passportDate"
+                    [ParentForm]="Form"
+            ></app-calendar-cmp>
+            <!-- <div class="form__input datepicker-test"
             [ngClass]="{'form__input--error': Form.controls.passportDate.invalid && (Form.controls.passportDate.dirty || Form.controls.passportDate.touched)}" 
             >
                 <my-date-picker name="passportDate" [options]="GiveOptions" formControlName="passportDate"
                 ></my-date-picker>
-            </div>
+            </div> -->
         </div>
 
         <!-- <div class="form__item">

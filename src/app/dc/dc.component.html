@@ -51,10 +51,16 @@
         <form [formGroup]="Form">
             <div class="form__item form__item--calendar form__item--small_top">
                 <label class="form__label">Введите дату окончания ДК</label>
-                <div class="form__input datepicker-test" [ngClass]="{'form__input--error': dcDate.invalid && (dcDate.dirty || dcDate.touched)}">
+                <app-calendar-cmp
+                    [DisableBefore]="Before"
+                    [DisableFrom]="After"
+                    formControlName="dcDate"
+                    [ParentForm]="Form"
+                ></app-calendar-cmp>
+                <!-- <div class="form__input datepicker-test" [ngClass]="{'form__input--error': dcDate.invalid && (dcDate.dirty || dcDate.touched)}">
                     <my-date-picker name="dcDate" [options]="myDatePickerOptions" formControlName="dcDate"
                     ></my-date-picker>
-                </div>
+                </div> -->
             </div>
     
             <div class="form__item form__item--small_top">

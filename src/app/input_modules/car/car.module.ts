@@ -8,6 +8,7 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { MyDatePickerModule } from 'mydatepicker';
 import { SimpleCarComponent } from './simple/simple.component';
 import { FullCarComponent } from './full/full.component';
+import { CalendarModule } from '../calendar/calendar.module';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { FullCarComponent } from './full/full.component';
         ReactiveFormsModule,
         TextMaskModule,
         AutocompleteLibModule,
-        MyDatePickerModule
+        MyDatePickerModule,
+        CalendarModule
     ],
     declarations: [
         SimpleCarComponent,

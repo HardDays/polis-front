@@ -49,10 +49,16 @@
 
     <div class="form__item form__item--calendar">
         <label class="form__label">Дата выдачи  {{docType.value ? 'СТС' : 'ПТС'}}</label>
-        <div class="form__input datepicker-test" [ngClass]="{'form__input--error': Form.controls.docDate.invalid && (Form.controls.docDate.dirty || Form.controls.docDate.touched)}">
+        <app-calendar-cmp
+            [DisableBefore]="Before"
+            [DisableFrom]="After"
+            formControlName="docDate"
+            [ParentForm]="Form"
+        ></app-calendar-cmp>
+        <!-- <div class="form__input datepicker-test" [ngClass]="{'form__input--error': Form.controls.docDate.invalid && (Form.controls.docDate.dirty || Form.controls.docDate.touched)}">
             <my-date-picker name="docDate" [options]="myDatePickerOptions" formControlName="docDate"
             ></my-date-picker>
-        </div>
+        </div> -->
         <!-- <input type="text" class="form__input" value="01.01.2018"> -->
     </div>
 </form>

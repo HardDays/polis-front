@@ -40,10 +40,16 @@
 
             <div class="form__item form__item--calendar">
                 <label class="form__label">Дата рождения</label>
-                <div class="form__input datepicker-test" [ngClass]="{'form__input--error': birthdate.invalid && (birthdate.dirty || birthdate.touched)}">
+                <app-calendar-cmp
+                    [DisableBefore]="BeforeBday"
+                    [DisableFrom]="AfterBday"
+                    formControlName="birthdate"
+                    [ParentForm]="Form"
+                ></app-calendar-cmp>
+                <!-- <div class="form__input datepicker-test" [ngClass]="{'form__input--error': birthdate.invalid && (birthdate.dirty || birthdate.touched)}">
                     <my-date-picker name="birthdate" [options]="BdayOptions" formControlName="birthdate"
                     ></my-date-picker>
-                </div>
+                </div> -->
             </div>
 
             <div class="form__item">
@@ -63,10 +69,17 @@
                 </div>
 
                 <label class="form__label">Начало стажа</label>
-                <div class="form__input datepicker-test"  [ngClass]="{'form__input--error': expdate.invalid && (expdate.dirty || expdate.touched)}">
+                <app-calendar-cmp
+                    [DisableBefore]="BeforeExp"
+                    [DisableFrom]="AfterExp"
+                    formControlName="expdate"
+                    [ParentForm]="Form"
+                ></app-calendar-cmp>
+
+                <!-- <div class="form__input datepicker-test"  [ngClass]="{'form__input--error': expdate.invalid && (expdate.dirty || expdate.touched)}">
                     <my-date-picker name="expdate" [options]="ExpOptions" formControlName="expdate"
                     ></my-date-picker>
-                </div>
+                </div> -->
             </div>
         </form>
     </div>

@@ -26,7 +26,7 @@ import { IMyDpOptions } from 'mydatepicker';
         if(!data)
             return [/[1-8]/,/\d/];
 
-        const age = this._main.GetAge(data.date.year + "-" + data.date.month + "-" + data.date.day);
+        const age = this._main.GetAge(data.date);
 
         const diff = age - 18;
         if(diff == 0)
@@ -48,25 +48,28 @@ import { IMyDpOptions } from 'mydatepicker';
         return [/[1-8]/,/\d/];
     }
 
-    myDatePickerOptions: IMyDpOptions = {
-        // other options...
-        dateFormat: 'dd.mm.yyyy',
-        dayLabels: {
-            su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб'
-        },
-        monthLabels:{
-            1: 'Янв', 2: 'Фев', 3: 'Мар', 4: 'Апр', 5: 'Май', 6: 'Июн', 7: 'Июл', 8: 'Авг', 9: 'Сен', 10: 'Окт', 11: 'Ноя', 12: 'Дек'
-        },
-        showTodayBtn: false,
-        disableSince: this.DisableSince(),
-        maxYear: this.GetMaxYear(),
-        showClearDateBtn: false,
-        height: '38px',
-        inline: false,
-        openSelectorOnInputClick: true,
-        editableDateField: true,
-        indicateInvalidDate: false
-    };
+    CalendarDisableFrom = this.DisableSince();
+    CalendarDisableBefore = this.DisableBefore();
+
+    // myDatePickerOptions: IMyDpOptions = {
+    //     // other options...
+    //     dateFormat: 'dd.mm.yyyy',
+    //     dayLabels: {
+    //         su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб'
+    //     },
+    //     monthLabels:{
+    //         1: 'Янв', 2: 'Фев', 3: 'Мар', 4: 'Апр', 5: 'Май', 6: 'Июн', 7: 'Июл', 8: 'Авг', 9: 'Сен', 10: 'Окт', 11: 'Ноя', 12: 'Дек'
+    //     },
+    //     showTodayBtn: false,
+    //     disableSince: this.DisableSince(),
+    //     maxYear: this.GetMaxYear(),
+    //     showClearDateBtn: false,
+    //     height: '38px',
+    //     inline: false,
+    //     openSelectorOnInputClick: true,
+    //     editableDateField: true,
+    //     indicateInvalidDate: false
+    // };
 
     ErrorNames = {
         fio: "ФИО",
@@ -147,14 +150,7 @@ import { IMyDpOptions } from 'mydatepicker';
 
         if(data.owner && data.owner.birthdate)
         {
-            const date = data.owner.birthdate.split("-");
-            this.Form.get('birthday').setValue({
-                date: {
-                    year: Number.parseInt(date[0]),
-                    month: Number.parseInt(date[1]),
-                    day: Number.parseInt(date[2])
-                }
-            })
+            this.Form.get('birthday').setValue(data.owner.birthdate);
         }
         
         if(data.phone)
@@ -222,6 +218,7 @@ import { IMyDpOptions } from 'mydatepicker';
 
     Save()
     {
+        console.log(this.Form.getRawValue());
         this.ErrorStr = [];
         for(const i in this.Form.controls)
         {
@@ -265,7 +262,7 @@ import { IMyDpOptions } from 'mydatepicker';
                 item.exp = Number.parseInt(this._main.ReplaceAll(data.exp,'\u2000', ""));
             }
 
-            agr.drivers[0].birthdate = data.birthday.date.year + "-" + data.birthday.date.month + "-" + data.birthday.date.day;
+            agr.drivers[0].birthdate = data.birthday;
             agr.drivers[0].firstname = fname;
             agr.drivers[0].lastname = lname;
             agr.drivers[0].middlename = mname;
@@ -276,13 +273,13 @@ import { IMyDpOptions } from 'mydatepicker';
             agr.owner.firstname = fname;
             agr.owner.lastname = lname;
             agr.owner.middlename = mname;
-            agr.owner.birthdate = data.birthday.date.year + "-" + data.birthday.date.month + "-" + data.birthday.date.day;
+            agr.owner.birthdate = data.birthday;
         }
         else{
             agr.insurer.firstname = fname;
             agr.insurer.lastname = lname;
             agr.insurer.middlename = mname;
-            agr.insurer.birthdate = data.birthday.date.year + "-" + data.birthday.date.month + "-" + data.birthday.date.day;
+            agr.insurer.birthdate = data.birthday;
         }
 
         
@@ -319,30 +316,41 @@ import { IMyDpOptions } from 'mydatepicker';
     {
         let date = new Date();
 
-        return {
-            year: date.getFullYear() - 18,
-            month: date.getMonth() + 1,
-            day: date.getDate()
-        }
+        const year = date.getFullYear() - 18;
+        const month = ((date.getMonth() + 1) < 10 ?  "0" : "") +  (date.getMonth() + 1);
+        const day = date.getDate();
+
+        return [year,month,day].join("-");
     }
 
-    GetMaxYear()
+    DisableBefore()
     {
-        const data = this.DisableSince();
+        let date = new Date();
 
-        return data.year;
+        const year =  date.getFullYear();
+        const month = ((date.getMonth() + 1) < 10 ?  "0" : "") +  (date.getMonth() + 1);
+        const day = ((date.getDate()) < 10 ?  "0" : "") +  (date.getDate());
+
+        return [year,month,day].join("-");
     }
 
-    onCalendarToggle(event: number): void {
-        if(!this.Form.controls.birthday.value && event == 1)
-        {
-            let obj = this.DisableSince();
-            obj.day -= 1;
-            this.Form.get('birthday').setValue({
-                date: obj
-            })
-        }
-    }
+    // GetMaxYear()
+    // {
+    //     const data = this.DisableSince();
+
+    //     return data.year;
+    // }
+
+    // onCalendarToggle(event: number): void {
+    //     if(!this.Form.controls.birthday.value && event == 1)
+    //     {
+    //         let obj = this.DisableSince();
+    //         obj.day -= 1;
+    //         this.Form.get('birthday').setValue({
+    //             date: obj
+    //         })
+    //     }
+    // }
 
     ValidateExp()
     {
@@ -355,7 +363,7 @@ import { IMyDpOptions } from 'mydatepicker';
                     return null;
 
 
-                const age = this._main.GetAge(data.date.year + "-" + data.date.month + "-" + data.date.day);
+                const age = this._main.GetAge(data);
 
                 const diff = age - 18;
 

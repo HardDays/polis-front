@@ -7,6 +7,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { MyDatePickerModule } from 'mydatepicker';
 import { OwnerFormComponent } from './owner.component';
+import { CalendarModule } from '../calendar/calendar.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { OwnerFormComponent } from './owner.component';
         ReactiveFormsModule,
         TextMaskModule,
         AutocompleteLibModule,
-        MyDatePickerModule
+        MyDatePickerModule,
+        CalendarModule
     ],
     declarations: [
         OwnerFormComponent

@@ -20,27 +20,6 @@ import { conformToMask } from 'text-mask-core';
     @Input() Car: VehicleModel
     ModelsDics = [];
 
-    myDatePickerOptions: IMyDpOptions = {
-        // other options...
-        dateFormat: 'dd.mm.yyyy',
-        dayLabels: {
-            su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб'
-        },
-        monthLabels:{
-            1: 'Янв', 2: 'Фев', 3: 'Мар', 4: 'Апр', 5: 'Май', 6: 'Июн', 7: 'Июл', 8: 'Авг', 9: 'Сен', 10: 'Окт', 11: 'Ноя', 12: 'Дек'
-        },
-        showTodayBtn: false,
-        // disableUntil: this.DisableUntil(),
-        disableSince: this.DisableFrom(),
-        // maxYear: this.GetMaxYear(),
-        showClearDateBtn: false,
-        height: '37px',
-        inline: false,
-        openSelectorOnInputClick: true,
-        editableDateField: true,
-        indicateInvalidDate: false
-    };
-
     DocMask = [
         /[УКЕНХВАРОСМТукенхваросмт0-9]/,
         /[УКЕНХВАРОСМТукенхваросмт0-9]/,
@@ -71,6 +50,9 @@ import { conformToMask } from 'text-mask-core';
         ])
     });
 
+    Before = "";
+    After = "";
+
     get docType()
     {
         return this.Form.get('docType');
@@ -78,10 +60,11 @@ import { conformToMask } from 'text-mask-core';
 
     constructor(private _main: MainService)
     {
-        
+        this.Before = this.DisableBefore();
+        this.After = this.DisableFrom();
     }
+
     ngOnInit(): void {
-        console.log(this.Car);
         if(this.Car)
         {
             let data = {
@@ -122,21 +105,33 @@ import { conformToMask } from 'text-mask-core';
     
             if(this.Car.docDate)
             {
-                data.docDate = this.ParseDate(this.Car.docDate);
+                data.docDate = this.Car.docDate;
             }
     
             this.Form.patchValue(data);
         }
     }
-    DisableUntil()
+    DisableBefore()
     {
-        const date = new Date();
+        let date = new Date();
 
-        return {
-            year: date.getFullYear() - 5,
-            month: date.getMonth() + 1,
-            day: date.getDate()
+        if(this._main.Agreement.vehicle.year)
+        {
+            date.setFullYear(this._main.Agreement.vehicle.year);
+            
         }
+        else{
+            date.setFullYear(date.getFullYear() - 100);
+        }
+        date.setMonth(0);
+        date.setDate(1);
+        date = new Date(date.getTime() - 1000*60*60*24);
+        const year =  date.getFullYear();
+        const month = ((date.getMonth() + 1) < 10 ?  "0" : "") +  (date.getMonth() + 1);
+        const day = ((date.getDate()) < 10 ?  "0" : "") +  (date.getDate());
+
+        console.log([year,month,day].join("-"));
+        return [year,month,day].join("-");
     }
 
     DisableFrom()
@@ -145,19 +140,16 @@ import { conformToMask } from 'text-mask-core';
 
         const newdate = new Date(date.getTime() + 1000*60*60*24);
 
-        return {
-            year: newdate.getFullYear(),
-            month: newdate.getMonth()+1,
-            day: newdate.getDate()
-        }
+        const year = newdate.getFullYear();
+        const month = ((newdate.getMonth() + 1) < 10 ?  "0" : "") +  (newdate.getMonth() + 1);
+        const day = newdate.getDate();
+
+        return [year,month,day].join("-");
     }
 
 
     GetData()
     {
-
-        // console.log(this.Form.getRawValue());
-        // return false;
         for(const i in this.Form.controls)
         {
             this.Form.get(i).markAsDirty();
@@ -188,10 +180,8 @@ import { conformToMask } from 'text-mask-core';
         }
         
 
-        result.docDate = this.ParseDateObjToStr(data.docDate);
+        result.docDate = data.docDate;
 
-        // console.log(result);
-        // return false;
         return result;
 
     }

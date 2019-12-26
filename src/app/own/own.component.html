@@ -37,13 +37,21 @@
             </div>
             <div class="form__item form__item--calendar">
                 <label class="form__label">Дата рождения</label>
+                <app-calendar-cmp 
+                    [Show]="false"
+                    [DisableFrom]="CalendarDisableFrom"
+                    [DisableBefore]="CalendarDisableBefore"
+                    [StartDate]="CalendarDisableFrom"
+                    formControlName="birthday"
+                    [ParentForm]="Form"
+                ></app-calendar-cmp>
                 <!-- <input type="text" class="form__input" value="12.12.1987"> -->
-                <div class="form__input datepicker-test" 
+                <!-- <div class="form__input datepicker-test" 
                     [ngClass]="{'form__input--error': Form.controls.birthday.invalid && (Form.controls.birthday.dirty || Form.controls.birthday.touched)}"
                 >
                     <my-date-picker name="birthday" [options]="myDatePickerOptions" formControlName="birthday" (calendarToggle)="onCalendarToggle($event)"
                     ></my-date-picker>
-                </div>
+                </div> -->
             </div>
             <div class="form__item form__item--select">
                 <div class="hint">

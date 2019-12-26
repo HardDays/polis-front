@@ -1,0 +1,80 @@
+
+<input 
+    type="text" 
+    class="form__input" 
+    (focus)="OnFocus()"
+    (blur)="OnBlur()"
+    [ngModel]="DateStr"
+    (ngModelChange)="OnInputChanged($event)"
+    [textMask]="{mask: InputMask}" 
+    [ngClass]="{'form__input--error': formControl.invalid && (formControl.dirty || formControl.touched)}"
+>
+
+
+
+<!-- <div class="calendar calendar--white" *ngIf="Show"> -->
+<div class="calendar" *ngIf="Show">
+    <div class="calendar__top">
+        <span class="calendar__back" (click)="prevMonth()"></span>
+        <span class="calendar__month">{{ MonthNames[currentDate.format('M')]}} {{ currentDate.format('YYYY') }}</span>
+        <span class="calendar__next" (click)="nextMonth()"></span>
+    </div>
+
+    <div class="calendar__table">
+        <div class="calendar__row">
+            <span class="calendar__week" *ngFor="let day of DayNames">{{day}}</span>
+        </div>
+        <div class="calendar__row" *ngFor="let week of weeks">
+            <ng-container *ngFor="let day of week">
+                <span class="calendar__day" 
+                    [ngClass]="{'calendar__day--inactive':!isSelectedMonth(day.mDate), 'calendar__day--today':day.today, 'calendar__day--strike': day.disabled, ' calendar__day--selected': day.selected}"
+                    (click)="selectDate(day)"
+                >{{day.mDate.date()}}</span>
+            </ng-container>
+            
+            <!-- <span class="calendar__day"></span>
+            <span class="calendar__day"></span>
+            <span class="calendar__day"></span>
+            <span class="calendar__day"></span>
+            <span class="calendar__day calendar__day--inactive">1</span>
+            <span class="calendar__day calendar__day--inactive">2</span>
+            <span class="calendar__day calendar__day--inactive">3</span> -->
+        </div>
+        <!-- <div class="calendar__row">
+            <span class="calendar__day calendar__day--inactive">4</span>
+            <span class="calendar__day calendar__day--today">5</span>
+            <span class="calendar__day calendar__day--selected">6</span>
+            <span class="calendar__day calendar__day--strike">7</span>
+            <span class="calendar__day calendar__day--strike">8</span>
+            <span class="calendar__day calendar__day--strike">9</span>
+            <span class="calendar__day">10</span>
+        </div>
+        <div class="calendar__row">
+            <span class="calendar__day">11</span>
+            <span class="calendar__day">12</span>
+            <span class="calendar__day">13</span>
+            <span class="calendar__day">14</span>
+            <span class="calendar__day">15</span>
+            <span class="calendar__day">16</span>
+            <span class="calendar__day">17</span>
+        </div>
+        <div class="calendar__row">
+            <span class="calendar__day">18</span>
+            <span class="calendar__day">19</span>
+            <span class="calendar__day">20</span>
+            <span class="calendar__day">21</span>
+            <span class="calendar__day">22</span>
+            <span class="calendar__day">23</span>
+            <span class="calendar__day">24</span>
+        </div>
+        <div class="calendar__row">
+            <span class="calendar__day">25</span>
+            <span class="calendar__day">26</span>
+            <span class="calendar__day">27</span>
+            <span class="calendar__day">28</span>
+            <span class="calendar__day">29</span>
+            <span class="calendar__day">30</span>
+            <span class="calendar__day">31</span>
+        </div> -->
+    </div>
+</div>

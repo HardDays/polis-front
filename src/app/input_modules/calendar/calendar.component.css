@@ -1,0 +1,34 @@
+.calendar
+{
+    position: absolute;
+    z-index: 9999;
+    width: 100%;
+    padding: 5px;
+    border-radius: 4px;
+    box-shadow: 0px 3.64342px 7.28684px rgba(0, 0, 0, 0.06);
+    background: #E9F4FF;
+}
+
+.calendar--white{
+    background: #FFFFFF;
+}
+
+.calendar__day{
+    color: inherit!important;
+    cursor: pointer;
+}
+
+.calendar__day--inactive
+{
+    color: #a9a9a9!important;
+}
+
+.calendar__day--strike
+{
+    cursor: not-allowed;
+}
+
+.calendar__back, .calendar__next
+{
+    cursor: pointer;
+}

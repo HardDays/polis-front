@@ -35,48 +35,6 @@ import { conformToMask } from 'text-mask-core';
     ];
     DocReg = /^\d{2}\s\d{2}\s\d{6}$/;
 
-    BdayOptions: IMyDpOptions = {
-        // other options...
-        dateFormat: 'dd.mm.yyyy',
-        dayLabels: {
-            su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб'
-        },
-        monthLabels:{
-            1: 'Янв', 2: 'Фев', 3: 'Мар', 4: 'Апр', 5: 'Май', 6: 'Июн', 7: 'Июл', 8: 'Авг', 9: 'Сен', 10: 'Окт', 11: 'Ноя', 12: 'Дек'
-        },
-        showTodayBtn: false,
-        // disableUntil: this.DisableUntil(),
-        disableSince: this.BdayDisable(),
-        // maxYear: this.GetMaxYear(),
-        showClearDateBtn: false,
-        height: '37px',
-        inline: false,
-        openSelectorOnInputClick: true,
-        editableDateField: true,
-        indicateInvalidDate: false
-    };
-
-    GiveOptions: IMyDpOptions = {
-        // other options...
-        dateFormat: 'dd.mm.yyyy',
-        dayLabels: {
-            su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб'
-        },
-        monthLabels:{
-            1: 'Янв', 2: 'Фев', 3: 'Мар', 4: 'Апр', 5: 'Май', 6: 'Июн', 7: 'Июл', 8: 'Авг', 9: 'Сен', 10: 'Окт', 11: 'Ноя', 12: 'Дек'
-        },
-        showTodayBtn: false,
-        // disableUntil: this.DisableUntil(),
-        disableSince: this.GiveDisable(),
-        // maxYear: this.GetMaxYear(),
-        showClearDateBtn: false,
-        height: '37px',
-        inline: false,
-        openSelectorOnInputClick: true,
-        editableDateField: true,
-        indicateInvalidDate: false
-    };
-
     Form: FormGroup = new FormGroup({
         "name": new FormControl('', [
             Validators.required
@@ -113,27 +71,22 @@ import { conformToMask } from 'text-mask-core';
             qc: 0
         }
     } as any;
+    BeforeBday = "";
+    AfterBday = "";
 
-    BdayDisable()
-    {
-        const date = new Date();
+    // BeforeBday = "";
+    AfterGive = "";
 
-        return {
-            year: date.getFullYear()-18,
-            month: date.getMonth()+1,
-            day: date.getDate()
-        }
-    }
 
     GiveDisable()
     {
-        const date = new Date((new Date()).getTime() + 1000*60*60*24);
+        const date = new Date((new Date()).getTime());
 
-        return {
-            year: date.getFullYear(),
-            month: date.getMonth()+1,
-            day: date.getDate()
-        }
+        const year =  date.getFullYear();
+        const month = ((date.getMonth() + 1) < 10 ?  "0" : "") +  (date.getMonth() + 1);
+        const day = ((date.getDate()) < 10 ?  "0" : "") +  (date.getDate());
+
+        return [year,month,day].join("-");
     }
 
 
@@ -142,8 +95,35 @@ import { conformToMask } from 'text-mask-core';
     {
         return [/[1-9]/,/\d/,/\d/,/\d/];
     }
+
+    BdayBeforeDisable()
+    {
+        const date = new Date();
+
+        const year =  date.getFullYear() - 90;
+        const month = ((date.getMonth() + 1) < 10 ?  "0" : "") +  (date.getMonth() + 1);
+        const day = ((date.getDate()) < 10 ?  "0" : "") +  (date.getDate());
+
+        return [year,month,day].join("-");
+    }
+
+    BdayDisable()
+    {
+        const date = new Date();
+
+        const year =  date.getFullYear() - 18;
+        const month = ((date.getMonth() + 1) < 10 ?  "0" : "") +  (date.getMonth() + 1);
+        const day = ((date.getDate()) < 10 ?  "0" : "") +  (date.getDate());
+
+        return [year,month,day].join("-");
+    }
+
     constructor(private _main: MainService)
     {
+        this.AfterBday = this.BdayDisable();
+        this.BeforeBday = this.BdayBeforeDisable();
+
+        this.AfterGive = this.GiveDisable();
     }
     ngOnInit(): void {
 
@@ -185,12 +165,12 @@ import { conformToMask } from 'text-mask-core';
 
         if(this.Data.passportDate)
         {
-            data.passportDate = this.ParseStrToObj(this.Data.passportDate);
+            data.passportDate = this.Data.passportDate;
         }
 
         if(this.Data.birthdate)
         {
-            data.birthdate = this.ParseStrToObj(this.Data.birthdate);
+            data.birthdate = this.Data.birthdate;
         }
 
         if(this.Data.fullAddress)
@@ -243,8 +223,8 @@ import { conformToMask } from 'text-mask-core';
 
         const data = this.Form.getRawValue();
 
-        result.birthdate = this.ParseDateObjToStr(data.birthdate);
-        result.passportDate = this.ParseDateObjToStr(data.passportDate);
+        result.birthdate = data.birthdate;
+        result.passportDate = data.passportDate;
 
         // const split = data.name.split(" ");
 

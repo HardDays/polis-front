@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { DateRoutingModule } from './date.routing';
 import { DateComponent } from './date.component';
 import { MyDatePickerModule } from 'mydatepicker';
+import { CalendarModule } from '../input_modules/calendar/calendar.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MyDatePickerModule } from 'mydatepicker';
     RouterModule,
     ReactiveFormsModule,
     DateRoutingModule,
-    MyDatePickerModule
+    MyDatePickerModule,
+    CalendarModule
   ],
   providers: [ 
   ]

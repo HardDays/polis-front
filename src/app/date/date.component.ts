@@ -11,31 +11,6 @@ import { AgreementModel } from '../core/models/agreement.model';
 })
 export class DateComponent implements OnInit{
 
-    @ViewChild('mydatepicker', {static: false}) mydp: MyDatePicker;
-    public selector: IMySelector = {
-        open: false
-    };
-    myDatePickerOptions: IMyDpOptions = {
-        // other options...
-        dateFormat: 'dd.mm.yyyy',
-        dayLabels: {
-            su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб'
-        },
-        monthLabels:{
-            1: 'Янв', 2: 'Фев', 3: 'Мар', 4: 'Апр', 5: 'Май', 6: 'Июн', 7: 'Июл', 8: 'Авг', 9: 'Сен', 10: 'Окт', 11: 'Ноя', 12: 'Дек'
-        },
-        showTodayBtn: false,
-        disableUntil: this.DisableFrom(),
-        // maxYear: this.GetMaxYear(),
-        showClearDateBtn: false,
-        height: '37px',
-        // inline: true,
-        // showInputField: false,
-        openSelectorOnInputClick: true,
-        editableDateField: true,
-        indicateInvalidDate: false
-    };
-
     Form: FormGroup = new FormGroup({
         "date": new FormControl('',[
           Validators.required
@@ -45,33 +20,33 @@ export class DateComponent implements OnInit{
         ])
     });
 
+    DisableBefore = "";
+
     constructor(private _main: MainService)
     {
         const data = this._main.Copy(this._main.Agreement) as AgreementModel;
 
         if(data.usePeriod)
-            this.Form.get('usePeriod').patchValue(data.usePeriod)
-        console.log(this._main.Agreement);
+            this.Form.get('usePeriod').patchValue(data.usePeriod);
+
+        this.DisableBefore = this.DisableDate();
         // this.datepicker.openSelector(1);
     }
     ngOnInit(): void {
         
-        this.selector = {
-            open: true
-        };
     }
 
-    DisableFrom()
+    DisableDate()
     {
         const date = new Date();
 
         const newDate = new Date(date.getTime() + 1000*60*60*24*3);
 
-        return {
-            year: newDate.getFullYear(),
-            month: newDate.getMonth() + 1,
-            day: newDate.getDate()
-        }
+        const year =  date.getFullYear();
+        const month = ((date.getMonth() + 1) < 10 ?  "0" : "") +  (date.getMonth() + 1);
+        const day = ((date.getDate()) < 10 ?  "0" : "") +  (date.getDate());
+
+        return [year,month,day].join("-");
     }
 
     Save()
@@ -85,7 +60,7 @@ export class DateComponent implements OnInit{
         {
             const vals = this.Form.getRawValue();
             let agr = this._main.Copy(this._main.Agreement) as AgreementModel;
-            agr.date = this._main.ParseDateObjToStr(vals.date);  
+            agr.date = vals.date;  
             agr.usePeriod = typeof vals.usePeriod == 'number' ? vals.usePeriod : Number.parseInt(vals.usePeriod);
 
             this._main.SaveAgreement(agr,(res) => {
