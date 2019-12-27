@@ -12,8 +12,10 @@
                     <app-calendar-cmp 
                         [Show]="true"
                         [DisableBefore]="DisableBefore"
+                        [DisabledDays]="DisabledDays"
                         formControlName="date"
                         [ParentForm]="Form"
+                        [Inline]="true"
                     ></app-calendar-cmp>
                     <!-- <div class="form__input datepicker-test" [ngClass]="{'form__input--error': date.invalid && (date.dirty || date.touched)}">
                         <my-date-picker [selector]="selector" name="date" [options]="myDatePickerOptions" formControlName="date"

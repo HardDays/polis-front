@@ -54,6 +54,7 @@
             [DisableFrom]="After"
             formControlName="docDate"
             [ParentForm]="Form"
+            [SplitYear]="true"
         ></app-calendar-cmp>
         <!-- <div class="form__input datepicker-test" [ngClass]="{'form__input--error': Form.controls.docDate.invalid && (Form.controls.docDate.dirty || Form.controls.docDate.touched)}">
             <my-date-picker name="docDate" [options]="myDatePickerOptions" formControlName="docDate"

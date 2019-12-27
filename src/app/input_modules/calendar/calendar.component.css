@@ -9,6 +9,11 @@
     background: #E9F4FF;
 }
 
+.calendar--inline
+{
+    position: relative;
+}
+
 .calendar--white{
     background: #FFFFFF;
 }
@@ -18,9 +23,15 @@
     cursor: pointer;
 }
 
+.calendar__day--next--month
+{
+    color:#a7a7a7!important
+}
+
 .calendar__day--inactive
 {
     color: #a9a9a9!important;
+    cursor: not-allowed;
 }
 
 .calendar__day--strike
@@ -32,3 +43,47 @@
 {
     cursor: pointer;
 }
+
+.delimeter
+{
+    width: 10px;
+}
+
+.calendar__header
+{
+    padding: 2px;
+    margin: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar__month--split{
+    width: 130px;
+    padding: 2px;
+    margin: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar__year
+{
+    width: 60px;
+    padding: 2px;
+    margin: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar__header--month
+{
+    width: 60%;
+}
+
+.calendar__header--year
+{
+    width: 35%;
+}
+    

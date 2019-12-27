@@ -319,6 +319,7 @@ import { IMyDpOptions } from 'mydatepicker';
         const year = date.getFullYear() - 18;
         const month = ((date.getMonth() + 1) < 10 ?  "0" : "") +  (date.getMonth() + 1);
         const day = date.getDate();
+        // console.log('from', [year,month,day].join("-"))
 
         return [year,month,day].join("-");
     }
@@ -327,10 +328,10 @@ import { IMyDpOptions } from 'mydatepicker';
     {
         let date = new Date();
 
-        const year =  date.getFullYear();
+        const year =  date.getFullYear() - 90;
         const month = ((date.getMonth() + 1) < 10 ?  "0" : "") +  (date.getMonth() + 1);
         const day = ((date.getDate()) < 10 ?  "0" : "") +  (date.getDate());
-
+        // console.log('to', [year,month,day].join("-"))
         return [year,month,day].join("-");
     }
 

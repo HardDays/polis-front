@@ -42,6 +42,7 @@
                     [DisableFrom]="AfterBday"
                     formControlName="birthdate"
                     [ParentForm]="Form"
+                    [SplitYear]="true"
             ></app-calendar-cmp>
             <!-- <div class="form__input datepicker-test"
                 [ngClass]="{'form__input--error': Form.controls.birthdate.invalid && (Form.controls.birthdate.dirty || Form.controls.birthdate.touched)}"    
@@ -74,6 +75,7 @@
                     [DisableFrom]="AfterGive"
                     formControlName="passportDate"
                     [ParentForm]="Form"
+                    [SplitYear]="true"
             ></app-calendar-cmp>
             <!-- <div class="form__input datepicker-test"
             [ngClass]="{'form__input--error': Form.controls.passportDate.invalid && (Form.controls.passportDate.dirty || Form.controls.passportDate.touched)}" 

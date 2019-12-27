@@ -7,6 +7,7 @@ import { MatAutocomplete } from '@angular/material/autocomplete';
 import { NgAutoCompleteComponent, CreateNewAutocompleteGroup, SelectedAutocompleteItem } from 'ng-auto-complete';
 import { VehicleModel, AgreementModel } from 'src/app/core/models/agreement.model';
 import { MainService } from 'src/app/core/services/main.service';
+import { TranslateService } from '../../../core/services/translit.service';
 
 @Component({
     selector: 'app-simple-car-cmp',
@@ -85,7 +86,7 @@ import { MainService } from 'src/app/core/services/main.service';
     {
         return [/[1-9]/,/\d/,/\d/,/\d/];
     }
-    constructor(private _main: MainService)
+    constructor(private _main: MainService, private _translate: TranslateService)
     {
         // this.Car = this._main.Copy(this._main.Agreement.vehicle);
         
@@ -122,7 +123,9 @@ import { MainService } from 'src/app/core/services/main.service';
 
     UpdateDics($event, callback?:() => void)
     {
-        this._main.CarDics($event, (res) => {
+        const str = this._translate.RuToLatin($event);
+        // console.log(str);
+        this._main.CarDics(str, (res) => {
             this.ModelsDics = res;
             if(callback && typeof callback == "function")
             {

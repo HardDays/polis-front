@@ -13,11 +13,27 @@
 
 
 <!-- <div class="calendar calendar--white" *ngIf="Show"> -->
-<div class="calendar" *ngIf="Show">
-    <div class="calendar__top">
+    
+<div class="calendar" *ngIf="Show || Inline" [ngClass]="{'calendar--inline': Inline}">
+    <div class="calendar__top" *ngIf="!SplitYear">
         <span class="calendar__back" (click)="prevMonth()"></span>
         <span class="calendar__month">{{ MonthNames[currentDate.format('M')]}} {{ currentDate.format('YYYY') }}</span>
         <span class="calendar__next" (click)="nextMonth()"></span>
+    </div>
+
+    <div class="calendar__top" *ngIf="SplitYear">
+        <div class="calendar__header calendar__header--month">
+            <span class="calendar__back" (click)="prevMonth()"></span>
+            <span class="calendar__month calendar__month--split">{{ MonthNames[currentDate.format('M')]}}</span>
+            <span class="calendar__next" (click)="nextMonth()"></span>
+        </div>
+        
+        <div class="calendar__header calendar__header--year">
+            <span class="calendar__back" (click)="prevYear()"></span>
+            <span class="calendar__month calendar__year">{{ currentDate.format('YYYY') }}</span>
+            <span class="calendar__next" (click)="nextYear()"></span>
+        </div>
+        
     </div>
 
     <div class="calendar__table">
@@ -27,7 +43,7 @@
         <div class="calendar__row" *ngFor="let week of weeks">
             <ng-container *ngFor="let day of week">
                 <span class="calendar__day" 
-                    [ngClass]="{'calendar__day--inactive':!isSelectedMonth(day.mDate), 'calendar__day--today':day.today, 'calendar__day--strike': day.disabled, ' calendar__day--selected': day.selected}"
+                    [ngClass]="{'calendar__day--inactive': day.inactive, 'calendar__day--next--month':!isSelectedMonth(day.mDate), 'calendar__day--today':day.today, 'calendar__day--strike': day.disabled, ' calendar__day--selected': day.selected}"
                     (click)="selectDate(day)"
                 >{{day.mDate.date()}}</span>
             </ng-container>

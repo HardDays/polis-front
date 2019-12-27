@@ -45,6 +45,7 @@
                     [DisableFrom]="AfterBday"
                     formControlName="birthdate"
                     [ParentForm]="Form"
+                    [SplitYear]="true"
                 ></app-calendar-cmp>
                 <!-- <div class="form__input datepicker-test" [ngClass]="{'form__input--error': birthdate.invalid && (birthdate.dirty || birthdate.touched)}">
                     <my-date-picker name="birthdate" [options]="BdayOptions" formControlName="birthdate"
@@ -74,6 +75,7 @@
                     [DisableFrom]="AfterExp"
                     formControlName="expdate"
                     [ParentForm]="Form"
+                    [SplitYear]="true"
                 ></app-calendar-cmp>
 
                 <!-- <div class="form__input datepicker-test"  [ngClass]="{'form__input--error': expdate.invalid && (expdate.dirty || expdate.touched)}">

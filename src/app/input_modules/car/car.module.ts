@@ -9,6 +9,7 @@ import { MyDatePickerModule } from 'mydatepicker';
 import { SimpleCarComponent } from './simple/simple.component';
 import { FullCarComponent } from './full/full.component';
 import { CalendarModule } from '../calendar/calendar.module';
+import { TranslateService } from '../../core/services/translit.service';
 
 
 @NgModule({
@@ -31,6 +32,9 @@ import { CalendarModule } from '../calendar/calendar.module';
     exports: [ 
         SimpleCarComponent,
         FullCarComponent
+    ],
+    providers: [
+        TranslateService
     ]
 })
 export class CarFormModule {}

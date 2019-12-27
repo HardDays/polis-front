@@ -32,6 +32,7 @@ export interface CalendarDate
     selected?: boolean;
     today?: boolean;
     disabled?: boolean;
+    inactive?: boolean;
 }
 
 @Component({
@@ -78,8 +79,14 @@ export class CalendarComponent implements OnInit,ControlValueAccessor
     @Input() DisableFrom: string;
     @Input() StartDate: string;
 
+    @Input() Inline: boolean;
+    @Input() SplitYear: boolean;
+
     @Input() ParentForm: FormGroup;
     @Input() formControlName: string;
+
+
+    @Input() DisabledDays: string[];
 
     onChangeCb: (_: any) => void = () => { };
     onTouchedCb: () => void = () => { };
@@ -149,8 +156,11 @@ export class CalendarComponent implements OnInit,ControlValueAccessor
     public onClick(targetElement) {
         const clickedInside = this._elementRef.nativeElement.contains(targetElement);
         if (!clickedInside) {
-            this.Show = false;
-            this.OnBlur();
+            if(this.Show)
+            {
+                this.Show = false;
+                this.OnBlur();
+            }
         }
     }
 
@@ -198,13 +208,32 @@ export class CalendarComponent implements OnInit,ControlValueAccessor
                     return {
                         today: this.isToday(d),
                         mDate: d,
-                        disabled: this.isDisabled(d),
-                        selected: d.isSame(this.SelectedDate)
+                        inactive: this.isInactive(d),
+                        selected: d.isSame(this.SelectedDate),
+                        disabled: this.isDisabled(d)
                     };
                 });
     }
 
     isDisabled(date: moment.Moment): boolean
+    {
+        let result = false;
+
+
+        if(this.DisabledDays)
+        {
+            for(let item of this.DisabledDays)
+            {
+                if(date.isSame(moment(item)))
+                    return true;
+            }
+        }
+
+
+        return false;
+    }
+
+    isInactive(date: moment.Moment): boolean
     {
         let result = false;
 
@@ -243,9 +272,19 @@ export class CalendarComponent implements OnInit,ControlValueAccessor
         this.generateCalendar();
     }
 
+    prevYear(): void {
+        this.currentDate = moment(this.currentDate).subtract(1, 'years');
+        this.generateCalendar();
+    }
+    
+    nextYear(): void {
+        this.currentDate = moment(this.currentDate).add(1, 'years');
+        this.generateCalendar();
+    }
+
     selectDate(date: CalendarDate)
     {
-        if(date.disabled)
+        if(date.disabled || date.inactive)
         {
             return;
         }

@@ -38,12 +38,13 @@
             <div class="form__item form__item--calendar">
                 <label class="form__label">Дата рождения</label>
                 <app-calendar-cmp 
-                    [Show]="false"
+                    [Show]="true"
                     [DisableFrom]="CalendarDisableFrom"
                     [DisableBefore]="CalendarDisableBefore"
                     [StartDate]="CalendarDisableFrom"
                     formControlName="birthday"
                     [ParentForm]="Form"
+                    [SplitYear]="true"
                 ></app-calendar-cmp>
                 <!-- <input type="text" class="form__input" value="12.12.1987"> -->
                 <!-- <div class="form__input datepicker-test" 

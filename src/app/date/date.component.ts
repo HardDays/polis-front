@@ -22,6 +22,8 @@ export class DateComponent implements OnInit{
 
     DisableBefore = "";
 
+    DisabledDays = [];
+
     constructor(private _main: MainService)
     {
         const data = this._main.Copy(this._main.Agreement) as AgreementModel;
@@ -30,17 +32,39 @@ export class DateComponent implements OnInit{
             this.Form.get('usePeriod').patchValue(data.usePeriod);
 
         this.DisableBefore = this.DisableDate();
+        this.DisabledDays = this.DisabledDates();
         // this.datepicker.openSelector(1);
     }
     ngOnInit(): void {
         
     }
 
+    DisabledDates()
+    {
+        const date = new Date();
+
+        const n = 4;
+        let result = [];
+
+        for(let i = 0; i < n; ++i)
+        {
+            const nDate = new Date(date.getTime() + i*1000*60*60*24);
+
+            const year =  nDate.getFullYear();
+            const month = ((nDate.getMonth() + 1) < 10 ?  "0" : "") +  (nDate.getMonth() + 1);
+            const day = ((nDate.getDate()) < 10 ?  "0" : "") +  (nDate.getDate());
+
+            result.push([year,month,day].join("-"));
+        }
+
+        return result;
+    }
+
     DisableDate()
     {
         const date = new Date();
 
-        const newDate = new Date(date.getTime() + 1000*60*60*24*3);
+        // const newDate = new Date(date.getTime() + 1000*60*60*24*3);
 
         const year =  date.getFullYear();
         const month = ((date.getMonth() + 1) < 10 ?  "0" : "") +  (date.getMonth() + 1);
