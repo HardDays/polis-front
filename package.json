@@ -41,7 +41,7 @@
     "ng-auto-complete": "^4.1.15",
     "ngx-carousel-lib": "^0.1.2",
     "ngx-swiper-wrapper": "^8.0.2",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "rxjs": "~6.5.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
